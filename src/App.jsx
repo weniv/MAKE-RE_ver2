@@ -1,13 +1,11 @@
 import GlobalStyles from './styles/GlobalStyles'
+import DateInput from './components/atoms/DateInput'
 
 function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <p>안녕</p>
-      <ul>
-        <li>55</li>
-      </ul>
+      <DateInput />
     </div>
   )
 }
