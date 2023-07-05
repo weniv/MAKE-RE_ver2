@@ -40,8 +40,9 @@ const Container = styled.dl`
     display: flex;
     margin: 2px 0;
   }
-  > div:last-child dd::after {
-    content: '';
+  > div + div::before {
+    content: '|';
+    margin: 0 5px;
   }
 `
 
@@ -55,9 +56,4 @@ const Term = styled.dt`
 
 const Descript = styled.dd`
   white-space: nowrap;
-
-  &::after {
-    content: '|';
-    margin: 0 5px;
-  }
 `
