@@ -38,6 +38,7 @@ ContributionInput.defaultProps = {
 const Wrap = styled.div`
   position: relative;
   width: 688px;
+  margin-bottom: 12px;
 `
 
 const Input = styled.input`
