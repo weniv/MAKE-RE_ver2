@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import move from '../../../assets/icon-link.svg'
+import urlValidation from '../../../utils/urlValidation'
 
 export default function PreviewProfileItem({ title, content, type }) {
   return (
     <Item>
       <ItemTitle>{title}</ItemTitle>
       {type === 'link' ? (
-        <ItemLink href={content}>{content}</ItemLink>
+        <ItemLink href={urlValidation(content)} target="_blank">
+          {content}
+        </ItemLink>
       ) : (
         <p>{content}</p>
       )}
