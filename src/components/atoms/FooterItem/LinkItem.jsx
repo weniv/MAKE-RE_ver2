@@ -11,13 +11,12 @@ export default function LinkItem({ content, link }) {
     </li>
   )
 }
-const Link = styled.a`
+export const Link = styled.a`
   color: var(--lightgray-color);
   text-decoration: none;
 
   &::after {
     content: '';
-    /* background: url(move) no-repeat 0px 0px; */
     background: url(${move}) no-repeat 0px 0px;
     display: inline-block;
     height: 10px;
