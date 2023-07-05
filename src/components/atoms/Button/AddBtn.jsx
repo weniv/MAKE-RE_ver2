@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import PlusIcon from '../../assets/icon-+.svg'
+import PlusIcon from '../../../assets/icon-+.svg'
 
 export default function AddBtn() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import CalendarIcon from '../../assets/icon-Calendar.svg'
+import CalendarIcon from '../../../assets/icon-Calendar.svg'
 
 export default function DateInput({ id, inputName }) {
   return (

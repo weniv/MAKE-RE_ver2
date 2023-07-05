@@ -1,8 +1,8 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import checkIcon from '../../assets/icon-Check.svg'
-import checkFillIcon from '../../assets/icon-Check-fill.svg'
-import hamburgerIcon from '../../assets/icon-hamburger.svg'
+import checkIcon from '../../../assets/icon-Check.svg'
+import checkFillIcon from '../../../assets/icon-Check-fill.svg'
+import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 
 export default function NavList({ id, listName, isFill }) {
   return (
