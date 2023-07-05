@@ -4,6 +4,7 @@ import reset from 'styled-reset'
 const GlobalStyles = createGlobalStyle`
     :root {
         --main-color: #2E6FF2;
+        --button-hover-color: #6296FF;
         --font-color: #121314;
         --gray-color: #47494D;
         --lightgray-color: #8D9299;
@@ -24,6 +25,13 @@ const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
     }
 
+
+    button {
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
     .ir {
         position: absolute;
         left: -10000px;
@@ -32,8 +40,6 @@ const GlobalStyles = createGlobalStyle`
         height: 1px;
         overflow: hidden;
     }
-
-
 `
 
 export default GlobalStyles
