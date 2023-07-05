@@ -5,14 +5,16 @@ import move from '../../../assets/icon-link.svg'
 export default function LinkItem({ content, link }) {
   return (
     <li>
-      <Link href={link}> {content}</Link>
+      <Link href={link} target="_blank">
+        {content}
+      </Link>
     </li>
   )
 }
 const Link = styled.a`
   color: var(--lightgray-color);
   text-decoration: none;
-  
+
   &::after {
     content: '';
     /* background: url(move) no-repeat 0px 0px; */
@@ -24,8 +26,6 @@ const Link = styled.a`
   }
 
   &:hover {
-    text-decoration:underline
+    text-decoration: underline;
   }
 `
-
-
