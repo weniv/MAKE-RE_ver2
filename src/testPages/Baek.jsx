@@ -4,9 +4,9 @@ import PreviewSubtitle from '../components/atoms/Title/PreviewSubtitle'
 import PreviewProfileItem from '../components/atoms/PreviewItem/PreviewProfileItem'
 import PreviewMonthItem from '../components/atoms/PreviewItem/PreviewMonthItem'
 import ToggleButton from '../components/atoms/Button/ToggleButton'
+import FooterItem from '../components/atoms/FooterItem/FooterItem'
 
 export default function Baek() {
-  const [onoff, setOnoff] = useState(true)
 
   return (
     <PageCont>
@@ -33,9 +33,22 @@ export default function Baek() {
       <PreviewMonthItem />
 
       <PreviewSubtitle title="On/Off" />
-
-      {/* <ToggleButton state={onoff} setState={setOnoff} /> */}
       <ToggleButton />
+
+      <PreviewSubtitle title="FooterItem" />
+      <FooterItem
+        title="위니브"
+        list={[
+          {
+            content: '제주코딩베이스캠프',
+            link: 'https://www.paullab.co.kr/about.html',
+          },
+          {
+            content: '유튜브 채널',
+            link: 'https://www.youtube.com/@jejucodingcamp',
+          },
+        ]}
+      />
     </PageCont>
   )
 }
