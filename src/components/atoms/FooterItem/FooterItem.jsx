@@ -4,15 +4,19 @@ import LinkItem from './LinkItem'
 
 export default function FooterItem({ title, list }) {
   return (
-    <>
+    <li>
       <ItemTitle>{title}</ItemTitle>
       <ItemList>
         {list.map((el) => (
           <LinkItem content={el.content} link={el.link} />
         ))}
       </ItemList>
-    </>
+    </li>
   )
+}
+FooterItem.defaultProps = {
+  title: '',
+  list: [],
 }
 const ItemTitle = styled.strong`
   font-size: 14px;
@@ -25,4 +29,8 @@ const ItemList = styled.ul`
   flex-direction: column;
   gap: 10px;
   font-size: 14px;
+
+  & a {
+    white-space: nowrap;
+  }
 `
