@@ -6,12 +6,13 @@ export default function WriteSubtitle({ id, subtitle }) {
 }
 
 WriteSubtitle.defaultProps = {
-  id: null,
+  id: 1,
   subtitle: '서브타이틀',
 }
 
 // style
 const Title = styled.label`
+  display: inline-flex;
   color: var(--font-color);
   font-size: 20px;
   margin: 32px 0 24px;
