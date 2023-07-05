@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-// export default function ToggleButton() {
-//   return <div>ToggleButton</div>
-// }
-
 export default function ToggleButton({ onClick }) {
   const [toggle, setToggle] = useState(false)
 

@@ -9,13 +9,12 @@ const GlobalStyles = createGlobalStyle`
         --lightgray-color: #8D9299;
         --border-color: #D9DBE0;
         --bg-color: #FFFFFF;
+        --hover-color: #F3F5FA
     }
-
     ${reset}
 
-
     @font-face {
-        font-family: "Pretendard";
+        font-family: 'Pretendard';
         src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
         font-style: normal;
     }
