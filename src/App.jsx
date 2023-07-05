@@ -3,8 +3,6 @@ import DateInput from './components/atoms/DateInput'
 import Baek from './testPages/Baek'
 import WriteTitle from './components/atoms/Title/WriteTitle'
 import WriteSubtitle from './components/atoms/Title/WriteSubtitle'
-import Baek from './testPages/Baek'
-
 
 function App() {
   return (
