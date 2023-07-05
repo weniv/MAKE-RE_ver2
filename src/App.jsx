@@ -1,13 +1,11 @@
 import GlobalStyles from './styles/GlobalStyles'
-import DateInput from './components/atoms/DateInput'
-import Baek from './testPages/Baek'
+import AddBtn from './components/atoms/Button/AddBtn'
 
 function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <DateInput />
-      <Baek />
+      <AddBtn />
     </div>
   )
 }
