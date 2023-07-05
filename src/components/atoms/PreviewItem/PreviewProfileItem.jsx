@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
+import move from '../../../assets/icon-link.svg'
 
 export default function PreviewProfileItem({ title, content, type }) {
   return (
     <Item>
       <ItemTitle>{title}</ItemTitle>
-      {type ? (
-        <ItemContent>{content}</ItemContent>
+      {type === 'link' ? (
+        <ItemLink href={content}>{content}</ItemLink>
       ) : (
-        <ItemContent>{content}</ItemContent>
+        <strong>{content}</strong>
       )}
     </Item>
   )
@@ -32,5 +33,21 @@ const ItemTitle = styled.p`
   width: 92px;
 `
 
-const ItemContent = styled.strong``
-const ItemLink = styled.a``
+const ItemLink = styled.a`
+  color: #000;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    /* background: url(move) no-repeat 0px 0px; */
+    background: url(${move}) no-repeat 0px 0px;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
