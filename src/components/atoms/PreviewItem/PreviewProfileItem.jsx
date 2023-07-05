@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function PreviewProfileItem({ title, content }) {
+export default function PreviewProfileItem({ title, content, type }) {
   return (
     <Item>
       <ItemTitle>{title}</ItemTitle>
-      <ItemContent>{content}</ItemContent>
+      {type ? (
+        <ItemContent>{content}</ItemContent>
+      ) : (
+        <ItemContent>{content}</ItemContent>
+      )}
     </Item>
   )
 }
@@ -29,3 +33,4 @@ const ItemTitle = styled.p`
 `
 
 const ItemContent = styled.strong``
+const ItemLink = styled.a``
