@@ -9,7 +9,7 @@ PreviewSubtitle.defaultProps = {
 }
 
 const Subtitle = styled.h3`
-  margin-top: 36px;
+  margin: 36px auto 20px;
   padding-bottom: 10px;
   width: 100%;
 
