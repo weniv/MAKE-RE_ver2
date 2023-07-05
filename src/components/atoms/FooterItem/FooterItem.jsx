@@ -18,7 +18,7 @@ FooterItem.defaultProps = {
   title: '',
   list: [],
 }
-const ItemTitle = styled.strong`
+const ItemTitle = styled.p`
   font-size: 14px;
   display: inline-block;
   margin-bottom: 20px;

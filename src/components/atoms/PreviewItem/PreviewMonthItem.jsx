@@ -5,7 +5,7 @@ export default function PreviewMonthItem({ date, content }) {
   return (
     <Item>
       <ItemDate>{date}</ItemDate>
-      <ItemContent>{content}</ItemContent>
+      <p>{content}</p>
     </Item>
   )
 }
@@ -29,5 +29,3 @@ const ItemDate = styled.p`
   color: #bdbdbd;
   font-weight: 700;
 `
-
-const ItemContent = styled.strong``

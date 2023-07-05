@@ -9,7 +9,7 @@ export default function PreviewProfileItem({ title, content, type }) {
       {type === 'link' ? (
         <ItemLink href={content}>{content}</ItemLink>
       ) : (
-        <strong>{content}</strong>
+        <p>{content}</p>
       )}
     </Item>
   )
