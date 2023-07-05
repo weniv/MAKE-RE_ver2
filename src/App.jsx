@@ -2,7 +2,6 @@ import GlobalStyles from './styles/GlobalStyles'
 import AddBtn from './components/atoms/Button/AddBtn'
 import DateInput from './components/atoms/Input/DateInput'
 import Baek from './testPages/Baek'
-import Gu from './testPages/Gu'
 
 function App() {
   return (
@@ -11,7 +10,6 @@ function App() {
       <AddBtn />
       <DateInput />
       <Baek />
-      <Gu />
     </div>
   )
 }
