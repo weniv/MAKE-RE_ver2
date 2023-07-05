@@ -13,4 +13,5 @@ WriteSubtitle.defaultProps = {
 const Title = styled.h4`
   color: var(--font-color);
   font-size: 20px;
+  margin: 32px 0 24px;
 `

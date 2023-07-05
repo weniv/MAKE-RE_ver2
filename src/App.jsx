@@ -1,9 +1,8 @@
 import GlobalStyles from './styles/GlobalStyles'
 import AddBtn from './components/atoms/Button/AddBtn'
-import DateInput from './components/atoms/DateInput'
+import DateInput from './components/atoms/Input/DateInput'
 import Baek from './testPages/Baek'
-import WriteTitle from './components/atoms/Title/WriteTitle'
-import WriteSubtitle from './components/atoms/Title/WriteSubtitle'
+import Gu from './testPages/Gu'
 
 function App() {
   return (
@@ -12,9 +11,7 @@ function App() {
       <AddBtn />
       <DateInput />
       <Baek />
-      <WriteTitle />
-      <WriteSubtitle />
-      <Baek />
+      <Gu />
     </div>
   )
 }
