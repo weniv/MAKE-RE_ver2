@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PreviewSubtitle from '../components/atoms/Title/PreviewSubtitle'
 import PreviewProfileItem from '../components/atoms/PreviewItem/PreviewProfileItem'
 import PreviewMonthItem from '../components/atoms/PreviewItem/PreviewMonthItem'
+import ToggleButton from '../components/atoms/Button/ToggleButton'
 
 export default function Baek() {
+  const [onoff, setOnoff] = useState(true)
+
   return (
     <PageCont>
       <h1>🐯 경현 구현</h1>
@@ -30,6 +33,9 @@ export default function Baek() {
       <PreviewMonthItem />
 
       <PreviewSubtitle title="On/Off" />
+
+      {/* <ToggleButton state={onoff} setState={setOnoff} /> */}
+      <ToggleButton />
     </PageCont>
   )
 }
