@@ -20,7 +20,7 @@ export default function ContributionInput({ id }) {
         value={inputText}
         onChange={handleChange}
       />
-      {id === 1 ? (
+      {id !== 1 ? (
         <DeleteButton>
           <img src={MinusIcon} alt="삭제하기" />
         </DeleteButton>
