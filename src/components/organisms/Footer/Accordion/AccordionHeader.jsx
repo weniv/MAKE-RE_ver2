@@ -24,9 +24,9 @@ export default function AccordionHeader({ title, onDrag, onClick }) {
           alt={isOpen ? '항목 접기' : '항목 펼치기'}
         />
       </SpreadToggleBtn>
-      <button onClick={onClick}>
+      <DeleteBtn onClick={onClick}>
         <img src={deleteIcon} alt="항목 삭제하기" />
-      </button>
+      </DeleteBtn>
     </Header>
   )
 }
@@ -62,4 +62,14 @@ const DragBtn = styled.button`
 
 const SpreadToggleBtn = styled.button`
   margin-right: 8px;
+`
+
+const DeleteBtn = styled.button`
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
 `
