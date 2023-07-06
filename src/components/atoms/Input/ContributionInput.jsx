@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { styled } from 'styled-components'
 import MinusIcon from '../../../assets/icon-minus.svg'
 
-export default function ContributionInput({ id, onClick }) {
-  const [inputText, setInputText] = useState('')
+export default function ContributionInput({ id, value, onClick }) {
+  const [inputText, setInputText] = useState(value)
 
   function handleChange(e) {
     setInputText(e.target.value)
@@ -31,6 +31,7 @@ export default function ContributionInput({ id, onClick }) {
 
 ContributionInput.defaultProps = {
   id: 1,
+  value: '',
   onClick: () => {},
 }
 
