@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { styled } from 'styled-components'
 import MinusIcon from '../../../assets/icon-minus.svg'
 
-export default function ContributionInput({ id }) {
-  const [inputText, setInputText] = useState('')
+export default function ContributionInput({ id, value, onClick }) {
+  const [inputText, setInputText] = useState(value)
 
   function handleChange(e) {
     setInputText(e.target.value)
@@ -21,7 +21,7 @@ export default function ContributionInput({ id }) {
         onChange={handleChange}
       />
       {id !== 1 ? (
-        <DeleteButton>
+        <DeleteButton onClick={onClick}>
           <img src={MinusIcon} alt="삭제하기" />
         </DeleteButton>
       ) : null}
@@ -31,7 +31,8 @@ export default function ContributionInput({ id }) {
 
 ContributionInput.defaultProps = {
   id: 1,
-  inputText: '기여 부분',
+  value: '',
+  onClick: () => {},
 }
 
 // style
