@@ -1,6 +1,8 @@
 import { styled } from 'styled-components'
 import closeIcon from '../../../assets/icon-X.svg'
 
+// a작성페이지와 미리보기 페이지 모두 사용하는 UI로, 작성페이지에서는 type = "delete"를 props로 넘겨주어 닫기 아이콘 추가하도록 구현
+
 export default function SkillList({ children, onClick, type }) {
   return (
     <SkillLi type={type}>
