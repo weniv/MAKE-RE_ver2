@@ -30,6 +30,8 @@ const GlobalStyles = createGlobalStyle`
         border: none;
         cursor: pointer;
         font-size: 14px;
+        background-color: inherit;
+        padding: 0;
     }
 
     .ir {
