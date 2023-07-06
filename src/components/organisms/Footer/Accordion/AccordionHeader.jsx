@@ -57,10 +57,14 @@ const Header = styled.header`
   }
 `
 const DragBtn = styled.button`
+  width: 20px;
+  height: 20px;
   margin-right: 12px;
 `
 
 const SpreadToggleBtn = styled.button`
+  width: 32px;
+  height: 32px;
   margin-right: 8px;
 `
 
