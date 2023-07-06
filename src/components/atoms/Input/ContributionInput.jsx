@@ -59,4 +59,8 @@ const DeleteButton = styled.button`
   cursor: pointer;
   background-color: transparent;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `
