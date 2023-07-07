@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { styled } from 'styled-components'
-import hamburgerIcon from '../../../../assets/icon-hamburger.svg'
-import openIcon from '../../../../assets/icon-triangle-down.svg'
-import foldIcon from '../../../../assets/icon-triangle-up.svg'
-import deleteIcon from '../../../../assets/icon-X.svg'
+import hamburgerIcon from '../../../assets/icon-hamburger.svg'
+import openIcon from '../../../assets/icon-triangle-down.svg'
+import foldIcon from '../../../assets/icon-triangle-up.svg'
+import deleteIcon from '../../../assets/icon-X.svg'
 
 export default function AccordionHeader({ title, onDrag, onClick }) {
   const [isOpen, setIsOpen] = useState(false)
