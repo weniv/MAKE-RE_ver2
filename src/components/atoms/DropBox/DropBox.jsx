@@ -10,7 +10,6 @@ export default function DropBox({
   setIsSelected,
   selectedData,
   setSelectedData,
-  buttonOnClick,
 }) {
   // 아래 코드를 부모 컴포넌트에서 작성할 수 있도록
   //   const [selectedData, setSelectedData] = useState(
@@ -25,7 +24,6 @@ export default function DropBox({
   //     setIsSelected={setIsSelected}
   //     selectedData={selectedData}
   //     setSelectedData={setSelectedData}
-  //     buttonOnClick={handleClickBtn}
   //   />
 
   // 드롭박스 외부 클릭했을 시 닫기
@@ -43,13 +41,21 @@ export default function DropBox({
   return (
     <DropBoxCont width={width} ref={dropBoxRef}>
       {!isSelected ? (
-        <DropBtn onClick={buttonOnClick}>
+        <DropBtn
+          onClick={() => {
+            setIsSelected((isSelected) => !isSelected)
+          }}
+        >
           {selectedData}
           <img src={TriangleDown} />
         </DropBtn>
       ) : (
         <>
-          <DropBtn onClick={buttonOnClick}>
+          <DropBtn
+            onClick={() => {
+              setIsSelected((isSelected) => !isSelected)
+            }}
+          >
             {selectedData}
             <img src={TriangleUp} />
           </DropBtn>
