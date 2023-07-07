@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import WriteTitle from '../components/atoms/Title/WriteTitle'
 import WriteSubtitle from '../components/atoms/Title/WriteSubtitle'
 import ContributionInput from '../components/atoms/Input/ContributionInput'
+import AccordionHeader from '../components/organisms/Accordion/AccordionHeader'
 
 export default function Baek() {
   return (
@@ -14,6 +15,7 @@ export default function Baek() {
       <ContributionInput id={3} />
       <ContributionInput id={2} />
       <ContributionInput id={1} />
+      <AccordionHeader title="주식회사 위니브" />
     </PageCont>
   )
 }
