@@ -24,7 +24,8 @@ export default function ComponentHeader({ kind, title, children }) {
           <style.Img src={deleteIcon} />
         </style.DelBtn>
       </style.Header>
-      {children}
+
+      {isExpand ? <style.Component>{children}</style.Component> : null}
     </style.Cont>
   )
 }
