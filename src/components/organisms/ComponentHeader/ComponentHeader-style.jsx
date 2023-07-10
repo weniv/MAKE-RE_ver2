@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import expandIcon from '../../../assets/icon-triangle-down.svg'
-import reduceIcon from '../../../assets/icon-Triangle-Up.svg'
+import reduceIcon from '../../../assets/icon-triangle-up.svg'
 
 export const Cont = styled.div`
   width: 786px;
