@@ -42,6 +42,10 @@ const GlobalStyles = createGlobalStyle`
         height: 1px;
         overflow: hidden;
     }
+
+    input:focus,input:active{
+        outline:2px solid var(--main-color);
+    }
 `
 
 export default GlobalStyles
