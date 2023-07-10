@@ -1,11 +1,12 @@
 import { styled } from 'styled-components'
 import expandIcon from '../../../assets/icon-triangle-down.svg'
-import reduceIcon from '../../../assets/icon-triangle-up.svg'
+import reduceIcon from '../../../assets/icon-Triangle-Up.svg'
 
 export const Cont = styled.div`
   width: 786px;
   border-radius: 16px;
   background-color: var(--bg-color);
+  box-shadow: 0 0 0 1px var(--border-color) inset;
 `
 
 export const Header = styled.div`
@@ -55,10 +56,3 @@ export const Img = styled.img`
   width: 20px;
   height: 20px;
 `
-
-export const expandImg = styled(Img)`
-  background-image: ${({ isExpand }) =>
-    !isExpand ? `url(${expandIcon})` : `url(${reduceIcon})`};
-`
-
-export const Contents = styled.div``

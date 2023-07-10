@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import * as style from './ComponentHeader-style'
 import DragIcon from '../../../assets/icon-hamburger.svg'
+import expandIcon from '../../../assets/icon-triangle-down.svg'
+import reduceIcon from '../../../assets/icon-Triangle-Up.svg'
 import deleteIcon from '../../../assets/icon-X.svg'
 
 export default function ComponentHeader({ kind, title, children }) {
@@ -18,7 +20,10 @@ export default function ComponentHeader({ kind, title, children }) {
             setIsExpand(!isExpand)
           }}
         >
-          <style.expandImg isExpand={isExpand} />
+          <style.Img
+            src={!isExpand ? expandIcon : reduceIcon}
+            isExpand={isExpand}
+          />
         </style.ExpandBtn>
         <style.DelBtn del>
           <style.Img src={deleteIcon} />
