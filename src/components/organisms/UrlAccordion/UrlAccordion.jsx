@@ -3,9 +3,9 @@ import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import DefaultInput from '../../atoms/Input/DefaultInput'
 import { styled } from 'styled-components'
 
-export default function UrlAccordion({ id }) {
-  const [name, setName] = useState('안녕하쇼?')
-  const [link, setLink] = useState('naver.com')
+export default function UrlAccordion({ id, data }) {
+  const [name, setName] = useState(data.name)
+  const [link, setLink] = useState(data.link)
   return (
     <>
       <ComponentHeader kind="URL" title={name}>

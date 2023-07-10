@@ -10,8 +10,8 @@ import UrlAccordion from '../components/organisms/UrlAccordion/UrlAccordion'
 
 export default function Baek() {
   const urlTest = [
-    { name: '이름1', link: '링크1' },
-    { name: '이름2', link: '링크2' },
+    { name: '네이버', link: 'http://www.naver.com' },
+    { name: '벨로그', link: 'http://www.velog.io' },
   ]
 
   return (
@@ -44,8 +44,8 @@ export default function Baek() {
       <Footer />
 
       <PreviewSubtitle title="organisms/UrlAccordion" />
-      {urlTest.map((e, idx) => {
-        return <UrlAccordion key={idx} id={idx} />
+      {urlTest.map((el, idx) => {
+        return <UrlAccordion key={idx} id={idx} data={el} />
       })}
     </PageCont>
   )
