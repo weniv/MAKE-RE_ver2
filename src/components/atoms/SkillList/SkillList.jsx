@@ -17,7 +17,6 @@ export default function SkillList({ children, onClick, type }) {
 }
 
 const SkillLi = styled.li`
-  width: 104px;
   height: 40px;
   display: inline-flex;
   align-items: center;
