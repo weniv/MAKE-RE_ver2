@@ -6,8 +6,14 @@ import PreviewMonthItem from '../components/atoms/PreviewItem/PreviewMonthItem'
 import ToggleBtn from '../components/atoms/Button/ToggleBtn'
 import FooterItem from '../components/atoms/FooterItem/FooterItem'
 import Footer from '../components/organisms/Footer/Footer'
+import UrlAccordion from '../components/organisms/UrlAccordion/UrlAccordion'
 
 export default function Baek() {
+  const urlTest = [
+    { name: '이름1', link: '링크1' },
+    { name: '이름2', link: '링크2' },
+  ]
+
   return (
     <PageCont>
       <h1>🐯 경현 구현</h1>
@@ -36,6 +42,11 @@ export default function Baek() {
 
       <PreviewSubtitle title="organisms/Footer" />
       <Footer />
+
+      <PreviewSubtitle title="organisms/UrlAccordion" />
+      {urlTest.map((e, idx) => {
+        return <UrlAccordion key={idx} id={idx} />
+      })}
     </PageCont>
   )
 }
