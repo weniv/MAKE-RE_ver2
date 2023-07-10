@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 import LinkIcon from '../../../assets/icon-Url.svg'
 
-export default function DefaultInput({
+export default function DefaultTextarea({
   children,
   width,
   marginRight,
@@ -12,9 +12,9 @@ export default function DefaultInput({
   setInputData,
 }) {
   return (
-    <InputCont>
+    <Cont>
       <Label htmlFor={id}>{children}</Label>
-      <Input
+      <TextArea
         id={id}
         type={type}
         placeholder={placeholder}
@@ -25,12 +25,11 @@ export default function DefaultInput({
           setInputData(e.target.value)
         }}
       />
-    </InputCont>
+    </Cont>
   )
 }
 
-const InputCont = styled.div`
-  width: 100%;
+const Cont = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -42,9 +41,9 @@ const Label = styled.label`
   font-size: 12px;
 `
 
-const Input = styled.input`
+const TextArea = styled.textarea`
   width: ${(props) => props.width};
-  height: 42px;
+  height: 92px;
   margin-right: ${(props) => props.marginRight};
   padding: 11px 0 11px;
   padding-left: ${(props) => (props.type === 'url' ? '36px' : '16px')};
@@ -56,4 +55,5 @@ const Input = styled.input`
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: 12px;
+  resize: none;
 `

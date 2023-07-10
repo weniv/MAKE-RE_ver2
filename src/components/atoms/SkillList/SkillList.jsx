@@ -9,7 +9,7 @@ export default function SkillList({ children, onClick, type }) {
       <span>{children}</span>
       {type && (
         <button onClick={onClick}>
-          <img src={closeIcon} />
+          <img src={closeIcon} width={'16px'} height={'16px'} />
         </button>
       )}
     </SkillLi>
@@ -28,10 +28,10 @@ const SkillLi = styled.li`
   background: var(--bg-color);
   color: var(--main-color);
   font-size: 14px;
-  box-sizing; border-box;
+  box-sizing: border-box;
 
   button {
     display: flex;
-    algin-items: center;
+    align-items: center;
   }
 `

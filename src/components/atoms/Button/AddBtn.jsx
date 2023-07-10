@@ -18,6 +18,7 @@ const Cont = styled.div`
   height: 42px;
   background-color: var(--main-color);
   border-radius: 10px;
+  margin-bottom: 12px;
   &:hover {
     background: var(--button-hover-color);
   }
