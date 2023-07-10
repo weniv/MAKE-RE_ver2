@@ -8,13 +8,22 @@ export default function Career() {
   return (
     <ComponentHeader kind={'커리어'}>
       <Wrap>
-        <DefaultInput width="738px" placeholder={'예) 위니브(WENIV)'}>
+        <DefaultInput
+          id="careerName"
+          type="text"
+          width="738px"
+          placeholder="예) 위니브(WENIV)"
+        >
           {'회사명'}
         </DefaultInput>
         <DateWrap>
-          <DateInput width="220px">{'시작일'}</DateInput>
+          <DateInput id="startDate" width="220px">
+            {'시작일'}
+          </DateInput>
           <Tilde>~</Tilde>
-          <DateInput width="220px">{'종료일'}</DateInput>
+          <DateInput id="endDate" width="220px">
+            {'종료일'}
+          </DateInput>
           <ProceedingBtn />
         </DateWrap>
         <DefaultInput width="738px" placeholder={'예) 스터디인 Front-End 개발'}>
