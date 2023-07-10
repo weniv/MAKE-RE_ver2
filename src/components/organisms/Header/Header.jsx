@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import Logo from '../../../assets/Logo.svg'
-import ToggleButton from '../../atoms/Button/ToggleButton'
+import ToggleBtn from '../../atoms/Button/ToggleBtn'
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
         <h1>
           <img src={Logo} alt="메이커리" />
         </h1>
-        <ToggleButton />
+        <ToggleBtn />
       </HeaderLayout>
     </HeaderCont>
   )
