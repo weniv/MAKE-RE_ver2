@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-export default function ToggleButton({ onClick }) {
+export default function ToggleBtn({ onClick }) {
   const [toggle, setToggle] = useState(false)
 
   const handleToggle = () => {
@@ -14,7 +14,7 @@ export default function ToggleButton({ onClick }) {
     </BtnCont>
   )
 }
-ToggleButton.defaultProps = {
+ToggleBtn.defaultProps = {
   onClick: () => {},
 }
 

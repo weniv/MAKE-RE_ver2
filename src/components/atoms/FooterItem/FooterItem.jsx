@@ -7,8 +7,8 @@ export default function FooterItem({ title, list }) {
     <li>
       <ItemTitle>{title}</ItemTitle>
       <ItemList>
-        {list.map((el) => (
-          <LinkItem content={el.content} link={el.link} />
+        {list.map((el, idx) => (
+          <LinkItem key={idx} content={el.content} link={el.link} />
         ))}
       </ItemList>
     </li>

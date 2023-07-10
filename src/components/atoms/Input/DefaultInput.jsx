@@ -30,6 +30,7 @@ export default function DefaultInput({
 }
 
 const InputCont = styled.div`
+  width: 100%;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
