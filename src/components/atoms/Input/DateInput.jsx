@@ -2,11 +2,11 @@ import React from 'react'
 import { styled } from 'styled-components'
 import CalendarIcon from '../../../assets/icon-Calendar.svg'
 
-export default function DateInput({ id, inputName }) {
+export default function DateInput({ id, children, width }) {
   return (
     <Wrap>
-      <Label htmlFor={`dateInput-${id}`}>{inputName}</Label>
-      <Input id={`dateInput-${id}`} type="month" max="9999-12" />
+      <Label htmlFor={`dateInput-${id}`}>{children}</Label>
+      <Input id={`dateInput-${id}`} type="month" max="9999-12" width={width} />
     </Wrap>
   )
 }
@@ -20,7 +20,6 @@ DateInput.defaultProps = {
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 100px 0 0 100px;
 `
 
 const Label = styled.label`
@@ -32,7 +31,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   position: relative;
-  width: 347px;
+  width: ${(props) => props.width || '347px'};
   height: 42px;
   border-radius: 10px;
   background-color: var(--bg-color);
