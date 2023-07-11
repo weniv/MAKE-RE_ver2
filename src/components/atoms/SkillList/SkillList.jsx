@@ -6,10 +6,11 @@ import ColorContext from '../../../context/ColorContext'
 // a작성페이지와 미리보기 페이지 모두 사용하는 UI로, 작성페이지에서는 type = "delete"를 props로 넘겨주어 닫기 아이콘 추가하도록 구현
 
 export default function SkillList({ children, onClick, type }) {
-  const { mainColor, upadteMainColor } = useContext(ColorContext)
+  //   const { mainColor, upadteMainColor } = useContext(ColorContext)
 
   return (
-    <SkillLi type={type} mainColor={mainColor}>
+    // <SkillLi type={type} mainColor={mainColor}>
+    <SkillLi type={type}>
       <span>{children}</span>
       {type && (
         <button onClick={onClick}>
@@ -28,9 +29,11 @@ const SkillLi = styled.li`
   margin-right: 10px;
   gap: 6px;
   border-radius: 40px;
-  border: 2px solid ${(props) => props.mainColor};
+  /* border: 2px solid ${(props) => props.mainColor}; */
+  border: 2px solid var(--main-color);
   background: var(--bg-color);
-  color: ${(props) => props.mainColor};
+  /* color: ${(props) => props.mainColor}; */
+  color: var(--main-color);
   font-size: 14px;
   box-sizing: border-box;
 

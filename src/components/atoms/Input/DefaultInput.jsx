@@ -7,9 +7,11 @@ export default function DefaultInput({
   marginRight,
   id,
   type,
+  name,
   placeholder,
   inputData,
   setInputData,
+  onChange,
 }) {
   return (
     <InputCont>
@@ -17,13 +19,15 @@ export default function DefaultInput({
       <Input
         id={id}
         type={type}
+        name={name}
         placeholder={placeholder}
         width={width}
         marginRight={marginRight}
         value={inputData}
-        onChange={(e) => {
-          setInputData(e.target.value)
-        }}
+        // onChange={(e) => {
+        //   setInputData(e.target.value)
+        // }}
+        onChange={onChange}
       />
     </InputCont>
   )

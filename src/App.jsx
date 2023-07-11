@@ -1,14 +1,11 @@
 import GlobalStyles from './styles/GlobalStyles'
-import Baek from './testPages/Baek'
-import { Project, Career } from './components/organisms/Component'
+import { ProjectTemplate } from './components/templates/Project'
 
 function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <Project />
-      <Career />
-      <Baek />
+      <ProjectTemplate />
     </div>
   )
 }
