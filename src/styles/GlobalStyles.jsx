@@ -43,7 +43,8 @@ const GlobalStyles = createGlobalStyle`
         overflow: hidden;
     }
 
-    input:focus,input:active{
+    input:focus,input:active,
+    textarea:focus, textarea:active{
         outline:2px solid var(--main-color);
     }
 `
