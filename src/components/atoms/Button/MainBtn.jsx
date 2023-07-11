@@ -26,7 +26,7 @@ export default function MainBtn({ onClick, children, type }) {
 
 const MainButton = styled.button`
   ${(props) =>
-    props.type === 'preivew'
+    props.type === 'preview'
       ? css`
           width: 162px;
           background-color: var(--main-color);
