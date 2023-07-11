@@ -1,14 +1,19 @@
 import GlobalStyles from './styles/GlobalStyles'
 import Baek from './testPages/Baek'
 import { Project, Career } from './components/organisms/Component'
+import { ColorProvider } from './context/ColorContext'
+import ColorPicker from './components/organisms/ColorPicker/ColorPicker'
 
 function App() {
   return (
     <div className="App">
-      <GlobalStyles />
-      <Project />
-      <Career />
-      <Baek />
+      <ColorProvider>
+        <GlobalStyles />
+        <ColorPicker />
+        <Project />
+        <Career />
+        <Baek />
+      </ColorProvider>
     </div>
   )
 }
