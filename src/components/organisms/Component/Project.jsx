@@ -83,8 +83,12 @@ export default function Project() {
           <AddBtn />
         </Contribute>
         {/* 적용 기술 */}
-        <WriteSubtitle id={'projectSkillSubTitle'} subtitle={'적용 기술'} />
-        <DefaultInput id="projectPeople" type="text" placeholder="예) Python" />
+        <WriteSubtitle id="projectSkill" subtitle={'적용 기술'} />
+        <DefaultInput
+          id="subtitle-projectSkill"
+          type="text"
+          placeholder="예) Python"
+        />
         {/* 하드코딩 -- 추후 수정 필요 */}
         <SkillListWrap>
           <SkillList type="delete">Python</SkillList>
