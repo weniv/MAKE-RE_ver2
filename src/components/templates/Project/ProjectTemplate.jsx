@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { Project } from '../../organisms/Component'
 import { MainBtn } from '../../atoms/Button'
-import { useAdd } from '../../../hooks'
+import { addData } from '../../../utils'
 
 export default function ProjectTemplate() {
   const nextId = useRef(1)
@@ -41,12 +41,11 @@ export default function ProjectTemplate() {
 
   /** 프로젝트 추가 */
   const AddProject = () => {
-    console.log('clicked')
     nextId.current++
-    useAdd(nextId.current, val, projectData, setProjectData)
+    addData(nextId.current, val, projectData, setProjectData)
   }
 
-  // console.log('projectData', projectData)
+  console.log('projectData', projectData)
 
   return (
     <Cont>
@@ -59,9 +58,14 @@ export default function ProjectTemplate() {
       </Header>
       <ProjectWrap>
         {projectData &&
-          projectData.map((project) => (
+          projectData.map((project, idx) => (
             <>
-              <Project />
+              <Project
+                idx={idx}
+                project={project}
+                projectData={projectData}
+                setProjectData={setProjectData}
+              />
             </>
           ))}
       </ProjectWrap>

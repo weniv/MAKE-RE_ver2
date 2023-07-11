@@ -7,9 +7,10 @@ export default function DefaultTextarea({
   marginRight,
   id,
   type,
+  name,
   placeholder,
   inputData,
-  setInputData,
+  onChange,
 }) {
   return (
     <Cont>
@@ -17,13 +18,12 @@ export default function DefaultTextarea({
       <TextArea
         id={id}
         type={type}
+        name={name}
         placeholder={placeholder}
         width={width}
         marginRight={marginRight}
         value={inputData}
-        onChange={(e) => {
-          setInputData(e.target.value)
-        }}
+        onChange={onChange}
       />
     </Cont>
   )
