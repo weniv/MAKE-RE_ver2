@@ -1,12 +1,32 @@
-import React from 'react'
-import { styled } from 'styled-components'
+import React, { useState, useRef, useEffect } from 'react'
+import styled, { css } from 'styled-components'
 import checkIcon from '../../../assets/icon-Check.svg'
 import checkFillIcon from '../../../assets/icon-Check-fill.svg'
 import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 
-export default function NavList({ id, listName, isFill }) {
+export default function NavList({ id, listName, isFill, clicked }) {
+  const [isClick, setIsClick] = useState(clicked)
+  const navListRef = useRef()
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navListRef.current && !navListRef.current.contains(e.target)) {
+        setIsClick(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+  }, [navListRef])
+
   return (
-    <Cont key={id} isFill={isFill}>
+    <Cont
+      key={id}
+      isFill={isFill}
+      onClick={() => {
+        setIsClick(true)
+      }}
+      ref={navListRef}
+      isClick={isClick}
+    >
       <p>{listName}</p>
     </Cont>
   )
@@ -47,4 +67,11 @@ const Cont = styled.div`
   &:hover {
     background-color: var(--hover-color);
   }
+
+  ${(props) =>
+    props.isClick &&
+    css`
+      border: 2px solid var(--main-color);
+      background-color: var(--hover-color);
+    `}
 `
