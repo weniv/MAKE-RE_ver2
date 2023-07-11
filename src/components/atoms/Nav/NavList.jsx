@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled, { css } from 'styled-components'
 import checkIcon from '../../../assets/icon-Check.svg'
-import checkFillIcon from '../../../assets/icon-Check-fill.svg'
+import { ReactComponent as CheckFillIcon } from '../../../assets/icon-Check-fill.svg'
 import hamburgerIcon from '../../../assets/icon-hamburger.svg'
+import ColorContext from '../../../context/ColorContext'
 
-export default function NavList({ id, listName, isFill, clicked }) {
+export default function NavList({ id, listName, isFill, clicked, type }) {
+  const { mainColor, upadteMainColor } = useContext(ColorContext)
   const [isClick, setIsClick] = useState(clicked)
+
   const navListRef = useRef()
 
   useEffect(() => {
@@ -27,7 +30,23 @@ export default function NavList({ id, listName, isFill, clicked }) {
       ref={navListRef}
       isClick={isClick}
     >
-      <p>{listName}</p>
+      {type === 'write' ? (
+        <>
+          {isFill ? (
+            <CheckFillIcon fill={mainColor} alt="입력 완료" />
+          ) : (
+            <img src={checkIcon} alt="입력 미완료" />
+          )}
+          <NavText>{listName}</NavText>
+          <DragBtn>
+            <img src={hamburgerIcon} />
+          </DragBtn>
+        </>
+      ) : (
+        <>
+          <NavText>{listName}</NavText>
+        </>
+      )}
     </Cont>
   )
 }
@@ -53,17 +72,6 @@ const Cont = styled.div`
   box-sizing: border-box;
   cursor: pointer;
 
-  &:before {
-    content: url(${({ isFill }) => (isFill ? checkFillIcon : checkIcon)});
-    margin-right: 12px;
-  }
-
-  &::after {
-    content: url(${hamburgerIcon});
-    position: absolute;
-    right: 16px;
-  }
-
   &:hover {
     background-color: var(--hover-color);
   }
@@ -74,4 +82,13 @@ const Cont = styled.div`
       border: 2px solid var(--main-color);
       background-color: var(--hover-color);
     `}
+`
+
+const NavText = styled.p`
+  margin-left: 12px;
+`
+
+const DragBtn = styled.button`
+  position: absolute;
+  right: 16px;
 `
