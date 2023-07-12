@@ -1,18 +1,13 @@
 import GlobalStyles from './styles/GlobalStyles'
-import Baek from './testPages/Baek'
-import { Project, Career } from './components/organisms/Component'
 import { ColorProvider } from './context/ColorContext'
-import ColorPicker from './components/organisms/ColorPicker/ColorPicker'
+import WritePage from './pages/WritePage'
 
 function App() {
   return (
     <div className="App">
       <ColorProvider>
         <GlobalStyles />
-        <ColorPicker />
-        <Project />
-        <Career />
-        <Baek />
+        <WritePage />
       </ColorProvider>
     </div>
   )
