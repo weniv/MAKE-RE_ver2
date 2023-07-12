@@ -4,6 +4,7 @@ import { Career, Project } from '../components/organisms/Component'
 import Baek from '../testPages/Baek'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
+import { ProjectTemplate } from '../components/templates/Project'
 
 export default function WritePage() {
   return (
@@ -11,9 +12,9 @@ export default function WritePage() {
       <Header />
       <Cont>
         <Main>
-          <Project />
-          <Career />
-          <Baek />
+          <ProjectTemplate />
+          {/* <Career />
+          <Baek /> */}
         </Main>
         <Aside type="write" />
       </Cont>

@@ -8,7 +8,13 @@ import { SkillList } from '../../atoms/SkillList'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 
-export default function Project({ idx, project, projectData, setProjectData }) {
+export default function Project({
+  idx,
+  project,
+  projectData,
+  setProjectData,
+  deleteProject,
+}) {
   const handleChange = (e) => {
     updateData(e, idx, projectData, setProjectData)
   }
@@ -17,6 +23,7 @@ export default function Project({ idx, project, projectData, setProjectData }) {
     <ComponentHeader
       kind={'프로젝트'}
       title={project.title ? project.title : null}
+      deleteProject={deleteProject}
     >
       <Wrap>
         <DefaultInput

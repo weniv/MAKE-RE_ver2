@@ -5,7 +5,12 @@ import expandIcon from '../../../assets/icon-triangle-down.svg'
 import reduceIcon from '../../../assets/icon-Triangle-Up.svg'
 import deleteIcon from '../../../assets/icon-X.svg'
 
-export default function ComponentHeader({ kind, title, children }) {
+export default function ComponentHeader({
+  kind,
+  title,
+  children,
+  deleteProject,
+}) {
   const [isExpand, setIsExpand] = useState(false)
 
   return (
@@ -25,7 +30,7 @@ export default function ComponentHeader({ kind, title, children }) {
             isExpand={isExpand}
           />
         </style.ExpandBtn>
-        <style.DelBtn del>
+        <style.DelBtn del onClick={deleteProject}>
           <style.Img src={deleteIcon} />
         </style.DelBtn>
       </style.Header>

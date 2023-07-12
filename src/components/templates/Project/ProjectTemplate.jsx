@@ -40,9 +40,14 @@ export default function ProjectTemplate() {
   }
 
   /** 프로젝트 추가 */
-  const AddProject = () => {
+  const addProject = () => {
     nextId.current++
     addData(nextId.current, val, projectData, setProjectData)
+  }
+
+  /** 프로젝트 삭제 */
+  const deleteProject = (idx) => {
+    setProjectData(projectData.filter((el, i) => i !== idx))
   }
 
   console.log('projectData', projectData)
@@ -54,7 +59,7 @@ export default function ProjectTemplate() {
           title={'프로젝트'}
           description={'대략 본인의 프로젝트 정보를 입력해달라는 내용의 문구'}
         />
-        <MainBtn onClick={AddProject}>프로젝트 추가하기</MainBtn>
+        <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
       </Header>
       <ProjectWrap>
         {projectData &&
@@ -65,6 +70,7 @@ export default function ProjectTemplate() {
                 project={project}
                 projectData={projectData}
                 setProjectData={setProjectData}
+                deleteProject={() => deleteProject(idx)}
               />
             </>
           ))}
