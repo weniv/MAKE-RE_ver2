@@ -2,7 +2,14 @@ import React from 'react'
 import { styled } from 'styled-components'
 import CalendarIcon from '../../../assets/icon-Calendar.svg'
 
-export default function DateInput({ id, children, width, name, onChange }) {
+export default function DateInput({
+  id,
+  children,
+  width,
+  name,
+  onChange,
+  inputData,
+}) {
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>
@@ -12,6 +19,7 @@ export default function DateInput({ id, children, width, name, onChange }) {
         max="9999-12"
         width={width}
         name={name}
+        value={inputData}
         onChange={onChange}
       />
     </Wrap>

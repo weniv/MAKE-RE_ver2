@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { styled } from 'styled-components'
 import MinusIcon from '../../../assets/icon-minus.svg'
 
-export default function ContributionInput({ id, value, onClick }) {
+export default function ContributionInput({
+  id,
+  idx,
+  value,
+  onClick,
+  contributes,
+  projectData,
+  setProjectData,
+}) {
   const [inputText, setInputText] = useState(value)
 
-  function handleChange(e) {
+  // contributes arr 내부 값 변경
+  const updateContrib = (e) => {
+    const newArr = [...contributes]
     setInputText(e.target.value)
+
+    contributes.map((el, i) => {
+      if (id === i) {
+        newArr[i] = e.target.value
+      }
+      projectData[idx].contributes = newArr
+      setProjectData([...projectData])
+    })
   }
+
+  // contributes arr 내부 값 삭제
 
   return (
     <Wrap>
@@ -16,11 +36,12 @@ export default function ContributionInput({ id, value, onClick }) {
         id={`subtitle-${id}`}
         type="text"
         width="300px"
-        placeholder="예) 스마트 컨트랙스 서버와 연동되는 웹 개발 전반"
+        name="contributes"
         value={inputText}
-        onChange={handleChange}
+        placeholder="예) 스마트 컨트랙스 서버와 연동되는 웹 개발 전반"
+        onChange={updateContrib}
       />
-      {id !== 1 ? (
+      {id !== 0 ? (
         <DeleteButton onClick={onClick}>
           <img src={MinusIcon} alt="삭제하기" />
         </DeleteButton>

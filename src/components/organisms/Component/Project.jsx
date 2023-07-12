@@ -1,16 +1,12 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
-import {
-  DefaultInput,
-  DefaultTextarea,
-  DateInput,
-  ContributionInput,
-} from '../../atoms/Input'
+import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
 import { WriteSubtitle } from '../../atoms/Title'
-import { ProceedingBtn, AddBtn } from '../../atoms/Button'
+import { ProceedingBtn } from '../../atoms/Button'
 import { SkillList } from '../../atoms/SkillList'
 import { updateData } from '../../../utils'
+import Contribution from './Contribution'
 
 export default function Project({ idx, project, projectData, setProjectData }) {
   const handleChange = (e) => {
@@ -110,15 +106,12 @@ export default function Project({ idx, project, projectData, setProjectData }) {
         </Cont>
         {/* 기여 부분 */}
         <WriteSubtitle subtitle={'기여 부분'} />
-        {/* 하드코딩 -- 추후 수정 필요 */}
-        <Contribute>
-          <div>
-            <ContributionInput id={1} />
-            <ContributionInput id={2} />
-            <ContributionInput id={3} />
-          </div>
-          <AddBtn />
-        </Contribute>
+        <Contribution
+          idx={idx}
+          contributes={project.contributes}
+          projectData={projectData}
+          setProjectData={setProjectData}
+        />
         {/* 적용 기술 */}
         <WriteSubtitle subtitle={'적용 기술'} />
         <DefaultInput
