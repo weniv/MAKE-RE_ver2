@@ -33,7 +33,7 @@ export default function ProjectTemplate() {
     endDate: '',
     progress: false,
     contributes: [''],
-    skills: [''],
+    skills: [],
     demoLink: '',
     githubLink: '',
     snsLink: '',
@@ -47,7 +47,7 @@ export default function ProjectTemplate() {
 
   /** 프로젝트 삭제 */
   const deleteProject = (idx) => {
-    setProjectData(projectData.filter((el, i) => i !== idx))
+    setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
   console.log('projectData', projectData)
@@ -71,6 +71,7 @@ export default function ProjectTemplate() {
                 projectData={projectData}
                 setProjectData={setProjectData}
                 deleteProject={() => deleteProject(idx)}
+                key={idx}
               />
             </>
           ))}

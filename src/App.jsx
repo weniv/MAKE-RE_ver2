@@ -8,10 +8,10 @@ function App() {
     <div className="App">
       <GlobalStyles />
       <ProjectTemplate />
-      <ColorProvider>
+      {/* <ColorProvider>
         <GlobalStyles />
         <WritePage />
-      </ColorProvider>
+      </ColorProvider> */}
     </div>
   )
 }

@@ -12,6 +12,7 @@ export default function DefaultInput({
   inputData,
   setInputData,
   onChange,
+  onKeyDown,
 }) {
   return (
     <InputCont>
@@ -28,6 +29,7 @@ export default function DefaultInput({
         //   setInputData(e.target.value)
         // }}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </InputCont>
   )

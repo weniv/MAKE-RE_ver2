@@ -7,6 +7,7 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { SkillList } from '../../atoms/SkillList'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
+import Skills from './Skills'
 
 export default function Project({
   idx,
@@ -121,18 +122,12 @@ export default function Project({
         />
         {/* 적용 기술 */}
         <WriteSubtitle subtitle={'적용 기술'} />
-        <DefaultInput
-          name="skills"
-          type="text"
-          onChange={handleChange}
-          inputData={project.skills}
-          placeholder="예) Python"
+        <Skills
+          idx={idx}
+          skills={project.skills}
+          projectData={projectData}
+          setProjectData={setProjectData}
         />
-        {/* 하드코딩 -- 추후 수정 필요 */}
-        <SkillListWrap>
-          <SkillList type="delete">Python</SkillList>
-          <SkillList type="delete">Django</SkillList>
-        </SkillListWrap>
       </Wrap>
     </ComponentHeader>
   )
@@ -158,15 +153,4 @@ const Tilde = styled.p`
   font-size: 14px;
   font-weight: 500;
   margin: 20px 8px 0 8px;
-`
-
-const Contribute = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: end;
-`
-
-const SkillListWrap = styled.div`
-  margin-top: 20px;
-  display: flex;
 `

@@ -9,15 +9,19 @@ export default function SkillList({ children, onClick, type }) {
   //   const { mainColor, upadteMainColor } = useContext(ColorContext)
 
   return (
-    // <SkillLi type={type} mainColor={mainColor}>
-    <SkillLi type={type}>
-      <span>{children}</span>
-      {type && (
-        <button onClick={onClick}>
-          <img src={closeIcon} width={'16px'} height={'16px'} />
-        </button>
-      )}
-    </SkillLi>
+    <>
+      {children ? (
+        // <SkillLi type={type} mainColor={mainColor}>
+        <SkillLi type={type} onClick={onClick}>
+          <span>{children}</span>
+          {type && (
+            <button>
+              <img src={closeIcon} width={'16px'} height={'16px'} />
+            </button>
+          )}
+        </SkillLi>
+      ) : null}
+    </>
   )
 }
 
@@ -36,6 +40,7 @@ const SkillLi = styled.li`
   color: var(--main-color);
   font-size: 14px;
   box-sizing: border-box;
+  cursor: pointer;
 
   button {
     display: flex;

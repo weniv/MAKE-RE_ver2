@@ -2,6 +2,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 import { ContributionInput } from '../../atoms/Input'
 import { AddBtn } from '../../atoms/Button'
+import { createArrdata } from '../../../utils'
 
 export default function Contribution({
   idx,
@@ -9,12 +10,6 @@ export default function Contribution({
   projectData,
   setProjectData,
 }) {
-  const handleAddArr = (idx, name) => {
-    const newArr = [...projectData]
-    newArr[idx][name].push('')
-    setProjectData(idx + 1 === projectData[idx].id ? newArr : projectData)
-  }
-
   return (
     <Wrap>
       <Contribute>
@@ -32,7 +27,7 @@ export default function Contribution({
       </Contribute>
       <AddBtn
         onClick={() => {
-          handleAddArr(idx, 'contributes')
+          createArrdata(idx, 'contributes', projectData, setProjectData)
         }}
       />
     </Wrap>
