@@ -5,31 +5,27 @@ import { ReactComponent as CheckFillIcon } from '../../../assets/icon-Check-fill
 import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 import ColorContext from '../../../context/ColorContext'
 
-export default function NavList({ id, listName, isFill, clicked, type }) {
+export default function NavList({
+  clickIdx,
+  listName,
+  id,
+  isFill,
+  type,
+  onClick,
+}) {
   const { mainColor, upadteMainColor } = useContext(ColorContext)
-  const [isClick, setIsClick] = useState(clicked)
-
-  const navListRef = useRef()
+  const [clicked, setClickIdx] = useState(clickIdx === id)
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navListRef.current && !navListRef.current.contains(e.target)) {
-        setIsClick(false)
-      }
+    if (clickIdx === id) {
+      setClickIdx(true)
+    } else {
+      setClickIdx(false)
     }
-    document.addEventListener('mousedown', handleClickOutside)
-  }, [navListRef])
+  }, [clickIdx])
 
   return (
-    <Cont
-      key={id}
-      isFill={isFill}
-      onClick={() => {
-        setIsClick(true)
-      }}
-      ref={navListRef}
-      isClick={isClick}
-    >
+    <Cont key={id} isFill={isFill} clicked={clicked} onClick={onClick}>
       {type === 'write' ? (
         <>
           {isFill ? (
@@ -77,7 +73,7 @@ const Cont = styled.div`
   }
 
   ${(props) =>
-    props.isClick &&
+    props.clicked &&
     css`
       border: 2px solid var(--main-color);
       background-color: var(--hover-color);
