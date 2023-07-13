@@ -30,7 +30,6 @@ export default function DefaultInput({
 }
 
 const InputCont = styled.div`
-  width: 100%;
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -42,7 +41,7 @@ const Label = styled.label`
   font-size: 12px;
 `
 
-const Input = styled.input`
+export const Input = styled.input`
   width: ${(props) => props.width};
   height: 42px;
   margin-right: ${(props) => props.marginRight};
