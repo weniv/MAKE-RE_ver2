@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 import { ContributionInput } from '../../atoms/Input'
 import { AddBtn } from '../../atoms/Button'
-import { createArrdata } from '../../../utils'
+import { createArrdata, deleteArrdata } from '../../../utils'
 
 export default function Contribution({
   id,
@@ -23,6 +23,16 @@ export default function Contribution({
               contributes={contributes}
               projectData={projectData}
               setProjectData={setProjectData}
+              onClick={() => {
+                deleteArrdata(
+                  i,
+                  idx,
+                  'contributes',
+                  contributes,
+                  projectData,
+                  setProjectData
+                )
+              }}
             />
           ))}
       </Contribute>

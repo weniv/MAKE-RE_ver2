@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { styled } from 'styled-components'
 import MinusIcon from '../../../assets/icon-minus.svg'
+import { updateArrdata } from '../../../utils'
 
 export default function ContributionInput({
   id,
@@ -12,23 +13,7 @@ export default function ContributionInput({
   projectData,
   setProjectData,
 }) {
-  const [inputText, setInputText] = useState(value)
-
-  // contributes arr 내부 값 변경
-  const updateContrib = (e) => {
-    const newArr = [...contributes]
-    setInputText(e.target.value)
-
-    contributes.map((el, i) => {
-      if (id === i) {
-        newArr[i] = e.target.value
-      }
-      projectData[idx].contributes = newArr
-      setProjectData([...projectData])
-    })
-  }
-
-  // contributes arr 내부 값 삭제
+  // const [inputText, setInputText] = useState(value)
 
   return (
     <Wrap>
@@ -37,9 +22,11 @@ export default function ContributionInput({
         type="text"
         width="300px"
         name="contributes"
-        value={inputText}
+        value={value}
         placeholder="예) 스마트 컨트랙스 서버와 연동되는 웹 개발 전반"
-        onChange={updateContrib}
+        onChange={(e) => {
+          updateArrdata(e, id, idx, contributes, projectData, setProjectData)
+        }}
         autoComplete="off"
       />
       {id !== 0 ? (
