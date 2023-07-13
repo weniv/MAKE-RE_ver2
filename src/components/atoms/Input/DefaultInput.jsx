@@ -37,7 +37,7 @@ const InputCont = styled.div`
   gap: 8px;
 `
 
-const Label = styled.label`
+export const Label = styled.label`
   color: var(--gray-color);
   font-size: 12px;
 `
