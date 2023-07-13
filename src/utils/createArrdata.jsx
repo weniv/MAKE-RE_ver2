@@ -1,10 +1,10 @@
-export default function createArrdata(idx, name, data, setData) {
+export default function createArrdata(id, name, data, setData) {
   const newArr = [...data]
 
-  if (name !== 'skills') {
-    newArr[idx][name].push('')
-    setData(idx + 1 === data[idx].id ? newArr : data)
+  if (name === 'skills') {
+    newArr.map((el) => setData(el.id === id ? newArr : data))
+  } else {
+    newArr.map((el) => (el.id === id ? el[name].push('') : null))
+    data.map((el) => setData(id === el.id ? newArr : data))
   }
-
-  newArr.map((el) => setData(el.id === idx ? newArr : data))
 }

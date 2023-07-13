@@ -5,6 +5,7 @@ import { AddBtn } from '../../atoms/Button'
 import { createArrdata } from '../../../utils'
 
 export default function Contribution({
+  id,
   idx,
   contributes,
   projectData,
@@ -27,7 +28,7 @@ export default function Contribution({
       </Contribute>
       <AddBtn
         onClick={() => {
-          createArrdata(idx, 'contributes', projectData, setProjectData)
+          createArrdata(id, 'contributes', projectData, setProjectData)
         }}
       />
     </Wrap>

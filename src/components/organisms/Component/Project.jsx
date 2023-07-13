@@ -116,6 +116,7 @@ export default function Project({
         <WriteSubtitle subtitle={'기여 부분'} />
         <Contribution
           idx={idx}
+          id={project.id}
           contributes={project.contributes}
           projectData={projectData}
           setProjectData={setProjectData}
