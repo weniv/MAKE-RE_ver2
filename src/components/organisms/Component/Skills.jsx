@@ -56,4 +56,6 @@ export default function Skills({
 const SkillListWrap = styled.div`
   margin-top: 20px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `
