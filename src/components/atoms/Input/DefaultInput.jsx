@@ -30,6 +30,7 @@ export default function DefaultInput({
         // }}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        autoComplete="off"
       />
     </InputCont>
   )

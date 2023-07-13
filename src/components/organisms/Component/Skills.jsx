@@ -4,21 +4,19 @@ import { SkillList } from '../../atoms/SkillList'
 import { DefaultInput } from '../../atoms/Input'
 import { createArrdata } from '../../../utils'
 
-export default function Skills({ idx, skills, projectData, setProjectData }) {
-  const deleteSkill = (idx) => {
-    const result = skills.filter((skill, i) => i !== idx)
-    projectData[idx].skills = result
-    setProjectData([...projectData])
-    // state 변경만 해주면 완료
+export default function Skills({ id, skills, projectData, setProjectData }) {
+  const deleteSkill = (id) => {
+    const result = skills.filter((skill, i) => i !== id)
+    // projectData[idx].skills = result
+    // setProjectData([...projectData])
   }
 
   // enter키 눌렀을때, SkillList 생성 이벤트 실행
   const createSkillList = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && e.target.value) {
       skills.push(e.target.value)
-      projectData[idx].skills = skills
-      createArrdata(idx, 'skills', projectData, setProjectData)
-      console.log('sfd', projectData)
+      projectData.map((el) => (el.id === id ? (el.skills = skills) : el.skills))
+      createArrdata(id, 'skills', projectData, setProjectData)
       e.target.value = ''
     }
   }
@@ -36,7 +34,7 @@ export default function Skills({ idx, skills, projectData, setProjectData }) {
           <SkillList
             key={idx}
             type="delete"
-            idx={idx}
+            // id={id}
             onClick={() => {
               deleteSkill(idx)
             }}

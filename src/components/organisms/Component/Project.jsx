@@ -124,6 +124,7 @@ export default function Project({
         <WriteSubtitle subtitle={'적용 기술'} />
         <Skills
           idx={idx}
+          id={project.id}
           skills={project.skills}
           projectData={projectData}
           setProjectData={setProjectData}

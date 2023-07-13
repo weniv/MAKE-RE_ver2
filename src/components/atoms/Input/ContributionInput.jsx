@@ -40,6 +40,7 @@ export default function ContributionInput({
         value={inputText}
         placeholder="예) 스마트 컨트랙스 서버와 연동되는 웹 개발 전반"
         onChange={updateContrib}
+        autoComplete="off"
       />
       {id !== 0 ? (
         <DeleteButton onClick={onClick}>
