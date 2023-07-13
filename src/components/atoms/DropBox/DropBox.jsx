@@ -39,9 +39,10 @@ export default function DropBox({
   }, [dropBoxRef])
 
   return (
-    <DropBoxCont width={width} ref={dropBoxRef}>
+    <DropBoxCont ref={dropBoxRef}>
       {!isSelected ? (
         <DropBtn
+          width={width}
           onClick={() => {
             setIsSelected((isSelected) => !isSelected)
           }}
@@ -52,6 +53,7 @@ export default function DropBox({
       ) : (
         <>
           <DropBtn
+            width={width}
             onClick={() => {
               setIsSelected((isSelected) => !isSelected)
             }}
@@ -59,7 +61,7 @@ export default function DropBox({
             {selectedData}
             <img src={TriangleUp} />
           </DropBtn>
-          <ListBox>
+          <ListBox width={width}>
             {list.map((item, idx) => {
               return (
                 <List
@@ -85,7 +87,7 @@ const DropBoxCont = styled.div`
 `
 
 const DropBtn = styled.button`
-  width: 100%;
+  width: ${(props) => props.width}px;
   color: var(--font-color);
   line-height: 20px;
   display: inline-flex;
@@ -98,10 +100,12 @@ const DropBtn = styled.button`
 `
 
 const ListBox = styled.ul`
+  width: ${(props) => props.width}px;
   box-sizing: border-box;
   margin-top: 5px;
-  width: 100%;
   padding: 8px;
+  position: absolute;
+  z-index: 10;
   background-color: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 10px;
