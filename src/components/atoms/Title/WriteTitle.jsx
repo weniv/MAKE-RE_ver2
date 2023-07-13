@@ -17,7 +17,7 @@ WriteTitle.defaultProps = {
 
 // style
 const Wrap = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 16px;
   margin: 52px 0;
