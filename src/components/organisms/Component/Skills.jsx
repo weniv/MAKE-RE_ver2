@@ -5,13 +5,14 @@ import { DefaultInput } from '../../atoms/Input'
 import { createArrdata } from '../../../utils'
 
 export default function Skills({ id, skills, projectData, setProjectData }) {
-  const deleteSkill = (id) => {
-    const result = skills.filter((skill, i) => i !== id)
-    // projectData[idx].skills = result
-    // setProjectData([...projectData])
+  /** skillList 삭제 */
+  const deleteSkill = (idx) => {
+    const result = skills.filter((skill, i) => i !== idx)
+    projectData.map((el) => (el.id === id ? (el.skills = result) : projectData))
+    setProjectData([...projectData])
   }
 
-  // enter키 눌렀을때, SkillList 생성 이벤트 실행
+  /** enter키 눌렀을때, SkillList 생성 */
   const createSkillList = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       skills.push(e.target.value)
@@ -32,9 +33,8 @@ export default function Skills({ id, skills, projectData, setProjectData }) {
       <SkillListWrap>
         {skills.map((skill, idx) => (
           <SkillList
-            key={idx}
+            key={id}
             type="delete"
-            // id={id}
             onClick={() => {
               deleteSkill(idx)
             }}
