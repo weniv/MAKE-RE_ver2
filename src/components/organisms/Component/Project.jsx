@@ -4,7 +4,6 @@ import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
 import { WriteSubtitle } from '../../atoms/Title'
 import { ProceedingBtn } from '../../atoms/Button'
-import { SkillList } from '../../atoms/SkillList'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
@@ -16,10 +15,6 @@ export default function Project({
   setProjectData,
   deleteProject,
 }) {
-  const handleChange = (e) => {
-    updateData(e, idx, projectData, setProjectData)
-  }
-
   return (
     <ComponentHeader
       kind={'프로젝트'}
@@ -32,7 +27,9 @@ export default function Project({
           width="738px"
           name="title"
           placeholder="프로젝트명을 입력합니다."
-          onChange={handleChange}
+          onChange={(e) => {
+            updateData(e, idx, projectData, setProjectData)
+          }}
           inputData={project.title}
         >
           {'프로젝트명'}
@@ -43,7 +40,9 @@ export default function Project({
           <DefaultInput
             name="demoLink"
             type="url"
-            onChange={handleChange}
+            onChange={(e) => {
+              updateData(e, idx, projectData, setProjectData)
+            }}
             inputData={project.demoLink}
           >
             {'프로젝트 링크'}
@@ -51,7 +50,9 @@ export default function Project({
           <DefaultInput
             name="githubLink"
             type="url"
-            onChange={handleChange}
+            onChange={(e) => {
+              updateData(e, idx, projectData, setProjectData)
+            }}
             inputData={project.githubLink}
           >
             {'프로젝트 깃허브 링크'}
@@ -59,7 +60,9 @@ export default function Project({
           <DefaultInput
             name="snsLink"
             type="url"
-            onChange={handleChange}
+            onChange={(e) => {
+              updateData(e, idx, projectData, setProjectData)
+            }}
             inputData={project.snsLink}
           >
             {'프로젝트 SNS 링크'}
@@ -70,7 +73,9 @@ export default function Project({
         <DefaultTextarea
           name="outline"
           placeholder="프로젝트명에 대한 설명을 작성합니다."
-          onChange={handleChange}
+          onChange={(e) => {
+            updateData(e, idx, projectData, setProjectData)
+          }}
           inputData={project.outline}
         >
           {'프로젝트 설명'}
@@ -81,7 +86,9 @@ export default function Project({
           <DefaultInput
             type="text"
             name="people"
-            onChange={handleChange}
+            onChange={(e) => {
+              updateData(e, idx, projectData, setProjectData)
+            }}
             inputData={project.people}
             placeholder="예) Front-End 4명, Back-End 2명"
           >
@@ -92,22 +99,30 @@ export default function Project({
               name="startDate"
               width="220px"
               inputData={project.startDate}
-              onChange={handleChange}
+              onChange={(e) => {
+                updateData(e, idx, projectData, setProjectData)
+              }}
             >
               {'시작일'}
             </DateInput>
             <Tilde>~</Tilde>
             <DateInput
+              idx={idx}
               name="endDate"
               width="220px"
               inputData={project.endDate}
-              onChange={handleChange}
+              onChange={(e) => {
+                updateData(e, idx, projectData, setProjectData)
+              }}
+              progress={project.progress}
             >
               {'종료일'}
             </DateInput>
             <ProceedingBtn
               name="progress"
-              onChange={handleChange}
+              onChange={(e) => {
+                updateData(e, idx, projectData, setProjectData)
+              }}
               inputData={project.progress}
             />
           </DateWrap>

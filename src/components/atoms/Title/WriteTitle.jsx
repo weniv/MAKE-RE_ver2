@@ -20,6 +20,7 @@ const Wrap = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-bottom: 52px;
 `
 
 const Title = styled.h2`

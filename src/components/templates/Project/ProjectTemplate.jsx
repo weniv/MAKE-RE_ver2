@@ -50,7 +50,7 @@ export default function ProjectTemplate() {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
-  console.log('projectData', projectData)
+  // console.log('projectData', projectData)
 
   return (
     <Cont>
@@ -61,21 +61,19 @@ export default function ProjectTemplate() {
         />
         <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
       </Header>
-      <ProjectWrap>
-        {projectData &&
-          projectData.map((project, idx) => (
-            <>
-              <Project
-                idx={idx}
-                project={project}
-                projectData={projectData}
-                setProjectData={setProjectData}
-                deleteProject={() => deleteProject(idx)}
-                key={idx}
-              />
-            </>
-          ))}
-      </ProjectWrap>
+      {projectData &&
+        projectData.map((project, idx) => (
+          <>
+            <Project
+              idx={idx}
+              project={project}
+              projectData={projectData}
+              setProjectData={setProjectData}
+              deleteProject={() => deleteProject(idx)}
+              key={idx}
+            />
+          </>
+        ))}
     </Cont>
   )
 }
@@ -83,23 +81,17 @@ export default function ProjectTemplate() {
 const Cont = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 52px;
   width: 890px;
-  height: 1640px;
   background-color: var(--bg-color);
   filter: drop-shadow(0px 4px 44px rgba(0, 0, 0, 0.1));
   border-radius: 16px;
   padding: 52px;
   margin: 0 auto;
+  gap: 12px;
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const ProjectWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: flex-start;
 `

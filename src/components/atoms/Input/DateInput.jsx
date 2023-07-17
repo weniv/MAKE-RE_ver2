@@ -9,7 +9,9 @@ export default function DateInput({
   name,
   onChange,
   inputData,
+  progress,
 }) {
+  console.log('progress', progress)
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>
@@ -21,6 +23,7 @@ export default function DateInput({
         name={name}
         value={inputData}
         onChange={onChange}
+        readOnly={name === 'endDate' && progress ? true : false}
       />
     </Wrap>
   )

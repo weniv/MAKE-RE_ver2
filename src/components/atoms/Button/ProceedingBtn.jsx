@@ -4,7 +4,7 @@ import checkIcon from '../../../assets/icon-square-Check.svg'
 import checkFillIcon from '../../../assets/icon-square-Check-fill.svg'
 
 export default function ProceedingBtn({ name, onChange, inputData }) {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(inputData)
 
   const handleCheck = () => {
     setIsChecked(!isChecked)
@@ -18,12 +18,9 @@ export default function ProceedingBtn({ name, onChange, inputData }) {
         name={name}
         onClick={handleCheck}
         onChange={onChange}
-        value={!inputData}
+        value={!isChecked}
       ></Checkbox>
-      <Lable
-        htmlFor="proceeding"
-        isChecked={inputData ? inputData : isChecked}
-      />
+      <Lable htmlFor="proceeding" img={isChecked ? checkFillIcon : checkIcon} />
     </Wrap>
   )
 }
@@ -45,8 +42,7 @@ const Lable = styled.label`
   cursor: pointer;
 
   &::before {
-    content: ${({ isChecked }) =>
-      !isChecked ? `url(${checkIcon})` : `url(${checkFillIcon})`};
+    content: ${({ img }) => `url(${img})`};
     width: 20px;
     height: 20px;
     margin-right: 8px;

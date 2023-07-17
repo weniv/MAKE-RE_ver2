@@ -9,6 +9,8 @@
 export default function updateData(e, idx, data, setData) {
   const { name, value } = e.target
 
+  console.log(name)
+
   setData(data.map((el, i) => (i === idx ? { ...el, [name]: value } : el)))
   return data
 }
