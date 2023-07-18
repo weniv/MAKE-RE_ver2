@@ -1,10 +1,11 @@
 import { styled } from 'styled-components'
 import Aside from '../components/templates/Aside/Aside'
 import { Career, Project } from '../components/organisms/Component'
-import Baek from '../testPages/Baek'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
 import Profile from '../components/templates/Profile/Profile'
+import Url from '../components/templates/Url/Url'
+import Experience from '../components/templates/Experience/Experience'
 
 export default function WritePage() {
   return (
@@ -15,7 +16,8 @@ export default function WritePage() {
           <Profile />
           <Project />
           <Career />
-          <Baek />
+          <Url />
+          <Experience />
         </Main>
         <Aside type="write" />
       </Cont>
