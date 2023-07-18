@@ -7,6 +7,8 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 export default function Project({
   idx,
@@ -15,11 +17,24 @@ export default function Project({
   setProjectData,
   deleteProject,
 }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: project.id,
+    })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
   return (
     <ComponentHeader
       kind={'프로젝트'}
       title={project.title ? project.title : null}
       deleteProject={deleteProject}
+      style={style}
+      setNodeRef={setNodeRef}
+      attributes={attributes}
+      listeners={listeners}
     >
       <Wrap>
         <DefaultInput

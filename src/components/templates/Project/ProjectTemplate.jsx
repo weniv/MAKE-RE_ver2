@@ -4,12 +4,17 @@ import { WriteTitle } from '../../atoms/Title'
 import { Project } from '../../organisms/Component'
 import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
+import { DndContext, closestCenter } from '@dnd-kit/core'
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable'
 
 export default function ProjectTemplate() {
-  const nextId = useRef(1)
   const [projectData, setProjectData] = useState([
     {
-      id: nextId.current,
+      id: 1,
       title: '',
       outline: '',
       people: '',
@@ -23,6 +28,15 @@ export default function ProjectTemplate() {
       snsLink: '',
     },
   ])
+
+  const maxId = projectData.reduce(
+    (acc, cur) => {
+      return acc.id > cur.id ? acc : cur
+    },
+    { id: 0 }
+  ).id
+
+  const nextId = useRef(maxId)
 
   const val = {
     id: nextId.current,
@@ -50,31 +64,45 @@ export default function ProjectTemplate() {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
+  const handleDragEnd = (e) => {
+    const { active, over } = e
+    setProjectData((career) => {
+      const oldIdx = career.findIndex((pro) => pro.id === active.id)
+      const newIdx = career.findIndex((pro) => pro.id === over.id)
+      return arrayMove(career, oldIdx, newIdx)
+    })
+  }
+
   // console.log('projectData', projectData)
 
   return (
-    <Cont>
-      <Header>
-        <WriteTitle
-          title={'프로젝트'}
-          description={'대략 본인의 프로젝트 정보를 입력해달라는 내용의 문구'}
-        />
-        <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
-      </Header>
-      {projectData &&
-        projectData.map((project, idx) => (
-          <>
-            <Project
-              idx={idx}
-              project={project}
-              projectData={projectData}
-              setProjectData={setProjectData}
-              deleteProject={() => deleteProject(idx)}
-              key={idx}
-            />
-          </>
-        ))}
-    </Cont>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <Cont>
+        <Header>
+          <WriteTitle
+            title={'프로젝트'}
+            description={'대략 본인의 프로젝트 정보를 입력해달라는 내용의 문구'}
+          />
+          <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
+        </Header>
+        <SortableContext
+          items={projectData}
+          strategy={verticalListSortingStrategy}
+        >
+          {projectData &&
+            projectData.map((project, idx) => (
+              <Project
+                idx={idx}
+                project={project}
+                projectData={projectData}
+                setProjectData={setProjectData}
+                deleteProject={() => deleteProject(idx)}
+                key={idx}
+              />
+            ))}
+        </SortableContext>
+      </Cont>
+    </DndContext>
   )
 }
 
