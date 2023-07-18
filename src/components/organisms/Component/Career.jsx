@@ -4,6 +4,8 @@ import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 export default function Career({
   idx,
@@ -12,11 +14,24 @@ export default function Career({
   setCareerData,
   deleteCareer,
 }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: career.id,
+    })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
   return (
     <ComponentHeader
       kind={'경험'}
       title={career.title ? career.title : null}
       deleteCareer={deleteCareer}
+      style={style}
+      setNodeRef={setNodeRef}
+      attributes={attributes}
+      listeners={listeners}
     >
       <Wrap>
         <DefaultInput
@@ -80,6 +95,12 @@ export default function Career({
     </ComponentHeader>
   )
 }
+
+const Test = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: pink;
+`
 
 const Wrap = styled.div`
   display: flex;

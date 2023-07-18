@@ -4,12 +4,17 @@ import { WriteTitle } from '../../atoms/Title'
 import { Career } from '../../organisms/Component'
 import { addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
+import { DndContext, closestCenter } from '@dnd-kit/core'
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from '@dnd-kit/sortable'
 
 export default function CareerTemplates() {
-  const nextId = useRef(1)
   const [careerData, setCareerData] = useState([
     {
-      id: nextId.current,
+      id: 1,
       title: '',
       start: '',
       end: '',
@@ -17,6 +22,15 @@ export default function CareerTemplates() {
       progress: false,
     },
   ])
+
+  const maxId = careerData.reduce(
+    (acc, cur) => {
+      return acc.id > cur.id ? acc : cur
+    },
+    { id: 0 }
+  ).id
+
+  const nextId = useRef(maxId)
 
   const val = {
     id: nextId.current,
@@ -38,31 +52,45 @@ export default function CareerTemplates() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
+  const handleDragEnd = (e) => {
+    const { active, over } = e
+    setCareerData((career) => {
+      const oldIdx = career.findIndex((pro) => pro.id === active.id)
+      const newIdx = career.findIndex((pro) => pro.id === over.id)
+      return arrayMove(career, oldIdx, newIdx)
+    })
+  }
+
   console.log('careerData', careerData)
 
   return (
-    <Cont>
-      <Header>
-        <WriteTitle
-          title={'경험'}
-          description={'대략 본인의 경험을 입력해달라는 내용의 문구'}
-        />
-        <MainBtn onClick={addCareer}>경험 추가하기</MainBtn>
-      </Header>
-      {careerData &&
-        careerData.map((career, idx) => (
-          <>
-            <Career
-              idx={idx}
-              career={career}
-              deleteCareer={() => deleteCareer(idx)}
-              careerData={careerData}
-              setCareerData={setCareerData}
-              key={idx}
-            />
-          </>
-        ))}
-    </Cont>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <Cont>
+        <Header>
+          <WriteTitle
+            title={'경험'}
+            description={'대략 본인의 경험을 입력해달라는 내용의 문구'}
+          />
+          <MainBtn onClick={addCareer}>경험 추가하기</MainBtn>
+        </Header>
+        <SortableContext
+          items={careerData}
+          strategy={verticalListSortingStrategy}
+        >
+          {careerData &&
+            careerData.map((career, idx) => (
+              <Career
+                idx={idx}
+                career={career}
+                deleteCareer={() => deleteCareer(idx)}
+                careerData={careerData}
+                setCareerData={setCareerData}
+                key={idx}
+              />
+            ))}
+        </SortableContext>
+      </Cont>
+    </DndContext>
   )
 }
 
