@@ -15,6 +15,8 @@ export default function Education() {
           <MainBtn>교육 추가하기</MainBtn>
         </Header>
         <Item kind="교육" />
+        <Item kind="교육" />
+        <Item kind="교육" />
       </Section>
     </Layout>
   )

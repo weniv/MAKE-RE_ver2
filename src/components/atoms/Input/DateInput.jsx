@@ -11,7 +11,6 @@ export default function DateInput({
   inputData,
   progress,
 }) {
-  console.log('progress', progress)
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>

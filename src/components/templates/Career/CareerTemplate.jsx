@@ -10,6 +10,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from '@dnd-kit/sortable'
+import { Layout } from '../../organisms/Component'
 
 export default function CareerTemplates() {
   const [careerData, setCareerData] = useState([
@@ -65,45 +66,42 @@ export default function CareerTemplates() {
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <Cont>
-        <Header>
-          <WriteTitle
-            title={'경험'}
-            description={'대략 본인의 경험을 입력해달라는 내용의 문구'}
-          />
-          <MainBtn onClick={addCareer}>경험 추가하기</MainBtn>
-        </Header>
-        <SortableContext
-          items={careerData}
-          strategy={verticalListSortingStrategy}
-        >
-          {careerData &&
-            careerData.map((career, idx) => (
-              <Career
-                idx={idx}
-                career={career}
-                deleteCareer={() => deleteCareer(idx)}
-                careerData={careerData}
-                setCareerData={setCareerData}
-                key={idx}
-              />
-            ))}
-        </SortableContext>
-      </Cont>
+      <Layout>
+        <Section>
+          <Header>
+            <WriteTitle
+              title={'커리어'}
+              description={'대략 본인의 커리어를 입력해달라는 내용의 문구'}
+            />
+            <MainBtn onClick={addCareer}>경력 추가하기</MainBtn>
+          </Header>
+          <SortableContext
+            items={careerData}
+            strategy={verticalListSortingStrategy}
+          >
+            {careerData &&
+              careerData.map((career, idx) => (
+                <Career
+                  idx={idx}
+                  career={career}
+                  deleteCareer={() => deleteCareer(idx)}
+                  careerData={careerData}
+                  setCareerData={setCareerData}
+                  key={idx}
+                />
+              ))}
+          </SortableContext>
+        </Section>
+      </Layout>
     </DndContext>
   )
 }
 
-const Cont = styled.div`
+const Section = styled.div`
+  padding: 0 52px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 890px;
-  background-color: var(--bg-color);
-  filter: drop-shadow(0px 4px 44px rgba(0, 0, 0, 0.1));
-  border-radius: 16px;
-  padding: 52px;
-  margin: 0 auto;
 `
 
 const Header = styled.div`

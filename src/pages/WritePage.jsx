@@ -1,6 +1,5 @@
 import { styled } from 'styled-components'
 import Aside from '../components/templates/Aside/Aside'
-import { Career, Project } from '../components/organisms/Component'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
 import Profile from '../components/templates/Profile/Profile'
