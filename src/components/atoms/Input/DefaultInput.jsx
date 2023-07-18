@@ -34,6 +34,7 @@ const InputCont = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   gap: 8px;
+  width: 100%;
 `
 
 const Label = styled.label`
