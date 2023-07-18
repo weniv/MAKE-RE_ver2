@@ -6,6 +6,9 @@ import Footer from '../components/organisms/Footer/Footer'
 import Profile from '../components/templates/Profile/Profile'
 import Url from '../components/templates/Url/Url'
 import Experience from '../components/templates/Experience/Experience'
+import Certificate from '../components/templates/Certificate/Certificate'
+import Education from '../components/templates/Education/Education'
+import { CareerTemplate } from '../components/templates/Career'
 import { ProjectTemplate } from '../components/templates/Project'
 
 export default function WritePage() {
@@ -15,10 +18,12 @@ export default function WritePage() {
       <Cont>
         <Main>
           <Profile />
+          <CareerTemplate />
           <ProjectTemplate />
-          {/* <Career />
+          <Experience />
+          <Certificate />
+          <Education />
           <Url />
-          <Experience /> */}
         </Main>
         <Aside type="write" />
       </Cont>
