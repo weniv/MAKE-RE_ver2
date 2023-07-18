@@ -1,4 +1,3 @@
-import React, { useContext } from 'react'
 import { styled } from 'styled-components'
 import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 // import ColorContext from '../../../context/ColorContext'
