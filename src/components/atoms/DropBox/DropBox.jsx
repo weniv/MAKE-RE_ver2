@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
-import TriangleUp from '../../../assets/icon-Triangle-Up.svg'
+import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import { useEffect, useRef, useState } from 'react'
 
 export default function DropBox({
