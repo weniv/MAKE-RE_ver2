@@ -5,8 +5,8 @@ import WritePage from './pages/WritePage'
 function App() {
   return (
     <div className="App">
-      <GlobalStyles />
       <ColorProvider>
+        <GlobalStyles />
         <WritePage />
       </ColorProvider>
     </div>
