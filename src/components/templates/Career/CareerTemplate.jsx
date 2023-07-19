@@ -10,6 +10,7 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from '@dnd-kit/sortable'
+import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 
 export default function CareerTemplates() {
@@ -65,7 +66,7 @@ export default function CareerTemplates() {
   console.log('careerData', careerData)
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <Dnd state={careerData} setState={setCareerData}>
       <Layout>
         <Section>
           <Header>
@@ -75,25 +76,20 @@ export default function CareerTemplates() {
             />
             <MainBtn onClick={addCareer}>경력 추가하기</MainBtn>
           </Header>
-          <SortableContext
-            items={careerData}
-            strategy={verticalListSortingStrategy}
-          >
-            {careerData &&
-              careerData.map((career, idx) => (
-                <Career
-                  idx={idx}
-                  career={career}
-                  deleteCareer={() => deleteCareer(idx)}
-                  careerData={careerData}
-                  setCareerData={setCareerData}
-                  key={idx}
-                />
-              ))}
-          </SortableContext>
+          {careerData &&
+            careerData.map((career, idx) => (
+              <Career
+                idx={idx}
+                career={career}
+                deleteCareer={() => deleteCareer(idx)}
+                careerData={careerData}
+                setCareerData={setCareerData}
+                key={idx}
+              />
+            ))}
         </Section>
       </Layout>
-    </DndContext>
+    </Dnd>
   )
 }
 

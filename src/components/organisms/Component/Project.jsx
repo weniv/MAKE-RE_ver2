@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -7,8 +7,13 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
+import { dndContext } from '../../../utils/dnd'
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+  useSortable,
+} from '@dnd-kit/sortable'
 
 export default function Project({
   idx,
@@ -17,24 +22,23 @@ export default function Project({
   setProjectData,
   deleteProject,
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: project.id,
-    })
+  // const { Style, Sort } = useContext(dndContext)
+  // const { attributes, listeners, setNodeRef, transform, transition } = Sort(
+  //   project.id
+  // )
+  // const style = Style(transform, transition)
+  console.log('project', useContext(dndContext))
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  }
   return (
     <ComponentHeader
+      id={project.id}
       kind={'프로젝트'}
       title={project.title ? project.title : null}
       deleteProject={deleteProject}
-      style={style}
-      setNodeRef={setNodeRef}
-      attributes={attributes}
-      listeners={listeners}
+      // style={style}
+      // setNodeRef={setNodeRef}
+      // attributes={attributes}
+      // listeners={listeners}
     >
       <Wrap>
         <DefaultInput

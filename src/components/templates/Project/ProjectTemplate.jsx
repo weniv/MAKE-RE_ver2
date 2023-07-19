@@ -4,12 +4,7 @@ import { WriteTitle } from '../../atoms/Title'
 import { Project } from '../../organisms/Component'
 import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
-import { DndContext, closestCenter } from '@dnd-kit/core'
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-  arrayMove,
-} from '@dnd-kit/sortable'
+import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 
 export default function ProjectTemplate() {
@@ -65,19 +60,10 @@ export default function ProjectTemplate() {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
-  const handleDragEnd = (e) => {
-    const { active, over } = e
-    setProjectData((career) => {
-      const oldIdx = career.findIndex((pro) => pro.id === active.id)
-      const newIdx = career.findIndex((pro) => pro.id === over.id)
-      return arrayMove(career, oldIdx, newIdx)
-    })
-  }
-
   // console.log('projectData', projectData)
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <Dnd state={projectData} setState={setProjectData}>
       <Layout>
         <Section>
           <Header>
@@ -89,25 +75,21 @@ export default function ProjectTemplate() {
             />
             <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
           </Header>
-          <SortableContext
-            items={projectData}
-            strategy={verticalListSortingStrategy}
-          >
-            {projectData &&
-              projectData.map((project, idx) => (
-                <Project
-                  idx={idx}
-                  project={project}
-                  projectData={projectData}
-                  setProjectData={setProjectData}
-                  deleteProject={() => deleteProject(idx)}
-                  key={idx}
-                />
-              ))}
-          </SortableContext>
+
+          {projectData &&
+            projectData.map((project, idx) => (
+              <Project
+                idx={idx}
+                project={project}
+                projectData={projectData}
+                setProjectData={setProjectData}
+                deleteProject={() => deleteProject(idx)}
+                key={idx}
+              />
+            ))}
         </Section>
       </Layout>
-    </DndContext>
+    </Dnd>
   )
 }
 

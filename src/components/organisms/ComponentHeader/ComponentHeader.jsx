@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as styles from './ComponentHeader-style'
 import DragIcon from '../../../assets/icon-hamburger.svg'
 import expandIcon from '../../../assets/icon-triangle-down.svg'
 import reduceIcon from '../../../assets/icon-triangle-up.svg'
 import deleteIcon from '../../../assets/icon-X.svg'
+import { dndContext } from '../../../utils/dnd'
 
 export default function ComponentHeader({
+  id,
   kind,
   title,
   children,
   deleteProject,
   deleteCareer,
-  style,
-  setNodeRef,
-  attributes,
-  listeners,
 }) {
   const [isExpand, setIsExpand] = useState(false)
+  console.log('header', useContext(dndContext))
+
+  if (useContext(dndContext)) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { Style, Sort } = useContext(dndContext)
+    var { attributes, listeners, setNodeRef, transform, transition } = Sort(id)
+    var style = Style(transform, transition)
+  }
 
   return (
     <styles.Cont style={style}>

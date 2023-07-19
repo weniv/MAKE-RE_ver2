@@ -7,7 +7,6 @@ import { updateData } from '../../../utils'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-
 export default function Career({
   idx,
   career,
@@ -15,24 +14,25 @@ export default function Career({
   setCareerData,
   deleteCareer,
 }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: career.id,
-    })
+  // const { attributes, listeners, setNodeRef, transform, transition } =
+  //   useSortable({
+  //     id: career.id,
+  //   })
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  }
+  // const style = {
+  //   transform: CSS.Transform.toString(transform),
+  //   transition,
+  // }
   return (
     <ComponentHeader
+      id={career.id}
       kind={'커리어'}
       title={career.title ? career.title : null}
       deleteCareer={deleteCareer}
-      style={style}
-      setNodeRef={setNodeRef}
-      attributes={attributes}
-      listeners={listeners}
+      // style={style}
+      // setNodeRef={setNodeRef}
+      // attributes={attributes}
+      // listeners={listeners}
     >
       <Wrap>
         <DefaultInput
