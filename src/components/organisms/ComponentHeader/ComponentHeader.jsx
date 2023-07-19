@@ -11,8 +11,7 @@ export default function ComponentHeader({
   kind,
   title,
   children,
-  deleteProject,
-  deleteCareer,
+  handleDelete,
 }) {
   const [isExpand, setIsExpand] = useState(false)
   console.log('header', useContext(dndContext))
@@ -41,10 +40,7 @@ export default function ComponentHeader({
             isExpand={isExpand}
           />
         </styles.ExpandBtn>
-        <styles.DelBtn
-          del
-          onClick={deleteProject ? deleteProject : deleteCareer}
-        >
+        <styles.DelBtn del onClick={handleDelete}>
           <styles.Img src={deleteIcon} />
         </styles.DelBtn>
       </styles.Header>
