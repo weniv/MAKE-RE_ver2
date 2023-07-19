@@ -16,7 +16,7 @@ export default function Certificate({
       id={cert.id}
       kind="자격증"
       title={cert.title ? cert.title : null}
-      deleteHandler={deleteCert}
+      handleDelete={deleteCert}
     >
       <Wrap>
         <DefaultInput

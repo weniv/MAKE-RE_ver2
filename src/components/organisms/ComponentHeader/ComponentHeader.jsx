@@ -11,7 +11,7 @@ export default function ComponentHeader({
   kind,
   title,
   children,
-  deleteHandler,
+  handleDelete,
 }) {
   const [isExpand, setIsExpand] = useState(false)
   console.log('header', useContext(dndContext))
@@ -40,7 +40,7 @@ export default function ComponentHeader({
             isExpand={isExpand}
           />
         </styles.ExpandBtn>
-        <styles.DelBtn del onClick={deleteHandler}>
+        <styles.DelBtn del onClick={handleDelete}>
           <styles.Img src={deleteIcon} />
         </styles.DelBtn>
       </styles.Header>
