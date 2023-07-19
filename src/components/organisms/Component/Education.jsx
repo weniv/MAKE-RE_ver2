@@ -3,26 +3,42 @@ import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
+import { updateData } from '../../../utils'
 
-export default function Education() {
+export default function Education({
+  idx,
+  edu,
+  eduData,
+  setEduData,
+  deleteEdu,
+}) {
   return (
-    <ComponentHeader kind="교육">
+    <ComponentHeader
+      kind="교육"
+      id={edu.id}
+      title={edu.title ? edu.title : null}
+      handleDelete={deleteEdu}
+    >
       <Wrap>
         <DefaultInput
           id="educationName"
           type="text"
           width="738px"
           placeholder="예) 위니브대학교 컴퓨터공학과"
+          onChange={(e) => {
+            updateData(e, idx, eduData, setEduData)
+          }}
+          inputData={edu.title}
         >
-          {'교육명'}
+          교육명
         </DefaultInput>
         <DateWrap>
           <DateInput id="startDate" width="220px">
-            {'시작일'}
+            시작일
           </DateInput>
           <Tilde>~</Tilde>
           <DateInput id="endDate" width="220px">
-            {'종료일'}
+            종료일
           </DateInput>
           <ProceedingBtn />
         </DateWrap>
