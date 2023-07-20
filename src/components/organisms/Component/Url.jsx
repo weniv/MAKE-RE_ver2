@@ -10,6 +10,7 @@ export default function Url({ id, data }) {
   return (
     <UrlItem>
       <ComponentHeader kind="URL" title={name}>
+        <ItemCont>
         <DefaultInput
           width="100%"
           marginRight="0px"
@@ -32,6 +33,7 @@ export default function Url({ id, data }) {
         >
           링크
         </DefaultInput>
+        </ItemCont>
       </ComponentHeader>
     </UrlItem>
   )
@@ -42,6 +44,10 @@ Url.defaultProps = {
 }
 
 const UrlItem = styled.li`
+`
+
+const ItemCont=styled.div`
+  
   display: flex;
   flex-direction: column;
   gap: 24px;
