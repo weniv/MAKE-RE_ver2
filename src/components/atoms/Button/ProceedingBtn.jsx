@@ -3,11 +3,12 @@ import { styled } from 'styled-components'
 import checkIcon from '../../../assets/icon-square-Check.svg'
 import checkFillIcon from '../../../assets/icon-square-Check-fill.svg'
 
-export default function ProceedingBtn({ name, onChange, inputData }) {
+export default function ProceedingBtn({ name, onChange, inputData, onClick }) {
   const [isChecked, setIsChecked] = useState(inputData)
 
   const handleCheck = () => {
     setIsChecked(!isChecked)
+    onClick()
   }
 
   return (

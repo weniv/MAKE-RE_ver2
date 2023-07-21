@@ -9,21 +9,21 @@ export default function DateInput({
   name,
   onChange,
   inputData,
-  progress,
+  isStill,
 }) {
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>
-      <Input
-        id={`dateInput-${id}`}
-        type="month"
-        max="9999-12"
-        width={width}
-        name={name}
-        value={inputData}
-        onChange={onChange}
-        readOnly={name === 'endDate' && progress ? true : false}
-      />
+        <Input
+          id={`dateInput-${id}`}
+          type="month"
+          max="9999-12"
+          width={width}
+          name={name}
+          value={inputData}
+          onChange={onChange}
+          readOnly={isStill}
+        />
     </Wrap>
   )
 }
@@ -66,5 +66,11 @@ const Input = styled.input`
 
   &:focus {
     outline: 2px solid var(--main-color);
+  }
+
+  &:read-only {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+    opacity: 0.4;
   }
 `
