@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import CalendarIcon from '../../../assets/icon-Calendar.svg'
 
@@ -11,19 +11,39 @@ export default function DateInput({
   inputData,
   progress,
 }) {
+  const [isRead, setIsRead] = useState(null)
+
+  useEffect(() => {
+    setIsRead(progress)
+  },[progress])
+
+  console.log('isRead', isRead)
+  
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>
-      <Input
-        id={`dateInput-${id}`}
-        type="month"
-        max="9999-12"
-        width={width}
-        name={name}
-        value={inputData}
-        onChange={onChange}
-        readOnly={name === 'endDate' && progress ? true : false}
-      />
+      {isRead ? (
+        <Input
+          id={`dateInput-${id}`}
+          type="month"
+          max="9999-12"
+          width={width}
+          name={name}
+          value={inputData}
+          onChange={onChange}
+          readOnly
+        />
+      ) : (
+        <Input
+          id={`dateInput-${id}`}
+          type="month"
+          max="9999-12"
+          width={width}
+          name={name}
+          value={inputData}
+          onChange={onChange}
+        />
+      )}
     </Wrap>
   )
 }

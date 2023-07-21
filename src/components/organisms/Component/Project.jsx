@@ -8,25 +8,8 @@ import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
 import { dndContext } from '../../../utils/dnd'
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-  arrayMove,
-  useSortable,
-} from '@dnd-kit/sortable'
 
-export default function Project({
-  idx,
-  project,
-  projectData,
-  setProjectData,
-  deleteProject,
-}) {
-  // const { Style, Sort } = useContext(dndContext)
-  // const { attributes, listeners, setNodeRef, transform, transition } = Sort(
-  //   project.id
-  // )
-  // const style = Style(transform, transition)
+export default function Project({ idx, project, projectData, setProjectData, handleDelete }) {
   console.log('project', useContext(dndContext))
 
   return (
@@ -34,11 +17,7 @@ export default function Project({
       id={project.id}
       kind={'프로젝트'}
       title={project.title ? project.title : null}
-      deleteProject={deleteProject}
-      // style={style}
-      // setNodeRef={setNodeRef}
-      // attributes={attributes}
-      // listeners={listeners}
+      handleDelete={handleDelete}
     >
       <Wrap>
         <DefaultInput
