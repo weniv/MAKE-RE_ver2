@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
 
 export default function Career({ idx, career, careerData, setCareerData, handleDelete }) {
+  const [isStill, setIsStill] = useState(career.progress)
+
+  
   return (
     <ComponentHeader
       id={career.id}
@@ -50,7 +51,7 @@ export default function Career({ idx, career, careerData, setCareerData, handleD
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}
-            progress={career.progress}
+            isStill={isStill}
           >
             {'종료일'}
           </DateInput>
@@ -59,6 +60,7 @@ export default function Career({ idx, career, careerData, setCareerData, handleD
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}
+            onClick={() => setIsStill(!isStill)}
             inputData={career.progress}
           />
         </DateWrap>

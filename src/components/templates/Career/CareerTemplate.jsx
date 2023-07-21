@@ -49,7 +49,7 @@ export default function CareerTemplates() {
   }
 
 
-  console.log('careerData', careerData)
+  console.log('careerData', careerData[0].progress)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>

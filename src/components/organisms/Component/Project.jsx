@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -7,10 +7,9 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
-import { dndContext } from '../../../utils/dnd'
 
 export default function Project({ idx, project, projectData, setProjectData, handleDelete }) {
-  console.log('project', useContext(dndContext))
+  const [isStill, setIsStill] = useState(project.progress)
 
   return (
     <ComponentHeader
@@ -112,7 +111,7 @@ export default function Project({ idx, project, projectData, setProjectData, han
               onChange={(e) => {
                 updateData(e, idx, projectData, setProjectData)
               }}
-              progress={project.progress}
+              isStill={isStill}
             >
               {'종료일'}
             </DateInput>
@@ -121,6 +120,7 @@ export default function Project({ idx, project, projectData, setProjectData, han
               onChange={(e) => {
                 updateData(e, idx, projectData, setProjectData)
               }}
+              onClick={() => setIsStill(!isStill)}
               inputData={project.progress}
             />
           </DateWrap>
