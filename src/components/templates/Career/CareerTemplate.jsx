@@ -48,7 +48,6 @@ export default function CareerTemplates() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-
   console.log('careerData', careerData[0].progress)
 
   return (
@@ -89,5 +88,5 @@ const Section = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `
