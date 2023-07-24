@@ -4,6 +4,7 @@ import { styled } from 'styled-components'
 import { Layout, CertItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
+import { Dnd } from '../../../utils'
 
 export default function Certificate() {
   const [certData, setCertData] = useState([
@@ -41,30 +42,32 @@ export default function Certificate() {
   }
 
   return (
-    <Layout>
-      <Section>
-        <Header>
-          <WriteTitle
-            title="자격증"
-            description="대략 본인의 자격증을 입력해달라는 내용의 문구"
-          />
-          <MainBtn onClick={addCert}>자격증 추가하기</MainBtn>
-        </Header>
-        <ItemList>
-          {certData &&
-            certData.map((cert, idx) => (
-              <CertItem
-                idx={idx}
-                cert={cert}
-                deleteCert={() => deleteCert(idx)}
-                certData={certData}
-                setCertData={setCertData}
-                key={idx}
-              />
-            ))}
-        </ItemList>
-      </Section>
-    </Layout>
+    <Dnd state={certData} setState={setCertData}>
+      <Layout>
+        <Section>
+          <Header>
+            <WriteTitle
+              title="자격증"
+              description="대략 본인의 자격증을 입력해달라는 내용의 문구"
+            />
+            <MainBtn onClick={addCert}>자격증 추가하기</MainBtn>
+          </Header>
+          <ItemList>
+            {certData &&
+              certData.map((cert, idx) => (
+                <CertItem
+                  idx={idx}
+                  cert={cert}
+                  deleteCert={() => deleteCert(idx)}
+                  certData={certData}
+                  setCertData={setCertData}
+                  key={idx}
+                />
+              ))}
+          </ItemList>
+        </Section>
+      </Layout>
+    </Dnd>
   )
 }
 

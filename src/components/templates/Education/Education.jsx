@@ -4,6 +4,7 @@ import { styled } from 'styled-components'
 import { Layout, EduItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
+import { Dnd } from '../../../utils'
 
 export default function Education() {
   const [eduData, setEduData] = useState([
@@ -44,30 +45,32 @@ export default function Education() {
     setEduData(eduData.filter((edu, i) => i !== idx))
   }
   return (
-    <Layout>
-      <Section>
-        <Header>
-          <WriteTitle
-            title="교육"
-            description="대략 본인의 교육을 입력해달라는 내용의 문구"
-          />
-          <MainBtn onClick={addEdu}>교육 추가하기</MainBtn>
-        </Header>
-        <ItemList>
-          {eduData &&
-            eduData.map((edu, idx) => (
-              <EduItem
-                idx={idx}
-                edu={edu}
-                deleteEdu={() => deleteEdu(idx)}
-                eduData={eduData}
-                setEduData={setEduData}
-                key={idx}
-              />
-            ))}
-        </ItemList>
-      </Section>
-    </Layout>
+    <Dnd state={eduData} setState={setEduData}>
+      <Layout>
+        <Section>
+          <Header>
+            <WriteTitle
+              title="교육"
+              description="대략 본인의 교육을 입력해달라는 내용의 문구"
+            />
+            <MainBtn onClick={addEdu}>교육 추가하기</MainBtn>
+          </Header>
+          <ItemList>
+            {eduData &&
+              eduData.map((edu, idx) => (
+                <EduItem
+                  idx={idx}
+                  edu={edu}
+                  deleteEdu={() => deleteEdu(idx)}
+                  eduData={eduData}
+                  setEduData={setEduData}
+                  key={idx}
+                />
+              ))}
+          </ItemList>
+        </Section>
+      </Layout>
+    </Dnd>
   )
 }
 
