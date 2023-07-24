@@ -23,16 +23,20 @@ export default function Certificate({
           id="certificateName"
           type="text"
           width="738px"
+          name="title"
           placeholder="예) 정보처리기사"
-          onChange={(e) => {
-            updateData(e, idx, certData, setCertData)
-          }}
+          onChange={(e) => updateData(e, idx, certData, setCertData)}
           inputData={cert.title}
         >
           자격증명
         </DefaultInput>
         <DateWrap>
-          <DateInput id="startDate" width="220px">
+          <DateInput
+            id="startDate"
+            width="220px"
+            name="date"
+            onChange={(e) => updateData(e, idx, certData, setCertData)}
+          >
             취득일
           </DateInput>
         </DateWrap>

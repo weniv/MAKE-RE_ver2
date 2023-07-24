@@ -24,6 +24,7 @@ export default function Education({
           id="educationName"
           type="text"
           width="738px"
+          name="title"
           placeholder="예) 위니브대학교 컴퓨터공학과"
           onChange={(e) => {
             updateData(e, idx, eduData, setEduData)
@@ -33,11 +34,21 @@ export default function Education({
           교육명
         </DefaultInput>
         <DateWrap>
-          <DateInput id="startDate" width="220px">
+          <DateInput
+            id="startDate"
+            name="start"
+            width="220px"
+            onChange={(e) => updateData(e, idx, eduData, setEduData)}
+          >
             시작일
           </DateInput>
           <Tilde>~</Tilde>
-          <DateInput id="endDate" width="220px">
+          <DateInput
+            id="endDate"
+            name="end"
+            width="220px"
+            onChange={(e) => updateData(e, idx, eduData, setEduData)}
+          >
             종료일
           </DateInput>
           <ProceedingBtn />
