@@ -12,7 +12,7 @@ export default function Education() {
       title: '',
       start: '',
       end: '',
-      progress: false,
+      inProgres: false,
     },
   ])
 
@@ -30,7 +30,7 @@ export default function Education() {
     title: '',
     start: '',
     end: '',
-    progress: false,
+    inProgres: false,
   }
 
   /** 교육 추가 */
@@ -41,7 +41,6 @@ export default function Education() {
 
   /** 자격증 삭제 */
   const deleteEdu = (idx) => {
-    console.log('자격증 삭제 버튼 클릭')
     setEduData(eduData.filter((edu, i) => i !== idx))
   }
   return (
