@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput } from '../../atoms/Input'
@@ -12,6 +12,8 @@ export default function Education({
   setEduData,
   deleteEdu,
 }) {
+  const [isStill, setIsStill] = useState(edu.progress)
+
   return (
     <ComponentHeader
       kind="교육"
@@ -47,11 +49,12 @@ export default function Education({
             id="endDate"
             name="end"
             width="220px"
+            isStill={isStill}
             onChange={(e) => updateData(e, idx, eduData, setEduData)}
           >
             종료일
           </DateInput>
-          <ProceedingBtn />
+          <ProceedingBtn onClick={() => setIsStill(!isStill)} />
         </DateWrap>
       </Wrap>
     </ComponentHeader>
