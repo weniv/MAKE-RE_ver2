@@ -54,7 +54,11 @@ export default function Education({
           >
             종료일
           </DateInput>
-          <ProceedingBtn onClick={() => setIsStill(!isStill)} />
+          <ProceedingBtn
+            onClick={() => setIsStill(!isStill)}
+            idx={idx}
+            type="edu"
+          />
         </DateWrap>
       </Wrap>
     </ComponentHeader>
