@@ -66,6 +66,7 @@ export default function ColorPicker() {
 }
 
 const Flexbox = styled.div`
+  position: relative;
   display: flex;
   gap: 20px;
 `
@@ -104,6 +105,8 @@ const ColorPickerBtn = styled.button`
 `
 
 const PickBox = styled.div`
+  position: absolute;
+  left: calc(100% + 20px);
   background-color: #fff;
   border-radius: 16px;
 `
