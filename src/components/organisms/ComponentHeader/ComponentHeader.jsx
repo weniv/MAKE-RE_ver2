@@ -14,7 +14,6 @@ export default function ComponentHeader({
   handleDelete,
 }) {
   const [isExpand, setIsExpand] = useState(false)
-  console.log('header', useContext(dndContext))
 
   if (useContext(dndContext)) {
     // eslint-disable-next-line react-hooks/rules-of-hooks

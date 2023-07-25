@@ -31,11 +31,15 @@ export default function WritePage() {
   )
 }
 
-const Main = styled.main``
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
 
 const Cont = styled.div`
   width: 100vw;
-  padding-top: 60px;
+  padding: 60px 0;
   background-color: var(--hover-color);
   display: flex;
   gap: 20px;

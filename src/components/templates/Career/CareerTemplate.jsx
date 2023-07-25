@@ -4,12 +4,6 @@ import { WriteTitle } from '../../atoms/Title'
 import { Career } from '../../organisms/Component'
 import { addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
-import { DndContext, closestCenter } from '@dnd-kit/core'
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-  arrayMove,
-} from '@dnd-kit/sortable'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 
@@ -18,8 +12,8 @@ export default function CareerTemplates() {
     {
       id: 1,
       title: '',
-      start: '',
-      end: '',
+      startDate: '',
+      endDate: '',
       works: '',
       progress: false,
     },
@@ -37,8 +31,8 @@ export default function CareerTemplates() {
   const val = {
     id: nextId.current,
     title: '',
-    start: '',
-    end: '',
+    startDate: '',
+    endDate: '',
     works: '',
     progress: false,
   }
@@ -50,20 +44,11 @@ export default function CareerTemplates() {
   }
 
   /** 커리어 삭제 */
-  const deleteCareer = (idx) => {
+  const handleDelete = (idx) => {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-  const handleDragEnd = (e) => {
-    const { active, over } = e
-    setCareerData((career) => {
-      const oldIdx = career.findIndex((pro) => pro.id === active.id)
-      const newIdx = career.findIndex((pro) => pro.id === over.id)
-      return arrayMove(career, oldIdx, newIdx)
-    })
-  }
-
-  console.log('careerData', careerData)
+  console.log('careerData', careerData[0].progress)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>
@@ -81,7 +66,7 @@ export default function CareerTemplates() {
               <Career
                 idx={idx}
                 career={career}
-                deleteCareer={() => deleteCareer(idx)}
+                handleDelete={() => handleDelete(idx)}
                 careerData={careerData}
                 setCareerData={setCareerData}
                 key={idx}
@@ -103,5 +88,5 @@ const Section = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `

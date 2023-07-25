@@ -56,7 +56,7 @@ export default function ProjectTemplate() {
   }
 
   /** 프로젝트 삭제 */
-  const deleteProject = (idx) => {
+  const handleDelete = (idx) => {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
@@ -83,7 +83,7 @@ export default function ProjectTemplate() {
                 project={project}
                 projectData={projectData}
                 setProjectData={setProjectData}
-                deleteProject={() => deleteProject(idx)}
+                handleDelete={() => handleDelete(idx)}
                 key={idx}
               />
             ))}

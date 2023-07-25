@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -7,38 +7,16 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
-import { dndContext } from '../../../utils/dnd'
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-  arrayMove,
-  useSortable,
-} from '@dnd-kit/sortable'
 
-export default function Project({
-  idx,
-  project,
-  projectData,
-  setProjectData,
-  deleteProject,
-}) {
-  // const { Style, Sort } = useContext(dndContext)
-  // const { attributes, listeners, setNodeRef, transform, transition } = Sort(
-  //   project.id
-  // )
-  // const style = Style(transform, transition)
-  console.log('project', useContext(dndContext))
+export default function Project({ idx, project, projectData, setProjectData, handleDelete }) {
+  const [isStill, setIsStill] = useState(project.progress)
 
   return (
     <ComponentHeader
       id={project.id}
       kind={'프로젝트'}
       title={project.title ? project.title : null}
-      deleteProject={deleteProject}
-      // style={style}
-      // setNodeRef={setNodeRef}
-      // attributes={attributes}
-      // listeners={listeners}
+      handleDelete={handleDelete}
     >
       <Wrap>
         <DefaultInput
@@ -133,7 +111,7 @@ export default function Project({
               onChange={(e) => {
                 updateData(e, idx, projectData, setProjectData)
               }}
-              progress={project.progress}
+              isStill={isStill}
             >
               {'종료일'}
             </DateInput>
@@ -142,6 +120,7 @@ export default function Project({
               onChange={(e) => {
                 updateData(e, idx, projectData, setProjectData)
               }}
+              onClick={() => setIsStill(!isStill)}
               inputData={project.progress}
             />
           </DateWrap>

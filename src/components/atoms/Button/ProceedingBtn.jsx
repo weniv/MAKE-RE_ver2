@@ -3,24 +3,35 @@ import { styled } from 'styled-components'
 import checkIcon from '../../../assets/icon-square-Check.svg'
 import checkFillIcon from '../../../assets/icon-square-Check-fill.svg'
 
-export default function ProceedingBtn({ name, onChange, inputData }) {
+export default function ProceedingBtn({
+  name,
+  idx,
+  type,
+  onChange,
+  inputData,
+  onClick,
+}) {
   const [isChecked, setIsChecked] = useState(inputData)
 
   const handleCheck = () => {
     setIsChecked(!isChecked)
+    onClick()
   }
 
   return (
     <Wrap>
       <Checkbox
-        id="proceeding"
+        id={`${type}-proceeding-${idx}`}
         type="checkbox"
         name={name}
         onClick={handleCheck}
         onChange={onChange}
         value={!isChecked}
       ></Checkbox>
-      <Lable htmlFor="proceeding" img={isChecked ? checkFillIcon : checkIcon} />
+      <Lable
+        htmlFor={`${type}-proceeding-${idx}`}
+        img={isChecked ? checkFillIcon : checkIcon}
+      />
     </Wrap>
   )
 }
