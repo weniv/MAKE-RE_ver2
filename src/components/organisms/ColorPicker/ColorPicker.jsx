@@ -106,7 +106,7 @@ const ColorPickerBtn = styled.button`
 
 const PickBox = styled.div`
   position: absolute;
-  right: -260px;
+  left: calc(100% + 20px);
   background-color: #fff;
   border-radius: 16px;
 `
