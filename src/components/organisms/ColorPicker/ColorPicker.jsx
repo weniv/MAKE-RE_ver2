@@ -67,8 +67,6 @@ export default function ColorPicker() {
 
 const Flexbox = styled.div`
   position: relative;
-  display: flex;
-  gap: 20px;
 `
 
 const ColorPickerCont = styled.div`
@@ -106,6 +104,8 @@ const ColorPickerBtn = styled.button`
 
 const PickBox = styled.div`
   position: absolute;
+  top: 0;
+  // NOTE: WritePage > Main의 gap 변경 시 20px 수정 필요
   left: calc(100% + 20px);
   background-color: #fff;
   border-radius: 16px;
