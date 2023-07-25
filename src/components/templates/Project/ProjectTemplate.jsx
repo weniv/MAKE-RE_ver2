@@ -60,7 +60,7 @@ export default function ProjectTemplate() {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
-  // console.log('projectData', projectData)
+  console.log('projectData', projectData[0].progress)
 
   return (
     <Dnd state={projectData} setState={setProjectData}>
