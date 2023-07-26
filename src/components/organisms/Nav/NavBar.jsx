@@ -28,6 +28,7 @@ export default function NavBar({ type }) {
               clickIdx={clickIdx}
               listName={item.title}
               idx={idx}
+              key={item.id}
               id={item.id}
               isFill={isFill}
               type={type}
