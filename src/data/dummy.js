@@ -29,7 +29,15 @@ export const resumeData = {
       demo: '',
     },
   ],
-  experience: [{ date: '', contents: '' }],
+  experience: [
+    {
+      id: 1,
+      title: '',
+      startDate: '',
+      endDate: '',
+      inProgress: false,
+    },
+  ],
   certificate: [{ id: 1, title: '', date: '' }],
   education: [
     { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
