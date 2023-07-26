@@ -3,41 +3,71 @@ import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import DefaultInput from '../../atoms/Input/DefaultInput'
 import { DateInput } from '../../atoms/Input'
+import { updateData } from '../../../utils'
 import { ProceedingBtn } from '../../atoms/Button'
 
-export default function Experience({ id, data }) {
-  const [name, setName] = useState(data.name)
-  const [start, setStart] = useState(data.start)
-  const [end, setEnd] = useState(data.end)
-  const [endFlag, setEndFlag] = useState(data.endFlag)
+export default function Experience({
+  idx,
+  exp,
+  expData,
+  setExpData,
+  deleteExp,
+}) {
+  const [isStill, setIsStill] = useState(exp.inProgress)
 
   return (
     <ExpItem>
-      <ComponentHeader kind="경험" title={name}>
+      <ComponentHeader
+        kind="경험"
+        id={exp.id}
+        title={exp.title || null}
+        handleDelete={deleteExp}
+      >
         <DefaultInput
           width="100%"
           marginRight="0px"
-          id={`exp-name-${id}`}
+          id={`exp-name-${exp.id}`}
           type="text"
+          name="title"
           placeholder="예) 제 7회 주식회사 위니브 청년 ICT 해외봉사 참여"
-          inputData={name}
-          setInputData={setName}
+          inputData={exp.title}
+          onChange={(e) => {
+            updateData(e, idx, expData, setExpData)
+          }}
         >
           경험명
         </DefaultInput>
         <Period>
-          <DateInput width="220px">시작일</DateInput>
+          <DateInput
+            id="startDate"
+            name="startDate"
+            width="220px"
+            inputData={exp.startDate}
+            onChange={(e) => updateData(e, idx, expData, setExpData)}
+          >
+            시작일
+          </DateInput>
           <span>~</span>
-          <DateInput width="220px">종료일</DateInput>
-          <ProceedingBtn>종료일 없음(?)</ProceedingBtn>
+          <DateInput
+            id="endDate"
+            name="endDate"
+            width="220px"
+            isStill={isStill}
+            inputData={exp.endDate}
+            onChange={(e) => updateData(e, idx, expData, setExpData)}
+          >
+            종료일
+          </DateInput>
+          <ProceedingBtn
+            onClick={() => setIsStill(!isStill)}
+            idx={idx}
+            type="exp"
+            inputData={exp.inProgress}
+          />
         </Period>
       </ComponentHeader>
     </ExpItem>
   )
-}
-Experience.defaultProps = {
-  id: 0,
-  data: { name: '', start: '', end: '', endFlag: false },
 }
 
 const ExpItem = styled.li`
