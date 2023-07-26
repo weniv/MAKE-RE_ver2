@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { SketchPicker } from 'react-color'
 import ColorPalette from '../../atoms/Nav/ColorPalette'
@@ -19,6 +19,18 @@ export default function ColorPicker() {
       updateMainColor(color)
     }
   }
+
+  // PickBox 외부 클릭했을 시 닫기
+  const pickBoxRef = useRef()
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (pickBoxRef.current && !pickBoxRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+  }, [pickBoxRef])
 
   return (
     <>
@@ -56,7 +68,7 @@ export default function ColorPicker() {
           </ColorPickerBtn>
         </ColorPickerCont>
         {isOpen && (
-          <PickBox>
+          <PickBox ref={pickBoxRef}>
             <Picker color={mainColor} onChangeComplete={handleChangeComplete} />
           </PickBox>
         )}
