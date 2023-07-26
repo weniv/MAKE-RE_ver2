@@ -5,6 +5,7 @@ import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { styled } from 'styled-components'
+import { Dnd } from '../../../utils'
 
 export default function Experience() {
   const { resumeData } = useContext(ResumeContext)
@@ -39,30 +40,32 @@ export default function Experience() {
   }
 
   return (
-    <Layout>
-      <Section>
-        <Header>
-          <WriteTitle
-            title="경험"
-            description="대략 본인의 경험을 입력해달라는 내용의 문구"
-          />
-          <MainBtn onClick={addExp}>경험 추가하기</MainBtn>
-        </Header>
-        <ItemList>
-          {expData &&
-            expData.map((exp, idx) => (
-              <ExpItem
-                idx={idx}
-                exp={exp}
-                deleteExp={() => deleteExp(idx)}
-                expData={expData}
-                setExpData={setExpData}
-                key={idx}
-              />
-            ))}
-        </ItemList>
-      </Section>
-    </Layout>
+    <Dnd state={expData} setState={setExpData}>
+      <Layout>
+        <Section>
+          <Header>
+            <WriteTitle
+              title="경험"
+              description="대략 본인의 경험을 입력해달라는 내용의 문구"
+            />
+            <MainBtn onClick={addExp}>경험 추가하기</MainBtn>
+          </Header>
+          <ItemList>
+            {expData &&
+              expData.map((exp, idx) => (
+                <ExpItem
+                  idx={idx}
+                  exp={exp}
+                  deleteExp={() => deleteExp(idx)}
+                  expData={expData}
+                  setExpData={setExpData}
+                  key={idx}
+                />
+              ))}
+          </ItemList>
+        </Section>
+      </Layout>
+    </Dnd>
   )
 }
 
