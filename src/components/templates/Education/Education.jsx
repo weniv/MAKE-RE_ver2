@@ -1,21 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { addData } from '../../../utils'
 import { styled } from 'styled-components'
 import { Layout, EduItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
+import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd } from '../../../utils'
 
 export default function Education() {
-  const [eduData, setEduData] = useState([
-    {
-      id: 1,
-      title: '',
-      start: '',
-      end: '',
-      inProgres: false,
-    },
-  ])
+  const { resumeData } = useContext(ResumeContext)
+  const [eduData, setEduData] = useState(resumeData['education'])
 
   const maxId = eduData.reduce(
     (acc, cur) => {
@@ -29,10 +23,11 @@ export default function Education() {
   const val = {
     id: nextId.current,
     title: '',
-    start: '',
-    end: '',
-    inProgres: false,
+    startDate: '',
+    endDate: '',
+    inProgress: false,
   }
+  console.log('EDUCATION DATA:', eduData)
 
   /** 교육 추가 */
   const addEdu = () => {

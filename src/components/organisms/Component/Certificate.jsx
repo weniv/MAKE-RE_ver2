@@ -35,6 +35,7 @@ export default function Certificate({
             id="startDate"
             width="220px"
             name="date"
+            inputData={cert.date}
             onChange={(e) => updateData(e, idx, certData, setCertData)}
           >
             취득일

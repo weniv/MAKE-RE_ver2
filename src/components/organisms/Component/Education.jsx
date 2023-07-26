@@ -12,7 +12,7 @@ export default function Education({
   setEduData,
   deleteEdu,
 }) {
-  const [isStill, setIsStill] = useState(edu.progress)
+  const [isStill, setIsStill] = useState(edu.inProgress)
 
   return (
     <ComponentHeader
@@ -38,8 +38,9 @@ export default function Education({
         <DateWrap>
           <DateInput
             id="startDate"
-            name="start"
+            name="startDate"
             width="220px"
+            inputData={edu.startDate}
             onChange={(e) => updateData(e, idx, eduData, setEduData)}
           >
             시작일
@@ -47,9 +48,10 @@ export default function Education({
           <Tilde>~</Tilde>
           <DateInput
             id="endDate"
-            name="end"
+            name="endDate"
             width="220px"
             isStill={isStill}
+            inputData={edu.endDate}
             onChange={(e) => updateData(e, idx, eduData, setEduData)}
           >
             종료일
@@ -58,6 +60,7 @@ export default function Education({
             onClick={() => setIsStill(!isStill)}
             idx={idx}
             type="edu"
+            inputData={edu.inProgress}
           />
         </DateWrap>
       </Wrap>

@@ -30,8 +30,10 @@ export const resumeData = {
     },
   ],
   experience: [{ date: '', contents: '' }],
-  certificate: [{ date: '', contents: '' }],
-  education: [{ date: '', contents: '' }],
+  certificate: [{ id: 1, title: '', date: '' }],
+  education: [
+    { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
+  ],
   url: [{ contents: '', link: '' }],
 }
 
