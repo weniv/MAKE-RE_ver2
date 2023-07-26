@@ -34,7 +34,7 @@ export default function Education() {
     addData(nextId.current, val, eduData, setEduData)
   }
 
-  /** 자격증 삭제 */
+  /** 교육 삭제 */
   const deleteEdu = (idx) => {
     setEduData(eduData.filter((edu, i) => i !== idx))
   }
