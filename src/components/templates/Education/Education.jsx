@@ -27,7 +27,6 @@ export default function Education() {
     endDate: '',
     inProgress: false,
   }
-  console.log('EDUCATION DATA:', eduData)
 
   /** 교육 추가 */
   const addEdu = () => {
