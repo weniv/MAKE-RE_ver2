@@ -4,17 +4,26 @@ import checkIcon from '../../../assets/icon-Check.svg'
 import { ReactComponent as CheckFillIcon } from '../../../assets/icon-Check-fill.svg'
 import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 import ColorContext from '../../../context/ColorContext'
+import { dndContext } from '../../../utils/dnd'
 
 export default function NavList({
   clickIdx,
   listName,
   id,
+  idx,
   isFill,
   type,
   onClick,
 }) {
   const { mainColor, upadteMainColor } = useContext(ColorContext)
-  const [clicked, setClickIdx] = useState(clickIdx === id)
+  const [clicked, setClickIdx] = useState(clickIdx === idx)
+
+  if (useContext(dndContext)) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { Style, Sort } = useContext(dndContext)
+    var { attributes, listeners, setNodeRef, transform, transition } = Sort(id)
+    var style = Style(transform, transition)
+  }
 
   useEffect(() => {
     if (clickIdx === id) {
@@ -34,7 +43,7 @@ export default function NavList({
             <img src={checkIcon} alt="입력 미완료" />
           )}
           <NavText>{listName}</NavText>
-          <DragBtn>
+          <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
             <img src={hamburgerIcon} />
           </DragBtn>
         </>

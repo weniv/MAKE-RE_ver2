@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { SketchPicker } from 'react-color'
 import ColorPalette from '../../atoms/Nav/ColorPalette'
@@ -19,6 +19,18 @@ export default function ColorPicker() {
       updateMainColor(color)
     }
   }
+
+  // PickBox 외부 클릭했을 시 닫기
+  const pickBoxRef = useRef()
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (pickBoxRef.current && !pickBoxRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+  }, [pickBoxRef])
 
   return (
     <>
@@ -56,7 +68,7 @@ export default function ColorPicker() {
           </ColorPickerBtn>
         </ColorPickerCont>
         {isOpen && (
-          <PickBox>
+          <PickBox ref={pickBoxRef}>
             <Picker color={mainColor} onChangeComplete={handleChangeComplete} />
           </PickBox>
         )}
@@ -66,8 +78,7 @@ export default function ColorPicker() {
 }
 
 const Flexbox = styled.div`
-  display: flex;
-  gap: 20px;
+  position: relative;
 `
 
 const ColorPickerCont = styled.div`
@@ -104,6 +115,10 @@ const ColorPickerBtn = styled.button`
 `
 
 const PickBox = styled.div`
+  position: absolute;
+  top: 0;
+  // NOTE: WritePage > Main의 gap 변경 시 20px 수정 필요
+  left: calc(100% + 20px);
   background-color: #fff;
   border-radius: 16px;
 `

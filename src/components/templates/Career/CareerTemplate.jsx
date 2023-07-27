@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { Career } from '../../organisms/Component'
@@ -6,18 +6,11 @@ import { addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function CareerTemplates() {
-  const [careerData, setCareerData] = useState([
-    {
-      id: 1,
-      title: '',
-      startDate: '',
-      endDate: '',
-      works: '',
-      progress: false,
-    },
-  ])
+  const { resumeData } = useContext(ResumeContext)
+  const [careerData, setCareerData] = useState(resumeData['career'])
 
   const maxId = careerData.reduce(
     (acc, cur) => {
@@ -48,7 +41,7 @@ export default function CareerTemplates() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-  console.log('careerData', careerData[0].progress)
+  // console.log('careerData', careerData)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>

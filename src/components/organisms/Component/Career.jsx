@@ -5,10 +5,15 @@ import { DefaultInput, DateInput } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 
-export default function Career({ idx, career, careerData, setCareerData, handleDelete }) {
+export default function Career({
+  idx,
+  career,
+  careerData,
+  setCareerData,
+  handleDelete,
+}) {
   const [isStill, setIsStill] = useState(career.progress)
 
-  
   return (
     <ComponentHeader
       id={career.id}
@@ -57,6 +62,8 @@ export default function Career({ idx, career, careerData, setCareerData, handleD
           </DateInput>
           <ProceedingBtn
             name="progress"
+            type="career"
+            idx={career.id}
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}

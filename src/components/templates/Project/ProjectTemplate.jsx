@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { Project } from '../../organisms/Component'
@@ -6,24 +6,11 @@ import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function ProjectTemplate() {
-  const [projectData, setProjectData] = useState([
-    {
-      id: 1,
-      title: '',
-      outline: '',
-      people: '',
-      startDate: '',
-      endDate: '',
-      progress: false,
-      contributes: [''],
-      skills: [''],
-      demoLink: '',
-      githubLink: '',
-      snsLink: '',
-    },
-  ])
+  const { resumeData } = useContext(ResumeContext)
+  const [projectData, setProjectData] = useState(resumeData['project'])
 
   const maxId = projectData.reduce(
     (acc, cur) => {

@@ -97,6 +97,10 @@ const DropBtn = styled.button`
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background: var(--bg-color);
+
+  &:focus {
+    outline: 2px solid var(--main-color);
+  }
 `
 
 const ListBox = styled.ul`

@@ -8,7 +8,13 @@ import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
 
-export default function Project({ idx, project, projectData, setProjectData, handleDelete }) {
+export default function Project({
+  idx,
+  project,
+  projectData,
+  setProjectData,
+  handleDelete,
+}) {
   const [isStill, setIsStill] = useState(project.progress)
 
   return (
@@ -117,6 +123,8 @@ export default function Project({ idx, project, projectData, setProjectData, han
             </DateInput>
             <ProceedingBtn
               name="progress"
+              type="project"
+              idx={project.id}
               onChange={(e) => {
                 updateData(e, idx, projectData, setProjectData)
               }}
