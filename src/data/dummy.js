@@ -42,7 +42,7 @@ export const resumeData = {
   education: [
     { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
   ],
-  url: [{ contents: '', link: '' }],
+  url: [{ id: 1, content: '', link: '' }],
 }
 
 export const remoteList = [
