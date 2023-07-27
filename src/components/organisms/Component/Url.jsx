@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import DefaultInput from '../../atoms/Input/DefaultInput'
 import { styled } from 'styled-components'
 import { updateData } from '../../../utils'
 
 export default function Url({ idx, url, urlData, setUrlData, deleteUrl }) {
+  useEffect(() => {
+    console.log('effect> ', urlData)
+  }, [urlData])
   return (
     <UrlItem>
       <ComponentHeader
         kind="URL"
         id={url.id}
-        title={url.title || null}
+        title={url.content || null}
         handleDelete={deleteUrl}
       >
         <ItemCont>
