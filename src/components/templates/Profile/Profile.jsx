@@ -1,19 +1,43 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { styled } from 'styled-components'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import AddBtn from '../../atoms/Button/AddBtn'
 import MainBtn from '../../atoms/Button/MainBtn'
+import { ResumeContext } from '../../../context/ResumeContext'
+import { SkillList } from '../../atoms/SkillList'
 
 export default function Profile() {
+  const { resumeData } = useContext(ResumeContext)
+  const [profileData, setProfileData] = useState(resumeData['profile'][0])
+
   const previousData = null
   const [isSelected, setIsSelected] = useState()
   const [selectedData, setSelectedData] = useState(
     previousData ? previousData : '직접 입력'
   )
+
+  // 기술 스택 추가
+  const createSkillList = (e) => {
+    if (e.keyCode === 13 && e.target.value) {
+      const newSkill = e.target.value
+      setProfileData((prevData) => ({
+        ...prevData,
+        skills: [...prevData.skills, newSkill],
+      }))
+      e.target.value = ''
+    }
+  }
+
+  // 기술 스택 삭제
+  const deleteSkillItem = (e, i) => {
+    setProfileData((prevData) => ({
+      ...prevData,
+      skills: prevData.skills.filter((_, idx) => idx !== i),
+    }))
+  }
 
   return (
     <Layout>
@@ -138,19 +162,23 @@ export default function Profile() {
       <Line />
       <Section>
         <WriteSubtitle subtitle="기술 스택" />
-        <FlexBox>
-          <Input
-            // id={id}
-            type="text"
-            placeholder="예) Python"
-            width="260px"
-            // value={inputData}
-            // onChange={(e) => {
-            //   setInputData(e.target.value)
-            // }}
-          />
-          <AddBtn />
-        </FlexBox>
+        <Input
+          onKeyDown={createSkillList}
+          type="text"
+          placeholder="예) Python"
+          width="260px"
+        />
+        <SkillListWrap>
+          {profileData.skills.map((skill, i) => (
+            <SkillList
+              key={i}
+              type="delete"
+              onClick={(e) => deleteSkillItem(e, i)}
+            >
+              {skill}
+            </SkillList>
+          ))}
+        </SkillListWrap>
       </Section>
       <Line />
       <Section>
@@ -178,6 +206,8 @@ export default function Profile() {
 }
 
 const Section = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 0 52px;
 `
 
@@ -224,6 +254,13 @@ const FlexBox = styled.div`
   display: flex;
   gap: 8px;
   align-items: bottom;
+`
+
+const SkillListWrap = styled.div`
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `
 
 const GitHubCont = styled(FlexBox)`
