@@ -198,7 +198,7 @@ export default function Profile() {
       </Section>
       <Line />
       <Section>
-        <WriteSubtitle subtitle="GitHub" />
+        <WriteSubtitle subtitle="GitHub" id="github" />
         <GitHubCont>
           <DefaultInput
             id="github"
