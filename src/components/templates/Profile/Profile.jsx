@@ -65,7 +65,7 @@ export default function Profile() {
           <div>
             <InputCont>
               <DefaultInput
-                // id={id}
+                id="name"
                 type="text"
                 placeholder="예) 홍길동"
                 width="220px"
@@ -78,7 +78,7 @@ export default function Profile() {
                 이름
               </DefaultInput>
               <DefaultInput
-                // id={id}
+                id="enName"
                 type="text"
                 placeholder="예) Kildong Hong"
                 width="356px"
@@ -92,7 +92,7 @@ export default function Profile() {
             </InputCont>{' '}
             <InputCont>
               <DefaultInput
-                // id={id}
+                id="phoneNumber"
                 type="text"
                 placeholder="예) 010-1234-5678"
                 width="220px"
@@ -142,6 +142,7 @@ export default function Profile() {
             </InputCont>
             <InputCont>
               <DefaultInput
+                id="blog"
                 type="url"
                 onChange={(e) => updateProfile(e, 'blog')}
                 inputData={profileData.blog}
@@ -175,8 +176,9 @@ export default function Profile() {
       </Section>
       <Line />
       <Section>
-        <WriteSubtitle subtitle="기술 스택" />
+        <WriteSubtitle subtitle="기술 스택" id="skills" />
         <Input
+          id="skills"
           onKeyDown={createSkillList}
           type="text"
           placeholder="예) Python"
@@ -199,7 +201,7 @@ export default function Profile() {
         <WriteSubtitle subtitle="GitHub" />
         <GitHubCont>
           <DefaultInput
-            // id={id}
+            id="github"
             type="text"
             width="260px"
             onChange={(e) => updateProfile(e, 'github')}
