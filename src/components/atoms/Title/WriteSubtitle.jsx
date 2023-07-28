@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 
 export default function WriteSubtitle({ id, subtitle }) {
-  return <Title htmlFor={`subtitle-${id}`}>{subtitle}</Title>
+  return <Title htmlFor={id}>{subtitle}</Title>
 }
 
 WriteSubtitle.defaultProps = {
