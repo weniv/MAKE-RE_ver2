@@ -24,16 +24,16 @@ export default function ProjectTemplate() {
   const val = {
     id: nextId.current,
     title: '',
+    demoLink: '',
+    githubLink: '',
+    snsLink: '',
     outline: '',
     people: '',
     startDate: '',
     endDate: '',
-    progress: false,
-    contributes: [''],
-    skills: [],
-    demoLink: '',
-    githubLink: '',
-    snsLink: '',
+    inProgress: false,
+    contributions: [''],
+    skills: [''],
   }
 
   /** 프로젝트 추가 */
@@ -46,8 +46,6 @@ export default function ProjectTemplate() {
   const handleDelete = (idx) => {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
-
-  // console.log('projectData', projectData)
 
   return (
     <Dnd state={projectData} setState={setProjectData}>
