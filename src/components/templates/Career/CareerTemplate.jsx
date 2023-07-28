@@ -23,11 +23,11 @@ export default function CareerTemplates() {
 
   const val = {
     id: nextId.current,
-    title: '',
+    companyName: '',
     startDate: '',
     endDate: '',
+    inProgress: false,
     works: '',
-    progress: false,
   }
 
   /** 커리어 추가 */

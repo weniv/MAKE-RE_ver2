@@ -36,7 +36,7 @@ export default function Experience() {
 
   /** 경험 삭제 */
   const deleteExp = (idx) => {
-    setExpData(expData.filter((edu, i) => i !== idx))
+    setExpData(expData.filter((exp, i) => i !== idx))
   }
 
   return (

@@ -6,27 +6,37 @@ export const resumeData = {
       enName: '',
       phoneNumber: '',
       fullEmail: '',
-      github: '',
       blog: '',
-      newcomer: true,
-      intro: '',
+      careerLength: 0,
       skills: [''],
+      github: '',
+      intro: '',
     },
   ],
-  career: [{ id: 1, start: '', end: '', companyName: '', works: '' }],
+  career: [
+    {
+      id: 1,
+      companyName: '',
+      startData: '',
+      endData: '',
+      inProgress: false,
+      works: '',
+    },
+  ],
   project: [
     {
       id: 1,
       title: '',
+      demoLink: '',
+      githubLink: '',
+      snsLink: '',
       outline: '',
       people: '',
-      startPeriod: '',
-      endPeriod: '',
-      progress: false,
-      contributes: [''],
+      startDate: '',
+      endDate: '',
+      inProgress: false,
+      contributions: [''],
       skills: [''],
-      github: '',
-      demo: '',
     },
   ],
   experience: [
@@ -42,7 +52,7 @@ export const resumeData = {
   education: [
     { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
   ],
-  url: [{ id: 1, content: '', link: '' }],
+  url: [{ id: 1, title: '', link: '' }],
 }
 
 export const remoteList = [

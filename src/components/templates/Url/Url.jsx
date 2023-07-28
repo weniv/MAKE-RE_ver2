@@ -21,7 +21,7 @@ export default function Url() {
 
   const val = {
     id: nextId.current,
-    content: '',
+    title: '',
     link: '',
   }
 
@@ -33,7 +33,7 @@ export default function Url() {
 
   /** url 삭제 */
   const deleteUrl = (idx) => {
-    setUrlData(urlData.filter((edu, i) => i !== idx))
+    setUrlData(urlData.filter((url, i) => i !== idx))
   }
 
   return (
