@@ -39,6 +39,14 @@ export default function Profile() {
     }))
   }
 
+  // 프로필 내용 업데이트
+  const updateProfile = (e, name) => {
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: e.target.value,
+    }))
+  }
+
   return (
     <Layout>
       <Section>
@@ -62,10 +70,10 @@ export default function Profile() {
                 placeholder="예) 홍길동"
                 width="220px"
                 marginRight="12px"
-                // value={inputData}
-                // onChange={(e) => {
-                //   setInputData(e.target.value)
-                // }}
+                inputData={profileData.name}
+                onChange={(e) => {
+                  updateProfile(e, 'name')
+                }}
               >
                 이름
               </DefaultInput>
@@ -74,10 +82,10 @@ export default function Profile() {
                 type="text"
                 placeholder="예) Kildong Hong"
                 width="356px"
-                // value={inputData}
-                // onChange={(e) => {
-                //   setInputData(e.target.value)
-                // }}
+                inputData={profileData.enName}
+                onChange={(e) => {
+                  updateProfile(e, 'enName')
+                }}
               >
                 영문 이름
               </DefaultInput>
@@ -89,10 +97,10 @@ export default function Profile() {
                 placeholder="예) 010-1234-5678"
                 width="220px"
                 marginRight="12px"
-                // value={inputData}
-                // onChange={(e) => {
-                //   setInputData(e.target.value)
-                // }}
+                inputData={profileData.phoneNumber}
+                onChange={(e) => {
+                  updateProfile(e, 'phoneNumber')
+                }}
               >
                 전화번호
               </DefaultInput>
@@ -133,7 +141,13 @@ export default function Profile() {
               />
             </InputCont>
             <InputCont>
-              <DefaultInput type="url">기술 블로그 링크</DefaultInput>
+              <DefaultInput
+                type="url"
+                onChange={(e) => updateProfile(e, 'blog')}
+                inputData={profileData.blog}
+              >
+                기술 블로그 링크
+              </DefaultInput>
             </InputCont>
             <Label>경력</Label>
             <DropBox
@@ -188,10 +202,8 @@ export default function Profile() {
             // id={id}
             type="text"
             width="260px"
-            // value={inputData}
-            // onChange={(e) => {
-            //   setInputData(e.target.value)
-            // }}
+            onChange={(e) => updateProfile(e, 'github')}
+            inputData={profileData.github}
           >
             GitHub ID
           </DefaultInput>
