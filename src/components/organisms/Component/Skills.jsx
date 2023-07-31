@@ -26,6 +26,7 @@ export default function Skills({
       <DefaultInput
         name="skills"
         type="text"
+        width="260px"
         onKeyDown={createSkillList}
         placeholder="예) Python"
       />
