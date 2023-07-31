@@ -4,6 +4,7 @@ import LinkIcon from '../../../assets/icon-Url.svg'
 export default function DefaultTextarea({
   children,
   width,
+  height,
   marginRight,
   id,
   type,
@@ -11,29 +12,32 @@ export default function DefaultTextarea({
   placeholder,
   inputData,
   onChange,
+  onKeyDown,
 }) {
   return (
-    <Cont>
+    <Cont type={type}>
       <Label htmlFor={id}>{children}</Label>
       <TextArea
         id={id}
         type={type}
         name={name}
+        height={height}
         placeholder={placeholder}
         width={width}
         marginRight={marginRight}
         value={inputData}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </Cont>
   )
 }
 
 const Cont = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 8px;
+  gap: ${(props) => (props.type === 'project' ? '8px' : null)};
 `
 
 const Label = styled.label`
@@ -43,10 +47,10 @@ const Label = styled.label`
 
 const TextArea = styled.textarea`
   width: ${(props) => props.width};
-  height: 92px;
+  height: ${(props) => props.height};
+  font-size: ${(props) => (props.type === 'intro' ? '16px' : '14px')};
   margin-right: ${(props) => props.marginRight};
-  padding: 11px 0 11px;
-  padding-left: ${(props) => (props.type === 'url' ? '36px' : '16px')};
+  padding: ${(props) => (props.type === 'intro' ? '20px' : '16px')};
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background-color: var(--bg-color);

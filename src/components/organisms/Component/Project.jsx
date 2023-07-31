@@ -75,7 +75,9 @@ export default function Project({
         <WriteSubtitle subtitle={'프로젝트 개요'} name="outline" />
         <DefaultTextarea
           name="outline"
+          height="92px"
           placeholder="프로젝트명에 대한 설명을 작성합니다."
+          type="project"
           onChange={(e) => {
             updateData(e, idx, projectData, setProjectData)
           }}
@@ -138,7 +140,7 @@ export default function Project({
         <Contribution
           idx={idx}
           id={project.id}
-          contributes={project.contributes}
+          contributions={project.contributions}
           projectData={projectData}
           setProjectData={setProjectData}
         />
