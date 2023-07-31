@@ -1,13 +1,12 @@
 import { useState, useContext } from 'react'
-import { styled } from 'styled-components'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
-import LicatFace from '../../../assets/icon-liacat.svg'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
 import MainBtn from '../../atoms/Button/MainBtn'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
+import * as styles from './Profile-style'
 
 export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
@@ -49,12 +48,12 @@ export default function Profile() {
 
   return (
     <Layout>
-      <Section>
+      <styles.Section>
         <WriteTitle
           title="프로필"
           description="대략 본인의 프로필 정보를 입력해달라는 내용의 문구"
         />
-        <ProfileCont>
+        <styles.ProfileCont>
           <button className="profileImg">
             {true ? (
               <span className="ir">프로필 이미지 업로드</span>
@@ -63,7 +62,7 @@ export default function Profile() {
             )}
           </button>
           <div>
-            <InputCont>
+            <styles.InputCont>
               <DefaultInput
                 id="name"
                 type="text"
@@ -89,8 +88,8 @@ export default function Profile() {
               >
                 영문 이름
               </DefaultInput>
-            </InputCont>{' '}
-            <InputCont>
+            </styles.InputCont>{' '}
+            <styles.InputCont>
               <DefaultInput
                 id="phoneNumber"
                 type="text"
@@ -104,8 +103,8 @@ export default function Profile() {
               >
                 전화번호
               </DefaultInput>
-            </InputCont>
-            <InputCont>
+            </styles.InputCont>
+            <styles.InputCont>
               <DefaultInput
                 // id={id}
                 type="text"
@@ -139,8 +138,8 @@ export default function Profile() {
                 selectedData={selectedData}
                 setSelectedData={setSelectedData}
               />
-            </InputCont>
-            <InputCont>
+            </styles.InputCont>
+            <styles.InputCont>
               <DefaultInput
                 id="blog"
                 type="url"
@@ -149,8 +148,8 @@ export default function Profile() {
               >
                 기술 블로그 링크
               </DefaultInput>
-            </InputCont>
-            <Label>경력</Label>
+            </styles.InputCont>
+            <styles.Label>경력</styles.Label>
             <DropBox
               width="179"
               list={[
@@ -172,10 +171,10 @@ export default function Profile() {
               setSelectedData={setSelectedData}
             />
           </div>
-        </ProfileCont>
-      </Section>
-      <Line />
-      <Section>
+        </styles.ProfileCont>
+      </styles.Section>
+      <styles.Line />
+      <styles.Section>
         <WriteSubtitle subtitle="기술 스택" id="skills" />
         <Input
           id="skills"
@@ -184,7 +183,7 @@ export default function Profile() {
           placeholder="예) Python"
           width="260px"
         />
-        <SkillListWrap>
+        <styles.SkillListWrap>
           {profileData.skills.map((skill, i) => (
             <SkillList
               key={i}
@@ -194,12 +193,12 @@ export default function Profile() {
               {skill}
             </SkillList>
           ))}
-        </SkillListWrap>
-      </Section>
-      <Line />
-      <Section>
+        </styles.SkillListWrap>
+      </styles.Section>
+      <styles.Line />
+      <styles.Section>
         <WriteSubtitle subtitle="GitHub" id="github" />
-        <GitHubCont>
+        <styles.GitHubCont>
           <DefaultInput
             id="github"
             type="text"
@@ -210,83 +209,11 @@ export default function Profile() {
             GitHub ID
           </DefaultInput>
           <MainBtn type="preview">내 잔디 불러오기</MainBtn>
-        </GitHubCont>
+        </styles.GitHubCont>
 
-        <Label>Contributions</Label>
-        <CommitBox />
-      </Section>
+        <styles.Label>Contributions</styles.Label>
+        <styles.CommitBox />
+      </styles.Section>
     </Layout>
   )
 }
-
-const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 52px;
-`
-
-const ProfileCont = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 52px;
-
-  button.profileImg {
-    width: 146px;
-    height: 146px;
-    border-radius: 200px;
-    border: 1px solid var(--border-color);
-    background: var(--hover-color);
-    background-image: url(${LicatFace});
-  }
-`
-
-const InputCont = styled.div`
-  display: flex;
-  margin-bottom: 24px;
-  align-items: flex-end;
-
-  span {
-    margin: 0 8px 13px 0;
-  }
-`
-
-const Label = styled.label`
-  color: var(--gray-color);
-  font-size: 12px;
-  display: block;
-  margin-bottom: 8px;
-`
-
-const Line = styled.div`
-  width: 890px;
-  height: 2px;
-  background: var(--hover-color);
-  margin: 40px 0 0;
-`
-
-const FlexBox = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: bottom;
-`
-
-const SkillListWrap = styled.div`
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-`
-
-const GitHubCont = styled(FlexBox)`
-  margin-bottom: 20px;
-
-  button {
-    align-self: flex-end;
-  }
-`
-const CommitBox = styled.div`
-  height: 160px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--hover-color);
-`
