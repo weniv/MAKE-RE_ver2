@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React from 'react'
 import { styled } from 'styled-components'
 import MinusIcon from '../../../assets/icon-minus.svg'
 import { updateArrdata } from '../../../utils'
@@ -9,7 +8,7 @@ export default function ContributionInput({
   idx,
   value,
   onClick,
-  contributes,
+  contributions,
   projectData,
   setProjectData,
 }) {
@@ -25,7 +24,7 @@ export default function ContributionInput({
         value={value}
         placeholder="예) 스마트 컨트랙스 서버와 연동되는 웹 개발 전반"
         onChange={(e) => {
-          updateArrdata(e, id, idx, contributes, projectData, setProjectData)
+          updateArrdata(e, id, idx, contributions, projectData, setProjectData)
         }}
         autoComplete="off"
       />
@@ -64,8 +63,10 @@ const Input = styled.input`
 
 const DeleteButton = styled.button`
   position: absolute;
-  top: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   right: 11px;
+  height: 20px;
   cursor: pointer;
   background-color: transparent;
   border: none;

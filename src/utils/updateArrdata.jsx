@@ -6,7 +6,7 @@ export default function updateArrdata(e, id, idx, data, state, setState) {
       if (id === i) {
         newArr[i] = e.target.value
       }
-      state[idx].contributes = newArr
+      state[idx].contributions = newArr
       setState([...state])
     })
   } catch (err) {

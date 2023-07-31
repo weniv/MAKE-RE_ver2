@@ -7,28 +7,28 @@ import { createArrdata, deleteArrdata } from '../../../utils'
 export default function Contribution({
   id,
   idx,
-  contributes,
+  contributions,
   projectData,
   setProjectData,
 }) {
   return (
     <Wrap>
       <Contribute>
-        {contributes &&
-          contributes.map((inputData, i) => (
+        {contributions &&
+          contributions.map((contribution, i) => (
             <ContributionInput
               id={i}
               idx={idx}
-              value={inputData}
-              contributes={contributes}
+              value={contribution}
+              contributions={contributions}
               projectData={projectData}
               setProjectData={setProjectData}
               onClick={() => {
                 deleteArrdata(
                   i,
                   idx,
-                  'contributes',
-                  contributes,
+                  'contributions',
+                  contributions,
                   projectData,
                   setProjectData
                 )
@@ -38,7 +38,7 @@ export default function Contribution({
       </Contribute>
       <AddBtn
         onClick={() => {
-          createArrdata(id, 'contributes', projectData, setProjectData)
+          createArrdata(id, 'contributions', projectData, setProjectData)
         }}
       />
     </Wrap>
