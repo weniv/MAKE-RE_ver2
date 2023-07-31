@@ -51,8 +51,6 @@ const TextArea = styled.textarea`
   font-size: ${(props) => (props.type === 'intro' ? '16px' : '14px')};
   margin-right: ${(props) => props.marginRight};
   padding: ${(props) => (props.type === 'intro' ? '20px' : '16px')};
-  // padding: 11px 0 11px;
-  // padding-left: ${(props) => (props.type === 'url' ? '36px' : '16px')};
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background-color: var(--bg-color);
