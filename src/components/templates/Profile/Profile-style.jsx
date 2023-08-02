@@ -9,50 +9,40 @@ export const Section = styled.div`
 export const ProfileCont = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 52px;
+  gap: 46px;
 `
 
-export const ProfileImgCont = styled.div`
+export const ImgCont = styled.div`
   position: relative;
   width: 146px;
   height: 146px;
-  flex-grow: 0;
-
-  .profileImg {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-
-    div {
-      width: 100%;
-      height: 100%;
-      border-radius: 200px;
-      overflow: hidden;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    img.defaultImg {
-      background: var(--hover-color);
-    }
-  }
-
-  .profileImg .addImgBtn,
-  .profileImg .deleteImgBtn {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 46px;
-    height: 46px;
-  }
 
   .profileInput {
     display: none;
+  }
+`
+
+export const ImgLabel = styled.label`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+`
+
+export const ImgWrap = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 200px;
+  overflow: hidden;
+`
+
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  &.defaultImg {
+    background: var(--hover-color);
   }
 `
 
