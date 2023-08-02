@@ -6,7 +6,7 @@ import { updateData } from '../../../utils'
 
 export default function Url({ idx, url, urlData, setUrlData, deleteUrl }) {
   useEffect(() => {
-    console.log('effect> ', urlData)
+    // console.log('effect> ', urlData)
   }, [urlData])
   return (
     <UrlItem>

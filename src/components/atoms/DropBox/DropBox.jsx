@@ -3,14 +3,12 @@ import TriangleDown from '../../../assets/icon-triangle-down.svg'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import { useEffect, useRef, useState } from 'react'
 
-export default function DropBox({
-  width,
-  list,
-  isSelected,
-  setIsSelected,
-  selectedData,
-  setSelectedData,
-}) {
+export default function DropBox({ width, list }) {
+  const previousData = null
+  const [isSelected, setIsSelected] = useState()
+  const [selectedData, setSelectedData] = useState(
+    previousData ? previousData : '직접 입력'
+  )
   // 아래 코드를 부모 컴포넌트에서 작성할 수 있도록
   //   const [selectedData, setSelectedData] = useState(
   //     previousData ? previousData : placeHolder

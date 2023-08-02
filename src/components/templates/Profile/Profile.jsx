@@ -21,11 +21,11 @@ export default function Profile() {
     fileRef.current.click()
   }
 
-  const previousData = null
-  const [isSelected, setIsSelected] = useState()
-  const [selectedData, setSelectedData] = useState(
-    previousData ? previousData : '직접 입력'
-  )
+  // const previousData = null
+  // const [isSelected, setIsSelected] = useState()
+  // const [selectedData, setSelectedData] = useState(
+  //   previousData ? previousData : '직접 입력'
+  // )
 
   // 엔터키 클릭 시, 기술 스택 추가
   const createSkillList = (e) => {
@@ -181,10 +181,10 @@ export default function Profile() {
               <DropBox
                 width="131"
                 list={['naver.com', 'daum.net', 'gmail.com']}
-                isSelected={isSelected}
-                setIsSelected={setIsSelected}
-                selectedData={selectedData}
-                setSelectedData={setSelectedData}
+                // isSelected={isSelected}
+                // setIsSelected={setIsSelected}
+                // selectedData={selectedData}
+                // setSelectedData={setSelectedData}
               />
             </styles.InputCont>
             <styles.InputCont>
@@ -213,10 +213,10 @@ export default function Profile() {
                 '9년',
                 '10년',
               ]}
-              isSelected={isSelected}
-              setIsSelected={setIsSelected}
-              selectedData={selectedData}
-              setSelectedData={setSelectedData}
+              // isSelected={isSelected}
+              // setIsSelected={setIsSelected}
+              // selectedData={selectedData}
+              // setSelectedData={setSelectedData}
             />
           </div>
         </styles.ProfileCont>
