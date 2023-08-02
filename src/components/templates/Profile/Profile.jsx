@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import axios from 'axios'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
@@ -6,6 +7,9 @@ import DropBox from '../../atoms/DropBox/DropBox'
 import MainBtn from '../../atoms/Button/MainBtn'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
+import AddImgIcon from '../../../assets/img-icon.svg'
+import DeleteImgIcon from '../../../assets/img-trash-icon.svg'
+import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 
 export default function Profile() {
@@ -18,7 +22,7 @@ export default function Profile() {
     previousData ? previousData : '직접 입력'
   )
 
-  // 기술 스택 추가
+  // 엔터키 클릭 시, 기술 스택 추가
   const createSkillList = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       const newSkill = e.target.value
@@ -46,6 +50,35 @@ export default function Profile() {
     }))
   }
 
+  // 프로필 이미지 추가
+  const handleImageChange = async (e) => {
+    const formData = new FormData()
+    const imageFile = e.target.files[0]
+    formData.append('image', imageFile)
+
+    try {
+      const response = await axios.post(
+        'https://api.mandarin.weniv.co.kr/image/uploadfile',
+        formData
+      )
+      await console.log(response)
+
+      const imageUrl =
+        'https://api.mandarin.weniv.co.kr/' + response.data.filename
+
+      setProfileData({ ...resumeData, profileImg: imageUrl })
+    } catch (error) {
+      console.log('프로필 이미지 변경에 실패했습니다.')
+      console.error(error)
+    }
+  }
+
+  // 프로필 이미지 삭제
+  function handleDeleteImg(e) {
+    e.preventDefault()
+    setProfileData({ ...resumeData, profileImg: '' })
+  }
+
   return (
     <Layout>
       <styles.Section>
@@ -54,13 +87,48 @@ export default function Profile() {
           description="대략 본인의 프로필 정보를 입력해달라는 내용의 문구"
         />
         <styles.ProfileCont>
-          <button className="profileImg">
-            {true ? (
-              <span className="ir">프로필 이미지 업로드</span>
-            ) : (
-              <span className="ir">프로필 이미지 변경</span>
-            )}
-          </button>
+          <styles.ProfileImgCont>
+            <label htmlFor="profile-upload" className="profileImg">
+              {profileData.profileImg ? (
+                <div>
+                  <img
+                    src={profileData.profileImg}
+                    alt={`${
+                      profileData.name || profileData.enName || '익명'
+                    } 님의 프로필 이미지`}
+                  />
+                  <button
+                    className="deleteImgBtn"
+                    onClick={handleDeleteImg}
+                    type="button"
+                  >
+                    <img src={DeleteImgIcon} alt="프로필 이미지 삭제" />
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <img
+                    src={LicatFace}
+                    alt="프로필 기본 이미지"
+                    className="defaultImg"
+                  />
+                  <img
+                    src={AddImgIcon}
+                    alt="프로필 사진 업로드하기"
+                    className="addImgBtn"
+                  />
+                </div>
+              )}
+            </label>
+            <input
+              className="profileInput"
+              type="file"
+              accept="image/*"
+              id="profile-upload"
+              onChange={handleImageChange}
+            />
+          </styles.ProfileImgCont>
+
           <div>
             <styles.InputCont>
               <DefaultInput
@@ -184,15 +252,16 @@ export default function Profile() {
           width="260px"
         />
         <styles.SkillListWrap>
-          {profileData.skills.map((skill, i) => (
-            <SkillList
-              key={i}
-              type="delete"
-              onClick={(e) => deleteSkillItem(e, i)}
-            >
-              {skill}
-            </SkillList>
-          ))}
+          {profileData.skills &&
+            profileData.skills.map((skill, i) => (
+              <SkillList
+                key={i}
+                type="delete"
+                onClick={(e) => deleteSkillItem(e, i)}
+              >
+                {skill}
+              </SkillList>
+            ))}
         </styles.SkillListWrap>
       </styles.Section>
       <styles.Line />

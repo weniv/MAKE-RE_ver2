@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-import LicatFace from '../../../assets/icon-liacat.svg'
 
 export const Section = styled.div`
   display: flex;
@@ -11,14 +10,49 @@ export const ProfileCont = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 52px;
+`
 
-  button.profileImg {
-    width: 146px;
-    height: 146px;
-    border-radius: 200px;
-    border: 1px solid var(--border-color);
-    background: var(--hover-color);
-    background-image: url(${LicatFace});
+export const ProfileImgCont = styled.div`
+  position: relative;
+  width: 146px;
+  height: 146px;
+  flex-grow: 0;
+
+  .profileImg {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    div {
+      width: 100%;
+      height: 100%;
+      border-radius: 200px;
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    img.defaultImg {
+      background: var(--hover-color);
+    }
+  }
+
+  .profileImg .addImgBtn,
+  .profileImg .deleteImgBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 46px;
+    height: 46px;
+  }
+
+  .profileInput {
+    display: none;
   }
 `
 
