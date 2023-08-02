@@ -16,7 +16,8 @@ export default function NavList({
   onClick,
 }) {
   const { mainColor, upadteMainColor } = useContext(ColorContext)
-  const [clicked, setClickIdx] = useState(clickIdx === idx)
+  // const [clicked, setClickIdx] = useState(clickIdx === idx)
+  const [clicked, setClickIdx] = useState(clickIdx === id)
 
   if (useContext(dndContext)) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -26,7 +27,7 @@ export default function NavList({
   }
 
   useEffect(() => {
-    if (clickIdx === id) {
+    if (clickIdx === idx) {
       setClickIdx(true)
     } else {
       setClickIdx(false)
