@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
@@ -6,11 +6,20 @@ import DropBox from '../../atoms/DropBox/DropBox'
 import MainBtn from '../../atoms/Button/MainBtn'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
+import { ImgBtn } from '../../atoms/Button'
+import { uploadImg, deleteImg } from '../../../utils'
+import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 
 export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
+
+  const fileRef = useRef(null)
+
+  const handleButtonClick = () => {
+    fileRef.current.click()
+  }
 
   const previousData = null
   const [isSelected, setIsSelected] = useState()
@@ -18,7 +27,7 @@ export default function Profile() {
     previousData ? previousData : '직접 입력'
   )
 
-  // 기술 스택 추가
+  // 엔터키 클릭 시, 기술 스택 추가
   const createSkillList = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       const newSkill = e.target.value
@@ -54,13 +63,52 @@ export default function Profile() {
           description="대략 본인의 프로필 정보를 입력해달라는 내용의 문구"
         />
         <styles.ProfileCont>
-          <button className="profileImg">
-            {true ? (
-              <span className="ir">프로필 이미지 업로드</span>
-            ) : (
-              <span className="ir">프로필 이미지 변경</span>
-            )}
-          </button>
+          <styles.ImgCont>
+            <styles.ImgLabel
+              ref={fileRef}
+              htmlFor="profile-upload"
+              className="profileImg"
+            >
+              {profileData.profileImg ? (
+                <styles.ImgWrap>
+                  <styles.Img
+                    src={profileData.profileImg}
+                    alt={`${
+                      profileData.name || profileData.enName || '익명'
+                    } 님의 프로필 이미지`}
+                  />
+                  <ImgBtn
+                    type="delete"
+                    profileData={profileData}
+                    setProfileData={setProfileData}
+                    onClick={(e) => deleteImg(e, resumeData, setProfileData)}
+                  />
+                </styles.ImgWrap>
+              ) : (
+                <styles.ImgWrap>
+                  <styles.Img
+                    src={LicatFace}
+                    alt="프로필 기본 이미지"
+                    className="defaultImg"
+                  />
+                  <ImgBtn
+                    type="add"
+                    profileData={profileData}
+                    setProfileData={setProfileData}
+                    onClick={handleButtonClick}
+                  />
+                </styles.ImgWrap>
+              )}
+            </styles.ImgLabel>
+            <input
+              className="profileInput"
+              type="file"
+              accept="image/*"
+              id="profile-upload"
+              onChange={(e) => uploadImg(e, resumeData, setProfileData)}
+            />
+          </styles.ImgCont>
+
           <div>
             <styles.InputCont>
               <DefaultInput
@@ -184,15 +232,16 @@ export default function Profile() {
           width="260px"
         />
         <styles.SkillListWrap>
-          {profileData.skills.map((skill, i) => (
-            <SkillList
-              key={i}
-              type="delete"
-              onClick={(e) => deleteSkillItem(e, i)}
-            >
-              {skill}
-            </SkillList>
-          ))}
+          {profileData.skills &&
+            profileData.skills.map((skill, i) => (
+              <SkillList
+                key={i}
+                type="delete"
+                onClick={(e) => deleteSkillItem(e, i)}
+              >
+                {skill}
+              </SkillList>
+            ))}
         </styles.SkillListWrap>
       </styles.Section>
       <styles.Line />
