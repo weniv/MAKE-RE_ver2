@@ -1,7 +1,7 @@
 export const resumeData = {
   profile: [
     {
-      profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png',
+      profileImg: '',
       name: '',
       enName: '',
       phoneNumber: '',
