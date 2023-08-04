@@ -9,7 +9,7 @@ export const resumeData = {
       fullEmail: '',
       blog: '',
       careerLength: 0,
-      skills: [''],
+      skills: [],
       github: '',
       intro: '',
     },
