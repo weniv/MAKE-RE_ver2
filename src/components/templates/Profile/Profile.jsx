@@ -8,6 +8,7 @@ import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { ImgBtn } from '../../atoms/Button'
 import { uploadImg, deleteImg } from '../../../utils'
+import { updateProfile } from '../../../utils'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 
@@ -27,7 +28,7 @@ export default function Profile() {
   //   previousData ? previousData : '직접 입력'
   // )
 
-  // 엔터키 클릭 시, 기술 스택 추가
+  // 엔터키 눌렀을 시, 기술 스택 추가
   const createSkillList = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       const newSkill = e.target.value
@@ -44,14 +45,6 @@ export default function Profile() {
     setProfileData((prevData) => ({
       ...prevData,
       skills: prevData.skills.filter((_, idx) => idx !== i),
-    }))
-  }
-
-  // 프로필 내용 업데이트
-  const updateProfile = (e, name) => {
-    setProfileData((prevData) => ({
-      ...prevData,
-      [name]: e.target.value,
     }))
   }
 
@@ -119,7 +112,7 @@ export default function Profile() {
                 marginRight="12px"
                 inputData={profileData.name}
                 onChange={(e) => {
-                  updateProfile(e, 'name')
+                  updateProfile(e, 'name', setProfileData)
                 }}
               >
                 이름
@@ -131,7 +124,7 @@ export default function Profile() {
                 width="356px"
                 inputData={profileData.enName}
                 onChange={(e) => {
-                  updateProfile(e, 'enName')
+                  updateProfile(e, 'enName', setProfileData)
                 }}
               >
                 영문 이름
@@ -146,7 +139,7 @@ export default function Profile() {
                 marginRight="12px"
                 inputData={profileData.phoneNumber}
                 onChange={(e) => {
-                  updateProfile(e, 'phoneNumber')
+                  updateProfile(e, 'phoneNumber', setProfileData)
                 }}
               >
                 전화번호
@@ -191,7 +184,7 @@ export default function Profile() {
               <DefaultInput
                 id="blog"
                 type="url"
-                onChange={(e) => updateProfile(e, 'blog')}
+                onChange={(e) => updateProfile(e, 'blog', setProfileData)}
                 inputData={profileData.blog}
               >
                 기술 블로그 링크
@@ -252,7 +245,7 @@ export default function Profile() {
             id="github"
             type="text"
             width="260px"
-            onChange={(e) => updateProfile(e, 'github')}
+            onChange={(e) => updateProfile(e, 'github', setProfileData)}
             inputData={profileData.github}
           >
             GitHub ID
