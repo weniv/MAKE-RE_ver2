@@ -87,7 +87,7 @@ export default function Profile() {
                     type="delete"
                     profileData={profileData}
                     setProfileData={setProfileData}
-                    onClick={(e) => deleteImg(e, resumeData, setProfileData)}
+                    onClick={(e) => deleteImg(e, profileData, setProfileData)}
                   />
                 </styles.ImgWrap>
               ) : (
