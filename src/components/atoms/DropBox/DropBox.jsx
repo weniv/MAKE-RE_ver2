@@ -3,7 +3,7 @@ import TriangleDown from '../../../assets/icon-triangle-down.svg'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import { useEffect, useRef, useState } from 'react'
 
-export default function DropBox({ width, list }) {
+export default function DropBox({ width, list, setDomain }) {
   const previousData = null
   const [isSelected, setIsSelected] = useState()
   const [selectedData, setSelectedData] = useState(
@@ -67,6 +67,7 @@ export default function DropBox({ width, list }) {
                   onClick={() => {
                     setSelectedData(item)
                     setIsSelected(false)
+                    setDomain(item)
                   }}
                 >
                   {item}

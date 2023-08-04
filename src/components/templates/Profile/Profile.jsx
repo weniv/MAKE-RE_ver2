@@ -160,7 +160,7 @@ export default function Profile() {
             </styles.InputCont>
             <styles.InputCont>
               <DefaultInput
-                // id={id}
+                id="emailId"
                 type="text"
                 placeholder="예) paul-lab"
                 width="220px"
@@ -177,12 +177,13 @@ export default function Profile() {
                 placeholder="예) paul-lab"
                 width="200px"
                 marginRight="8px"
-                inputData={domain}
+                inputData={domain === '직접입력' ? '' : domain}
                 onChange={(e) => setDomain(e.target.value)}
               />
               <DropBox
                 width="131"
                 list={['직접입력', 'naver.com', 'daum.net', 'gmail.com']}
+                setDomain={setDomain}
                 // isSelected={isSelected}
                 // setIsSelected={setIsSelected}
                 // selectedData={selectedData}

@@ -6,7 +6,7 @@ export const resumeData = {
       name: '',
       enName: '',
       phoneNumber: '',
-      fullEmail: 'skdud0322@naver.com', // 테스트용 이메일
+      fullEmail: '',
       blog: '',
       careerLength: 0,
       skills: [],
