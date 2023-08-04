@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext, useRef, useEffect } from 'react'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
@@ -16,11 +16,24 @@ export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
+  useEffect(() => {
+    console.log('데이터 변경>>', profileData)
+  }, [profileData])
+
   const fileRef = useRef(null)
 
   const handleButtonClick = () => {
     fileRef.current.click()
   }
+
+  // 이메일 설정
+  const [id, setId] = useState(profileData.fullEmail.split('@')[0])
+  const [domain, setDomain] = useState(profileData.fullEmail.split('@')[1])
+
+  useEffect(() => {
+    const fullEmail = [id, domain].join('@')
+    setProfileData({ ...profileData, fullEmail })
+  }, [id, domain])
 
   // const previousData = null
   // const [isSelected, setIsSelected] = useState()
@@ -32,10 +45,10 @@ export default function Profile() {
   const createSkillList = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       const newSkill = e.target.value
-      setProfileData((prevData) => ({
-        ...prevData,
-        skills: [...prevData.skills, newSkill],
-      }))
+      setProfileData({
+        ...profileData,
+        skills: [...profileData.skills, newSkill],
+      })
       e.target.value = ''
     }
   }
@@ -112,7 +125,7 @@ export default function Profile() {
                 marginRight="12px"
                 inputData={profileData.name}
                 onChange={(e) => {
-                  updateProfile(e, 'name', setProfileData)
+                  updateProfile(e, 'name', profileData, setProfileData)
                 }}
               >
                 이름
@@ -124,7 +137,7 @@ export default function Profile() {
                 width="356px"
                 inputData={profileData.enName}
                 onChange={(e) => {
-                  updateProfile(e, 'enName', setProfileData)
+                  updateProfile(e, 'enName', profileData, setProfileData)
                 }}
               >
                 영문 이름
@@ -139,7 +152,7 @@ export default function Profile() {
                 marginRight="12px"
                 inputData={profileData.phoneNumber}
                 onChange={(e) => {
-                  updateProfile(e, 'phoneNumber', setProfileData)
+                  updateProfile(e, 'phoneNumber', profileData, setProfileData)
                 }}
               >
                 전화번호
@@ -152,10 +165,8 @@ export default function Profile() {
                 placeholder="예) paul-lab"
                 width="220px"
                 marginRight="12px"
-                // value={inputData}
-                // onChange={(e) => {
-                //   setInputData(e.target.value)
-                // }}
+                inputData={id}
+                onChange={(e) => setId(e.target.value)}
               >
                 이메일
               </DefaultInput>
@@ -166,14 +177,12 @@ export default function Profile() {
                 placeholder="예) paul-lab"
                 width="200px"
                 marginRight="8px"
-                // value={inputData}
-                // onChange={(e) => {
-                //   setInputData(e.target.value)
-                // }}
+                inputData={domain}
+                onChange={(e) => setDomain(e.target.value)}
               />
               <DropBox
                 width="131"
-                list={['naver.com', 'daum.net', 'gmail.com']}
+                list={['직접입력', 'naver.com', 'daum.net', 'gmail.com']}
                 // isSelected={isSelected}
                 // setIsSelected={setIsSelected}
                 // selectedData={selectedData}
@@ -184,7 +193,9 @@ export default function Profile() {
               <DefaultInput
                 id="blog"
                 type="url"
-                onChange={(e) => updateProfile(e, 'blog', setProfileData)}
+                onChange={(e) =>
+                  updateProfile(e, 'blog', profileData, setProfileData)
+                }
                 inputData={profileData.blog}
               >
                 기술 블로그 링크
@@ -245,7 +256,9 @@ export default function Profile() {
             id="github"
             type="text"
             width="260px"
-            onChange={(e) => updateProfile(e, 'github', setProfileData)}
+            onChange={(e) =>
+              updateProfile(e, 'github', profileData, setProfileData)
+            }
             inputData={profileData.github}
           >
             GitHub ID
