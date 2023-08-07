@@ -9,13 +9,13 @@ import { SkillList } from '../../atoms/SkillList'
 import { ImgBtn } from '../../atoms/Button'
 import { uploadImg, deleteImg } from '../../../utils'
 import { updateProfile } from '../../../utils'
+import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 
 export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
-
 
   // 데이터 테스트 용
   // useEffect(() => {
@@ -179,7 +179,7 @@ export default function Profile() {
               <DropBox
                 type="email"
                 width="131"
-                list={['직접입력', 'naver.com', 'daum.net', 'gmail.com']}
+                list={domainList}
                 setDomain={setDomain}
               />
             </styles.InputCont>
@@ -201,19 +201,7 @@ export default function Profile() {
               profileData={profileData}
               setProfileData={setProfileData}
               width="179"
-              list={[
-                '신입',
-                '1년',
-                '2년',
-                '3년',
-                '4년',
-                '5년',
-                '6년',
-                '7년',
-                '8년',
-                '9년',
-                '10년',
-              ]}
+              list={careerList}
             />
           </div>
         </styles.ProfileCont>
