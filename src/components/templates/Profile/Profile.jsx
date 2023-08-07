@@ -16,6 +16,8 @@ export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
+
+  // 데이터 테스트 용
   // useEffect(() => {
   //   console.log('데이터 변경>>', profileData)
   // }, [profileData])
@@ -34,12 +36,6 @@ export default function Profile() {
     const fullEmail = [id, domain].join('@')
     setProfileData({ ...profileData, fullEmail })
   }, [id, domain])
-
-  // const previousData = null
-  // const [isSelected, setIsSelected] = useState()
-  // const [selectedData, setSelectedData] = useState(
-  //   previousData ? previousData : '직접 입력'
-  // )
 
   // 엔터키 눌렀을 시, 기술 스택 추가
   const createSkillList = (e) => {
@@ -172,7 +168,7 @@ export default function Profile() {
               </DefaultInput>
               <span>@</span>
               <DefaultInput
-                // id={id}
+                id="emailDomain"
                 type="text"
                 placeholder="예) paul-lab"
                 width="200px"
@@ -181,13 +177,10 @@ export default function Profile() {
                 onChange={(e) => setDomain(e.target.value)}
               />
               <DropBox
+                type="email"
                 width="131"
                 list={['직접입력', 'naver.com', 'daum.net', 'gmail.com']}
                 setDomain={setDomain}
-                // isSelected={isSelected}
-                // setIsSelected={setIsSelected}
-                // selectedData={selectedData}
-                // setSelectedData={setSelectedData}
               />
             </styles.InputCont>
             <styles.InputCont>
@@ -204,6 +197,9 @@ export default function Profile() {
             </styles.InputCont>
             <styles.Label>경력</styles.Label>
             <DropBox
+              type="career"
+              profileData={profileData}
+              setProfileData={setProfileData}
               width="179"
               list={[
                 '신입',
@@ -218,10 +214,6 @@ export default function Profile() {
                 '9년',
                 '10년',
               ]}
-              // isSelected={isSelected}
-              // setIsSelected={setIsSelected}
-              // selectedData={selectedData}
-              // setSelectedData={setSelectedData}
             />
           </div>
         </styles.ProfileCont>
