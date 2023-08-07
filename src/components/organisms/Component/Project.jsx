@@ -15,7 +15,7 @@ export default function Project({
   setProjectData,
   handleDelete,
 }) {
-  const [isStill, setIsStill] = useState(project.progress)
+  const [isStill, setIsStill] = useState(project.inProgress)
 
   return (
     <ComponentHeader
@@ -131,7 +131,7 @@ export default function Project({
                 updateData(e, idx, projectData, setProjectData)
               }}
               onClick={() => setIsStill(!isStill)}
-              inputData={project.progress}
+              isStill={isStill}
             />
           </DateWrap>
         </Cont>

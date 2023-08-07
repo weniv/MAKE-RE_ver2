@@ -16,9 +16,9 @@ export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
-  useEffect(() => {
-    console.log('데이터 변경>>', profileData)
-  }, [profileData])
+  // useEffect(() => {
+  //   console.log('데이터 변경>>', profileData)
+  // }, [profileData])
 
   const fileRef = useRef(null)
 
