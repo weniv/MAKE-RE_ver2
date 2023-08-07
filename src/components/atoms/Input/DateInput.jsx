@@ -11,19 +11,20 @@ export default function DateInput({
   inputData,
   isStill,
 }) {
+  console.log('isStill', isStill)
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>
-        <Input
-          id={`dateInput-${id}`}
-          type="month"
-          max="9999-12"
-          width={width}
-          name={name}
-          value={inputData}
-          onChange={onChange}
-          readOnly={isStill}
-        />
+      <Input
+        id={`dateInput-${id}`}
+        type="month"
+        max="9999-12"
+        width={width}
+        name={name}
+        value={inputData}
+        onChange={onChange}
+        readOnly={isStill}
+      />
     </Wrap>
   )
 }

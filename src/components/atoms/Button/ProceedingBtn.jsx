@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { styled } from 'styled-components'
 import checkIcon from '../../../assets/icon-square-Check.svg'
 import checkFillIcon from '../../../assets/icon-square-Check-fill.svg'
@@ -8,13 +8,10 @@ export default function ProceedingBtn({
   idx,
   type,
   onChange,
-  inputData,
+  isStill,
   onClick,
 }) {
-  const [isChecked, setIsChecked] = useState(inputData)
-
   const handleCheck = () => {
-    setIsChecked(!isChecked)
     onClick()
   }
 
@@ -26,11 +23,11 @@ export default function ProceedingBtn({
         name={name}
         onClick={handleCheck}
         onChange={onChange}
-        value={!isChecked}
+        value={isStill}
       ></Checkbox>
       <Lable
         htmlFor={`${type}-proceeding-${idx}`}
-        img={isChecked ? checkFillIcon : checkIcon}
+        img={isStill ? checkFillIcon : checkIcon}
       />
     </Wrap>
   )

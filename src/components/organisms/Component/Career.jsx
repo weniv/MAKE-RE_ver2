@@ -12,7 +12,9 @@ export default function Career({
   setCareerData,
   handleDelete,
 }) {
-  const [isStill, setIsStill] = useState(career.progress)
+  const [isStill, setIsStill] = useState(career.inProgress)
+
+  console.log('career.inProgress', career.inProgress)
 
   return (
     <ComponentHeader
@@ -68,7 +70,7 @@ export default function Career({
               updateData(e, idx, careerData, setCareerData)
             }}
             onClick={() => setIsStill(!isStill)}
-            inputData={career.progress}
+            isStill={isStill}
           />
         </DateWrap>
         <DefaultInput
