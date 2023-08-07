@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { styled } from 'styled-components'
+import * as styles from './Dropbox-style'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
 
@@ -87,9 +87,9 @@ export default function DropBox({
   }, [dropBoxRef])
 
   return (
-    <DropBoxCont ref={dropBoxRef}>
+    <styles.DropBoxCont ref={dropBoxRef}>
       {!isSelected ? (
-        <DropBtn
+        <styles.DropBtn
           width={width}
           onClick={() => {
             setIsSelected((isSelected) => !isSelected)
@@ -97,10 +97,10 @@ export default function DropBox({
         >
           {selectedData}
           <img src={TriangleDown} />
-        </DropBtn>
+        </styles.DropBtn>
       ) : (
         <>
-          <DropBtn
+          <styles.DropBtn
             width={width}
             onClick={() => {
               setIsSelected((isSelected) => !isSelected)
@@ -108,12 +108,12 @@ export default function DropBox({
           >
             {selectedData}
             <img src={TriangleUp} />
-          </DropBtn>
+          </styles.DropBtn>
           {type === 'email' ? (
-            <ListBox width={width}>
+            <styles.ListBox width={width}>
               {list.map((item, idx) => {
                 return (
-                  <List
+                  <styles.List
                     key={idx}
                     onClick={() => {
                       setSelectedData(item)
@@ -122,15 +122,15 @@ export default function DropBox({
                     }}
                   >
                     {item}
-                  </List>
+                  </styles.List>
                 )
               })}
-            </ListBox>
+            </styles.ListBox>
           ) : (
-            <ListBox width={width}>
+            <styles.ListBox width={width}>
               {list.map((item, idx) => {
                 return (
-                  <List
+                  <styles.List
                     key={idx}
                     onClick={() => {
                       setSelectedData(item)
@@ -139,65 +139,13 @@ export default function DropBox({
                     }}
                   >
                     {item}
-                  </List>
+                  </styles.List>
                 )
               })}
-            </ListBox>
+            </styles.ListBox>
           )}
         </>
       )}
-    </DropBoxCont>
+    </styles.DropBoxCont>
   )
 }
-
-const DropBoxCont = styled.div`
-  width: ${(props) => props.width}px;
-`
-
-const DropBtn = styled.button`
-  width: ${(props) => props.width}px;
-  color: var(--font-color);
-  line-height: 20px;
-  display: inline-flex;
-  height: 42px;
-  padding: 11px 10px 11px 16px;
-  justify-content: space-between;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-color);
-
-  &:focus {
-    outline: 2px solid var(--main-color);
-  }
-`
-
-const ListBox = styled.ul`
-  width: ${(props) => props.width}px;
-  box-sizing: border-box;
-  margin-top: 5px;
-  padding: 8px;
-  position: absolute;
-  z-index: 10;
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
-`
-
-const List = styled.li`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--font-color);
-  padding: 5px 10px;
-  height: 30px;
-  box-sizing: border-box;
-  margin-bottom: 5px;
-  border-radius: 8px;
-
-  &:hover {
-    background-color: var(--hover-color);
-  }
-`
