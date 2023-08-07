@@ -173,7 +173,7 @@ export default function Profile() {
                 placeholder="예) paul-lab"
                 width="200px"
                 marginRight="8px"
-                inputData={domain === '직접입력' ? '' : domain}
+                inputData={domain === '직접 입력' ? '' : domain}
                 onChange={(e) => setDomain(e.target.value)}
               />
               <DropBox

@@ -1,4 +1,4 @@
-export const domainList = ['직접입력', 'naver.com', 'daum.net', 'gmail.com']
+export const domainList = ['직접 입력', 'naver.com', 'daum.net', 'gmail.com']
 
 export const careerList = [
   '신입',
