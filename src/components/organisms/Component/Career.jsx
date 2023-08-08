@@ -14,8 +14,6 @@ export default function Career({
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
 
-  console.log('career.inProgress', career.inProgress)
-
   return (
     <ComponentHeader
       id={career.id}

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { Project } from '../../organisms/Component'
@@ -11,6 +11,10 @@ import { ResumeContext } from '../../../context/ResumeContext'
 export default function ProjectTemplate() {
   const { resumeData } = useContext(ResumeContext)
   const [projectData, setProjectData] = useState(resumeData['project'])
+
+  useEffect(() => {
+    resumeData['project'] = [...projectData]
+  }, [projectData])
 
   const maxId = projectData.reduce(
     (acc, cur) => {

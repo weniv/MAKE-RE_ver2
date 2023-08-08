@@ -1,12 +1,21 @@
+import { useContext } from 'react'
 import { styled } from 'styled-components'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function PreviewBox({ type }) {
+  const { resumeData } = useContext(ResumeContext)
+
+  const saveLocalstorage = () => {
+    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+    console.log('데이터 저장 완료 - ⭐')
+  }
+
   return (
     <Cont>
       {type === 'write' ? (
         <>
-          <SaveBtn>임시저장</SaveBtn>
+          <SaveBtn onClick={saveLocalstorage}>임시저장</SaveBtn>
           <MainBtn type="preview">미리보기</MainBtn>
         </>
       ) : (
