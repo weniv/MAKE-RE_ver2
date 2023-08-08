@@ -102,7 +102,6 @@ export default function GithubApi() {
   const getPrimaryLanguage = async (langs) => {
     const langObj = {}
     const colorObj = {}
-    // console.log('get lang')
     langs.map((lang, idx) => {
       if (lang.primaryLanguage?.name) {
         langObj[lang.primaryLanguage?.name]
@@ -129,8 +128,13 @@ export default function GithubApi() {
       ],
     }
 
+    // 언어 사용 %
+    const numData = Object.values(langObj)
+    const sum = numData.reduce((acc, cur) => acc + cur)
+    const ratio = numData.map((data) => Math.floor((data / sum) * 100))
+
     val.labels = Object.keys(langObj)
-    val.datasets[0].data = Object.values(langObj)
+    val.datasets[0].data = ratio
     val.datasets[0].backgroundColor = Object.keys(colorObj)
     val.datasets[0].borderColor = Object.keys(colorObj)
 
@@ -160,6 +164,7 @@ export default function GithubApi() {
         },
       })
       setUserName(result.data.login)
+      localStorage.setItem('userGithubId', result.data.login)
     } catch (err) {
       console.log(err)
     }
@@ -218,38 +223,11 @@ export default function GithubApi() {
 
   //   console.log('userData', userData)
 
-  const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  }
-
   return (
     <>
       <div>
         <form onSubmit={handleSubmit}>
-          <button type="submit">깃허브 정보 불러오기(테스트)</button>
+          <TestBtn type="submit">깃허브 정보 불러오기(테스트)</TestBtn>
         </form>
       </div>
 
@@ -280,6 +258,11 @@ export default function GithubApi() {
     </>
   )
 }
+
+const TestBtn = styled.button`
+  font-weight: 700;
+  font-size: 40px;
+`
 
 const Cont = styled.div`
   display: flex;

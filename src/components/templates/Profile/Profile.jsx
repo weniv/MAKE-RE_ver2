@@ -244,7 +244,14 @@ export default function Profile() {
           >
             GitHub ID
           </DefaultInput>
-          <MainBtn type="preview">내 잔디 불러오기</MainBtn>
+          <MainBtn
+            onClick={() => {
+              console.log(localStorage.getItem('userGithubId'))
+            }}
+            type="preview"
+          >
+            내 잔디 불러오기
+          </MainBtn>
         </styles.GitHubCont>
 
         <styles.Label>Contributions</styles.Label>
