@@ -8,6 +8,17 @@ export default function GithubApi() {
   const [queryString, setQueryString] = useState(window.location.search)
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        data: [],
+        backgroundColor: [],
+        borderColor: [],
+        borderWidth: 1,
+      },
+    ],
+  })
   const [token, setToken] = useState({
     access_token: '',
     sexpires_in: '',
@@ -88,45 +99,42 @@ export default function GithubApi() {
   //     })
   //   }
 
-  const getPrimaryLanguage = (langs) => {
+  const getPrimaryLanguage = async (langs) => {
     const langObj = {}
-    const langArr = []
+    const colorObj = {}
     // console.log('get lang')
-    // console.log('get', langs)
-    langs.map((lang, idx) =>
-      langObj[lang.primaryLanguage?.name]
-        ? langObj[lang.primaryLanguage?.name]['ratio']++
-        : (langObj[lang.primaryLanguage?.name]['ratio'] = 1)
-    )
+    langs.map((lang, idx) => {
+      if (lang.primaryLanguage?.name) {
+        langObj[lang.primaryLanguage?.name]
+          ? langObj[lang.primaryLanguage?.name]++
+          : (langObj[lang.primaryLanguage?.name] = 1)
+      }
 
-    const data = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      if (lang.primaryLanguage?.color) {
+        colorObj[lang.primaryLanguage?.color]
+          ? colorObj[lang.primaryLanguage?.color]++
+          : (colorObj[lang.primaryLanguage?.color] = 1)
+      }
+    })
+
+    const val = {
+      labels: [],
       datasets: [
         {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          data: [],
+          backgroundColor: [],
+          borderColor: [],
           borderWidth: 1,
         },
       ],
     }
 
-    console.log('langObj', langObj)
+    val.labels = Object.keys(langObj)
+    val.datasets[0].data = Object.values(langObj)
+    val.datasets[0].backgroundColor = Object.keys(colorObj)
+    val.datasets[0].borderColor = Object.keys(colorObj)
+
+    setChartData(val)
   }
 
   /** 로그인한 사용자 정보로 api 통신하여 pinned repo, language 등 정보 가져옴 */
@@ -266,13 +274,7 @@ export default function GithubApi() {
                 </a>
               ))}
           </PinnedRepo>
-          {/* <div>
-            {userData.repositories &&
-              userData.repositories.nodes.map((lang, idx) =>
-                console.log(lang.primaryLanguage)
-              )}
-          </div> */}
-          <DoughnutChart data={data} />
+          <DoughnutChart data={chartData} />
         </Cont>
       ) : null}
     </>
