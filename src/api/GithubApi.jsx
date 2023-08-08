@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import { gql, GraphQLClient } from 'graphql-request'
 import axios from 'axios'
+import DoughnutChart from './DoughnutChart'
 
 export default function GithubApi() {
   const [queryString, setQueryString] = useState(window.location.search)
@@ -87,11 +88,53 @@ export default function GithubApi() {
   //     })
   //   }
 
+  const getPrimaryLanguage = (langs) => {
+    const langObj = {}
+    const langArr = []
+    // console.log('get lang')
+    // console.log('get', langs)
+    langs.map((lang, idx) =>
+      langObj[lang.primaryLanguage?.name]
+        ? langObj[lang.primaryLanguage?.name]['ratio']++
+        : (langObj[lang.primaryLanguage?.name]['ratio'] = 1)
+    )
+
+    const data = {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [
+        {
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    }
+
+    console.log('langObj', langObj)
+  }
+
   /** 로그인한 사용자 정보로 api 통신하여 pinned repo, language 등 정보 가져옴 */
   const getApi = async () => {
     try {
       const data = await graphQLClient.request(query)
       setUserData(...userData, data.user)
+      getPrimaryLanguage(data.user.repositories.nodes)
     } catch (err) {
       console.log(err)
     }
@@ -165,7 +208,34 @@ export default function GithubApi() {
     // }
   }
 
-  console.log('userData', userData)
+  //   console.log('userData', userData)
+
+  const data = {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  }
 
   return (
     <>
@@ -196,6 +266,13 @@ export default function GithubApi() {
                 </a>
               ))}
           </PinnedRepo>
+          {/* <div>
+            {userData.repositories &&
+              userData.repositories.nodes.map((lang, idx) =>
+                console.log(lang.primaryLanguage)
+              )}
+          </div> */}
+          <DoughnutChart data={data} />
         </Cont>
       ) : null}
     </>
