@@ -194,8 +194,8 @@ export default function GithubApi() {
       accept: 'application/json',
     }
     const data = {
-      client_id: 'Iv1.1353321326fecccd',
-      client_secret: '702fa73cb978200c7ade4eb29f05350ce4a6e9c1',
+      client_id: process.env.REACT_APP_clientID,
+      client_secret: process.env.REACT_APP_clientSecret,
       code: codeData,
     }
 
