@@ -174,8 +174,7 @@ export default function GithubApi() {
 
   /** oauth 인증을 위해 redirect */
   const redirectAuth = () => {
-    window.location.href =
-      'https://github.com/login/oauth/authorize?client_id=Iv1.1353321326fecccd'
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_clientID}`
   }
 
   /** access_token 발급을 위한 code */

@@ -54,8 +54,16 @@ export default function Profile() {
 
   // 깃허브 잔디 이미지 불러오기
   const [commitSrc, setCommitSrc] = useState('')
-  const loadCommitImg = () => {
-    const src = 'https://ghchart.rshah.org/' + profileData.github
+  const loadCommitImg = async () => {
+    let src = ''
+    let colorCode = '2E6FF2'
+    const userId = localStorage.getItem('userGithubId')
+    if (userId) {
+      src = 'https://ghchart.rshah.org/' + `/${colorCode}/` + userId
+    } else if (profileData.github) {
+      src = 'https://ghchart.rshah.org/' + `/${colorCode}/` + profileData.github
+    }
+
     setCommitSrc(src)
   }
 
