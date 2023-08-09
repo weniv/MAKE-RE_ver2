@@ -95,4 +95,14 @@ export const CommitBox = styled.div`
   border-radius: 10px;
   border: 1px solid var(--border-color);
   background: var(--hover-color);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+`
+
+export const CommitImg = styled.img`
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
 `

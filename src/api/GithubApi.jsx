@@ -163,6 +163,8 @@ export default function GithubApi() {
           Authorization: `token ${token.access_token}`,
         },
       })
+
+      // console.log('result', result)
       setUserName(result.data.login)
       localStorage.setItem('userGithubId', result.data.login)
     } catch (err) {

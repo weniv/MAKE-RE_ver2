@@ -17,11 +17,6 @@ export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
-  // 데이터 테스트 용
-  // useEffect(() => {
-  //   console.log('데이터 변경>>', profileData)
-  // }, [profileData])
-
   const fileRef = useRef(null)
 
   const handleButtonClick = () => {
@@ -55,6 +50,13 @@ export default function Profile() {
       ...prevData,
       skills: prevData.skills.filter((_, idx) => idx !== i),
     }))
+  }
+
+  // 깃허브 잔디 이미지 불러오기
+  const [commitSrc, setCommitSrc] = useState('')
+  const loadCommitImg = () => {
+    const src = 'https://ghchart.rshah.org/' + profileData.github
+    setCommitSrc(src)
   }
 
   return (
@@ -244,18 +246,15 @@ export default function Profile() {
           >
             GitHub ID
           </DefaultInput>
-          <MainBtn
-            onClick={() => {
-              console.log(localStorage.getItem('userGithubId'))
-            }}
-            type="preview"
-          >
+          <MainBtn type="preview" onClick={loadCommitImg}>
             내 잔디 불러오기
           </MainBtn>
         </styles.GitHubCont>
 
         <styles.Label>Contributions</styles.Label>
-        <styles.CommitBox />
+        <styles.CommitBox>
+          {commitSrc && <styles.CommitImg src={commitSrc} />}
+        </styles.CommitBox>
       </styles.Section>
     </Layout>
   )

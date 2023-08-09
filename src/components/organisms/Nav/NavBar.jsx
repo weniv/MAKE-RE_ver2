@@ -1,23 +1,21 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { remoteList } from '../../../data/dummy'
 import { Dnd } from '../../../utils'
+import RemoteContext from '../../../context/RemoteContext'
 
-// const remoteList = [
-//   '프로필',
-//   '자기소개서',
-//   '커리어',
-//   '프로젝트',
-//   '경험',
-//   '자격증',
-//   '학력',
-//   '추가 URL',
-// ]
 export default function NavBar({ type }) {
   const [clickIdx, setClickIdx] = useState(0)
   const [isFill, setIsFill] = useState(false)
   const [list, setList] = useState(remoteList)
+
+  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+
+  const handleClickList = (item, idx) => {
+    setClickIdx(idx)
+    updateCurrentSection(item.title)
+  }
 
   return (
     <Dnd state={list} setState={setList}>
@@ -33,7 +31,7 @@ export default function NavBar({ type }) {
               isFill={isFill}
               type={type}
               onClick={() => {
-                setClickIdx(idx)
+                handleClickList(item, idx)
               }}
             ></NavList>
           )
