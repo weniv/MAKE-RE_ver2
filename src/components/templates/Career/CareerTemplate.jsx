@@ -56,17 +56,19 @@ export default function CareerTemplates() {
             />
             <MainBtn onClick={addCareer}>경력 추가하기</MainBtn>
           </Header>
-          {careerData &&
-            careerData.map((career, idx) => (
-              <Career
-                idx={idx}
-                career={career}
-                handleDelete={() => handleDelete(idx)}
-                careerData={careerData}
-                setCareerData={setCareerData}
-                key={idx}
-              />
-            ))}
+          <ItemList>
+            {careerData &&
+              careerData.map((career, idx) => (
+                <Career
+                  idx={idx}
+                  career={career}
+                  handleDelete={() => handleDelete(idx)}
+                  careerData={careerData}
+                  setCareerData={setCareerData}
+                  key={idx}
+                />
+              ))}
+          </ItemList>
         </Section>
       </Layout>
     </Dnd>
@@ -77,11 +79,16 @@ const Section = styled.div`
   padding: 0 52px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+const ItemList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `

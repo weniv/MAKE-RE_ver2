@@ -65,17 +65,19 @@ export default function ProjectTemplate() {
             <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
           </Header>
 
-          {projectData &&
-            projectData.map((project, idx) => (
-              <Project
-                idx={idx}
-                project={project}
-                projectData={projectData}
-                setProjectData={setProjectData}
-                handleDelete={() => handleDelete(idx)}
-                key={idx}
-              />
-            ))}
+          <ItemList>
+            {projectData &&
+              projectData.map((project, idx) => (
+                <Project
+                  idx={idx}
+                  project={project}
+                  projectData={projectData}
+                  setProjectData={setProjectData}
+                  handleDelete={() => handleDelete(idx)}
+                  key={idx}
+                />
+              ))}
+          </ItemList>
         </Section>
       </Layout>
     </Dnd>
@@ -86,11 +88,16 @@ const Section = styled.div`
   padding: 0 52px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 `
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+const ItemList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `
