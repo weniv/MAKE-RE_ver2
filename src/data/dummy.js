@@ -18,8 +18,8 @@ export const resumeData = {
     {
       id: 1,
       companyName: '',
-      startDate: '',
-      endDate: '',
+      startData: '',
+      endData: '',
       inProgress: false,
       works: '',
     },
