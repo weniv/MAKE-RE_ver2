@@ -17,6 +17,10 @@ export default function Profile() {
   const { resumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
+  useEffect(() => {
+    resumeData['profile'][0] = { ...profileData }
+  }, [profileData])
+
   const fileRef = useRef(null)
 
   const handleButtonClick = () => {

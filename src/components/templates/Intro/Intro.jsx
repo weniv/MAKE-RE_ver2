@@ -10,6 +10,10 @@ export default function Intro() {
   const [intro, setIntro] = useState(resumeData['profile'][0]['intro'])
   const maxCount = 1000
 
+  useEffect(() => {
+    resumeData['profile'][0]['intro'] = intro
+  }, [intro])
+
   function handleUpdateIntro(e) {
     if (intro.trim().length <= maxCount) {
       setIntro(e.target.value)
