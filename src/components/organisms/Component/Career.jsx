@@ -39,8 +39,8 @@ export default function Career({
           <DateInput
             id="startDate"
             width="220px"
-            name="start"
-            inputData={career.start}
+            name="startDate"
+            inputData={career.startDate}
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}
@@ -52,7 +52,7 @@ export default function Career({
             id="endDate"
             width="220px"
             name="endDate"
-            inputData={career.end}
+            inputData={career.endDate}
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}

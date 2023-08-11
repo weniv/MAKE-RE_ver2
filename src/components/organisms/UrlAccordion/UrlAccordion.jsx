@@ -6,7 +6,6 @@ import { styled } from 'styled-components'
 export default function UrlAccordion({ id, data }) {
   const [name, setName] = useState(data.name)
   const [link, setLink] = useState(data.link)
-  // console.log('추가>', id)
   return (
     <>
       <ComponentHeader kind="URL" title={name}>

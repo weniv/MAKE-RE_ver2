@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { styled } from 'styled-components'
 import { Layout, UrlItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
@@ -9,6 +9,10 @@ import { MainBtn } from '../../atoms/Button'
 export default function Url() {
   const { resumeData } = useContext(ResumeContext)
   const [urlData, setUrlData] = useState(resumeData['url'])
+
+  useEffect(() => {
+    resumeData['url'] = [...urlData]
+  }, [urlData])
 
   const maxId = urlData.reduce(
     (acc, cur) => {

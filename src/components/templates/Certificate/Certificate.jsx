@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { addData } from '../../../utils'
 import { styled } from 'styled-components'
 import { Layout, CertItem } from '../../organisms/Component'
@@ -10,6 +10,10 @@ import { Dnd } from '../../../utils'
 export default function Certificate() {
   const { resumeData } = useContext(ResumeContext)
   const [certData, setCertData] = useState(resumeData['certificate'])
+
+  useEffect(() => {
+    resumeData['certificate'] = [...certData]
+  }, [certData])
 
   const maxId = certData.reduce(
     (acc, cur) => {

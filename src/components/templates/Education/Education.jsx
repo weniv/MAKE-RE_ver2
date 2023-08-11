@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { addData } from '../../../utils'
 import { styled } from 'styled-components'
 import { Layout, EduItem } from '../../organisms/Component'
@@ -10,6 +10,10 @@ import { Dnd } from '../../../utils'
 export default function Education() {
   const { resumeData } = useContext(ResumeContext)
   const [eduData, setEduData] = useState(resumeData['education'])
+
+  useEffect(() => {
+    resumeData['education'] = [...eduData]
+  }, [eduData])
 
   const maxId = eduData.reduce(
     (acc, cur) => {

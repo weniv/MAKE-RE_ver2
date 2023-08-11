@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from 'react'
+import React, { useRef, useContext, useState, useEffect } from 'react'
 import { ExpItem, Layout } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
@@ -10,6 +10,10 @@ import { Dnd } from '../../../utils'
 export default function Experience() {
   const { resumeData } = useContext(ResumeContext)
   const [expData, setExpData] = useState(resumeData['experience'])
+
+  useEffect(() => {
+    resumeData['experience'] = [...expData]
+  }, [expData])
 
   const maxId = expData.reduce(
     (acc, cur) => {
