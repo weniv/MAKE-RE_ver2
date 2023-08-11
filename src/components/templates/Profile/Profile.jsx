@@ -14,12 +14,19 @@ import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 
 export default function Profile() {
-  const { resumeData } = useContext(ResumeContext)
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
 
   useEffect(() => {
     resumeData['profile'][0] = { ...profileData }
   }, [profileData])
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('resumeData'))
+    if (data) {
+      setResumeData(data)
+    }
+  }, [])
 
   const fileRef = useRef(null)
 

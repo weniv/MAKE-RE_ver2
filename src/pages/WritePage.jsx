@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Aside from '../components/templates/Aside/Aside'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
@@ -12,9 +12,18 @@ import Education from '../components/templates/Education/Education'
 import { CareerTemplate } from '../components/templates/Career'
 import { ProjectTemplate } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
+import { ResumeContext } from '../context/ResumeContext'
 
 export default function WritePage() {
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('resumeData'))
+    if (data) {
+      setResumeData(data)
+    }
+  }, [currentSection])
 
   const components = {
     프로필: Profile,

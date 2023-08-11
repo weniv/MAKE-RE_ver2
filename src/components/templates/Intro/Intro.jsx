@@ -33,6 +33,7 @@ export default function Intro() {
           title="자기소개서"
           description="대략 본인의 자기소개서를 입력해달라는 내용의 문구"
         />
+
         <DefaultTextarea
           height="516px"
           width="100%"

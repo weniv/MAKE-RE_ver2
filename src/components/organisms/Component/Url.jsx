@@ -5,9 +5,6 @@ import { styled } from 'styled-components'
 import { updateData } from '../../../utils'
 
 export default function Url({ idx, url, urlData, setUrlData, deleteUrl }) {
-  useEffect(() => {
-    // console.log('effect> ', urlData)
-  }, [urlData])
   return (
     <UrlItem>
       <ComponentHeader
