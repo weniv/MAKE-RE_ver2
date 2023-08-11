@@ -18,13 +18,6 @@ export default function WritePage() {
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
   const { resumeData, setResumeData } = useContext(ResumeContext)
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('resumeData'))
-    if (data) {
-      setResumeData(data)
-    }
-  }, [currentSection])
-
   const components = {
     프로필: Profile,
     자기소개서: Intro,
