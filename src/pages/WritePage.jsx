@@ -12,6 +12,7 @@ import Education from '../components/templates/Education/Education'
 import { CareerTemplate } from '../components/templates/Career'
 import { ProjectTemplate } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
+import { GithubApi } from '../api'
 import { ResumeContext } from '../context/ResumeContext'
 
 export default function WritePage() {
@@ -33,6 +34,7 @@ export default function WritePage() {
 
   return (
     <>
+      <GithubApi />
       <Header />
       <Cont>
         <Main>

@@ -10,7 +10,10 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.3",
+    "graphql-request": "^6.1.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -41,5 +44,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://github.com/login/oauth"
 }

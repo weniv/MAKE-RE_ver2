@@ -12,10 +12,13 @@ import { updateProfile } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
+import ColorContext from '../../../context/ColorContext'
 
 export default function Profile() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'][0])
+  const { mainColor } = useContext(ColorContext)
+  const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
 
   useEffect(() => {
     resumeData['profile'][0] = { ...profileData }
@@ -63,10 +66,30 @@ export default function Profile() {
     }))
   }
 
+  useEffect(() => {
+    setColorCode(mainColor)
+  }, [mainColor])
+
+  useEffect(() => {
+    loadCommitImg()
+  }, [colorCode])
+
   // 깃허브 잔디 이미지 불러오기
   const [commitSrc, setCommitSrc] = useState('')
-  const loadCommitImg = () => {
-    const src = 'https://ghchart.rshah.org/' + profileData.github
+  const loadCommitImg = async () => {
+    let src = ''
+
+    const userId = localStorage.getItem('userGithubId')
+    if (userId) {
+      src =
+        'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
+    } else if (profileData.github) {
+      src =
+        'https://ghchart.rshah.org/' +
+        `/${colorCode.split('#')[1]}/` +
+        profileData.github
+    }
+
     setCommitSrc(src)
   }
 
