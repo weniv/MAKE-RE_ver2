@@ -13,6 +13,7 @@ import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
+import GithubApi from '../../../api/GithubApi'
 
 export default function Profile() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
@@ -83,11 +84,6 @@ export default function Profile() {
     if (userId) {
       src =
         'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
-    } else if (profileData.github) {
-      src =
-        'https://ghchart.rshah.org/' +
-        `/${colorCode.split('#')[1]}/` +
-        profileData.github
     }
 
     setCommitSrc(src)
@@ -269,7 +265,7 @@ export default function Profile() {
       <styles.Section>
         <WriteSubtitle subtitle="GitHub" id="github" />
         <styles.GitHubCont>
-          <DefaultInput
+          {/* <DefaultInput
             id="github"
             type="text"
             width="260px"
@@ -279,10 +275,12 @@ export default function Profile() {
             inputData={profileData.github}
           >
             GitHub ID
-          </DefaultInput>
-          <MainBtn type="preview" onClick={loadCommitImg}>
-            내 잔디 불러오기
-          </MainBtn>
+          </DefaultInput> */}
+          <GithubApi>
+            <MainBtn type="preview" onClick={loadCommitImg}>
+              내 잔디 불러오기
+            </MainBtn>
+          </GithubApi>
         </styles.GitHubCont>
 
         <styles.Label>Contributions</styles.Label>

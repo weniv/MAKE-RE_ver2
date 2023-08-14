@@ -4,7 +4,7 @@ import { gql, GraphQLClient } from 'graphql-request'
 import axios from 'axios'
 import DoughnutChart from './DoughnutChart'
 
-export default function GithubApi() {
+export default function GithubApi({ children }) {
   const [queryString, setQueryString] = useState(window.location.search)
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
@@ -228,11 +228,12 @@ export default function GithubApi() {
     <>
       <div>
         <form onSubmit={handleSubmit}>
-          <TestBtn type="submit">깃허브 정보 불러오기(테스트)</TestBtn>
+          {children}
+          {/* <TestBtn type="submit">깃허브 정보 불러오기(테스트)</TestBtn> */}
         </form>
       </div>
 
-      {userData && userName ? (
+      {/* {userData && userName ? (
         <Cont>
           <img
             src={userData.avatarUrl}
@@ -255,7 +256,7 @@ export default function GithubApi() {
           </PinnedRepo>
           <DoughnutChart data={chartData} />
         </Cont>
-      ) : null}
+      ) : null} */}
     </>
   )
 }

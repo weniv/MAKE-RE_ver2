@@ -34,7 +34,7 @@ export default function WritePage() {
 
   return (
     <>
-      <GithubApi />
+      {/* <GithubApi /> */}
       <Header />
       <Cont>
         <Main>
