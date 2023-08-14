@@ -265,7 +265,7 @@ export default function GithubApi({ children }) {
       {userData && userName ? (
         <Cont>
           <Label>Pinned Repo</Label>
-          <RepoWrap>
+          {/* <RepoWrap>
             {userData.pinnedItems &&
               userData.pinnedItems.edges.map((node, idx) => (
                 <a
@@ -277,7 +277,7 @@ export default function GithubApi({ children }) {
                   <img src={node.node.openGraphImageUrl} alt="" />
                 </a>
               ))}
-          </RepoWrap>
+          </RepoWrap> */}
         </Cont>
       ) : null}
 
