@@ -264,8 +264,8 @@ export default function GithubApi({ children }) {
 
       {userData && userName ? (
         <Cont>
-          <Label>Pinned Repo</Label>
-          {/* <RepoWrap>
+          {/* <Label>Pinned Repo</Label>
+          <RepoWrap>
             {userData.pinnedItems &&
               userData.pinnedItems.edges.map((node, idx) => (
                 <a
