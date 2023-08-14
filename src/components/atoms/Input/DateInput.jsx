@@ -11,7 +11,6 @@ export default function DateInput({
   inputData,
   isStill,
 }) {
-  console.log('isStill', isStill)
   return (
     <Wrap>
       <Label htmlFor={`dateInput-${id}`}>{children}</Label>

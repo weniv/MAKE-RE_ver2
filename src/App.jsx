@@ -1,7 +1,7 @@
 import GlobalStyles from './styles/GlobalStyles'
 import { ColorProvider } from './context/ColorContext'
 import WritePage from './pages/WritePage'
-import Data from './context/ResumeContext'
+import ResumeProvider from './context/ResumeContext'
 import { RemoteProvider } from './context/RemoteContext'
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
       <ColorProvider>
         <RemoteProvider>
           <GlobalStyles />
-          <Data>
+          <ResumeProvider>
             <WritePage />
-          </Data>
+          </ResumeProvider>
         </RemoteProvider>
       </ColorProvider>
     </div>
