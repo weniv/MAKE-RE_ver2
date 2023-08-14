@@ -264,8 +264,9 @@ export default function Profile() {
       <styles.Line />
       <styles.Section>
         <WriteSubtitle subtitle="GitHub" id="github" />
-        <styles.GitHubCont>
-          {/* <DefaultInput
+        <GithubApi/>
+        {/* <styles.GitHubCont>
+          <DefaultInput
             id="github"
             type="text"
             width="260px"
@@ -275,18 +276,17 @@ export default function Profile() {
             inputData={profileData.github}
           >
             GitHub ID
-          </DefaultInput> */}
-          <GithubApi>
+          </DefaultInput>
             <MainBtn type="preview" onClick={loadCommitImg}>
               내 잔디 불러오기
             </MainBtn>
-          </GithubApi>
+          
         </styles.GitHubCont>
 
         <styles.Label>Contributions</styles.Label>
         <styles.CommitBox>
           {commitSrc && <styles.CommitImg src={commitSrc} />}
-        </styles.CommitBox>
+        </styles.CommitBox> */}
       </styles.Section>
     </Layout>
   )

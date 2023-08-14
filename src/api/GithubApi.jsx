@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { styled } from 'styled-components'
 import { gql, GraphQLClient } from 'graphql-request'
 import axios from 'axios'
+import { MainBtn } from '../components/atoms/Button'
 import DoughnutChart from './DoughnutChart'
+import ColorContext from '../context/ColorContext'
+
+export const GithubContext = React.createContext()
 
 export default function GithubApi({ children }) {
   const [queryString, setQueryString] = useState(window.location.search)
+  const { mainColor } = useContext(ColorContext)
+  const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
   const [chartData, setChartData] = useState({
@@ -147,6 +153,7 @@ export default function GithubApi({ children }) {
       const data = await graphQLClient.request(query)
       setUserData(...userData, data.user)
       getPrimaryLanguage(data.user.repositories.nodes)
+      loadCommitImg()
     } catch (err) {
       console.log(err)
     }
@@ -213,25 +220,66 @@ export default function GithubApi({ children }) {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // if (!queryString) {
     redirectAuth()
-    // } else {
-    //   console.log('이미 인증됨')
-    // }
   }
 
-  //   console.log('userData', userData)
+  useEffect(() => {
+    setColorCode(mainColor)
+  }, [mainColor])
+
+  useEffect(() => {
+    loadCommitImg()
+  }, [colorCode])
+
+  // 깃허브 잔디 이미지 불러오기
+  const [commitSrc, setCommitSrc] = useState('')
+  const loadCommitImg = async () => {
+    let src = ''
+
+    const userId = localStorage.getItem('userGithubId')
+
+    console.log('userId', userId)
+    if (userId) {
+      src =
+        'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
+    }
+
+    setCommitSrc(src)
+  }
 
   return (
     <>
-      <div>
+      <GitHubCont>
         <form onSubmit={handleSubmit}>
-          {children}
-          {/* <TestBtn type="submit">깃허브 정보 불러오기(테스트)</TestBtn> */}
+          <MainBtn type="preview" onClick={loadCommitImg}>
+            내 잔디 불러오기
+          </MainBtn>
         </form>
-      </div>
+      </GitHubCont>
+
+      <Label>Contributions</Label>
+      <CommitBox>{commitSrc && <CommitImg src={commitSrc} />}</CommitBox>
+
+      {userData && userName ? (
+        <Cont>
+          <Label>Pinned Repo</Label>
+          <RepoWrap>
+            {userData.pinnedItems &&
+              userData.pinnedItems.edges.map((node, idx) => (
+                <a
+                  href={node.node.url}
+                  key={idx}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img src={node.node.openGraphImageUrl} alt="" />
+                </a>
+              ))}
+          </RepoWrap>
+        </Cont>
+      ) : null}
 
       {/* {userData && userName ? (
         <Cont>
@@ -261,17 +309,19 @@ export default function GithubApi({ children }) {
   )
 }
 
-const TestBtn = styled.button`
-  font-weight: 700;
-  font-size: 40px;
+const Label = styled.label`
+  color: var(--gray-color);
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
 `
 
 const Cont = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 890px;
   margin: 0 auto;
-  gap: 30px;
+  margin-top: 30px;
 
   img.profileImg {
     width: 200px;
@@ -279,15 +329,44 @@ const Cont = styled.div`
   }
 `
 
-const Title = styled.h1`
-  font-weight: 700;
-`
-
-const PinnedRepo = styled.div`
+const RepoWrap = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
+  gap: 10px;
 
   img {
-    width: 200px;
+    width: 100%;
   }
+`
+
+const FlexBox = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: bottom;
+`
+
+const GitHubCont = styled(FlexBox)`
+  margin-bottom: 20px;
+
+  button {
+    align-self: flex-end;
+  }
+`
+
+const CommitBox = styled.div`
+  height: 160px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--hover-color);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+`
+
+const CommitImg = styled.img`
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
 `
