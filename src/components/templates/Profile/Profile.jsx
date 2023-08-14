@@ -3,7 +3,6 @@ import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import MainBtn from '../../atoms/Button/MainBtn'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { ImgBtn } from '../../atoms/Button'
@@ -81,6 +80,8 @@ export default function Profile() {
     let src = ''
 
     const userId = localStorage.getItem('userGithubId')
+
+    console.log('userId', userId)
     if (userId) {
       src =
         'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
@@ -264,29 +265,7 @@ export default function Profile() {
       <styles.Line />
       <styles.Section>
         <WriteSubtitle subtitle="GitHub" id="github" />
-        <styles.GitHubCont>
-          {/* <DefaultInput
-            id="github"
-            type="text"
-            width="260px"
-            onChange={(e) =>
-              updateProfile(e, 'github', profileData, setProfileData)
-            }
-            inputData={profileData.github}
-          >
-            GitHub ID
-          </DefaultInput> */}
-          <GithubApi>
-            <MainBtn type="preview" onClick={loadCommitImg}>
-              내 잔디 불러오기
-            </MainBtn>
-          </GithubApi>
-        </styles.GitHubCont>
-
-        <styles.Label>Contributions</styles.Label>
-        <styles.CommitBox>
-          {commitSrc && <styles.CommitImg src={commitSrc} />}
-        </styles.CommitBox>
+        <GithubApi />
       </styles.Section>
     </Layout>
   )
