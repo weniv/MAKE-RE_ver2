@@ -7,15 +7,8 @@ import { styled } from 'styled-components'
 
 export default function Intro() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [intro, setIntro] = useState('')
+  const [intro, setIntro] = useState(resumeData['profile']['intro'])
   const maxCount = 1000
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('resumeData'))
-    if (data) {
-      setIntro(data['profile']['intro'])
-    }
-  }, [])
 
   useEffect(() => {
     if (intro.trim().length > maxCount) {

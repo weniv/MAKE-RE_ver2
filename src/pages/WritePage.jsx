@@ -14,11 +14,11 @@ import { ProjectTemplate } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
 import { GithubApi } from '../api'
 import { ResumeContext } from '../context/ResumeContext'
+import reset from 'styled-reset'
 
 export default function WritePage() {
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
   const { resumeData, setResumeData } = useContext(ResumeContext)
-
   const components = {
     프로필: Profile,
     자기소개서: Intro,
@@ -31,6 +31,13 @@ export default function WritePage() {
   }
 
   const CurrentComponent = components[currentSection]
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('resumeData'))
+    if (data) {
+      setResumeData(data)
+    }
+  }, [currentSection])
 
   return (
     <>
