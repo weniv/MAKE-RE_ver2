@@ -240,7 +240,7 @@ export default function GithubApi({ children }) {
 
     const userId = localStorage.getItem('userGithubId')
 
-    console.log('userId', userId)
+    
     if (userId) {
       src =
         'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId

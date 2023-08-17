@@ -12,7 +12,6 @@ export const resumeData = {
     github: '',
     intro: '',
   },
-
   career: [
     {
       id: 1,

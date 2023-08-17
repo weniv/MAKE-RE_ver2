@@ -4,14 +4,8 @@ import { resumeData as initialData } from '../data/dummy'
 export const ResumeContext = createContext(null)
 
 export default function ResumeProvider({ children }) {
-  const [resumeData, setResumeData] = useState(initialData)
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('resumeData'))
-    if (data) {
-      setResumeData(data)
-    }
-  }, [])
+  const data = JSON.parse(localStorage.getItem('resumeData'))
+  const [resumeData, setResumeData] = useState(data ? data : initialData)
 
   return (
     <>

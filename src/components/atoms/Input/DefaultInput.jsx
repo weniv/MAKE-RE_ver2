@@ -10,7 +10,6 @@ export default function DefaultInput({
   name,
   placeholder,
   inputData,
-  setInputData,
   onChange,
   onKeyDown,
 }) {
@@ -25,9 +24,6 @@ export default function DefaultInput({
         width={width}
         marginRight={marginRight}
         value={inputData}
-        // onChange={(e) => {
-        //   setInputData(e.target.value)
-        // }}
         onChange={onChange}
         onKeyDown={onKeyDown}
         autoComplete="off"
