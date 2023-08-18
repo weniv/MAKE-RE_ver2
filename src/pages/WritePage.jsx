@@ -41,19 +41,10 @@ export default function WritePage() {
 
   return (
     <>
-      {/* <GithubApi /> */}
       <Header />
       <Cont>
         <Main>
-          {/* <CurrentComponent /> */}
-          <Profile />
-          <Intro />
-          <CareerTemplate />
-          <ProjectTemplate />
-          <Experience />
-          <Certificate />
-          <Education />
-          <Url />
+          <CurrentComponent />
         </Main>
         <Aside type="write" />
       </Cont>

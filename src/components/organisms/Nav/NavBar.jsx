@@ -10,7 +10,7 @@ export default function NavBar({ type }) {
   const [isFill, setIsFill] = useState(false)
   const [list, setList] = useState(remoteList)
 
-  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+  const { updateCurrentSection } = useContext(RemoteContext)
 
   const handleClickList = (item, idx) => {
     setClickIdx(idx)
