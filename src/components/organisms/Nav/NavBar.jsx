@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useContext, useState } from 'react'
+import { useContext, useState, useRef, useEffect } from 'react'
 import { remoteList } from '../../../data/dummy'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
@@ -10,11 +10,15 @@ export default function NavBar({ type }) {
   const [isFill, setIsFill] = useState(false)
   const [list, setList] = useState(remoteList)
 
-  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+  const { updateCurrentSection } = useContext(RemoteContext)
 
   const handleClickList = (item, idx) => {
     setClickIdx(idx)
-    updateCurrentSection(item.title)
+    const val = {
+      id: item.id,
+      title: item.title,
+    }
+    updateCurrentSection(val)
   }
 
   return (
@@ -23,7 +27,7 @@ export default function NavBar({ type }) {
         {list.map((item, idx) => {
           return (
             <NavList
-              clickIdx={clickIdx}
+              clickIdx={JSON.parse(localStorage.getItem('section')).id}
               listName={item.title}
               idx={idx}
               key={item.id}

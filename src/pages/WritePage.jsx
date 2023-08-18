@@ -12,13 +12,11 @@ import Education from '../components/templates/Education/Education'
 import { CareerTemplate } from '../components/templates/Career'
 import { ProjectTemplate } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
-import { GithubApi } from '../api'
 import { ResumeContext } from '../context/ResumeContext'
-import reset from 'styled-reset'
 
 export default function WritePage() {
-  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
-  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const { currentSection } = useContext(RemoteContext)
+  const { setResumeData } = useContext(ResumeContext)
   const components = {
     프로필: Profile,
     자기소개서: Intro,
@@ -30,7 +28,7 @@ export default function WritePage() {
     '추가 URL': Url,
   }
 
-  const CurrentComponent = components[currentSection]
+  const CurrentComponent = components[currentSection.title]
 
   useEffect(() => {
     localStorage.setItem('resumeData', JSON.stringify(resumeData))
@@ -42,7 +40,6 @@ export default function WritePage() {
 
   return (
     <>
-      {/* <GithubApi /> */}
       <Header />
       <Cont>
         <Main>
