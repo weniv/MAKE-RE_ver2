@@ -9,11 +9,11 @@ import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function CareerTemplates() {
-  const { resumeData } = useContext(ResumeContext)
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const [careerData, setCareerData] = useState(resumeData['career'])
 
   useEffect(() => {
-    resumeData['career'] = [...careerData]
+    setResumeData({ ...resumeData, career: careerData })
   }, [careerData])
 
   const maxId = careerData.reduce(
@@ -44,6 +44,8 @@ export default function CareerTemplates() {
   const handleDelete = (idx) => {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
+
+  console.log('resumeData', resumeData.career)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>

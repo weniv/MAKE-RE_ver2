@@ -3,7 +3,6 @@ import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import MainBtn from '../../atoms/Button/MainBtn'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { ImgBtn } from '../../atoms/Button'
@@ -270,28 +269,6 @@ export default function Profile() {
         <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
           <GithubApi />
-          {/* <styles.GitHubCont>
-          <DefaultInput
-            id="github"
-            type="text"
-            width="260px"
-            onChange={(e) =>
-              updateProfile(e, 'github', profileData, setProfileData)
-            }
-            inputData={profileData.github}
-          >
-            GitHub ID
-          </DefaultInput>
-            <MainBtn type="preview" onClick={loadCommitImg}>
-              내 잔디 불러오기
-            </MainBtn>
-          
-        </styles.GitHubCont>
-
-        <styles.Label>Contributions</styles.Label>
-        <styles.CommitBox>
-          {commitSrc && <styles.CommitImg src={commitSrc} />}
-        </styles.CommitBox> */}
         </styles.Section>
       </>
     </Layout>
