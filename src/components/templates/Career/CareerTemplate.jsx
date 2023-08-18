@@ -13,12 +13,7 @@ export default function CareerTemplates() {
   const [careerData, setCareerData] = useState(resumeData['career'])
 
   useEffect(() => {
-<<<<<<< HEAD
-    resumeData['career'] = [...careerData]
-    console.log(...careerData)
-=======
     setResumeData({ ...resumeData, career: careerData })
->>>>>>> f239235d42130c4431d8d714e1354c21023c39ed
   }, [careerData])
 
   const maxId = careerData.reduce(
