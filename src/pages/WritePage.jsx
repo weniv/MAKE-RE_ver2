@@ -33,6 +33,7 @@ export default function WritePage() {
   const CurrentComponent = components[currentSection]
 
   useEffect(() => {
+    localStorage.setItem('resumeData', JSON.stringify(resumeData))
     const data = JSON.parse(localStorage.getItem('resumeData'))
     if (data) {
       setResumeData(data)

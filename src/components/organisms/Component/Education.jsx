@@ -56,11 +56,22 @@ export default function Education({
           >
             종료일
           </DateInput>
+
           <ProceedingBtn
-            onClick={() => setIsStill(!isStill)}
-            idx={idx}
+            name="inProgress"
+            value={isStill}
+            idx={edu.id}
             type="edu"
             inputData={edu.inProgress}
+            onChange={(e) => {
+              setEduData(
+                eduData.map((el, i) =>
+                  i === idx ? { ...el, inProgress: !isStill } : el
+                )
+              )
+              setIsStill(!isStill)
+            }}
+            isStill={isStill}
           />
         </DateWrap>
       </Wrap>

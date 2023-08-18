@@ -59,10 +59,20 @@ export default function Experience({
             종료일
           </DateInput>
           <ProceedingBtn
-            onClick={() => setIsStill(!isStill)}
-            idx={idx}
+            name="inProgress"
+            value={isStill}
+            idx={exp.id}
             type="exp"
             inputData={exp.inProgress}
+            onChange={(e) => {
+              setExpData(
+                expData.map((el, i) =>
+                  i === idx ? { ...el, inProgress: !isStill } : el
+                )
+              )
+              setIsStill(!isStill)
+            }}
+            isStill={isStill}
           />
         </Period>
       </ComponentHeader>

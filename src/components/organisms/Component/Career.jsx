@@ -60,14 +60,21 @@ export default function Career({
           >
             {'종료일'}
           </DateInput>
+
           <ProceedingBtn
-            name="progress"
+            name="inProgress"
+            value={isStill}
             type="career"
             idx={career.id}
+            inputData={career.inProgress}
             onChange={(e) => {
-              updateData(e, idx, careerData, setCareerData)
+              setCareerData(
+                careerData.map((el, i) =>
+                  i === idx ? { ...el, inProgress: !isStill } : el
+                )
+              )
+              setIsStill(!isStill)
             }}
-            onClick={() => setIsStill(!isStill)}
             isStill={isStill}
           />
         </DateWrap>

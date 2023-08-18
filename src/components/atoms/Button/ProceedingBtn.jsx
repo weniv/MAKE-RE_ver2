@@ -32,6 +32,9 @@ export default function ProceedingBtn({
     </Wrap>
   )
 }
+ProceedingBtn.defaultProps = {
+  onClick: function () {},
+}
 
 const Wrap = styled.div`
   display: flex;

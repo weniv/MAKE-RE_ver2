@@ -124,13 +124,19 @@ export default function Project({
               {'종료일'}
             </DateInput>
             <ProceedingBtn
-              name="progress"
-              type="project"
+              name="inProgress"
+              value={isStill}
               idx={project.id}
+              type="project"
+              inputData={project.inProgress}
               onChange={(e) => {
-                updateData(e, idx, projectData, setProjectData)
+                setProjectData(
+                  projectData.map((el, i) =>
+                    i === idx ? { ...el, inProgress: !isStill } : el
+                  )
+                )
+                setIsStill(!isStill)
               }}
-              onClick={() => setIsStill(!isStill)}
               isStill={isStill}
             />
           </DateWrap>
