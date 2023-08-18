@@ -6,12 +6,21 @@ import Layout from '../../organisms/Component/Layout'
 import { styled } from 'styled-components'
 
 export default function Intro() {
-  const { resumeData } = useContext(ResumeContext)
-  const [intro, setIntro] = useState(resumeData['profile'][0]['intro'])
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const [intro, setIntro] = useState(resumeData['profile']['intro'])
   const maxCount = 1000
 
   useEffect(() => {
-    resumeData['profile'][0]['intro'] = intro
+    if (intro.trim().length > maxCount) {
+      resumeData['profile']['intro'] = intro.slice(0, maxCount)
+      setIntro(intro.slice(0, maxCount))
+    } else {
+      // resumeData['profile']['intro'] = intro
+      setResumeData({
+        ...resumeData,
+        profile: { ...resumeData['profile'], intro },
+      })
+    }
   }, [intro])
 
   function handleUpdateIntro(e) {
@@ -20,11 +29,7 @@ export default function Intro() {
     }
   }
 
-  useEffect(() => {
-    if (intro.trim().length > maxCount) {
-      setIntro(intro.slice(0, maxCount))
-    }
-  }, [intro])
+  useEffect(() => {}, [intro])
 
   return (
     <Layout>
@@ -34,14 +39,16 @@ export default function Intro() {
           description="대략 본인의 자기소개서를 입력해달라는 내용의 문구"
         />
 
-        <DefaultTextarea
-          height="516px"
-          width="100%"
-          type="intro"
-          placeholder="예) 풀스택 웹 개발자를 꿈꾸는 홍길동입니다."
-          onChange={handleUpdateIntro}
-          inputData={intro}
-        />
+        <>
+          <DefaultTextarea
+            height="516px"
+            width="100%"
+            type="intro"
+            placeholder="예) 풀스택 웹 개발자를 꿈꾸는 홍길동입니다."
+            onChange={handleUpdateIntro}
+            inputData={intro}
+          />
+        </>
         <WordCountWrap>{intro.trim().length}/1000</WordCountWrap>
       </Section>
     </Layout>
