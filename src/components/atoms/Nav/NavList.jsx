@@ -10,13 +10,11 @@ export default function NavList({
   clickIdx,
   listName,
   id,
-  idx,
   isFill,
   type,
   onClick,
 }) {
   const { mainColor, upadteMainColor } = useContext(ColorContext)
-  // const [clicked, setClickIdx] = useState(clickIdx === idx)
   const [clicked, setClickIdx] = useState(clickIdx === id)
 
   if (useContext(dndContext)) {
@@ -27,7 +25,7 @@ export default function NavList({
   }
 
   useEffect(() => {
-    if (clickIdx === idx) {
+    if (clickIdx === id) {
       setClickIdx(true)
     } else {
       setClickIdx(false)
