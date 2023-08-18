@@ -16,7 +16,7 @@ import { ResumeContext } from '../context/ResumeContext'
 
 export default function WritePage() {
   const { currentSection } = useContext(RemoteContext)
-  const { setResumeData } = useContext(ResumeContext)
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const components = {
     프로필: Profile,
     자기소개서: Intro,
