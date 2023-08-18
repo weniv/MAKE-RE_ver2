@@ -33,6 +33,7 @@ export default function WritePage() {
   const CurrentComponent = components[currentSection]
 
   useEffect(() => {
+    localStorage.setItem('resumeData', JSON.stringify(resumeData))
     const data = JSON.parse(localStorage.getItem('resumeData'))
     if (data) {
       setResumeData(data)
@@ -45,15 +46,15 @@ export default function WritePage() {
       <Header />
       <Cont>
         <Main>
-          {/* <CurrentComponent /> */}
-          <Profile />
+          <CurrentComponent />
+          {/* <Profile />
           <Intro />
           <CareerTemplate />
           <ProjectTemplate />
           <Experience />
           <Certificate />
           <Education />
-          <Url />
+          <Url /> */}
         </Main>
         <Aside type="write" />
       </Cont>

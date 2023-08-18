@@ -14,6 +14,7 @@ export default function CareerTemplates() {
 
   useEffect(() => {
     resumeData['career'] = [...careerData]
+    console.log(...careerData)
   }, [careerData])
 
   const maxId = careerData.reduce(
