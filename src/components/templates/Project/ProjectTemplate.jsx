@@ -9,11 +9,11 @@ import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function ProjectTemplate() {
-  const { resumeData } = useContext(ResumeContext)
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const [projectData, setProjectData] = useState(resumeData['project'])
 
   useEffect(() => {
-    resumeData['project'] = [...projectData]
+    setResumeData({ ...resumeData, project: projectData })
   }, [projectData])
 
   const maxId = projectData.reduce(

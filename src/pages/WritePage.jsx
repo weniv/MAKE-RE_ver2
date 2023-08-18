@@ -47,14 +47,6 @@ export default function WritePage() {
       <Cont>
         <Main>
           <CurrentComponent />
-          {/* <Profile />
-          <Intro />
-          <CareerTemplate />
-          <ProjectTemplate />
-          <Experience />
-          <Certificate />
-          <Education />
-          <Url /> */}
         </Main>
         <Aside type="write" />
       </Cont>
