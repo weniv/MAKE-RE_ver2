@@ -6,14 +6,12 @@ import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
 
 export default function NavBar({ type }) {
-  const [clickIdx, setClickIdx] = useState(0)
   const [isFill, setIsFill] = useState(false)
   const [list, setList] = useState(remoteList)
 
-  const { updateCurrentSection } = useContext(RemoteContext)
+  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
 
   const handleClickList = (item, idx) => {
-    setClickIdx(idx)
     const val = {
       id: item.id,
       title: item.title,
@@ -27,7 +25,7 @@ export default function NavBar({ type }) {
         {list.map((item, idx) => {
           return (
             <NavList
-              clickIdx={JSON.parse(localStorage.getItem('section')).id}
+              clickIdx={currentSection.id}
               listName={item.title}
               idx={idx}
               key={item.id}
