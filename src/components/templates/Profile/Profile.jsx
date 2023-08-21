@@ -32,6 +32,7 @@ export default function Profile() {
   }, [])
 
   useEffect(() => {
+    console.log('profileData', profileData)
     setResumeData({ ...resumeData, profile: profileData })
   }, [profileData])
 
@@ -143,7 +144,7 @@ export default function Profile() {
                 type="file"
                 accept="image/*"
                 id="profile-upload"
-                onChange={(e) => uploadImg(e, resumeData, setProfileData)}
+                onChange={(e) => uploadImg(e, profileData, setProfileData)}
               />
             </styles.ImgCont>
 
