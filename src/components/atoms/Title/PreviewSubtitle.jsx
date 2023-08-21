@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
 
-export default function PreviewSubtitle({ title }) {
+export default function PreviewSubtitle({ children }) {
   const { mainColor, upadteMainColor } = useContext(ColorContext)
 
-  return <Subtitle mainColor={mainColor}>{title}</Subtitle>
+  return <Subtitle mainColor={mainColor}>{children}</Subtitle>
 }
 
 PreviewSubtitle.defaultProps = {

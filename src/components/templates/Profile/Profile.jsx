@@ -178,7 +178,7 @@ export default function Profile() {
               <styles.InputCont>
                 <DefaultInput
                   id="phoneNumber"
-                  type="text"
+                  type="tel"
                   placeholder="예) 010-1234-5678"
                   width="220px"
                   marginRight="12px"
