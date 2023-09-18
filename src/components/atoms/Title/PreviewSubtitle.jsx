@@ -2,10 +2,15 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
 
-export default function PreviewSubtitle({ children }) {
-  const { mainColor, upadteMainColor } = useContext(ColorContext)
+// hasBorder props: bottom-border 여부
+export default function PreviewSubtitle({ children, hasBorder }) {
+  const { mainColor, updateMainColor } = useContext(ColorContext)
 
-  return <Subtitle mainColor={mainColor}>{children}</Subtitle>
+  return (
+    <Subtitle mainColor={mainColor} hasBorder={hasBorder}>
+      {children}
+    </Subtitle>
+  )
 }
 
 PreviewSubtitle.defaultProps = {
@@ -13,8 +18,8 @@ PreviewSubtitle.defaultProps = {
 }
 
 const Subtitle = styled.h3`
-  margin: 36px auto 20px;
-  padding-bottom: 10px;
+  margin: 0 auto 12px;
+  padding-bottom: ${(props) => props.hasBorder && '10px'};
   width: 100%;
 
   font-size: 18px;
@@ -22,5 +27,6 @@ const Subtitle = styled.h3`
   text-align: left;
 
   color: ${(props) => props.mainColor};
-  border-bottom: 1px solid ${(props) => props.mainColor};
+  border-bottom: ${(props) =>
+    props.hasBorder && `1px solid ${props.mainColor}`};
 `
