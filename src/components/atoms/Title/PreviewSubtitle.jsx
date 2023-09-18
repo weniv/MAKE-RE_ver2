@@ -4,7 +4,7 @@ import ColorContext from '../../../context/ColorContext'
 
 // hasBorder props: bottom-border 여부
 export default function PreviewSubtitle({ children, hasBorder }) {
-  const { mainColor, upadteMainColor } = useContext(ColorContext)
+  const { mainColor, updateMainColor } = useContext(ColorContext)
 
   return (
     <Subtitle mainColor={mainColor} hasBorder={hasBorder}>
