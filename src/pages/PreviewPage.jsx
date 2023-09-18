@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
 import styled from 'styled-components'
+import PreviewLayout from '../components/organisms/Component/PreviewLayout'
 
 export const LocalContext = createContext(null)
 
@@ -15,6 +16,8 @@ export default function PreviewPage() {
     <Layout>
       <LocalContext.Provider value={{ data, setData }}>
         <ProfilePreview />
+        {/* 테스트용 */}
+        <PreviewLayout />
       </LocalContext.Provider>
     </Layout>
   )
