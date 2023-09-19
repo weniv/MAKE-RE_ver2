@@ -17,6 +17,10 @@ export default function PreviewBox({ type }) {
     navigate('/preview')
   }
 
+  const moveHome = () => {
+    navigate('/')
+  }
+
   return (
     <Cont>
       {type === 'write' ? (
@@ -28,7 +32,7 @@ export default function PreviewBox({ type }) {
         </>
       ) : (
         <>
-          <SaveBtn>돌아가기</SaveBtn>
+          <SaveBtn onClick={moveHome}>돌아가기</SaveBtn>
           <MainBtn type="preview">PDF로 내보내기</MainBtn>
         </>
       )}

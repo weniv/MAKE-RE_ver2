@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
@@ -7,7 +8,9 @@ export default function Header() {
     <HeaderCont>
       <HeaderLayout>
         <h1>
-          <img src={Logo} alt="메이커리" />
+          <Link to="/">
+            <img src={Logo} alt="메이커리" />
+          </Link>
         </h1>
         <ToggleBtn />
       </HeaderLayout>
