@@ -34,7 +34,18 @@ export default function NavList({
 
   return (
     <Cont key={id} isFill={isFill} clicked={clicked} onClick={onClick}>
-      {type === 'write' ? (
+      <>
+        {isFill ? (
+          <CheckFillIcon fill={mainColor} alt="입력 완료" />
+        ) : (
+          <img src={checkIcon} alt="입력 미완료" />
+        )}
+        <NavText>{listName}</NavText>
+        <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
+          <img src={hamburgerIcon} />
+        </DragBtn>
+      </>
+      {/* {type === 'write' ? (
         <>
           {isFill ? (
             <CheckFillIcon fill={mainColor} alt="입력 완료" />
@@ -50,7 +61,7 @@ export default function NavList({
         <>
           <NavText>{listName}</NavText>
         </>
-      )}
+      )} */}
     </Cont>
   )
 }

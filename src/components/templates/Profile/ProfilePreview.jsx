@@ -58,10 +58,6 @@ export default function ProfilePreview() {
           </DataList>
         </ProfileBox>
       </ProfileSection>
-      <Intro>
-        <PreviewSubtitle>Introduction</PreviewSubtitle>
-        <p>{profileData?.intro}</p>
-      </Intro>
     </>
   )
 }
@@ -73,12 +69,13 @@ const ProfileSection = styled.section`
 `
 
 const ProfileImg = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 142px;
+  height: 142px;
   border-radius: 100px;
   border: 2px solid var(--main-color);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+  flex-shrink: 0;
 
   img {
     width: 100%;
@@ -88,12 +85,8 @@ const ProfileImg = styled.div`
 `
 
 const ProfileBox = styled.div`
-  max-width: 620px;
-  flex-basis: 620px;
-
   span {
     display: block;
-    width: 620px;
     margin: 0 0 20px 0;
     padding-bottom: 10px;
     font-weight: 500;

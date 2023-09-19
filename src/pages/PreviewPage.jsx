@@ -1,7 +1,8 @@
 import React, { createContext, useState } from 'react'
+import Header from '../components/organisms/Header/Header'
+import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
 import styled from 'styled-components'
-import PreviewLayout from '../components/organisms/Component/PreviewLayout'
 
 export const LocalContext = createContext(null)
 
@@ -13,18 +14,42 @@ export default function PreviewPage() {
   const [data, setData] = useState(getlocalData)
 
   return (
-    <Layout>
+    <>
+      <Header />
       <LocalContext.Provider value={{ data, setData }}>
-        <ProfilePreview />
-        {/* 테스트용 */}
-        <PreviewLayout />
+        <Cont>
+          <Main>
+            <Layout>
+              <ProfilePreview />
+            </Layout>
+          </Main>
+          <Aside type="preview" />
+        </Cont>
       </LocalContext.Provider>
-    </Layout>
+    </>
   )
 }
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+const Cont = styled.div`
+  width: 100vw;
+  height: calc(100vh - 70px);
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 60px 0;
+  background-color: var(--hover-color);
+`
 
 const Layout = styled.div`
   width: 810px;
   margin: 0 auto;
-  padding: 90px 0;
+  padding: 74px 52px;
+  background-color: var(--bg-color);
+  border-radius: 16px;
 `
