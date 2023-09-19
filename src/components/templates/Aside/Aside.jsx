@@ -6,7 +6,7 @@ import PreviewBox from '../../organisms/Nav/PreviewBox'
 export default function Aside({ type }) {
   return (
     <AsideCont>
-      {type === 'write' && <ColorPicker type={type} />}
+      {type === 'preview' && <ColorPicker type={type} />}
       <NavBar type={type} />
       <PreviewBox type={type} />
     </AsideCont>
