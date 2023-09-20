@@ -31,7 +31,7 @@ const MainButton = styled.button`
   background-color: var(--main-color);
   border-radius: 10px;
   padding: 13px 20px;
-  color: var(--hover-color);
+  color: var(--bg-color);
   line-height: 16px;
   display: flex;
   justify-content: center;
