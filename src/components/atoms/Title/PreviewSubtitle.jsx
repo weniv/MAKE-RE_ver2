@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
 
-// hasBorder props: bottom-border 여부
-export default function PreviewSubtitle({ children, hasBorder }) {
+// type이 skills일 때만  type props 전달
+export default function PreviewSubtitle({ children, type }) {
   const { mainColor, updateMainColor } = useContext(ColorContext)
 
   return (
-    <Subtitle mainColor={mainColor} hasBorder={hasBorder}>
+    <Subtitle mainColor={mainColor} type={type}>
       {children}
     </Subtitle>
   )
@@ -18,15 +18,14 @@ PreviewSubtitle.defaultProps = {
 }
 
 const Subtitle = styled.h3`
-  margin: 0 auto 12px;
-  padding-bottom: ${(props) => props.hasBorder && '10px'};
-  width: 100%;
+  display: ${(props) => props.type && 'inline-block'};
+  margin-right: ${(props) => props.type && '18px'};
+  margin-bottom: ${(props) => !props.type && '20px'};
+  padding-bottom: ${(props) => !props.type && '10px'};
 
   font-size: 18px;
   font-weight: 700;
-  text-align: left;
 
   color: ${(props) => props.mainColor};
-  border-bottom: ${(props) =>
-    props.hasBorder && `1px solid ${props.mainColor}`};
+  border-bottom: ${(props) => !props.type && `1px solid ${props.mainColor}`};
 `
