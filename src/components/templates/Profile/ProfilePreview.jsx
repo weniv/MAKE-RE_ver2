@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
-import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
 
@@ -63,7 +62,6 @@ export default function ProfilePreview() {
 }
 
 const ProfileSection = styled.section`
-  margin-bottom: 40px;
   display: flex;
   gap: 40px;
 `

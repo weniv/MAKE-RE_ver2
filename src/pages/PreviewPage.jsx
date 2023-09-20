@@ -30,26 +30,26 @@ export default function PreviewPage() {
   )
 }
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
-
 const Cont = styled.div`
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: 100vh;
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding: 60px 0;
+  padding: 60px 0 120px;
   background-color: var(--hover-color);
+  margin: 0 auto;
+`
+
+const Main = styled.main`
+  background-color: var(--bg-color);
+  border-radius: 16px;
 `
 
 const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   width: 810px;
-  margin: 0 auto;
   padding: 74px 52px;
-  background-color: var(--bg-color);
-  border-radius: 16px;
 `
