@@ -24,7 +24,7 @@ export default function WritePage() {
     프로젝트: ProjectTemplate,
     경험: Experience,
     자격증: Certificate,
-    학력: Education,
+    교육: Education,
     '추가 URL': Url,
   }
 

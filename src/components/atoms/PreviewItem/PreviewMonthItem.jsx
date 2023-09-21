@@ -1,31 +1,50 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function PreviewMonthItem({ date, content }) {
+// NOTE: 종료일이 없는 자격증 항목일 때만 type props 전달
+export default function PreviewMonthItem({
+  type,
+  title,
+  date,
+  startDate,
+  endDate,
+  isInvalid,
+}) {
   return (
     <Item>
-      <ItemDate>{date}</ItemDate>
-      <p>{content}</p>
+      <DateWrap isInvalid={isInvalid} startDate={startDate} endDate={endDate}>
+        {type === 'certificate'
+          ? { date }
+          : !isInvalid
+          ? `${startDate} ~ ${endDate}`
+          : '-'}
+      </DateWrap>
+      <p>{title}</p>
     </Item>
   )
 }
 
 PreviewMonthItem.defaultProps = {
   date: '-',
+  startDate: '-',
+  endDate: '-',
   content: '-',
 }
 
 const Item = styled.li`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
 
-  margin: 10px auto;
   font-size: 14px;
+  margin: 10px auto;
 `
 
-const ItemDate = styled.p`
-  width: 80px;
+const DateWrap = styled.p`
+  width: 140px;
   color: #bdbdbd;
   font-weight: 700;
+  text-align: ${(props) => props.isInvalid && 'center'};
+  text-align: ${(props) => !props.startDate && props.endDate && 'right'};
+  padding-right: ${(props) => !props.startDate && props.endDate && '7px'};
 `

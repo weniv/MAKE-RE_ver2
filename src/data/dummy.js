@@ -61,6 +61,6 @@ export const remoteList = [
   { id: 4, title: '프로젝트' },
   { id: 5, title: '경험' },
   { id: 6, title: '자격증' },
-  { id: 7, title: '학력' },
+  { id: 7, title: '교육' },
   { id: 8, title: '추가 URL' },
 ]
