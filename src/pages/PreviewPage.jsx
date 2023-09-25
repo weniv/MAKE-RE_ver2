@@ -3,7 +3,7 @@ import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
 import styled from 'styled-components'
-import { PreviewMonthItem } from '../components/atoms/PreviewItem'
+import CertificatePreview from '../components/templates/Certificate/CertificatePreview'
 import EducationPreview from '../components/templates/Education/EducationPreview'
 
 export const LocalContext = createContext(null)
@@ -23,6 +23,7 @@ export default function PreviewPage() {
           <Main>
             <Layout>
               <ProfilePreview />
+              <CertificatePreview />
               <EducationPreview />
             </Layout>
           </Main>

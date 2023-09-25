@@ -12,12 +12,17 @@ export default function PreviewMonthItem({
 }) {
   return (
     <Item>
-      <DateWrap isInvalid={isInvalid} startDate={startDate} endDate={endDate}>
-        {type === 'certificate'
-          ? { date }
-          : !isInvalid
-          ? `${startDate} ~ ${endDate}`
-          : '-'}
+      <DateWrap
+        type={type}
+        isInvalid={isInvalid}
+        startDate={startDate}
+        endDate={endDate}
+      >
+        {isInvalid
+          ? '-'
+          : type === 'certificate'
+          ? date
+          : `${startDate} ~ ${endDate}`}
       </DateWrap>
       <p>{title}</p>
     </Item>
