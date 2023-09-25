@@ -1,4 +1,5 @@
 {
+  "homepage": "https://weniv.github.io/MAKE-RE_ver2",
   "name": "resume_ver2",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "chart.js": "^4.3.3",
+    "gh-pages": "^6.0.0",
     "graphql-request": "^6.1.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -26,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
