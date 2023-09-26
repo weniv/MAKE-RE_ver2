@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
+import IntroPreview from '../components/templates/Intro/IntroPreview'
 import styled from 'styled-components'
 import CertificatePreview from '../components/templates/Certificate/CertificatePreview'
 import EducationPreview from '../components/templates/Education/EducationPreview'
@@ -23,6 +24,7 @@ export default function PreviewPage() {
           <Main>
             <Layout>
               <ProfilePreview />
+              <IntroPreview />
               <CertificatePreview />
               <EducationPreview />
             </Layout>
