@@ -8,7 +8,7 @@ export default function Header() {
     <HeaderCont>
       <HeaderLayout>
         <h1>
-          <Link to="/">
+          <Link to="/MAKE-RE_ver2/">
             <img src={Logo} alt="메이커리" />
           </Link>
         </h1>

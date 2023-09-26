@@ -14,8 +14,8 @@ function App() {
           <ResumeProvider>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<WritePage />} />
-                <Route path="/preview" element={<PreviewPage />} />
+                <Route path="/MAKE-RE_ver2" element={<WritePage />} />
+                <Route path="/MAKE-RE_ver2/preview" element={<PreviewPage />} />
               </Routes>
             </BrowserRouter>
           </ResumeProvider>

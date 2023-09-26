@@ -14,11 +14,11 @@ export default function PreviewBox({ type }) {
   }
 
   const movePreview = () => {
-    navigate('/preview')
+    navigate('/MAKE-RE_ver2/preview')
   }
 
   const moveHome = () => {
-    navigate('/')
+    navigate('/MAKE-RE_ver2/')
   }
 
   return (
