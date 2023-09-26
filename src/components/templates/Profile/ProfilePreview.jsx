@@ -12,8 +12,6 @@ export default function ProfilePreview() {
     mainColor.split('#')[1]
   }/${localStorage.getItem('userGithubId')}`
 
-  console.log('메인컬러>>', mainColor)
-
   return (
     <>
       <ProfileSection>
