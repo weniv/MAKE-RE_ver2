@@ -15,10 +15,10 @@ export default function ProfilePreview() {
   return (
     <>
       <ProfileSection>
-        <ProfileImg>
+        <ProfileImg mainColor={mainColor}>
           <img src={profileData?.profileImg} alt="" />
         </ProfileImg>
-        <ProfileBox>
+        <ProfileBox mainColor={mainColor}>
           <span>
             <strong>{profileData?.name}</strong>
             {profileData?.enName}
@@ -71,6 +71,7 @@ const ProfileImg = styled.div`
   height: 142px;
   border-radius: 100px;
   border: 2px solid var(--main-color);
+  border: ${(props) => `2px solid ${props.mainColor}`};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   flex-shrink: 0;
@@ -91,7 +92,8 @@ const ProfileBox = styled.div`
     font-size: 16px;
     line-height: 23px;
     color: var(--main-color);
-    border-bottom: 1px solid var(--main-color);
+    color: ${(props) => props.mainColor};
+    border-bottom: ${(props) => `1px solid ${props.mainColor}`};
   }
 
   span strong {
