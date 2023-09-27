@@ -3,17 +3,16 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
-import styled from 'styled-components'
 
-export default function EducationPreview() {
+export default function ExperiencePreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const eduData = data.education
-  const educationList = eduData.filter(
+  const expData = data.experience
+  const expList = expData.filter(
     (edu) => edu.startDate || edu.endDate || edu.title.trim()
   )
 
-  const hasEducation = !!educationList.length
+  const hasExperience = !!expList.length
 
   function formatDate(date) {
     return date.replace('-', '. ') + '.'
@@ -21,22 +20,22 @@ export default function EducationPreview() {
 
   return (
     <>
-      {hasEducation && (
+      {hasExperience && (
         <section>
-          <PreviewSubtitle>Education</PreviewSubtitle>
-          {educationList.map((edu) => {
+          <PreviewSubtitle>Experience</PreviewSubtitle>
+          {expList.map((exp) => {
             const isInvalid =
-              (!edu.startDate && !edu.endDate) ||
-              (!edu.startDate && edu.inProgress)
+              (!exp.startDate && !exp.endDate) ||
+              (!exp.startDate && exp.inProgress)
 
             return (
               <PreviewMonthItem
-                key={edu.id}
-                startDate={edu.startDate && formatDate(edu.startDate)}
+                key={exp.id}
+                startDate={exp.startDate && formatDate(exp.startDate)}
                 endDate={
-                  edu.inProgress ? '' : edu.endDate && formatDate(edu.endDate)
+                  exp.inProgress ? '' : exp.endDate && formatDate(exp.endDate)
                 }
-                title={edu.title}
+                title={exp.title}
                 isInvalid={isInvalid}
               />
             )
