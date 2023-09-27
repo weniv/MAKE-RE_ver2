@@ -4,6 +4,7 @@ import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
 import IntroPreview from '../components/templates/Intro/IntroPreview'
 import styled from 'styled-components'
+import ExperiencePreview from '../components/templates/Experience/ExperiencePreview'
 import CertificatePreview from '../components/templates/Certificate/CertificatePreview'
 import EducationPreview from '../components/templates/Education/EducationPreview'
 
@@ -25,6 +26,7 @@ export default function PreviewPage() {
             <Layout>
               <ProfilePreview />
               <IntroPreview />
+              <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />
             </Layout>
@@ -38,7 +40,6 @@ export default function PreviewPage() {
 
 const Cont = styled.div`
   width: 100vw;
-  height: 100vh;
   display: flex;
   gap: 20px;
   justify-content: center;
