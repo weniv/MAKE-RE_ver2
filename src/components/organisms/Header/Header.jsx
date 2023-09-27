@@ -24,8 +24,7 @@ const HeaderCont = styled.header`
 `
 
 const HeaderLayout = styled.div`
-  max-width: 1250px;
-  min-width: 768px;
+  max-width: 1190px;
   height: 70px;
   margin: 0 auto;
   display: flex;
