@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import { SketchPicker } from 'react-color'
+import { BlockPicker } from 'react-color'
 import ColorPalette from '../../atoms/Nav/ColorPalette'
 import ColorContext from '../../../context/ColorContext'
 
@@ -121,11 +121,15 @@ const PickBox = styled.div`
   left: calc(100% + 20px);
   background-color: #fff;
   border-radius: 16px;
+
+  .block-picker > div:first-child {
+    transform: rotate(-90deg) !important;
+    top: 30px !important;
+    left: -4px !important;
+  }
 `
 
-const Picker = styled(SketchPicker)`
+const Picker = styled(BlockPicker)`
   border-radius: 16px !important;
   box-shadow: none !important;
-  background-color: var(--bg-color) !important;
-  padding: 20px !important;
 `
