@@ -11,10 +11,12 @@ export default function IntroPreview() {
 
   return (
     <>
-      <section>
-        <PreviewSubtitle>Introduction</PreviewSubtitle>
-        <IntroCont>{introData}</IntroCont>
-      </section>
+      {introData && (
+        <section>
+          <PreviewSubtitle>Introduction</PreviewSubtitle>
+          <IntroCont>{introData}</IntroCont>
+        </section>
+      )}
     </>
   )
 }

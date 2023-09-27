@@ -9,6 +9,9 @@ export default function EducationPreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const eduData = data.education
+  const educationList = eduData.filter((edu) => edu.date || edu.title.trim())
+
+  const hasEducation = !!educationList.length
 
   function formatDate(date) {
     return date.replace('-', '. ') + '.'
@@ -16,26 +19,28 @@ export default function EducationPreview() {
 
   return (
     <>
-      <section>
-        <PreviewSubtitle>Education</PreviewSubtitle>
-        {eduData.map((edu) => {
-          const isInvalid =
-            (!edu.startDate && !edu.endDate) ||
-            (!edu.startDate && edu.inProgress)
+      {hasEducation && (
+        <section>
+          <PreviewSubtitle>Education</PreviewSubtitle>
+          {educationList.map((edu) => {
+            const isInvalid =
+              (!edu.startDate && !edu.endDate) ||
+              (!edu.startDate && edu.inProgress)
 
-          return (
-            <PreviewMonthItem
-              key={edu.id}
-              startDate={edu.startDate && formatDate(edu.startDate)}
-              endDate={
-                edu.inProgress ? '' : edu.endDate && formatDate(edu.endDate)
-              }
-              title={edu.title}
-              isInvalid={isInvalid}
-            />
-          )
-        })}
-      </section>
+            return (
+              <PreviewMonthItem
+                key={edu.id}
+                startDate={edu.startDate && formatDate(edu.startDate)}
+                endDate={
+                  edu.inProgress ? '' : edu.endDate && formatDate(edu.endDate)
+                }
+                title={edu.title}
+                isInvalid={isInvalid}
+              />
+            )
+          })}
+        </section>
+      )}
     </>
   )
 }
