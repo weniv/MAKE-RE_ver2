@@ -9,7 +9,9 @@ export default function EducationPreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const eduData = data.education
-  const educationList = eduData.filter((edu) => edu.date || edu.title.trim())
+  const educationList = eduData.filter(
+    (edu) => edu.startDate || edu.endDate || edu.title.trim()
+  )
 
   const hasEducation = !!educationList.length
 
