@@ -1,1 +1,1 @@
-export { default as CareerTemplate } from './CareerTemplate'
+export { default as Career } from './Career'
