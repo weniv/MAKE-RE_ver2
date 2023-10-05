@@ -13,7 +13,7 @@ export default function PreviewMonthItem({
   size,
 }) {
   return (
-    <Item size={size}>
+    <Item size={size} type={type}>
       <DateWrap
         type={type}
         isInvalid={isInvalid}
@@ -43,9 +43,8 @@ const Item = styled.li`
   display: flex;
   align-items: center;
   gap: 16px;
-  /* ${(props) => props.color || '#bdbdbd'}; */
   font-size: ${(props) => props.size || '14px'};
-  margin: 10px auto;
+  margin: ${(props) => (props.type === 'career' ? 0 : '10px auto')};
 `
 
 const DateWrap = styled.p`
