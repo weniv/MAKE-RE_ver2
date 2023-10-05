@@ -45,7 +45,7 @@ export default function Career() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-  // console.log('resumeData', resumeData.career)
+  console.log('resumeData', resumeData.career)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>

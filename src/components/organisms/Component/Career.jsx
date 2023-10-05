@@ -28,7 +28,6 @@ export default function Career({
       handleDelete={handleDelete}
     >
       <Wrap>
-        <p>{textAreaHeight}</p>
         <DefaultInput
           id="careerName"
           type="text"

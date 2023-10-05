@@ -10,45 +10,32 @@ export default function CareerPreview() {
   const { mainColor } = useContext(ColorContext)
   const careerData = data.career
 
-  //   {
-  //     "id": 1,
-  //     "companyName": "",
-  //     "startData": "",
-  //     "endData": "",
-  //     "inProgress": false,
-  //     "works": "스터디인 개발",
-  //     "title": "위니브",
-  //     "startDate": "2021-12",
-  //     "endDate": "2023-02"
-  // }
-
-  const testData = ['111111111', '222222222', '333333333333']
-
   return (
-    <section>
-      <PreviewSubtitle>Career</PreviewSubtitle>
-      <Wrap gap="40px">
-        {careerData &&
-          careerData.map(
-            (data) => (
-              console.log('data.works', data),
-              (
+    <>
+      {data.career.length > 0 ? (
+        <section>
+          <PreviewSubtitle>Career</PreviewSubtitle>
+          <Wrap gap="40px">
+            {careerData &&
+              careerData.map((data) => (
                 <Wrap>
-                  <PreviewMonthItem
-                    type={'career'}
-                    startDate={data.startDate}
-                    endDate={data.endDate ? data.endDate : '재직 중'}
-                    color={mainColor}
-                    size={'0.75rem'}
-                  />
+                  {data.startDate && (data.endDate || data.inProgress) ? (
+                    <PreviewMonthItem
+                      type={'career'}
+                      startDate={data.startDate}
+                      endDate={data.inProgress ? '재직중' : data.endDate}
+                      color={mainColor}
+                      size={'0.75rem'}
+                    />
+                  ) : null}
                   <Title>{data.title}</Title>
                   <Works>{data.works}</Works>
                 </Wrap>
-              )
-            )
-          )}
-      </Wrap>
-    </section>
+              ))}
+          </Wrap>
+        </section>
+      ) : null}
+    </>
   )
 }
 
