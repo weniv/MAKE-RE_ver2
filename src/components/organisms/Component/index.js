@@ -1,4 +1,4 @@
-export { default as Career } from './Career'
+export { default as CareerItem } from './Career'
 export { default as Project } from './Project'
 export { default as CertItem } from './Certificate'
 export { default as EduItem } from './Education'

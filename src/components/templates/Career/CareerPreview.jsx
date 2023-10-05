@@ -29,23 +29,24 @@ export default function CareerPreview() {
       <PreviewSubtitle>Career</PreviewSubtitle>
       <Wrap gap="40px">
         {careerData &&
-          careerData.map((data) => (
-            <Wrap>
-              <PreviewMonthItem
-                type={'career'}
-                startDate={data.startDate}
-                endDate={data.endDate ? data.endDate : '재직 중'}
-                color={mainColor}
-                size={'0.75rem'}
-              />
-              <Title>{data.title}</Title>
-              <Works>
-                {testData.map((work) => (
-                  <li>{work}</li>
-                ))}
-              </Works>
-            </Wrap>
-          ))}
+          careerData.map(
+            (data) => (
+              console.log('data.works', data),
+              (
+                <Wrap>
+                  <PreviewMonthItem
+                    type={'career'}
+                    startDate={data.startDate}
+                    endDate={data.endDate ? data.endDate : '재직 중'}
+                    color={mainColor}
+                    size={'0.75rem'}
+                  />
+                  <Title>{data.title}</Title>
+                  <Works>{data.works}</Works>
+                </Wrap>
+              )
+            )
+          )}
       </Wrap>
     </section>
   )
@@ -64,13 +65,9 @@ const Title = styled.p`
   color: var(--font-color);
 `
 
-const Works = styled.ul`
-  list-style-type: disc;
-  list-style-position: inside;
+const Works = styled.p`
   color: var(--font-color);
-
-  li {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  white-space: pre-wrap;
 `

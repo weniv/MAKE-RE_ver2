@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
-import { Career } from '../../organisms/Component'
+import { CareerItem } from '../../organisms/Component'
 import { addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function CareerTemplates() {
+export default function Career() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [careerData, setCareerData] = useState(resumeData['career'])
 
@@ -45,7 +45,7 @@ export default function CareerTemplates() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-  console.log('resumeData', resumeData.career)
+  // console.log('resumeData', resumeData.career)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>
@@ -56,12 +56,12 @@ export default function CareerTemplates() {
               title={'커리어'}
               description={'대략 본인의 커리어를 입력해달라는 내용의 문구'}
             />
-            <MainBtn onClick={addCareer}>경력 추가하기</MainBtn>
+            <MainBtn onClick={addCareer}>커리어 추가하기</MainBtn>
           </Header>
           <ItemList>
             {careerData &&
               careerData.map((career, idx) => (
-                <Career
+                <CareerItem
                   idx={idx}
                   career={career}
                   handleDelete={() => handleDelete(idx)}

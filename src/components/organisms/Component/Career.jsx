@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
-import { DefaultInput, DateInput } from '../../atoms/Input'
+import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 
@@ -13,6 +13,12 @@ export default function Career({
   handleDelete,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
+  const [textAreaHeight, setTextAreaHeight] = useState(42)
+
+  // textarea 높이 조절 수정 필요
+  const handleResizeTextArea = (height) => {
+    setTextAreaHeight(height)
+  }
 
   return (
     <ComponentHeader
@@ -22,6 +28,7 @@ export default function Career({
       handleDelete={handleDelete}
     >
       <Wrap>
+        <p>{textAreaHeight}</p>
         <DefaultInput
           id="careerName"
           type="text"
@@ -78,17 +85,18 @@ export default function Career({
             isStill={isStill}
           />
         </DateWrap>
-        <DefaultInput
-          width="738px"
+        <DefaultTextarea
+          height={`${textAreaHeight}px`}
           name="works"
           placeholder={'예) 스터디인 Front-End 개발'}
           onChange={(e) => {
             updateData(e, idx, careerData, setCareerData)
+            handleResizeTextArea(e.target.scrollHeight)
           }}
           inputData={career.works}
         >
           {'담당 업무'}
-        </DefaultInput>
+        </DefaultTextarea>
       </Wrap>
     </ComponentHeader>
   )
