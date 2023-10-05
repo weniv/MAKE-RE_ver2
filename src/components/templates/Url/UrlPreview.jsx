@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
 import { PreviewSubtitle } from '../../atoms/Title'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
+import styled from 'styled-components'
 
 export default function EducationPreview() {
   const { data } = useContext(LocalContext)
@@ -14,14 +14,33 @@ export default function EducationPreview() {
       {!!urlList.length && (
         <section>
           <PreviewSubtitle>Url</PreviewSubtitle>
-          {urlList.map((url) => (
-            <div>
-              <p>{url.content}</p>
-              <PreviewLink link={url.link} />
-            </div>
-          ))}
+          <UrlListContainer>
+            {urlList.map((url) => (
+              <li>
+                <UrlContent>{url.content}</UrlContent>
+                <PreviewLink link={url.link} />
+              </li>
+            ))}
+          </UrlListContainer>
         </section>
       )}
     </>
   )
 }
+
+const UrlListContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & li {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+`
+
+const UrlContent = styled.p`
+  font-size: 16px;
+  font-weight: 700;
+`

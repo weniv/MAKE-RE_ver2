@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import ColorIcon from '../ColorIcon/ColorIcon'
+import IconUrl from '../../../assets/icon-Url.svg'
 
 export default function PreviewLink({ link }) {
   function urlFormat(url) {
@@ -9,14 +11,31 @@ export default function PreviewLink({ link }) {
     }
     return url
   }
-  return <LinkItem href={urlFormat(link)}>{link}</LinkItem>
+  return (
+    <LinkContainer>
+      <ColorIcon iconPath={IconUrl} />
+      <LinkItem href={urlFormat(link)} target="_blank">
+        {link}
+      </LinkItem>
+    </LinkContainer>
+  )
 }
 
 const LinkItem = styled.a`
-  display: inline-block;
-  background-color: #f2f2f2;
-  padding: 8px 12px;
   color: inherit;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+const LinkContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #f2f2f2;
   border-radius: 5px;
 `
