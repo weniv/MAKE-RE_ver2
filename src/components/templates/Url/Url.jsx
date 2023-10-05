@@ -25,7 +25,7 @@ export default function Url() {
 
   const val = {
     id: nextId.current,
-    title: '',
+    content: '',
     link: '',
   }
 

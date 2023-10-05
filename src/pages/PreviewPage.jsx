@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import ExperiencePreview from '../components/templates/Experience/ExperiencePreview'
 import CertificatePreview from '../components/templates/Certificate/CertificatePreview'
 import EducationPreview from '../components/templates/Education/EducationPreview'
+import UrlPreview from '../components/templates/Url/UrlPreview'
 
 export const LocalContext = createContext(null)
 
@@ -29,6 +30,7 @@ export default function PreviewPage() {
               <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />
+              <UrlPreview />
             </Layout>
           </Main>
           <Aside type="preview" />
