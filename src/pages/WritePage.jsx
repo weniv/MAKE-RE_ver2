@@ -10,7 +10,7 @@ import Experience from '../components/templates/Experience/Experience'
 import Certificate from '../components/templates/Certificate/Certificate'
 import Education from '../components/templates/Education/Education'
 import { Career } from '../components/templates/Career'
-import { ProjectTemplate } from '../components/templates/Project'
+import { Project } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
 import { ResumeContext } from '../context/ResumeContext'
 
@@ -21,7 +21,7 @@ export default function WritePage() {
     프로필: Profile,
     자기소개서: Intro,
     커리어: Career,
-    프로젝트: ProjectTemplate,
+    프로젝트: Project,
     경험: Experience,
     자격증: Certificate,
     교육: Education,

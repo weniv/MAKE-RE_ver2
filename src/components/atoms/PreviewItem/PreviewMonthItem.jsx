@@ -54,4 +54,5 @@ const DateWrap = styled.p`
   text-align: ${(props) => props.isInvalid && 'center'};
   text-align: ${(props) => !props.startDate && props.endDate && 'right'};
   padding-right: ${(props) => !props.startDate && props.endDate && '7px'};
+  white-space: pre-wrap;
 `
