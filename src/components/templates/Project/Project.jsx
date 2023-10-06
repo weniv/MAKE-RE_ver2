@@ -37,7 +37,7 @@ export default function Project() {
     endDate: '',
     inProgress: false,
     contributions: [''],
-    skills: [''],
+    skills: [],
   }
 
   /** 프로젝트 추가 */

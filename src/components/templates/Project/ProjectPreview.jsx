@@ -13,62 +13,66 @@ export default function ProjectPreview() {
   const projectData = data.project
 
   return (
-    <section>
-      <PreviewSubtitle>Project</PreviewSubtitle>
-      <Project>
-        {projectData &&
-          projectData.map((data) => (
-            <div>
-              <div className="description">
-                {/* {data.startDate && (data.endDate || data.inProgress) ? ( */}
-                <PreviewMonthItem
-                  startDate={
-                    data.startDate ? `${data.startDate}\n` : '시작일\n'
-                  }
-                  endDate={
-                    data.inProgress
-                      ? '진행중'
-                      : data.endDate
-                      ? data.endDate
-                      : '종료일'
-                  }
-                  color={mainColor}
-                ></PreviewMonthItem>
-                {/* ) : null} */}
-                <ProjectWrap>
-                  <Title>{data.title}</Title>
-                  <p>{data.outline}</p>
-                  <Title>
-                    인원 <span>{data.people}</span>
-                  </Title>
-                  <Title>적용기술</Title>
-                  <ul>
-                    {data.skills.map((skill) => (
-                      <Badge className="list">{skill}</Badge>
-                    ))}
-                  </ul>
-                  <Title>기여 부분</Title>
-                  <ul>
-                    {data.contributions.map((cont) => (
-                      <li className="list">{cont}</li>
-                    ))}
-                  </ul>
-                </ProjectWrap>
-              </div>
-              <LinkWrap>
-                <div className="linkCont">
-                  <Title>깃허브 링크 </Title>
-                  <PreviewLink link={data.githubLink}></PreviewLink>
+    <>
+      {projectData.length > 0 ? (
+        <section>
+          <PreviewSubtitle>Project</PreviewSubtitle>
+          <Project>
+            {projectData &&
+              projectData.map((data) => (
+                <div>
+                  <div className="description">
+                    <PreviewMonthItem
+                      startDate={
+                        data.startDate ? `${data.startDate}\n` : '시작일\n'
+                      }
+                      endDate={
+                        data.inProgress
+                          ? '진행중'
+                          : data.endDate
+                          ? data.endDate
+                          : '종료일'
+                      }
+                      color={mainColor}
+                    ></PreviewMonthItem>
+                    <ProjectWrap>
+                      <Title>{data.title}</Title>
+                      <p className="outline">{data.outline}</p>
+                      <Title>
+                        인원 <span>{data.people}</span>
+                      </Title>
+                      <Title>적용기술</Title>
+                      <ul>
+                        {data.skills.map((skill) => (
+                          <Badge className="list">{skill}</Badge>
+                        ))}
+                      </ul>
+                      <Title>기여 부분</Title>
+                      <ul>
+                        {data.contributions
+                          .filter((cont) => cont !== '')
+                          .map((cont) => (
+                            <li className="list">{cont}</li>
+                          ))}
+                      </ul>
+                    </ProjectWrap>
+                  </div>
+                  <LinkWrap>
+                    <div className="linkCont">
+                      <Title>깃허브 링크 </Title>
+                      <PreviewLink link={data.githubLink}></PreviewLink>
+                    </div>
+                    <div className="linkCont">
+                      <Title>프로젝트 링크</Title>
+                      <PreviewLink link={data.demoLink}></PreviewLink>
+                    </div>
+                  </LinkWrap>
                 </div>
-                <div className="linkCont">
-                  <Title>프로젝트 링크</Title>
-                  <PreviewLink link={data.demoLink}></PreviewLink>
-                </div>
-              </LinkWrap>
-            </div>
-          ))}
-      </Project>
-    </section>
+              ))}
+          </Project>
+        </section>
+      ) : null}
+    </>
   )
 }
 
@@ -91,6 +95,12 @@ const Project = styled.section`
       width: auto;
     }
   }
+
+  p.outline {
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+    line-height: 1.25rem;
+  }
 `
 
 const ProjectWrap = styled.div`
@@ -102,6 +112,10 @@ const ProjectWrap = styled.div`
     display: flex;
     gap: 5px;
     font-size: 0.875rem;
+  }
+
+  ul:not(:has(li)) {
+    display: none;
   }
 
   ul:last-child {
