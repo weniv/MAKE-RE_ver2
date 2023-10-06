@@ -43,9 +43,11 @@ export default function ProjectPreview() {
                       </Title>
                       <Title>적용기술</Title>
                       <ul>
-                        {data.skills.map((skill) => (
-                          <Badge className="list">{skill}</Badge>
-                        ))}
+                        {data.skills
+                          .filter((skill) => skill !== '')
+                          .map((skill) => (
+                            <Badge className="list">{skill}</Badge>
+                          ))}
                       </ul>
                       <Title>기여 부분</Title>
                       <ul>
