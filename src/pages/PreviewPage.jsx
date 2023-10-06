@@ -9,6 +9,7 @@ import CertificatePreview from '../components/templates/Certificate/CertificateP
 import EducationPreview from '../components/templates/Education/EducationPreview'
 import UrlPreview from '../components/templates/Url/UrlPreview'
 import CareerPreview from '../components/templates/Career/CareerPreview'
+import { ProjectPreview } from '../components/templates/Project'
 
 export const LocalContext = createContext(null)
 
@@ -29,6 +30,7 @@ export default function PreviewPage() {
               <ProfilePreview />
               <IntroPreview />
               <CareerPreview />
+              <ProjectPreview />
               <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />

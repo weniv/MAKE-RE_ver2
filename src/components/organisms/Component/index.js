@@ -1,5 +1,5 @@
 export { default as CareerItem } from './Career'
-export { default as Project } from './Project'
+export { default as ProjectItem } from './Project'
 export { default as CertItem } from './Certificate'
 export { default as EduItem } from './Education'
 export { default as UrlItem } from './Url'

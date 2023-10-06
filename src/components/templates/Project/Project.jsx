@@ -1,14 +1,14 @@
 import React, { useState, useRef, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
-import { Project } from '../../organisms/Component'
+import { ProjectItem } from '../../organisms/Component'
 import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function ProjectTemplate() {
+export default function Project() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [projectData, setProjectData] = useState(resumeData['project'])
 
@@ -68,7 +68,7 @@ export default function ProjectTemplate() {
           <ItemList>
             {projectData &&
               projectData.map((project, idx) => (
-                <Project
+                <ProjectItem
                   idx={idx}
                   project={project}
                   projectData={projectData}
