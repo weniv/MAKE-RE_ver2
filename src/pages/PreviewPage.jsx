@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useRef, useState } from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -14,6 +14,7 @@ import { ProjectPreview } from '../components/templates/Project'
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const exportRef = useRef(null)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
@@ -25,7 +26,7 @@ export default function PreviewPage() {
       <Header />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
-          <Main>
+          <Main ref={exportRef}>
             <Layout>
               <ProfilePreview />
               <IntroPreview />
@@ -37,7 +38,7 @@ export default function PreviewPage() {
               <UrlPreview />
             </Layout>
           </Main>
-          <Aside type="preview" />
+          <Aside type="preview" exportRef={exportRef} />
         </Cont>
       </LocalContext.Provider>
     </>
