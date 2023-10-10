@@ -58,6 +58,11 @@ const Cont = styled.div`
 const Main = styled.main`
   background-color: var(--bg-color);
   border-radius: 16px;
+
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
 `
 
 const Layout = styled.div`
@@ -66,4 +71,8 @@ const Layout = styled.div`
   gap: 40px;
   width: 890px;
   padding: 74px 52px;
+
+  & > * {
+    break-inside: avoid;
+  }
 `

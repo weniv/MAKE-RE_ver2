@@ -103,6 +103,10 @@ const Project = styled.section`
     white-space: pre-wrap;
     line-height: 1.25rem;
   }
+
+  & > * {
+    break-inside: avoid;
+  }
 `
 
 const ProjectWrap = styled.div`

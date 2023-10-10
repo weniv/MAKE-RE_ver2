@@ -18,7 +18,7 @@ export default function CareerPreview() {
           <Wrap gap="40px">
             {careerData &&
               careerData.map((data) => (
-                <Wrap>
+                <Content>
                   {data.startDate && (data.endDate || data.inProgress) ? (
                     <PreviewMonthItem
                       type={'career'}
@@ -30,7 +30,7 @@ export default function CareerPreview() {
                   ) : null}
                   <Title>{data.title}</Title>
                   <Works>{data.works}</Works>
-                </Wrap>
+                </Content>
               ))}
           </Wrap>
         </section>
@@ -45,7 +45,15 @@ const Wrap = styled.div`
   flex-direction: column;
   gap: ${(props) => props.gap || '16px'};
 `
-
+const Content = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  &:not(:first-child) {
+    break-inside: avoid;
+  }
+`
 const Title = styled.p`
   font-size: 1rem;
   font-weight: bold;
