@@ -56,7 +56,9 @@ export default function ColorPicker() {
           ></ColorPalette>
           <ColorPalette
             // color="#F2785C"
-            color={(themeMode === 'light' ? lightTheme : darkTheme).primary}
+            color={
+              (themeMode === 'light' ? lightTheme : darkTheme).primaryColor
+            }
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
@@ -101,7 +103,7 @@ const ColorPickerCont = styled.div`
   height: 70px;
   padding: 20px;
   border-radius: 16px;
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background-color);
   box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
 `
 
@@ -132,10 +134,10 @@ const PickBox = styled.div`
   // NOTE: WritePage > Main의 gap 변경 시 20px 수정 필요
   left: calc(100% + 20px);
   border-radius: 16px;
-  background-color: ${(props) => props.theme.background} !important;
+  background-color: var(--background-color) !important;
 
   .block-picker {
-    background-color: ${(props) => props.theme.background} !important;
+    background-color: var(--background-color) !important;
   }
 
   .block-picker > div:first-child {
