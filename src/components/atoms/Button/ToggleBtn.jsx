@@ -1,19 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled, { css } from 'styled-components'
 import LightIcon from '../../../assets/icon-light-mode.svg'
 import DarkIcon from '../../../assets/icon-dark-mode.svg'
+import ThemeContext from '../../../context/ThemeContext'
 
 export default function ToggleBtn({ onClick }) {
-  const [isDark, setisDark] = useState(false)
+  const { themeMode, toggleTheme } = useContext(ThemeContext)
 
-  const handleToggle = () => {
-    setisDark((prev) => !prev)
-    onClick()
-  }
   return (
-    <BtnCont onClick={handleToggle} isDark={isDark}>
+    <BtnCont onClick={toggleTheme} mode={themeMode}>
       <span className="ir">다크모드 온/오프 버튼</span>
-      <Circle isDark={isDark} />
+      <Circle mode={themeMode} />
     </BtnCont>
   )
 }
@@ -27,7 +24,7 @@ const BtnCont = styled.button`
   border-radius: 40px;
   border: none;
   cursor: pointer;
-  background-color: var(--main-color);
+  background-color: ${(props) => props.theme.primary};
   position: relative;
   display: flex;
   justify-content: center;
@@ -43,14 +40,16 @@ const Circle = styled.div`
   left: 5px;
   transition: all 0.3s ease-in-out;
   ${(props) =>
-    props.isDark &&
+    props.mode === 'dark' &&
     css`
       transform: translateX(32px);
     `}
-  background-color: ${(props) =>
-    !props.isDark ? 'var(--bg-color)' : 'var(--font-color)'};
+
   background-image: ${(props) =>
-    !props.isDark ? `url(${LightIcon})` : `url(${DarkIcon})`};
+    props.mode === 'light' ? `url(${LightIcon})` : `url(${DarkIcon})`};
+
+  background-color: ${(props) => props.theme.background};
+
   background-repeat: no-repeat;
   background-position: center;
 `

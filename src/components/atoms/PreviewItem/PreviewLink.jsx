@@ -22,7 +22,6 @@ export default function PreviewLink({ link }) {
 }
 
 const LinkItem = styled.a`
-  color: inherit;
   text-decoration: none;
 
   &:hover {
@@ -36,6 +35,6 @@ const LinkContainer = styled.div`
   gap: 12px;
   width: 100%;
   padding: 8px 12px;
-  background-color: #f2f2f2;
+  background-color: ${(props) => props.theme.grayLv1};
   border-radius: 5px;
 `

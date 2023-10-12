@@ -61,6 +61,7 @@ const Lable = styled.label`
 
   &::after {
     content: '진행 중';
+    color: ${(props) => props.theme.surface};
     font-size: 14px;
     font-weight: 500;
   }

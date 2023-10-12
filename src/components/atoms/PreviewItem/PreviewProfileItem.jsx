@@ -37,12 +37,10 @@ const ItemTitle = styled.p`
 `
 
 const ItemLink = styled.a`
-  color: #000;
   text-decoration: none;
 
   &::after {
     content: '';
-    /* background: url(move) no-repeat 0px 0px; */
     background: url(${move}) no-repeat 0px 0px;
     display: inline-block;
     height: 10px;

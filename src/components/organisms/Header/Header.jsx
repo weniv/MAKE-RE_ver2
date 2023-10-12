@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
+import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 
 export default function Header() {
   return (
@@ -9,7 +10,8 @@ export default function Header() {
       <HeaderLayout>
         <h1>
           <Link to="/MAKE-RE_ver2/">
-            <img src={Logo} alt="메이커리" />
+            <ColorIcon iconPath={Logo} width="176px" height="46px" />
+            {/* <img src={Logo} alt="메이커리" /> */}
           </Link>
         </h1>
         <ToggleBtn />
@@ -20,7 +22,7 @@ export default function Header() {
 
 const HeaderCont = styled.header`
   width: 100vw;
-  background-color: var(--hover-color);
+  background-color: ${(props) => props.theme.grayLv1};
 `
 
 const HeaderLayout = styled.div`

@@ -70,7 +70,6 @@ const ProfileImg = styled.div`
   width: 142px;
   height: 142px;
   border-radius: 100px;
-  border: 2px solid var(--main-color);
   border: ${(props) => `2px solid ${props.mainColor}`};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -91,13 +90,12 @@ const ProfileBox = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 23px;
-    color: var(--main-color);
     color: ${(props) => props.mainColor};
     border-bottom: ${(props) => `1px solid ${props.mainColor}`};
   }
 
   span strong {
-    color: var(--font-color);
+    color: ${(props) => props.theme.surface};
     font-size: 24px;
     font-weight: 700;
     padding-right: 12px;

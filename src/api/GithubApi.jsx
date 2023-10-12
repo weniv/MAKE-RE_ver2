@@ -5,10 +5,16 @@ import axios from 'axios'
 import { MainBtn } from '../components/atoms/Button'
 import DoughnutChart from './DoughnutChart'
 import ColorContext from '../context/ColorContext'
+import ThemeContext from '../context/ThemeContext'
+import AddImgIcon from '../assets/img-icon.svg'
+import AddImgIconDark from '../assets/img-icon-dark.svg'
 
 export const GithubContext = React.createContext()
 
 export default function GithubApi({ children }) {
+  const { themeMode } = useContext(ThemeContext)
+  const imgIcon = themeMode === 'light' ? AddImgIcon : AddImgIconDark
+
   const [queryString, setQueryString] = useState(window.location.search)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
@@ -240,7 +246,6 @@ export default function GithubApi({ children }) {
 
     const userId = localStorage.getItem('userGithubId')
 
-    
     if (userId) {
       src =
         'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
@@ -260,7 +265,13 @@ export default function GithubApi({ children }) {
       </GitHubCont>
 
       <Label>Contributions</Label>
-      <CommitBox>{commitSrc && <CommitImg src={commitSrc} />}</CommitBox>
+      <CommitBox>
+        {commitSrc ? (
+          <CommitImg src={commitSrc} />
+        ) : (
+          <img src={imgIcon} alt="" />
+        )}
+      </CommitBox>
 
       {userData && userName ? (
         <Cont>
@@ -310,7 +321,7 @@ export default function GithubApi({ children }) {
 }
 
 const Label = styled.label`
-  color: var(--gray-color);
+  color: ${(props) => props.theme.grayLv4};
   font-size: 12px;
   display: block;
   margin-bottom: 8px;
@@ -357,10 +368,11 @@ const GitHubCont = styled(FlexBox)`
 const CommitBox = styled.div`
   height: 160px;
   border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--hover-color);
+  border: 1px solid ${(props) => props.theme.grayLv2};
+  background-color: ${(props) => props.theme.grayLv1};
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 10px;
 `
 

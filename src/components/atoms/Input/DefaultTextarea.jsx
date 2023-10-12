@@ -41,7 +41,7 @@ const Cont = styled.div`
 `
 
 const Label = styled.label`
-  color: var(--gray-color);
+  color: ${(props) => props.theme.grayLv4};
   font-size: 12px;
 `
 
@@ -52,8 +52,7 @@ const TextArea = styled.textarea`
   margin-right: ${(props) => props.marginRight};
   padding: ${(props) => (props.type === 'intro' ? '20px' : '16px')};
   border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
+  color: ${(props) => props.theme.surface};
   background-image: ${(props) =>
     props.type === 'url' ? `url(${LinkIcon})` : null};
   background-repeat: no-repeat;

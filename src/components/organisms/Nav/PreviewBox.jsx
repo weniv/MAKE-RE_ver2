@@ -43,8 +43,8 @@ export default function PreviewBox({ type }) {
 const Cont = styled.div`
   padding: 14px;
   border-radius: 16px;
-  background-color: var(--bg-color);
   display: inline-flex;
   gap: 10px;
-  box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: ${(props) => props.theme.shadow};
+  background-color: ${(props) => props.theme.background};
 `

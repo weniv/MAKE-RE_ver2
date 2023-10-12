@@ -60,7 +60,7 @@ const Section = styled.div`
 `
 
 const WordCountWrap = styled.p`
-  color: var(--gray-color);
+  color: ${(props) => props.theme.grayLv4};
   font-size: 12px;
   margin-top: 8px;
   text-align: right;

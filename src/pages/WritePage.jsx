@@ -61,7 +61,8 @@ const Main = styled.main`
 const Cont = styled.div`
   width: 100vw;
   padding: 60px 0;
-  background-color: var(--hover-color);
+  background-color: ${(props) => props.theme.grayLv1};
+
   display: flex;
   gap: 20px;
   justify-content: center;

@@ -3,11 +3,12 @@ import { styled } from 'styled-components'
 export const Cont = styled.div`
   width: 786px;
   border-radius: 16px;
-  background-color: var(--bg-color);
-  box-shadow: 0 0 0 1px var(--border-color) inset;
+  background-color: ${(props) => props.theme.background};
+  border: 1px solid ${(props) => props.theme.grayLv2};
 `
 
 export const Header = styled.div`
+  color: ${(props) => props.theme.surface};
   position: relative;
   display: flex;
   align-items: center;
@@ -40,7 +41,7 @@ export const DelBtn = styled(Btn)`
   padding: 6px 6px;
 
   &:hover {
-    background-color: var(--hover-color);
+    background-color: ${(props) => props.theme.grayLv1};
   }
 `
 

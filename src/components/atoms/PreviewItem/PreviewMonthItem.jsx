@@ -42,12 +42,13 @@ const Item = styled.li`
   gap: 16px;
 
   font-size: 14px;
+  color: ${(props) => props.theme.surface};
   margin: 10px auto;
 `
 
 const DateWrap = styled.p`
   width: 140px;
-  color: #bdbdbd;
+  color: ${(props) => props.theme.grayLv3};
   font-weight: 700;
   text-align: ${(props) => props.isInvalid && 'center'};
   text-align: ${(props) => !props.startDate && props.endDate && 'right'};

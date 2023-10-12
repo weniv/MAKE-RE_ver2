@@ -46,9 +46,34 @@ const GlobalStyles = createGlobalStyle`
         overflow: hidden;
     }
 
+    a 
+    {color: ${(props) => props.theme.surface}}
+
+    input, textarea {
+        color: ${(props) => props.theme.surface};
+        border: 1px solid ${(props) => props.theme.grayLv2};
+        background-color: ${(props) => props.theme.background};
+    }
+
+    input::placeholder,
+    textarea::placeholder{
+        color: ${(props) => props.theme.grayLv3};
+    }
+
     input:focus,input:active,
     textarea:focus, textarea:active{
-        outline:2px solid var(--main-color);
+        outline: 2px solid ${(props) => props.theme.primary};
+    }
+
+
+    .iconLv1 {
+        background-color: ${(props) => props.theme.grayLv4}
+    }
+    .iconLv2 {
+        background-color: ${(props) => props.theme.grayLv3}
+    }
+    .iconLv3 {
+        background-color: ${(props) => props.theme.grayLv2}
     }
 `
 

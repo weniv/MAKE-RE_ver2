@@ -8,10 +8,11 @@ const SaveButton = styled.button`
   width: 80px;
   padding: 13px 0;
   border-radius: 10px;
-  color: #000;
+  color: ${(props) => props.theme.surface};
   line-height: 16px;
   background-color: inherit;
   &:hover {
     background: var(--hover-color);
+    background-color: ${(props) => props.theme.grayLv1};
   }
 `

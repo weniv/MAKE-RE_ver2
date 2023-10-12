@@ -106,6 +106,7 @@ const DateWrap = styled.div`
 `
 
 const Tilde = styled.p`
+  color: ${(props) => props.theme.surface};
   font-size: 14px;
   font-weight: 500;
   margin: 20px 8px 0 8px;
