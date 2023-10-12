@@ -54,7 +54,9 @@ export default function Career() {
           <Header>
             <WriteTitle
               title={'커리어'}
-              description={'대략 본인의 커리어를 입력해달라는 내용의 문구'}
+              description={
+                '경력에 대해 자세히 설명하고, 각 직무에서의 주요 책임과 성과를 기록해주세요.'
+              }
             />
             <MainBtn onClick={addCareer}>커리어 추가하기</MainBtn>
           </Header>

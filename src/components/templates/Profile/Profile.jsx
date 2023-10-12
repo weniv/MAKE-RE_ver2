@@ -99,7 +99,7 @@ export default function Profile() {
         <styles.Section>
           <WriteTitle
             title="프로필"
-            description="대략 본인의 프로필 정보를 입력해달라는 내용의 문구"
+            description="자신을 간단히 소개해 주세요."
           />
           <styles.ProfileCont>
             <styles.ImgCont>
