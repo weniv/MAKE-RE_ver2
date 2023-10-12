@@ -9,14 +9,17 @@ export default function PreviewMonthItem({
   startDate,
   endDate,
   isInvalid,
+  color,
+  size,
 }) {
   return (
-    <Item>
+    <Item size={size} type={type}>
       <DateWrap
         type={type}
         isInvalid={isInvalid}
         startDate={startDate}
         endDate={endDate}
+        color={color}
       >
         {isInvalid
           ? '-'
@@ -40,10 +43,10 @@ const Item = styled.li`
   display: flex;
   align-items: center;
   gap: 16px;
-
-  font-size: 14px;
   color: ${(props) => props.theme.surface};
-  margin: 10px auto;
+  font-size: ${(props) => props.size || '14px'};
+  margin: ${(props) => (props.type === 'career' ? 0 : '10px auto')};
+
 `
 
 const DateWrap = styled.p`
@@ -53,4 +56,5 @@ const DateWrap = styled.p`
   text-align: ${(props) => props.isInvalid && 'center'};
   text-align: ${(props) => !props.startDate && props.endDate && 'right'};
   padding-right: ${(props) => !props.startDate && props.endDate && '7px'};
+  white-space: pre-wrap;
 `

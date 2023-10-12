@@ -28,6 +28,7 @@ export default function DefaultTextarea({
         value={inputData}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        rows={1}
       />
     </Cont>
   )
@@ -37,7 +38,8 @@ const Cont = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: ${(props) => (props.type === 'project' ? '8px' : null)};
+  /* gap: ${(props) => (props.type === 'project' ? '8px' : null)}; */
+  gap: 8px;
 `
 
 const Label = styled.label`
@@ -49,8 +51,9 @@ const TextArea = styled.textarea`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   font-size: ${(props) => (props.type === 'intro' ? '16px' : '14px')};
+  line-height: ${(props) => props.type === 'intro' && '28px'};
   margin-right: ${(props) => props.marginRight};
-  padding: ${(props) => (props.type === 'intro' ? '20px' : '16px')};
+  padding: ${(props) => (props.type === 'intro' ? '20px' : '11px 16px')};
   border-radius: 10px;
   color: ${(props) => props.theme.surface};
   background-image: ${(props) =>
@@ -59,4 +62,5 @@ const TextArea = styled.textarea`
   background-size: 20px 20px;
   background-position: 12px;
   resize: none;
+  overflow-y: hidden;
 `

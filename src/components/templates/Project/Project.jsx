@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
-import { Career } from '../../organisms/Component'
-import { addData } from '../../../utils'
+import { ProjectItem } from '../../organisms/Component'
 import { MainBtn } from '../../atoms/Button'
+import { addData } from '../../../utils'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function CareerTemplates() {
+export default function Project() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [careerData, setCareerData] = useState(resumeData['career'])
+  const [projectData, setProjectData] = useState(resumeData['project'])
 
   useEffect(() => {
-    setResumeData({ ...resumeData, career: careerData })
-  }, [careerData])
+    setResumeData({ ...resumeData, project: projectData })
+  }, [projectData])
 
-  const maxId = careerData.reduce(
+  const maxId = projectData.reduce(
     (acc, cur) => {
       return acc.id > cur.id ? acc : cur
     },
@@ -27,46 +27,53 @@ export default function CareerTemplates() {
 
   const val = {
     id: nextId.current,
-    companyName: '',
+    title: '',
+    demoLink: '',
+    githubLink: '',
+    snsLink: '',
+    outline: '',
+    people: '',
     startDate: '',
     endDate: '',
     inProgress: false,
-    works: '',
+    contributions: [''],
+    skills: [],
   }
 
-  /** 커리어 추가 */
-  const addCareer = () => {
+  /** 프로젝트 추가 */
+  const addProject = () => {
     nextId.current++
-    addData(nextId.current, val, careerData, setCareerData)
+    addData(nextId.current, val, projectData, setProjectData)
   }
 
-  /** 커리어 삭제 */
+  /** 프로젝트 삭제 */
   const handleDelete = (idx) => {
-    setCareerData(careerData.filter((career, i) => i !== idx))
+    setProjectData(projectData.filter((pro, i) => i !== idx))
   }
-
-  console.log('resumeData', resumeData.career)
 
   return (
-    <Dnd state={careerData} setState={setCareerData}>
+    <Dnd state={projectData} setState={setProjectData}>
       <Layout>
         <Section>
           <Header>
             <WriteTitle
-              title={'커리어'}
-              description={'대략 본인의 커리어를 입력해달라는 내용의 문구'}
+              title={'프로젝트'}
+              description={
+                '대략 본인의 프로젝트 정보를 입력해달라는 내용의 문구'
+              }
             />
-            <MainBtn onClick={addCareer}>경력 추가하기</MainBtn>
+            <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>
           </Header>
+
           <ItemList>
-            {careerData &&
-              careerData.map((career, idx) => (
-                <Career
+            {projectData &&
+              projectData.map((project, idx) => (
+                <ProjectItem
                   idx={idx}
-                  career={career}
+                  project={project}
+                  projectData={projectData}
+                  setProjectData={setProjectData}
                   handleDelete={() => handleDelete(idx)}
-                  careerData={careerData}
-                  setCareerData={setCareerData}
                   key={idx}
                 />
               ))}

@@ -8,6 +8,8 @@ import ExperiencePreview from '../components/templates/Experience/ExperiencePrev
 import CertificatePreview from '../components/templates/Certificate/CertificatePreview'
 import EducationPreview from '../components/templates/Education/EducationPreview'
 import UrlPreview from '../components/templates/Url/UrlPreview'
+import CareerPreview from '../components/templates/Career/CareerPreview'
+import { ProjectPreview } from '../components/templates/Project'
 
 export const LocalContext = createContext(null)
 
@@ -27,6 +29,8 @@ export default function PreviewPage() {
             <Layout>
               <ProfilePreview />
               <IntroPreview />
+              <CareerPreview />
+              <ProjectPreview />
               <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />

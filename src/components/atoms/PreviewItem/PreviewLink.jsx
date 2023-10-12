@@ -6,7 +6,7 @@ import IconUrl from '../../../assets/icon-Url.svg'
 export default function PreviewLink({ link }) {
   function urlFormat(url) {
     // url 절대경로 변환
-    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+    if (!url?.startsWith('https://') && !url?.startsWith('http://')) {
       url = 'http://' + url
     }
     return url

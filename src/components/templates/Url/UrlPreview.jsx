@@ -7,7 +7,9 @@ import styled from 'styled-components'
 export default function EducationPreview() {
   const { data } = useContext(LocalContext)
   const urlData = data.url
-  const urlList = urlData.filter((url) => url.content.trim() || url.link.trim())
+  const urlList = urlData.filter(
+    (url) => url.content?.trim() || url.link?.trim()
+  )
 
   return (
     <>
