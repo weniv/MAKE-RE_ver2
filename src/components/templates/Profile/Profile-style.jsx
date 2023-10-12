@@ -34,6 +34,7 @@ export const ImgWrap = styled.div`
   height: 100%;
   border-radius: 200px;
   overflow: hidden;
+  border: 1px solid var(--gray-lv2-color);
 `
 
 export const Img = styled.img`
@@ -42,7 +43,7 @@ export const Img = styled.img`
   object-fit: cover;
 
   &.defaultImg {
-    background: var(--hover-color);
+    background: var(--gray-lv1-color);
   }
 `
 
@@ -52,12 +53,14 @@ export const InputCont = styled.div`
   align-items: flex-end;
 
   span {
+    color: var(--surface-color);
     margin: 0 8px 13px 0;
   }
 `
 
 export const Label = styled.label`
-  color: var(--gray-color);
+  color: var(--surface-color);
+
   font-size: 12px;
   display: block;
   margin-bottom: 8px;
@@ -66,7 +69,7 @@ export const Label = styled.label`
 export const Line = styled.div`
   width: 890px;
   height: 2px;
-  background: var(--hover-color);
+  background-color: var(--gray-lv1-color);
   margin: 40px 0 0;
 `
 
@@ -81,28 +84,4 @@ export const SkillListWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-`
-
-export const GitHubCont = styled(FlexBox)`
-  margin-bottom: 20px;
-
-  button {
-    align-self: flex-end;
-  }
-`
-export const CommitBox = styled.div`
-  height: 160px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--hover-color);
-  display: flex;
-  align-items: center;
-  padding: 10px;
-`
-
-export const CommitImg = styled.img`
-  width: 100%;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
 `

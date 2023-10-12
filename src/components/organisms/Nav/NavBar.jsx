@@ -48,7 +48,7 @@ const Nav = styled.nav`
   flex-direction: column;
   gap: 8px;
   padding: 20px;
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   border-radius: 16px;
   box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
 `

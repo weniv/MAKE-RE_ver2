@@ -49,11 +49,11 @@ const Wrap = styled.div`
 const Title = styled.p`
   font-size: 1rem;
   font-weight: bold;
-  color: var(--font-color);
+  color: var(--surface-color);
 `
 
 const Works = styled.p`
-  color: var(--font-color);
+  color: var(--surface-color);
   font-size: 0.875rem;
   line-height: 1.25rem;
   white-space: pre-wrap;

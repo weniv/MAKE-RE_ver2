@@ -61,6 +61,7 @@ const Lable = styled.label`
 
   &::after {
     content: '진행 중';
+    color: var(--surface-color);
     font-size: 14px;
     font-weight: 500;
   }

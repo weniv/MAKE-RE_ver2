@@ -19,6 +19,7 @@ FooterItem.defaultProps = {
   list: [],
 }
 const ItemTitle = styled.p`
+  color: var(--surface-color);
   font-size: 14px;
   display: inline-block;
   margin-bottom: 20px;
@@ -29,6 +30,10 @@ const ItemList = styled.ul`
   flex-direction: column;
   gap: 10px;
   font-size: 14px;
+
+  li a {
+    color: var(--gray-lv3-color);
+  }
 
   & a {
     white-space: nowrap;

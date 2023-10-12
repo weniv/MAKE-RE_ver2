@@ -13,6 +13,6 @@ const Section = styled.section`
   width: 100%;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-color);
+  border: 1px solid var(--gray-lv2-color);
+  background-color: var(--background-color);
 `

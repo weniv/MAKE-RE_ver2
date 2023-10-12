@@ -45,17 +45,18 @@ export default function PreviewPage() {
 }
 
 const Cont = styled.div`
+  color: var(--surface-color);
   width: 100vw;
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding: 60px 0 120px;
-  background-color: var(--hover-color);
   margin: 0 auto;
+  padding: 60px 0 120px;
+  background-color: var(--gray-lv1-color);
 `
 
 const Main = styled.main`
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   border-radius: 16px;
 `
 

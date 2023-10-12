@@ -12,7 +12,7 @@ export default function LinkItem({ content, link }) {
   )
 }
 export const Link = styled.a`
-  color: var(--lightgray-color);
+  color: var(--gray-lv3-color);
   text-decoration: none;
 
   &::after {

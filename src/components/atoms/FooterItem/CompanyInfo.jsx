@@ -32,9 +32,9 @@ const Container = styled.dl`
   flex-wrap: wrap;
   max-width: 80%;
   font-size: 10px;
-  color: var(--lightgray-color);
   position: absolute;
   bottom: 40px;
+  color: var(--gray-lv3-color);
 
   > div {
     display: flex;

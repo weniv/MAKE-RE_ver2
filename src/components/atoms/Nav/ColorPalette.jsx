@@ -34,7 +34,7 @@ const Cont = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: ${({ color }) => (color ? color : 'var(--main-color)')};
+  background-color: ${({ color, props }) => color || 'var(--primary-color)'};
 
   ${(props) =>
     props.isClick &&

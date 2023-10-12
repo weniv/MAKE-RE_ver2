@@ -43,13 +43,14 @@ const Item = styled.li`
   display: flex;
   align-items: center;
   gap: 16px;
+  color: var(--surface-color);
   font-size: ${(props) => props.size || '14px'};
   margin: ${(props) => (props.type === 'career' ? 0 : '10px auto')};
 `
 
 const DateWrap = styled.p`
   width: 140px;
-  color: ${(props) => props.color || '#bdbdbd'};
+  color: var(--gray-lv3-color);
   font-weight: 700;
   text-align: ${(props) => props.isInvalid && 'center'};
   text-align: ${(props) => !props.startDate && props.endDate && 'right'};

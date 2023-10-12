@@ -5,6 +5,7 @@ import expandIcon from '../../../assets/icon-triangle-down.svg'
 import reduceIcon from '../../../assets/icon-triangle-up.svg'
 import deleteIcon from '../../../assets/icon-X.svg'
 import { dndContext } from '../../../utils/dnd'
+import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 
 export default function ComponentHeader({
   id,
@@ -26,7 +27,7 @@ export default function ComponentHeader({
     <styles.Cont style={style}>
       <styles.Header>
         <styles.Btn ref={setNodeRef} {...attributes} {...listeners}>
-          <styles.Img src={DragIcon} />
+          <ColorIcon iconPath={DragIcon} type="iconLv2" />
         </styles.Btn>
         <styles.Title>{title ? title : `새로운 ${kind}`}</styles.Title>
         <styles.ExpandBtn
@@ -34,13 +35,18 @@ export default function ComponentHeader({
             setIsExpand(!isExpand)
           }}
         >
-          <styles.Img
+          <ColorIcon
+            iconPath={!isExpand ? expandIcon : reduceIcon}
+            isExpand={isExpand}
+            type="iconLv1"
+          />
+          {/* <styles.Img
             src={!isExpand ? expandIcon : reduceIcon}
             isExpand={isExpand}
-          />
+          /> */}
         </styles.ExpandBtn>
         <styles.DelBtn del onClick={handleDelete}>
-          <styles.Img src={deleteIcon} />
+          <ColorIcon type="iconLv2" iconPath={deleteIcon} />
         </styles.DelBtn>
       </styles.Header>
 
