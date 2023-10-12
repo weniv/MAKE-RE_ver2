@@ -37,9 +37,9 @@ const SkillLi = styled.li`
   margin-right: 10px;
   gap: 6px;
   border-radius: 40px;
-  color: ${(props) => props.theme.primary};
-  border: 2px solid ${(props) => props.theme.primary};
-  background-color: ${(props) => props.theme.background};
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-color);
   font-size: 14px;
   box-sizing: border-box;
   cursor: pointer;

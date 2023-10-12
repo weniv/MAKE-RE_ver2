@@ -34,7 +34,7 @@ export const ImgWrap = styled.div`
   height: 100%;
   border-radius: 200px;
   overflow: hidden;
-  border: 1px solid ${(props) => props.theme.grayLv2};
+  border: 1px solid var(--gray-lv2-color);
 `
 
 export const Img = styled.img`
@@ -43,7 +43,7 @@ export const Img = styled.img`
   object-fit: cover;
 
   &.defaultImg {
-    background: ${(props) => props.theme.grayLv1};
+    background: var(--gray-lv1-color);
   }
 `
 
@@ -53,13 +53,13 @@ export const InputCont = styled.div`
   align-items: flex-end;
 
   span {
-    color: ${(props) => props.theme.surface};
+    color: var(--surface-color);
     margin: 0 8px 13px 0;
   }
 `
 
 export const Label = styled.label`
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
 
   font-size: 12px;
   display: block;
@@ -69,7 +69,7 @@ export const Label = styled.label`
 export const Line = styled.div`
   width: 890px;
   height: 2px;
-  background-color: ${(props) => props.theme.grayLv1};
+  background-color: var(--gray-lv1-color);
   margin: 40px 0 0;
 `
 

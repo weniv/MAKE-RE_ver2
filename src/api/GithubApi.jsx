@@ -321,7 +321,7 @@ export default function GithubApi({ children }) {
 }
 
 const Label = styled.label`
-  color: ${(props) => props.theme.grayLv4};
+  color: var(--gray-lv4-color);
   font-size: 12px;
   display: block;
   margin-bottom: 8px;
@@ -368,8 +368,8 @@ const GitHubCont = styled(FlexBox)`
 const CommitBox = styled.div`
   height: 160px;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.grayLv2};
-  background-color: ${(props) => props.theme.grayLv1};
+  border: 1px solid var(--gray-lv2-color);
+  background-color: var(--gray-lv1-color);
   display: flex;
   align-items: center;
   justify-content: center;

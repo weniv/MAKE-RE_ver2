@@ -22,7 +22,7 @@ export default function Header() {
 
 const HeaderCont = styled.header`
   width: 100vw;
-  background-color: ${(props) => props.theme.grayLv1};
+  background-color: var(--gray-lv1-color);
 `
 
 const HeaderLayout = styled.div`

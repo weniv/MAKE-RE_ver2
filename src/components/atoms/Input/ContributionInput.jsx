@@ -54,10 +54,10 @@ const Input = styled.input`
   width: 100%;
   padding: 11px 45px 11px 16px;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.grayLv2};
+  border: 1px solid var(--gray-lv2-color);
 
   &:focus {
-    outline: 2px solid ${(props) => props.theme.primary};
+    outline: 2px solid var(--primary-color);
   }
 `
 

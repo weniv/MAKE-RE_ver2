@@ -27,7 +27,7 @@ const MainButton = styled.button`
       width: 162px;
     `}
   height: 42px;
-  background-color: ${(props) => props.theme.primary};
+  background-color: var(--primary-color);
   border-radius: 10px;
   padding: 13px 20px;
   color: #fff;
@@ -38,6 +38,6 @@ const MainButton = styled.button`
   transition: background-color 0.1s ease-in;
 
   &:hover {
-    background-color: ${(props) => props.theme.secondary};
+    background-color: var(--secondary-color);
   }
 `

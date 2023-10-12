@@ -45,6 +45,6 @@ const Cont = styled.div`
   border-radius: 16px;
   display: inline-flex;
   gap: 10px;
-  box-shadow: ${(props) => props.theme.shadow};
-  background-color: ${(props) => props.theme.background};
+  box-shadow: var(--shadow);
+  background-color: var(--background-color);
 `

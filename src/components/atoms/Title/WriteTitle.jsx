@@ -24,10 +24,10 @@ const Wrap = styled.div`
 `
 
 const Title = styled.h2`
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
   font-size: 32px;
 `
 const Description = styled.p`
-  color: ${(props) => props.theme.grayLv4};
+  color: var(--gray-lv4-color);
   font-size: 14px;
 `

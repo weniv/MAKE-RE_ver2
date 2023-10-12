@@ -13,7 +13,7 @@ WriteSubtitle.defaultProps = {
 // style
 const Title = styled.label`
   display: inline-flex;
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
   font-size: 20px;
   margin: 32px 0 24px;
 `

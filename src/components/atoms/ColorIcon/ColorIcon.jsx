@@ -22,7 +22,7 @@ const Icon = styled.div`
   width: ${(props) => props.width || '20px'};
   height: ${(props) => props.height || '20px'};
   border-radius: 50%;
-  background-color: ${(props) => !props.className && props.theme.primary};
+  background-color: ${(props) => !props.className && props.theme.primaryColor};
   mask-image: url(${(props) => props.iconPath});
   mask-size: 100%;
   mask-repeat: no-repeat;

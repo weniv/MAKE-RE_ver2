@@ -24,7 +24,7 @@ const BtnCont = styled.button`
   border-radius: 40px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => props.theme.primary};
+  background-color: var(--primary-color);
   position: relative;
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@ const Circle = styled.div`
   background-image: ${(props) =>
     props.mode === 'light' ? `url(${LightIcon})` : `url(${DarkIcon})`};
 
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background-color);
 
   background-repeat: no-repeat;
   background-position: center;

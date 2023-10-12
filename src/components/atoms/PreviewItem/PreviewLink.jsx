@@ -35,6 +35,6 @@ const LinkContainer = styled.div`
   gap: 12px;
   width: 100%;
   padding: 8px 12px;
-  background-color: ${(props) => props.theme.grayLv1};
+  background-color: var(--gray-lv1-color);
   border-radius: 5px;
 `

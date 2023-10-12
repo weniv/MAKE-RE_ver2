@@ -8,18 +8,18 @@ export const DropBoxCont = styled.div`
 
 export const DropBtn = styled.button`
   width: ${(props) => props.width}px;
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
   line-height: 20px;
   display: inline-flex;
   height: 42px;
   padding: 11px 10px 11px 16px;
   justify-content: space-between;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.grayLv2};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid var(--gray-lv2-color);
+  background-color: var(--background-color);
 
   &:focus {
-    outline: 2px solid ${(props) => props.theme.primary};
+    outline: 2px solid var(--primary-color);
   }
 
   // &.open::after {
@@ -40,15 +40,15 @@ export const ListBox = styled.ul`
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
-  border: 1px solid ${(props) => props.theme.grayLv2};
-  background-color: ${(props) => props.theme.background};
+  border: 1px solid var(--gray-lv2-color);
+  background-color: var(--background-color);
 `
 
 export const List = styled.li`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
 
   padding: 5px 10px;
   height: 30px;
@@ -57,6 +57,6 @@ export const List = styled.li`
   border-radius: 8px;
 
   &:hover {
-    background-color: ${(props) => props.theme.grayLv1};
+    background-color: var(--gray-lv1-color);
   }
 `

@@ -41,7 +41,7 @@ const InputCont = styled.div`
 `
 
 const Label = styled.label`
-  color: ${(props) => props.theme.grayLv4};
+  color: var(--gray-lv4-color);
   font-size: 12px;
 `
 

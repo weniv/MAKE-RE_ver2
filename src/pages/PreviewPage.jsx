@@ -45,18 +45,18 @@ export default function PreviewPage() {
 }
 
 const Cont = styled.div`
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
   width: 100vw;
   display: flex;
   gap: 20px;
   justify-content: center;
   margin: 0 auto;
   padding: 60px 0 120px;
-  background-color: ${(props) => props.theme.grayLv1};
+  background-color: var(--gray-lv1-color);
 `
 
 const Main = styled.main`
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background-color);
   border-radius: 16px;
 `
 

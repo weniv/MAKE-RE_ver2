@@ -41,7 +41,7 @@ const Wrap = styled.div`
 
 const Label = styled.label`
   font-size: 12px;
-  color: ${(props) => props.theme.grayLv4};
+  color: var(--gray-lv4-color);
   margin-bottom: 8px;
   font-weight: 500; // Medium
 `
@@ -51,10 +51,10 @@ const Input = styled.input`
   width: ${(props) => props.width || '347px'};
   height: 42px;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.grayLv2};
+  border: 1px solid var(--gray-lv2-color);
   padding: 11px 12px 11px 16px;
   box-sizing: border-box;
-  color: ${(props) => props.theme.grayLv3};
+  color: var(--gray-lv3-color);
 
   &::-webkit-calendar-picker-indicator {
     width: 20px;
@@ -64,11 +64,11 @@ const Input = styled.input`
   }
 
   &:focus {
-    outline: 2px solid ${(props) => props.theme.primary};
+    outline: 2px solid var(--primary-color);
   }
 
   &:read-only {
-    background-color: ${(props) => props.theme.grayLv2};
+    background-color: var(--gray-lv2-color);
     cursor: not-allowed;
     opacity: 0.4;
   }

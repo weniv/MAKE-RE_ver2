@@ -34,7 +34,7 @@ const Container = styled.dl`
   font-size: 10px;
   position: absolute;
   bottom: 40px;
-  color: ${(props) => props.theme.grayLv3};
+  color: var(--gray-lv3-color);
 
   > div {
     display: flex;

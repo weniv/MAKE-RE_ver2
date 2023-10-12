@@ -8,6 +8,6 @@ const Section = styled.section`
   width: 890px;
   padding: 0 0 52px;
   border-radius: 16px;
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background-color);
   box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
 `

@@ -85,8 +85,8 @@ const Cont = styled.div`
   display: flex;
   width: 240px;
   height: 48px;
-  color: ${(props) => props.theme.surface};
-  background-color: ${(props) => props.theme.background};
+  color: var(--surface-color);
+  background-color: var(--background-color);
   font-size: 14px;
   font-weight: 500;
   border-radius: 10px;
@@ -96,14 +96,14 @@ const Cont = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.grayLv1};
+    background-color: var(--gray-lv1-color);
   }
 
   ${(props) =>
     props.clicked &&
     css`
-      border: 2px solid ${(props) => props.theme.primary};
-      background-color: ${(props) => props.theme.grayLv1};
+      border: 2px solid var(--primary-color);
+      background-color: var(--gray-lv1-color);
     `}
 `
 

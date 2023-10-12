@@ -3,14 +3,23 @@ import reset from 'styled-reset'
 
 const GlobalStyles = createGlobalStyle`
     :root {
-        --main-color: #2E6FF2;
-        --button-hover-color: #6296FF;
-        --font-color: #121314;
-        --gray-color: #47494D;
-        --lightgray-color: #8D9299;
-        --border-color: #D9DBE0;
-        --bg-color: #FFFFFF;
-        --hover-color: #F3F5FA
+        --primary-color: ${(props) => props.theme.primaryColor};
+        --secondary-color: ${(props) => props.theme.secondaryColor};
+        --background-color: ${(props) => props.theme.backgroundColor};
+        --surface-color: ${(props) => props.theme.surfaceColor};
+        --gray-lv1-color: ${(props) => props.theme.grayLv1Color};
+        --gray-lv2-color: ${(props) => props.theme.grayLv2Color};
+        --gray-lv3-color: ${(props) => props.theme.grayLv3Color};
+        --gray-lv4-color: ${(props) => props.theme.grayLv4Color};
+
+        --code-purple: ${(props) => props.theme.codePurple};
+        --code-pink: ${(props) => props.theme.codePink};
+        --code-blue: ${(props) => props.theme.codeBlue};
+        --code-green: ${(props) => props.theme.codeGreen};
+        --code-orange: ${(props) => props.theme.codeOrange};
+        
+        --shadow: ${(props) => props.theme.shadow};
+
     }
     ${reset}
 
@@ -47,33 +56,33 @@ const GlobalStyles = createGlobalStyle`
     }
 
     a 
-    {color: ${(props) => props.theme.surface}}
+    {color: var(--surface-color);}
 
     input, textarea {
-        color: ${(props) => props.theme.surface};
-        border: 1px solid ${(props) => props.theme.grayLv2};
-        background-color: ${(props) => props.theme.background};
+        color: var(--surface-color);
+        border: 1px solid var(--gray-lv2-color);
+        background-color: var(--background-color);
     }
 
     input::placeholder,
     textarea::placeholder{
-        color: ${(props) => props.theme.grayLv3};
+        color: var(--gray-lv3-color);
     }
 
     input:focus,input:active,
     textarea:focus, textarea:active{
-        outline: 2px solid ${(props) => props.theme.primary};
+        outline: 2px solid var(--primary-color);
     }
 
 
     .iconLv1 {
-        background-color: ${(props) => props.theme.grayLv4}
+        background-color: var(--gray-lv4-color)
     }
     .iconLv2 {
-        background-color: ${(props) => props.theme.grayLv3}
+        background-color: var(--gray-lv3-color)
     }
     .iconLv3 {
-        background-color: ${(props) => props.theme.grayLv2}
+        background-color: var(--gray-lv2-color)
     }
 `
 

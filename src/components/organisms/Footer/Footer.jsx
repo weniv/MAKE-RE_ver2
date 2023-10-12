@@ -57,7 +57,7 @@ export default function Footer() {
 }
 
 const FooterCont = styled.footer`
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background-color);
 `
 
 const Wrap = styled.div`
@@ -75,7 +75,7 @@ const ItemCont = styled.ul`
 `
 
 const Copyright = styled.small`
-  color: ${(props) => props.theme.grayLv3};
+  color: var(--gray-lv3-color);
   font-size: 12px;
   position: absolute;
   right: 0;

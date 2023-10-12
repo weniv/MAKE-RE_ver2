@@ -8,6 +8,7 @@ export default function ProfilePreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
+  console.log('mainColor', mainColor)
   const commitUrl = `https://ghchart.rshah.org/${
     mainColor.split('#')[1]
   }/${localStorage.getItem('userGithubId')}`
@@ -95,7 +96,7 @@ const ProfileBox = styled.div`
   }
 
   span strong {
-    color: ${(props) => props.theme.surface};
+    color: var(--surface-color);
     font-size: 24px;
     font-weight: 700;
     padding-right: 12px;

@@ -87,7 +87,7 @@ const ExpItem = styled.li`
 `
 
 const Period = styled.div`
-  color: ${(props) => props.theme.surface};
+  color: var(--surface-color);
   display: flex;
   margin: 25px 0 0;
   & span {
