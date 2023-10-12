@@ -48,7 +48,7 @@ export default function Certificate() {
           <Header>
             <WriteTitle
               title="자격증"
-              description="대략 본인의 자격증을 입력해달라는 내용의 문구"
+              description="보유한 자격증이나 인증서를 나열하고, 언제 획득했으며 어떤 의미가 있는지 설명해 주세요."
             />
             <MainBtn onClick={addCert}>자격증 추가하기</MainBtn>
           </Header>

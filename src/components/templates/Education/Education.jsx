@@ -49,7 +49,7 @@ export default function Education() {
           <Header>
             <WriteTitle
               title="교육"
-              description="대략 본인의 교육을 입력해달라는 내용의 문구"
+              description="학력 및 교육 배경을 소개하고, 학교, 전공, 학위, 졸업 연도 등에 대한 정보를 공유해 주세요."
             />
             <MainBtn onClick={addEdu}>교육 추가하기</MainBtn>
           </Header>

@@ -47,7 +47,7 @@ export default function Url() {
           <Header>
             <WriteTitle
               title="추가 URL"
-              description="대략 본인의 추가 URL을 입력해달라는 내용의 문구"
+              description="LinkedIn 프로필, 포트폴리오, 또는 다른 온라인 자료가 있다면 링크를 제공해 주세요."
             />
             <MainBtn onClick={addUrl}>URL 추가하기</MainBtn>
           </Header>
