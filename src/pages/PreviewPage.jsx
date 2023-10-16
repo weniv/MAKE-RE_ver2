@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -10,15 +10,40 @@ import EducationPreview from '../components/templates/Education/EducationPreview
 import UrlPreview from '../components/templates/Url/UrlPreview'
 import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
+import { ResumeContext } from '../context/ResumeContext'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const { navList } = useContext(ResumeContext)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
   }
+
   const [data, setData] = useState(getlocalData)
+
+  const components = {
+    프로필: ProfilePreview,
+    자기소개서: IntroPreview,
+    커리어: CareerPreview,
+    프로젝트: ProjectPreview,
+    경험: ExperiencePreview,
+    자격증: CertificatePreview,
+    교육: EducationPreview,
+    '추가 URL': UrlPreview,
+  }
+
+  const CurrentComponent = navList.map((el, index) => {
+    const Component = components[el.title]
+    return (
+      <div key={index}>
+        <Component />
+      </div>
+    )
+  })
+
+  // console.log('list', list)
 
   return (
     <>
@@ -27,14 +52,15 @@ export default function PreviewPage() {
         <Cont>
           <Main>
             <Layout>
-              <ProfilePreview />
+              {CurrentComponent}
+              {/* <ProfilePreview />
               <IntroPreview />
               <CareerPreview />
               <ProjectPreview />
               <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />
-              <UrlPreview />
+              <UrlPreview /> */}
             </Layout>
           </Main>
           <Aside type="preview" />
