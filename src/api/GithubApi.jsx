@@ -8,16 +8,19 @@ import ColorContext from '../context/ColorContext'
 import ThemeContext from '../context/ThemeContext'
 import AddImgIcon from '../assets/img-icon.svg'
 import AddImgIconDark from '../assets/img-icon-dark.svg'
+import { ResumeContext } from '../context/ResumeContext'
 
 export const GithubContext = React.createContext()
 
 export default function GithubApi({ children }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const { themeMode } = useContext(ThemeContext)
   const imgIcon = themeMode === 'light' ? AddImgIcon : AddImgIconDark
 
   const [queryString, setQueryString] = useState(window.location.search)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
+  const [githubID, setGithubID] = useState(resumeData.github[0])
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
   const [chartData, setChartData] = useState({
@@ -235,12 +238,12 @@ export default function GithubApi({ children }) {
     setColorCode(mainColor)
   }, [mainColor])
 
-  useEffect(() => {
-    loadCommitImg()
-  }, [colorCode])
+  // useEffect(() => {
+  //   loadCommitImg()
+  // }, [colorCode])
 
   // 깃허브 잔디 이미지 불러오기
-  const [commitSrc, setCommitSrc] = useState('')
+  const [commitSrc, setCommitSrc] = useState(resumeData.github[1])
   const loadCommitImg = async () => {
     let src = ''
 
@@ -254,14 +257,40 @@ export default function GithubApi({ children }) {
     setCommitSrc(src)
   }
 
+  const loadCommitImgWithID = (e) => {
+    e.preventDefault()
+
+    if (githubID) {
+      const commitImg = `https://ghchart.rshah.org/${
+        colorCode.split('#')[1]
+      }/${githubID}`
+
+      setCommitSrc(commitImg)
+      setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      console.log(commitSrc)
+    }
+  }
+
   return (
     <>
       <GitHubCont>
-        <form onSubmit={handleSubmit}>
-          <MainBtn type="preview" onClick={loadCommitImg}>
+        {/* <GithubForm onSubmit={handleSubmit}> */}
+        <GithubForm>
+          <div>
+            <label htmlFor="githubId">GitHub ID</label>
+            <input
+              id="githubId"
+              type="text"
+              value={githubID}
+              onChange={(e) => {
+                setGithubID(e.target.value)
+              }}
+            />
+          </div>
+          <MainBtn type="preview" onClick={loadCommitImgWithID}>
             내 잔디 불러오기
           </MainBtn>
-        </form>
+        </GithubForm>
       </GitHubCont>
 
       <Label>Contributions</Label>
@@ -362,6 +391,32 @@ const GitHubCont = styled(FlexBox)`
 
   button {
     align-self: flex-end;
+  }
+`
+
+const GithubForm = styled.form`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+
+  div {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+
+    label {
+      color: var(--gray-lv4-color);
+      font-size: 12px;
+    }
+
+    input {
+      width: 260px;
+      height: 42px;
+      padding: 11px 0 11px;
+      padding-left: 16px;
+      border-radius: 10px;
+    }
   }
 `
 
