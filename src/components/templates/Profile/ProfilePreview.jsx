@@ -8,10 +8,7 @@ export default function ProfilePreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
-  console.log('mainColor', mainColor)
-  const commitUrl = `https://ghchart.rshah.org/${
-    mainColor.split('#')[1]
-  }/${localStorage.getItem('userGithubId')}`
+  const commitUrl = data.github[1]
 
   return (
     <>
