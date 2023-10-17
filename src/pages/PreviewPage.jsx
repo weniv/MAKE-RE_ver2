@@ -11,6 +11,7 @@ import UrlPreview from '../components/templates/Url/UrlPreview'
 import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
 import { ResumeContext } from '../context/ResumeContext'
+import Footer from '../components/organisms/Footer/Footer'
 
 export const LocalContext = createContext(null)
 
@@ -66,6 +67,7 @@ export default function PreviewPage() {
           <Aside type="preview" />
         </Cont>
       </LocalContext.Provider>
+      <Footer />
     </>
   )
 }
