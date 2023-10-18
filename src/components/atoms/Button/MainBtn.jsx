@@ -1,17 +1,28 @@
+import { useContext } from 'react'
 import styled, { css } from 'styled-components'
+import PageTypeContext from '../../../context/PageContext'
+import ColorContext from '../../../context/ColorContext'
 import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 
 // 미리보기, PDF 내보내기 버튼인 경우 162px로 고정임으로 type="preview"를 props로 내려보내 주어 너비 값 고정시키기
 // url, 경력, 프로젝트 추가 버튼인 경우 type설정 x
 export default function MainBtn({ onClick, children, type }) {
+  const { mainColor } = useContext(ColorContext)
+  const { pageType } = useContext(PageTypeContext)
+
   return (
     <>
       {type ? (
-        <MainButton onClick={onClick} type={type}>
+        <MainButton
+          mainColor={mainColor}
+          pageType={pageType}
+          onClick={onClick}
+          type={type}
+        >
           {children}
         </MainButton>
       ) : (
-        <MainButton onClick={onClick}>
+        <MainButton mainColor={mainColor} pageType={pageType} onClick={onClick}>
           <PlusIcon width="16px" height="16px" />
           {children}
         </MainButton>
@@ -27,7 +38,8 @@ const MainButton = styled.button`
       width: 162px;
     `}
   height: 42px;
-  background-color: var(--primary-color);
+  background-color: ${(props) =>
+    props.pageType === 'write' ? 'var(--primary-color)' : props.mainColor};
   border-radius: 10px;
   padding: 13px 20px;
   color: #fff;
@@ -35,9 +47,9 @@ const MainButton = styled.button`
   display: flex;
   justify-content: center;
   gap: 10px;
-  transition: background-color 0.1s ease-in;
+  transition: opacity 0.1s ease-in;
 
   &:hover {
-    background-color: var(--secondary-color);
+    opacity: 0.9;
   }
 `

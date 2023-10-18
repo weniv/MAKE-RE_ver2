@@ -1,14 +1,11 @@
 import { useContext, useEffect, useState, useRef } from 'react'
-import styled, { css } from 'styled-components'
 import { BlockPicker } from 'react-color'
+import styled, { css } from 'styled-components'
 import ColorPalette from '../../atoms/Nav/ColorPalette'
 import ColorContext from '../../../context/ColorContext'
-import ThemeContext from '../../../context/ThemeContext'
-import { lightTheme, darkTheme } from '../../../theme/theme'
 
 export default function ColorPicker() {
   const { mainColor, updateMainColor } = useContext(ColorContext)
-  const { themeMode } = useContext(ThemeContext)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -40,35 +37,23 @@ export default function ColorPicker() {
       <Flexbox>
         <ColorPickerCont>
           <ColorPalette
-            // color="#2E6FF2"
-            // color={
-            //   themeMode === 'light'
-            //     ? lightTheme.codePurple
-            //     : darkTheme.codePurple
-            // }
-            color={(themeMode === 'light' ? lightTheme : darkTheme).codePurple}
+            color="var(--code-purple)"
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            // color="#5F3AF2"
-            color={(themeMode === 'light' ? lightTheme : darkTheme).codePink}
+            color="var(--code-pink)"
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            // color="#F2785C"
-            color={
-              (themeMode === 'light' ? lightTheme : darkTheme).primaryColor
-            }
+            color="var(--primary-color)"
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            color={(themeMode === 'light' ? lightTheme : darkTheme).codeGreen}
+            color="var(--code-green)"
             setColor={handleChangeComplete}
-            setPickerOpen={setIsOpen}
           ></ColorPalette>
           <ColorPalette
-            // color="#0FA650"
-            color={(themeMode === 'light' ? lightTheme : darkTheme).codeOrange}
+            color="var(--code-orange)"
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPickerBtn
