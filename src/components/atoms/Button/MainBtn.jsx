@@ -25,19 +25,19 @@ const MainButton = styled.button`
     props.type === 'preview' &&
     css`
       width: 162px;
-      background-color: var(--main-color);
     `}
   height: 42px;
-  background-color: var(--main-color);
+  background-color: var(--primary-color);
   border-radius: 10px;
   padding: 13px 20px;
-  color: var(--bg-color);
+  color: #fff;
   line-height: 16px;
   display: flex;
   justify-content: center;
   gap: 10px;
+  transition: background-color 0.1s ease-in;
 
   &:hover {
-    opacity: 0.7;
+    background-color: var(--secondary-color);
   }
 `

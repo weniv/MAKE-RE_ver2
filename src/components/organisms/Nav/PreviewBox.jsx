@@ -14,7 +14,8 @@ export default function PreviewBox({ type, ...props }) {
     console.log('데이터 저장 완료 - ⭐')
   }
 
-  const movePreview = () => {
+  const movePreview = async () => {
+    await localStorage.setItem('resumeData', JSON.stringify(resumeData))
     navigate('/MAKE-RE_ver2/preview')
   }
 
@@ -51,8 +52,8 @@ export default function PreviewBox({ type, ...props }) {
 const Cont = styled.div`
   padding: 14px;
   border-radius: 16px;
-  background-color: var(--bg-color);
   display: inline-flex;
   gap: 10px;
-  box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow);
+  background-color: var(--background-color);
 `

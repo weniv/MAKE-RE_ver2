@@ -15,7 +15,7 @@ const Cont = styled.div`
   justify-content: center;
   width: 42px;
   height: 42px;
-  background-color: var(--main-color);
+  background-color: var(--primary-color);
   border-radius: 10px;
   margin-bottom: 12px;
   cursor: pointer;

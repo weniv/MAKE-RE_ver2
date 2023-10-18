@@ -59,7 +59,7 @@ export default function Project() {
             <WriteTitle
               title={'프로젝트'}
               description={
-                '대략 본인의 프로젝트 정보를 입력해달라는 내용의 문구'
+                '참여한 프로젝트를 소개하고, 본인의 역할과 어떤 결과를 달성했는지 설명해 주세요.'
               }
             />
             <MainBtn onClick={addProject}>프로젝트 추가하기</MainBtn>

@@ -1,13 +1,13 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useContext, useState, useRef, useEffect } from 'react'
-import { remoteList } from '../../../data/dummy'
+import { useContext, useState } from 'react'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function NavBar({ type }) {
   const [isFill, setIsFill] = useState(false)
-  const [list, setList] = useState(remoteList)
+  const { navList, setNavList } = useContext(ResumeContext)
 
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
 
@@ -20,9 +20,9 @@ export default function NavBar({ type }) {
   }
 
   return (
-    <Dnd state={list} setState={setList}>
+    <Dnd state={navList} setState={setNavList}>
       <Nav>
-        {list.map((item, idx) => {
+        {navList.map((item, idx) => {
           return (
             <NavList
               clickIdx={currentSection.id}
@@ -48,7 +48,7 @@ const Nav = styled.nav`
   flex-direction: column;
   gap: 8px;
   padding: 20px;
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   border-radius: 16px;
   box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
 `

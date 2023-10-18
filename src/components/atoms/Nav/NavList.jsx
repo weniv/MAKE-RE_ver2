@@ -5,6 +5,7 @@ import { ReactComponent as CheckFillIcon } from '../../../assets/icon-Check-fill
 import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 import ColorContext from '../../../context/ColorContext'
 import { dndContext } from '../../../utils/dnd'
+import ColorIcon from '../ColorIcon/ColorIcon'
 
 export default function NavList({
   clickIdx,
@@ -33,16 +34,23 @@ export default function NavList({
   }, [clickIdx])
 
   return (
-    <Cont key={id} isFill={isFill} clicked={clicked} onClick={onClick}>
+    <Cont key={id} isFill={true} clicked={clicked} onClick={onClick}>
       <>
         {isFill ? (
           <CheckFillIcon fill={mainColor} alt="입력 완료" />
         ) : (
-          <img src={checkIcon} alt="입력 미완료" />
+          // <ColorIcon iconPath={CheckFillIcon} type="nav" />
+          <ColorIcon type="iconLv3" iconPath={checkIcon} />
         )}
         <NavText>{listName}</NavText>
         <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
-          <img src={hamburgerIcon} />
+          <ColorIcon
+            type="iconLv3"
+            iconPath={hamburgerIcon}
+            width="16px"
+            height="16px"
+          />
+          {/* <img src={hamburgerIcon} /> */}
         </DragBtn>
       </>
       {/* {type === 'write' ? (
@@ -77,8 +85,8 @@ const Cont = styled.div`
   display: flex;
   width: 240px;
   height: 48px;
-  background-color: var(--bg-color);
-  color: var(--font-color);
+  color: var(--surface-color);
+  background-color: var(--background-color);
   font-size: 14px;
   font-weight: 500;
   border-radius: 10px;
@@ -88,14 +96,14 @@ const Cont = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: var(--hover-color);
+    background-color: var(--gray-lv1-color);
   }
 
   ${(props) =>
     props.clicked &&
     css`
-      border: 2px solid var(--main-color);
-      background-color: var(--hover-color);
+      border: 2px solid var(--primary-color);
+      background-color: var(--gray-lv1-color);
     `}
 `
 

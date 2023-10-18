@@ -137,7 +137,7 @@ const ProjectWrap = styled.div`
 const Title = styled.p`
   font-size: 1rem;
   font-weight: bold;
-  color: var(--font-color);
+  color: var(--surface-color);
   white-space: nowrap;
 
   span {
@@ -150,7 +150,7 @@ const Badge = styled.li`
   height: 22px;
   display: inline-flex;
   background-color: #4f4f4f;
-  color: var(--bg-color);
+  color: var(--background-color);
   border-radius: 100px;
   padding: 5px 11px;
   align-items: center;

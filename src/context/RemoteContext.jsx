@@ -14,7 +14,6 @@ export const RemoteProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('section', JSON.stringify(currentSection))
-    console.log('set', currentSection)
   }, [currentSection])
 
   return (

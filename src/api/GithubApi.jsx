@@ -5,13 +5,22 @@ import axios from 'axios'
 import { MainBtn } from '../components/atoms/Button'
 import DoughnutChart from './DoughnutChart'
 import ColorContext from '../context/ColorContext'
+import ThemeContext from '../context/ThemeContext'
+import AddImgIcon from '../assets/img-icon.svg'
+import AddImgIconDark from '../assets/img-icon-dark.svg'
+import { ResumeContext } from '../context/ResumeContext'
 
 export const GithubContext = React.createContext()
 
 export default function GithubApi({ children }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const { themeMode } = useContext(ThemeContext)
+  const imgIcon = themeMode === 'light' ? AddImgIcon : AddImgIconDark
+
   const [queryString, setQueryString] = useState(window.location.search)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
+  const [githubID, setGithubID] = useState(resumeData.github[0])
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
   const [chartData, setChartData] = useState({
@@ -229,18 +238,17 @@ export default function GithubApi({ children }) {
     setColorCode(mainColor)
   }, [mainColor])
 
-  useEffect(() => {
-    loadCommitImg()
-  }, [colorCode])
+  // useEffect(() => {
+  //   loadCommitImg()
+  // }, [colorCode])
 
   // 깃허브 잔디 이미지 불러오기
-  const [commitSrc, setCommitSrc] = useState('')
+  const [commitSrc, setCommitSrc] = useState(resumeData.github[1])
   const loadCommitImg = async () => {
     let src = ''
 
     const userId = localStorage.getItem('userGithubId')
 
-    
     if (userId) {
       src =
         'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
@@ -249,18 +257,50 @@ export default function GithubApi({ children }) {
     setCommitSrc(src)
   }
 
+  const loadCommitImgWithID = (e) => {
+    e.preventDefault()
+
+    if (githubID) {
+      const commitImg = `https://ghchart.rshah.org/${
+        colorCode.split('#')[1]
+      }/${githubID}`
+
+      setCommitSrc(commitImg)
+      setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      console.log(commitSrc)
+    }
+  }
+
   return (
     <>
       <GitHubCont>
-        <form onSubmit={handleSubmit}>
-          <MainBtn type="preview" onClick={loadCommitImg}>
+        {/* <GithubForm onSubmit={handleSubmit}> */}
+        <GithubForm>
+          <div>
+            <label htmlFor="githubId">GitHub ID</label>
+            <input
+              id="githubId"
+              type="text"
+              value={githubID}
+              onChange={(e) => {
+                setGithubID(e.target.value)
+              }}
+            />
+          </div>
+          <MainBtn type="preview" onClick={loadCommitImgWithID}>
             내 잔디 불러오기
           </MainBtn>
-        </form>
+        </GithubForm>
       </GitHubCont>
 
       <Label>Contributions</Label>
-      <CommitBox>{commitSrc && <CommitImg src={commitSrc} />}</CommitBox>
+      <CommitBox>
+        {commitSrc ? (
+          <CommitImg src={commitSrc} />
+        ) : (
+          <img src={imgIcon} alt="" />
+        )}
+      </CommitBox>
 
       {userData && userName ? (
         <Cont>
@@ -310,7 +350,7 @@ export default function GithubApi({ children }) {
 }
 
 const Label = styled.label`
-  color: var(--gray-color);
+  color: var(--gray-lv4-color);
   font-size: 12px;
   display: block;
   margin-bottom: 8px;
@@ -354,13 +394,40 @@ const GitHubCont = styled(FlexBox)`
   }
 `
 
+const GithubForm = styled.form`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+
+  div {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+
+    label {
+      color: var(--gray-lv4-color);
+      font-size: 12px;
+    }
+
+    input {
+      width: 260px;
+      height: 42px;
+      padding: 11px 0 11px;
+      padding-left: 16px;
+      border-radius: 10px;
+    }
+  }
+`
+
 const CommitBox = styled.div`
   height: 160px;
   border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--hover-color);
+  border: 1px solid var(--gray-lv2-color);
+  background-color: var(--gray-lv1-color);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 10px;
 `
 

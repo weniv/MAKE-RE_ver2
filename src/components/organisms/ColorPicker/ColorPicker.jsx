@@ -3,9 +3,12 @@ import styled, { css } from 'styled-components'
 import { BlockPicker } from 'react-color'
 import ColorPalette from '../../atoms/Nav/ColorPalette'
 import ColorContext from '../../../context/ColorContext'
+import ThemeContext from '../../../context/ThemeContext'
+import { lightTheme, darkTheme } from '../../../theme/theme'
 
 export default function ColorPicker() {
   const { mainColor, updateMainColor } = useContext(ColorContext)
+  const { themeMode } = useContext(ThemeContext)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -37,24 +40,35 @@ export default function ColorPicker() {
       <Flexbox>
         <ColorPickerCont>
           <ColorPalette
-            color="#2E6FF2"
+            // color="#2E6FF2"
+            // color={
+            //   themeMode === 'light'
+            //     ? lightTheme.codePurple
+            //     : darkTheme.codePurple
+            // }
+            color={(themeMode === 'light' ? lightTheme : darkTheme).codePurple}
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            color="#5F3AF2"
+            // color="#5F3AF2"
+            color={(themeMode === 'light' ? lightTheme : darkTheme).codePink}
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            color="#F2785C"
+            // color="#F2785C"
+            color={
+              (themeMode === 'light' ? lightTheme : darkTheme).primaryColor
+            }
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPalette
-            color="#F2B705"
+            color={(themeMode === 'light' ? lightTheme : darkTheme).codeGreen}
             setColor={handleChangeComplete}
             setPickerOpen={setIsOpen}
           ></ColorPalette>
           <ColorPalette
-            color="#0FA650"
+            // color="#0FA650"
+            color={(themeMode === 'light' ? lightTheme : darkTheme).codeOrange}
             setColor={handleChangeComplete}
           ></ColorPalette>
           <ColorPickerBtn
@@ -89,7 +103,7 @@ const ColorPickerCont = styled.div`
   height: 70px;
   padding: 20px;
   border-radius: 16px;
-  background: var(--bg-color);
+  background-color: var(--background-color);
   box-shadow: 0px 4px 44px 0px rgba(0, 0, 0, 0.04);
 `
 
@@ -119,13 +133,21 @@ const PickBox = styled.div`
   top: 0;
   // NOTE: WritePage > Main의 gap 변경 시 20px 수정 필요
   left: calc(100% + 20px);
-  background-color: #fff;
   border-radius: 16px;
+  background-color: var(--background-color) !important;
+
+  .block-picker {
+    background-color: var(--background-color) !important;
+  }
 
   .block-picker > div:first-child {
     transform: rotate(-90deg) !important;
     top: 30px !important;
     left: -4px !important;
+  }
+
+  .block-picker > div:nth-child(2) {
+    border-radius: 16px 16px 0 0 !important;
   }
 `
 

@@ -50,7 +50,7 @@ export default function Experience() {
           <Header>
             <WriteTitle
               title="경험"
-              description="대략 본인의 경험을 입력해달라는 내용의 문구"
+              description="봉사 활동, 집필 또는 다른 경험을 기술하고 어떤 역량을 발전시키거나 배웠는지 설명해주세요."
             />
             <MainBtn onClick={addExp}>경험 추가하기</MainBtn>
           </Header>

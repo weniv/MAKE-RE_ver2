@@ -44,9 +44,9 @@ const Header = styled.header`
   height: 68px;
   display: flex;
   align-items: center;
-  color: var(--font-color);
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
+  color: var(--surface-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--gray-lv2-color);
   font-size: 16px;
   margin: 12px 0;
   padding: 24px 18px 24px 24px;
@@ -74,6 +74,6 @@ const DeleteBtn = styled.button`
   border-radius: 10px;
 
   &:hover {
-    background-color: var(--hover-color);
+    background-color: var(--gray-lv1-color);
   }
 `

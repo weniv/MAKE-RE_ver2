@@ -61,7 +61,8 @@ const Main = styled.main`
 const Cont = styled.div`
   width: 100vw;
   padding: 60px 0;
-  background-color: var(--hover-color);
+  background-color: var(--gray-lv1-color);
+
   display: flex;
   gap: 20px;
   justify-content: center;

@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useState } from 'react'
+import React, { createContext, useContext, useRef, useState } from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -10,16 +10,42 @@ import EducationPreview from '../components/templates/Education/EducationPreview
 import UrlPreview from '../components/templates/Url/UrlPreview'
 import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
+import { ResumeContext } from '../context/ResumeContext'
+import Footer from '../components/organisms/Footer/Footer'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
   const exportRef = useRef(null)
+  const { navList } = useContext(ResumeContext)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
   }
+
   const [data, setData] = useState(getlocalData)
+
+  const components = {
+    프로필: ProfilePreview,
+    자기소개서: IntroPreview,
+    커리어: CareerPreview,
+    프로젝트: ProjectPreview,
+    경험: ExperiencePreview,
+    자격증: CertificatePreview,
+    교육: EducationPreview,
+    '추가 URL': UrlPreview,
+  }
+
+  const CurrentComponent = navList.map((el, index) => {
+    const Component = components[el.title]
+    return (
+      <div key={index}>
+        <Component />
+      </div>
+    )
+  })
+
+  // console.log('list', list)
 
   return (
     <>
@@ -28,35 +54,38 @@ export default function PreviewPage() {
         <Cont>
           <Main ref={exportRef}>
             <Layout>
-              <ProfilePreview />
+              {CurrentComponent}
+              {/* <ProfilePreview />
               <IntroPreview />
               <CareerPreview />
               <ProjectPreview />
               <ExperiencePreview />
               <CertificatePreview />
               <EducationPreview />
-              <UrlPreview />
+              <UrlPreview /> */}
             </Layout>
           </Main>
           <Aside type="preview" exportRef={exportRef} />
         </Cont>
       </LocalContext.Provider>
+      <Footer />
     </>
   )
 }
 
 const Cont = styled.div`
+  color: var(--surface-color);
   width: 100vw;
   display: flex;
   gap: 20px;
   justify-content: center;
-  padding: 60px 0 120px;
-  background-color: var(--hover-color);
   margin: 0 auto;
+  padding: 60px 0 120px;
+  background-color: var(--gray-lv1-color);
 `
 
 const Main = styled.main`
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   border-radius: 16px;
 
   @page {

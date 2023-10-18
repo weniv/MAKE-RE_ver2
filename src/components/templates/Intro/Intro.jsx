@@ -36,7 +36,7 @@ export default function Intro() {
       <Section>
         <WriteTitle
           title="자기소개서"
-          description="대략 본인의 자기소개서를 입력해달라는 내용의 문구"
+          description="자신의 역량, 성과, 목표 등 이력서로 전달하고 싶은 핵심 메시지를 자유롭게 기술해 주세요."
         />
 
         <>
@@ -60,7 +60,7 @@ const Section = styled.div`
 `
 
 const WordCountWrap = styled.p`
-  color: var(--gray-color);
+  color: var(--gray-lv4-color);
   font-size: 12px;
   margin-top: 8px;
   text-align: right;

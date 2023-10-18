@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import * as styles from './Dropbox-style'
+import ColorIcon from '../ColorIcon/ColorIcon'
+import ThemeContext from '../../../context/ThemeContext'
+import { theme } from '../../../theme/theme'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
 
@@ -15,6 +18,7 @@ export default function DropBox({
   const [selectedData, setSelectedData] = useState(
     type === 'email' ? '직접 입력' : '신입'
   )
+  const { themeMode } = useContext(ThemeContext)
   // const previousData = null
   // const [selectedData, setSelectedData] = useState(
   //   previousData ? previousData : '직접 입력'
@@ -96,7 +100,8 @@ export default function DropBox({
           }}
         >
           {selectedData}
-          <img src={TriangleDown} />
+          <ColorIcon type="iconLv1" iconPath={TriangleDown} />
+          {/* <img src={TriangleDown} /> */}
         </styles.DropBtn>
       ) : (
         <>
@@ -105,9 +110,11 @@ export default function DropBox({
             onClick={() => {
               setIsSelected((isSelected) => !isSelected)
             }}
+            className="open"
           >
             {selectedData}
-            <img src={TriangleUp} />
+            <ColorIcon type="iconLv1" iconPath={TriangleUp} />
+            {/* <img src={TriangleUp} /> */}
           </styles.DropBtn>
           {type === 'email' ? (
             <styles.ListBox width={width}>
