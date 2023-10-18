@@ -35,41 +35,30 @@ export default function NavList({
 
   return (
     <Cont key={id} isFill={true} clicked={clicked} onClick={onClick}>
-      <>
-        {isFill ? (
-          <CheckFillIcon fill={mainColor} alt="입력 완료" />
-        ) : (
-          // <ColorIcon iconPath={CheckFillIcon} type="nav" />
-          <ColorIcon type="iconLv3" iconPath={checkIcon} />
-        )}
-        <NavText>{listName}</NavText>
-        <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
-          <ColorIcon
-            type="iconLv3"
-            iconPath={hamburgerIcon}
-            width="16px"
-            height="16px"
-          />
-          {/* <img src={hamburgerIcon} /> */}
-        </DragBtn>
-      </>
-      {/* {type === 'write' ? (
+      {type === 'preview' ? (
+        <>
+          <NavText onClick={onClick}>{listName}</NavText>
+        </>
+      ) : (
         <>
           {isFill ? (
             <CheckFillIcon fill={mainColor} alt="입력 완료" />
           ) : (
-            <img src={checkIcon} alt="입력 미완료" />
+            // <ColorIcon iconPath={CheckFillIcon} type="nav" />
+            <ColorIcon type="iconLv3" iconPath={checkIcon} />
           )}
           <NavText>{listName}</NavText>
           <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
-            <img src={hamburgerIcon} />
+            <ColorIcon
+              type="iconLv3"
+              iconPath={hamburgerIcon}
+              width="16px"
+              height="16px"
+            />
+            {/* <img src={hamburgerIcon} /> */}
           </DragBtn>
         </>
-      ) : (
-        <>
-          <NavText>{listName}</NavText>
-        </>
-      )} */}
+      )}
     </Cont>
   )
 }
