@@ -44,7 +44,7 @@ export default function PreviewPage() {
   }
 
   useEffect(() => {
-    updateCurrentSection({ id: 1, title: '프로필' })
+    updateCurrentSection({ id: navList[0].id, title: navList[0].title })
   }, [])
 
   const scrollRef = useRef([])
