@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -12,10 +18,12 @@ import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
 import { ResumeContext } from '../context/ResumeContext'
 import Footer from '../components/organisms/Footer/Footer'
+import RemoteContext from '../context/RemoteContext'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
   const { navList } = useContext(ResumeContext)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
@@ -35,16 +43,20 @@ export default function PreviewPage() {
     '추가 URL': UrlPreview,
   }
 
+  useEffect(() => {
+    updateCurrentSection({ id: 1, title: '프로필' })
+  }, [])
+
+  const scrollRef = useRef([])
+
   const CurrentComponent = navList.map((el, index) => {
     const Component = components[el.title]
     return (
       <div key={index}>
-        <Component />
+        <Component scrollRef={scrollRef} />
       </div>
     )
   })
-
-  // console.log('list', list)
 
   return (
     <>
@@ -52,19 +64,9 @@ export default function PreviewPage() {
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
           <Main>
-            <Layout>
-              {CurrentComponent}
-              {/* <ProfilePreview />
-              <IntroPreview />
-              <CareerPreview />
-              <ProjectPreview />
-              <ExperiencePreview />
-              <CertificatePreview />
-              <EducationPreview />
-              <UrlPreview /> */}
-            </Layout>
+            <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside type="preview" />
+          <Aside type="preview" scrollRef={scrollRef} />
         </Cont>
       </LocalContext.Provider>
       <Footer />
