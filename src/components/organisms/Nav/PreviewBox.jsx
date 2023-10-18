@@ -13,7 +13,8 @@ export default function PreviewBox({ type }) {
     console.log('데이터 저장 완료 - ⭐')
   }
 
-  const movePreview = () => {
+  const movePreview = async () => {
+    await localStorage.setItem('resumeData', JSON.stringify(resumeData))
     navigate('/MAKE-RE_ver2/preview')
   }
 
