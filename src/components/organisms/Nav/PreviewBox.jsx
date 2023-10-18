@@ -1,11 +1,13 @@
 import { useContext } from 'react'
-import { styled } from 'styled-components'
-import { MainBtn, SaveBtn } from '../../atoms/Button'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { useNavigate } from 'react-router-dom'
+import { styled } from 'styled-components'
+import { ResumeContext } from '../../../context/ResumeContext'
+import PageTypeContext from '../../../context/PageContext'
+import { MainBtn, SaveBtn } from '../../atoms/Button'
 
 export default function PreviewBox({ type }) {
   const { resumeData } = useContext(ResumeContext)
+  const { togglePageType } = useContext(PageTypeContext)
   const navigate = useNavigate()
 
   const saveLocalstorage = () => {
@@ -15,10 +17,12 @@ export default function PreviewBox({ type }) {
 
   const movePreview = () => {
     navigate('/MAKE-RE_ver2/preview')
+    togglePageType()
   }
 
   const moveHome = () => {
     navigate('/MAKE-RE_ver2/')
+    togglePageType()
   }
 
   return (
