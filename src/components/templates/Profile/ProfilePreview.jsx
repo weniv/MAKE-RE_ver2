@@ -8,17 +8,17 @@ export default function ProfilePreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
-  console.log('mainColor', mainColor)
-  const commitUrl = `https://ghchart.rshah.org/${
-    mainColor.split('#')[1]
-  }/${localStorage.getItem('userGithubId')}`
+  const commitUrl = data.github[1]
 
   return (
     <>
       <ProfileSection>
-        <ProfileImg mainColor={mainColor}>
-          <img src={profileData?.profileImg} alt="" />
-        </ProfileImg>
+        {profileData?.profileImg && (
+          <ProfileImg mainColor={mainColor}>
+            <img src={profileData?.profileImg} alt="" />
+          </ProfileImg>
+        )}
+
         <ProfileBox mainColor={mainColor}>
           <span>
             <strong>{profileData?.name}</strong>
@@ -26,21 +26,30 @@ export default function ProfilePreview() {
           </span>
           <DataList>
             {/* 전화번호 */}
-            <PreviewProfileItem
-              title="전화번호"
-              content={profileData?.phoneNumber}
-            ></PreviewProfileItem>
+            {profileData?.phoneNumber && (
+              <PreviewProfileItem
+                title="전화번호"
+                content={profileData?.phoneNumber}
+              ></PreviewProfileItem>
+            )}
+
             {/* 이메일 */}
-            <PreviewProfileItem
-              title="이메일"
-              content={profileData?.fullEmail}
-            ></PreviewProfileItem>
+            {profileData?.fullEmail !== '@' && (
+              <PreviewProfileItem
+                title="이메일"
+                content={profileData?.fullEmail}
+              ></PreviewProfileItem>
+            )}
+
             {/* 기술 블로그 */}
-            <PreviewProfileItem
-              title="기술 블로그"
-              type="link"
-              content={profileData?.blog}
-            ></PreviewProfileItem>
+            {profileData?.blog && (
+              <PreviewProfileItem
+                title="기술 블로그"
+                type="link"
+                content={profileData?.blog}
+              ></PreviewProfileItem>
+            )}
+
             {/* 경력사항 */}
             <PreviewProfileItem
               title="경력 사항"
@@ -50,11 +59,13 @@ export default function ProfilePreview() {
                   : '신입'
               }
             ></PreviewProfileItem>
-            <img
-              src={commitUrl}
-              className="commit"
-              alt="깃허브 커밋기록 이미지"
-            />
+            {commitUrl && (
+              <img
+                src={commitUrl}
+                className="commit"
+                alt="깃허브 커밋기록 이미지"
+              />
+            )}
           </DataList>
         </ProfileBox>
       </ProfileSection>
@@ -84,6 +95,8 @@ const ProfileImg = styled.div`
 `
 
 const ProfileBox = styled.div`
+  width: 100%;
+
   span {
     display: block;
     margin: 0 0 20px 0;
@@ -109,12 +122,5 @@ const DataList = styled.ul`
   img.commit {
     width: 100%;
     margin-top: 12px;
-  }
-`
-
-const Intro = styled.div`
-  p {
-    word-wrap: break-word;
-    line-height: 20px;
   }
 `

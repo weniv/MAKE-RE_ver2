@@ -32,7 +32,6 @@ export default function Profile() {
   }, [])
 
   useEffect(() => {
-    // console.log('profileData', profileData)
     setResumeData({ ...resumeData, profile: profileData })
   }, [profileData])
 
