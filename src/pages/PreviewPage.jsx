@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useRef, useState } from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -16,6 +16,7 @@ import Footer from '../components/organisms/Footer/Footer'
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const exportRef = useRef(null)
   const { navList } = useContext(ResumeContext)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
@@ -51,7 +52,7 @@ export default function PreviewPage() {
       <Header />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
-          <Main>
+          <Main ref={exportRef}>
             <Layout>
               {CurrentComponent}
               {/* <ProfilePreview />
@@ -64,7 +65,7 @@ export default function PreviewPage() {
               <UrlPreview /> */}
             </Layout>
           </Main>
-          <Aside type="preview" />
+          <Aside type="preview" exportRef={exportRef} />
         </Cont>
       </LocalContext.Provider>
       <Footer />
@@ -86,6 +87,11 @@ const Cont = styled.div`
 const Main = styled.main`
   background-color: var(--background-color);
   border-radius: 16px;
+
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
 `
 
 const Layout = styled.div`
@@ -94,4 +100,8 @@ const Layout = styled.div`
   gap: 40px;
   width: 890px;
   padding: 74px 52px;
+
+  & > * {
+    break-inside: avoid;
+  }
 `

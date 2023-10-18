@@ -3,8 +3,9 @@ import { styled } from 'styled-components'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { useNavigate } from 'react-router-dom'
+import { useReactToPrint } from 'react-to-print'
 
-export default function PreviewBox({ type }) {
+export default function PreviewBox({ type, ...props }) {
   const { resumeData } = useContext(ResumeContext)
   const navigate = useNavigate()
 
@@ -22,6 +23,11 @@ export default function PreviewBox({ type }) {
     navigate('/MAKE-RE_ver2/')
   }
 
+  const exportPDF = useReactToPrint({
+    content: () => props.exportRef.current,
+    documentTitle: `이력서`,
+  })
+
   return (
     <Cont>
       {type === 'write' ? (
@@ -34,7 +40,9 @@ export default function PreviewBox({ type }) {
       ) : (
         <>
           <SaveBtn onClick={moveHome}>돌아가기</SaveBtn>
-          <MainBtn type="preview">PDF로 내보내기</MainBtn>
+          <MainBtn type="preview" onClick={exportPDF}>
+            PDF로 내보내기
+          </MainBtn>
         </>
       )}
     </Cont>
