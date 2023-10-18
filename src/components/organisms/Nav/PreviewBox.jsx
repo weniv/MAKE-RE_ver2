@@ -4,7 +4,6 @@ import { styled } from 'styled-components'
 import { ResumeContext } from '../../../context/ResumeContext'
 import PageTypeContext from '../../../context/PageContext'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
-import { useNavigate } from 'react-router-dom'
 import { useReactToPrint } from 'react-to-print'
 
 export default function PreviewBox({ type, ...props }) {
