@@ -27,7 +27,6 @@ const Icon = styled.div`
   border-radius: 50%;
   background-color: ${(props) =>
     props.pageType === 'write' ? 'var(--primary-color)' : props.color};
-  background-color: ${(props) => props.className && 'inherit'};
   mask-image: url(${(props) => props.iconPath});
   mask-size: 100%;
   mask-repeat: no-repeat;
