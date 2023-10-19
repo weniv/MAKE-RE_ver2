@@ -8,7 +8,7 @@ export default function ProfilePreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
-  const commitUrl = data.github[1]
+  const commitUrl = data.github && data.github[1]
 
   return (
     <>
