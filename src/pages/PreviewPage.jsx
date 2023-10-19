@@ -24,6 +24,7 @@ export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+  const exportRef = useRef(null)
   const { navList } = useContext(ResumeContext)
   const getlocalData = () => {
     const data = localStorage.getItem('resumeData')
@@ -79,11 +80,11 @@ export default function PreviewPage() {
       <Header />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
-          <Main>
+          <Main ref={exportRef}>
             <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside
-            type="preview"
+          <Aside type="preview" 
+            exportRef={exportRef}
             profileRef={profileRef}
             introRef={introRef}
             careerRef={careerRef}
@@ -114,6 +115,11 @@ const Cont = styled.div`
 const Main = styled.main`
   background-color: var(--background-color);
   border-radius: 16px;
+
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
 `
 
 const Layout = styled.div`

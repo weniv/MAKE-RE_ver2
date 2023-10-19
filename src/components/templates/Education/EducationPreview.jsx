@@ -22,7 +22,7 @@ export default function EducationPreview({ educationRef }) {
   return (
     <>
       {hasEducation && (
-        <section ref={educationRef}>
+        <PreviewSection ref={educationRef}>
           <PreviewSubtitle>Education</PreviewSubtitle>
           {educationList.map((edu) => {
             const isInvalid =
@@ -41,8 +41,12 @@ export default function EducationPreview({ educationRef }) {
               />
             )
           })}
-        </section>
+        </PreviewSection>
       )}
     </>
   )
 }
+const PreviewSection = styled.section`
+  page-break-inside: avoid;
+  break-inside: avoid;
+`

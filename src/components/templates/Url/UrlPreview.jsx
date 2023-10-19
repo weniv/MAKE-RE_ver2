@@ -14,8 +14,8 @@ export default function UrlPreview({ urlRef }) {
   return (
     <>
       {!!urlList.length && (
-        <section ref={urlRef}>
-          <PreviewSubtitle>Url</PreviewSubtitle>
+        <PreviewSection ref={urlRef}>
+          <PreviewSubtitle>URL</PreviewSubtitle>
           <UrlListContainer>
             {urlList.map((url) => (
               <li>
@@ -24,7 +24,7 @@ export default function UrlPreview({ urlRef }) {
               </li>
             ))}
           </UrlListContainer>
-        </section>
+        </PreviewSection>
       )}
     </>
   )
@@ -45,4 +45,9 @@ const UrlListContainer = styled.ul`
 const UrlContent = styled.p`
   font-size: 16px;
   font-weight: 700;
+`
+
+const PreviewSection = styled.section`
+  page-break-inside: avoid;
+  break-inside: avoid;
 `

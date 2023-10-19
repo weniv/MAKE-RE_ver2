@@ -12,15 +12,19 @@ export default function IntroPreview({ introRef }) {
   return (
     <>
       {introData && (
-        <section ref={introRef}>
+        <IntroSection ref={introRef}>
           <PreviewSubtitle>Introduction</PreviewSubtitle>
           <IntroCont>{introData}</IntroCont>
-        </section>
+        </IntroSection>
       )}
     </>
   )
 }
 
+const IntroSection = styled.div`
+  page-break-inside: avoid;
+  break-inside: avoid;
+`
 const IntroCont = styled.pre`
   width: 100%;
   font-size: 14px;

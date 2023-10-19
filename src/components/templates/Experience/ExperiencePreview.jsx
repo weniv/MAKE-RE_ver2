@@ -3,6 +3,7 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
+import styled from 'styled-components'
 
 export default function ExperiencePreview({ experienceRef }) {
   const { data } = useContext(LocalContext)
@@ -21,7 +22,7 @@ export default function ExperiencePreview({ experienceRef }) {
   return (
     <>
       {hasExperience && (
-        <section ref={experienceRef}>
+        <PreviewSection ref={experienceRef}>
           <PreviewSubtitle>Experience</PreviewSubtitle>
           {expList.map((exp) => {
             const isInvalid =
@@ -40,8 +41,13 @@ export default function ExperiencePreview({ experienceRef }) {
               />
             )
           })}
-        </section>
+        </PreviewSection>
       )}
     </>
   )
 }
+
+const PreviewSection = styled.section`
+  page-break-inside: avoid;
+  break-inside: avoid;
+`

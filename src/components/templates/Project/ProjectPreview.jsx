@@ -20,7 +20,7 @@ export default function ProjectPreview({ projectRef }) {
           <Project>
             {projectData &&
               projectData.map((data) => (
-                <div>
+                <ProjectItem>
                   <div className="description">
                     <PreviewMonthItem
                       startDate={
@@ -69,7 +69,7 @@ export default function ProjectPreview({ projectRef }) {
                       <PreviewLink link={data.demoLink}></PreviewLink>
                     </div>
                   </LinkWrap>
-                </div>
+                </ProjectItem>
               ))}
           </Project>
         </section>
@@ -102,6 +102,18 @@ const Project = styled.section`
     font-size: 0.875rem;
     white-space: pre-wrap;
     line-height: 1.25rem;
+  }
+
+  & > * {
+    break-inside: avoid;
+  }
+`
+const ProjectItem = styled.div`
+  break-inside: avoid;
+  page-break-inside: avoid;
+  &:first-child {
+    break-before: avoid;
+    page-break-before: avoid;
   }
 `
 
