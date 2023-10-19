@@ -5,7 +5,7 @@ import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
 
-export default function EducationPreview() {
+export default function EducationPreview({ educationRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const eduData = data.education
@@ -22,7 +22,7 @@ export default function EducationPreview() {
   return (
     <>
       {hasEducation && (
-        <section>
+        <section ref={educationRef}>
           <PreviewSubtitle>Education</PreviewSubtitle>
           {educationList.map((edu) => {
             const isInvalid =

@@ -1,11 +1,21 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function NavBar({ type }) {
+export default function NavBar({
+  type,
+  profileRef,
+  introRef,
+  careerRef,
+  projectRef,
+  experienceRef,
+  certificateRef,
+  educationRef,
+  urlRef,
+}) {
   const [isFill, setIsFill] = useState(false)
   const { navList, setNavList } = useContext(ResumeContext)
 
@@ -17,6 +27,45 @@ export default function NavBar({ type }) {
       title: item.title,
     }
     updateCurrentSection(val)
+
+    console.log(item.title)
+    if (type === 'preview') {
+      // 스크롤이동 이벤트 구현
+      switch (item.title) {
+        case '자기소개서':
+          return introRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '커리어':
+          return careerRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '프로젝트':
+          return projectRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '경험':
+          return experienceRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '자격증':
+          return certificateRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '교육':
+          return educationRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        case '추가 URL':
+          return urlRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+        default:
+          return profileRef.current?.scrollIntoView({
+            behavior: 'smooth',
+          })
+      }
+    }
   }
 
   return (

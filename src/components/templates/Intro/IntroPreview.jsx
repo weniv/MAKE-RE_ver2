@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
 
-export default function IntroPreview() {
+export default function IntroPreview({ introRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const introData = data.profile.intro
@@ -12,7 +12,7 @@ export default function IntroPreview() {
   return (
     <>
       {introData && (
-        <section>
+        <section ref={introRef}>
           <PreviewSubtitle>Introduction</PreviewSubtitle>
           <IntroCont>{introData}</IntroCont>
         </section>

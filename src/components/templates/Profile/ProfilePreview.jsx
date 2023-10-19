@@ -4,7 +4,7 @@ import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
 
-export default function ProfilePreview() {
+export default function ProfilePreview({ profileRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
@@ -12,7 +12,7 @@ export default function ProfilePreview() {
 
   return (
     <>
-      <ProfileSection>
+      <ProfileSection ref={profileRef}>
         {profileData?.profileImg && (
           <ProfileImg mainColor={mainColor}>
             <img src={profileData?.profileImg} alt="" />

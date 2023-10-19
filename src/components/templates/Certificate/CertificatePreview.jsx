@@ -4,7 +4,7 @@ import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 
-export default function CertificatePreview() {
+export default function CertificatePreview({ certificateRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const certData = data.certificate
@@ -24,7 +24,7 @@ export default function CertificatePreview() {
   return (
     <>
       {hasCertificates && (
-        <section>
+        <section ref={certificateRef}>
           <PreviewSubtitle>Certificate</PreviewSubtitle>
           {certificates.map((cert) => {
             const isInvalid = !cert.date

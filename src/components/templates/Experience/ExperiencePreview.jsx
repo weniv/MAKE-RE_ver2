@@ -4,7 +4,7 @@ import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 
-export default function ExperiencePreview() {
+export default function ExperiencePreview({ experienceRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const expData = data.experience
@@ -21,7 +21,7 @@ export default function ExperiencePreview() {
   return (
     <>
       {hasExperience && (
-        <section>
+        <section ref={experienceRef}>
           <PreviewSubtitle>Experience</PreviewSubtitle>
           {expList.map((exp) => {
             const isInvalid =

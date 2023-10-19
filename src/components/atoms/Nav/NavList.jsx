@@ -44,7 +44,6 @@ export default function NavList({
           {isFill ? (
             <CheckFillIcon fill={mainColor} alt="입력 완료" />
           ) : (
-            // <ColorIcon iconPath={CheckFillIcon} type="nav" />
             <ColorIcon type="iconLv3" iconPath={checkIcon} />
           )}
           <NavText>{listName}</NavText>
@@ -55,7 +54,6 @@ export default function NavList({
               width="16px"
               height="16px"
             />
-            {/* <img src={hamburgerIcon} /> */}
           </DragBtn>
         </>
       )}

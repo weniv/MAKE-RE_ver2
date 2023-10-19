@@ -5,7 +5,7 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 
-export default function CareerPreview() {
+export default function CareerPreview({ careerRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const careerData = data.career
@@ -13,7 +13,7 @@ export default function CareerPreview() {
   return (
     <>
       {data.career.length > 0 ? (
-        <section>
+        <section ref={careerRef}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap gap="40px">
             {careerData &&

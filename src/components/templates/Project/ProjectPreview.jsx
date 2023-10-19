@@ -7,7 +7,7 @@ import ColorContext from '../../../context/ColorContext'
 import { SkillList } from '../../atoms/SkillList'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 
-export default function ProjectPreview() {
+export default function ProjectPreview({ projectRef }) {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const projectData = data.project
@@ -15,7 +15,7 @@ export default function ProjectPreview() {
   return (
     <>
       {projectData.length > 0 ? (
-        <section>
+        <section ref={projectRef}>
           <PreviewSubtitle>Project</PreviewSubtitle>
           <Project>
             {projectData &&

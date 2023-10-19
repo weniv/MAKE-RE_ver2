@@ -4,7 +4,7 @@ import { PreviewSubtitle } from '../../atoms/Title'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import styled from 'styled-components'
 
-export default function EducationPreview() {
+export default function UrlPreview({ urlRef }) {
   const { data } = useContext(LocalContext)
   const urlData = data.url
   const urlList = urlData.filter(
@@ -14,7 +14,7 @@ export default function EducationPreview() {
   return (
     <>
       {!!urlList.length && (
-        <section>
+        <section ref={urlRef}>
           <PreviewSubtitle>Url</PreviewSubtitle>
           <UrlListContainer>
             {urlList.map((url) => (

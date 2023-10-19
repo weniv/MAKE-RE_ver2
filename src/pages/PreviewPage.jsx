@@ -47,13 +47,29 @@ export default function PreviewPage() {
     updateCurrentSection({ id: navList[0].id, title: navList[0].title })
   }, [])
 
-  const scrollRef = useRef([])
+  const profileRef = useRef(null)
+  const introRef = useRef(null)
+  const careerRef = useRef(null)
+  const projectRef = useRef(null)
+  const experienceRef = useRef(null)
+  const certificateRef = useRef(null)
+  const educationRef = useRef(null)
+  const urlRef = useRef(null)
 
   const CurrentComponent = navList.map((el, index) => {
     const Component = components[el.title]
     return (
       <div key={index}>
-        <Component scrollRef={scrollRef} />
+        <Component
+          profileRef={profileRef}
+          introRef={introRef}
+          careerRef={careerRef}
+          projectRef={projectRef}
+          experienceRef={experienceRef}
+          certificateRef={certificateRef}
+          educationRef={educationRef}
+          urlRef={urlRef}
+        />
       </div>
     )
   })
@@ -66,7 +82,17 @@ export default function PreviewPage() {
           <Main>
             <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside type="preview" scrollRef={scrollRef} />
+          <Aside
+            type="preview"
+            profileRef={profileRef}
+            introRef={introRef}
+            careerRef={careerRef}
+            projectRef={projectRef}
+            experienceRef={experienceRef}
+            certificateRef={certificateRef}
+            educationRef={educationRef}
+            urlRef={urlRef}
+          />
         </Cont>
       </LocalContext.Provider>
       <Footer />
