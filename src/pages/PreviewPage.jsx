@@ -100,8 +100,4 @@ const Layout = styled.div`
   gap: 40px;
   width: 890px;
   padding: 74px 52px;
-
-  & > * {
-    break-inside: avoid;
-  }
 `
