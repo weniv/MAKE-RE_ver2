@@ -3,6 +3,7 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
+import styled from 'styled-components'
 
 export default function CertificatePreview() {
   const { data } = useContext(LocalContext)
@@ -24,7 +25,7 @@ export default function CertificatePreview() {
   return (
     <>
       {hasCertificates && (
-        <section>
+        <PreviewSection>
           <PreviewSubtitle>Certificate</PreviewSubtitle>
           {certificates.map((cert) => {
             const isInvalid = !cert.date
@@ -39,8 +40,13 @@ export default function CertificatePreview() {
               />
             )
           })}
-        </section>
+        </PreviewSection>
       )}
     </>
   )
 }
+
+const PreviewSection = styled.section`
+  page-break-inside: avoid;
+  break-inside: avoid;
+`

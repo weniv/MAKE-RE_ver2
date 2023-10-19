@@ -50,8 +50,11 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  &:not(:first-child) {
-    break-inside: avoid;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  &:first-child {
+    break-before: avoid;
+    page-break-before: avoid;
   }
 `
 const Title = styled.p`

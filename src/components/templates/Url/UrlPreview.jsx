@@ -14,7 +14,7 @@ export default function EducationPreview() {
   return (
     <>
       {!!urlList.length && (
-        <section>
+        <PreviewSection>
           <PreviewSubtitle>Url</PreviewSubtitle>
           <UrlListContainer>
             {urlList.map((url) => (
@@ -24,7 +24,7 @@ export default function EducationPreview() {
               </li>
             ))}
           </UrlListContainer>
-        </section>
+        </PreviewSection>
       )}
     </>
   )
@@ -45,4 +45,9 @@ const UrlListContainer = styled.ul`
 const UrlContent = styled.p`
   font-size: 16px;
   font-weight: 700;
+`
+
+const PreviewSection = styled.section`
+  page-break-inside: avoid;
+  break-inside: avoid;
 `
