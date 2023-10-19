@@ -15,7 +15,7 @@ export default function EducationPreview() {
     <>
       {!!urlList.length && (
         <PreviewSection>
-          <PreviewSubtitle>Url</PreviewSubtitle>
+          <PreviewSubtitle>URL</PreviewSubtitle>
           <UrlListContainer>
             {urlList.map((url) => (
               <li>
