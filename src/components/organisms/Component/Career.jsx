@@ -13,10 +13,10 @@ export default function Career({
   handleDelete,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
-  const [textAreaHeight, setTextAreaHeight] = useState(42)
+  const [textAreaHeight, setTextAreaHeight] = useState('auto')
 
-  // textarea 높이 조절 수정 필요
   const handleResizeTextArea = (height) => {
+    setTextAreaHeight('auto')
     setTextAreaHeight(height)
   }
 
@@ -89,8 +89,8 @@ export default function Career({
           name="works"
           placeholder={'예) 스터디인 Front-End 개발'}
           onChange={(e) => {
-            updateData(e, idx, careerData, setCareerData)
             handleResizeTextArea(e.target.scrollHeight)
+            updateData(e, idx, careerData, setCareerData)
           }}
           inputData={career.works}
         >

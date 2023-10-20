@@ -49,6 +49,7 @@ const Label = styled.label`
 
 const TextArea = styled.textarea`
   width: ${(props) => props.width};
+  min-height: 42px;
   height: ${(props) => props.height};
   font-size: ${(props) => (props.type === 'intro' ? '16px' : '14px')};
   line-height: ${(props) => props.type === 'intro' && '28px'};
