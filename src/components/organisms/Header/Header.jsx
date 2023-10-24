@@ -23,6 +23,7 @@ export default function Header() {
 const HeaderCont = styled.header`
   width: 100vw;
   background-color: var(--gray-lv1-color);
+  position: fixed;
 `
 
 const HeaderLayout = styled.div`
