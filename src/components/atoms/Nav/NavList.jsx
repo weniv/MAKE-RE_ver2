@@ -36,10 +36,10 @@ export default function NavList({
   }, [clickIdx])
 
   return (
-    <Cont 
-      key={id} 
-      isFill={true} 
-      clicked={clicked} 
+    <Cont
+      key={id}
+      isFill={true}
+      clicked={clicked}
       onClick={onClick}
       pageType={pageType}
       color={mainColor}
@@ -49,24 +49,29 @@ export default function NavList({
           <NavText onClick={onClick}>{listName}</NavText>
         </>
       ) : (
-      <>
-        {isFill ? (
-          // NOTE: 다크모드 여부에 따른 primary-color 차이로 아래 컴포넌트 사용 필요
-          // <ColorIcon pageType={pageType} iconPath={CheckFillIcon} />
-          <CheckFillIcon fill={mainColor} alt="입력 완료" />
-        ) : (
-          <ColorIcon type="iconLv3" iconPath={checkIcon} />
-        )}
-        <NavText>{listName}</NavText>
-        <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
-          <ColorIcon
-            type="iconLv3"
-            iconPath={hamburgerIcon}
-            width="16px"
-            height="16px"
-          />
-        </DragBtn>
-      </>
+        <>
+          {isFill ? (
+            <>
+              {/* NOTE: 다크모드 여부에 따른 primary-color 차이로 아래 컴포넌트 사용 필요 */}
+              {/* <ColorIcon pageType={pageType} iconPath={CheckFillIcon} /> */}
+              <CheckFillIcon fill={mainColor} alt="입력 완료" />
+            </>
+          ) : (
+            <>
+              <ColorIcon type="iconLv3" iconPath={checkIcon} />
+            </>
+          )}
+        </>
+      )}
+      <NavText>{listName}</NavText>
+      <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
+        <ColorIcon
+          type="iconLv3"
+          iconPath={hamburgerIcon}
+          width="16px"
+          height="16px"
+        />
+      </DragBtn>
     </Cont>
   )
 }

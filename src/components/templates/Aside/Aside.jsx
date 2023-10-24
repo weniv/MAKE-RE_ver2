@@ -13,7 +13,7 @@ export default function Aside({
   certificateRef,
   educationRef,
   urlRef,
-  , ...props
+  ...props
 }) {
   return (
     <AsideCont>
@@ -28,7 +28,7 @@ export default function Aside({
         certificateRef={certificateRef}
         educationRef={educationRef}
         urlRef={urlRef}
-        {...props} 
+        {...props}
       />
       <PreviewBox type={type} />
     </AsideCont>

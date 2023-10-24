@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
 import { ResumeContext } from '../../../context/ResumeContext'
@@ -21,6 +21,53 @@ export default function NavBar({
 
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
 
+  //-------------------- 스크롤 네비게이션 구현 중 ------------------
+  // const [currentRef, setCurrentRef] = useState(currentSection.id)
+
+  // useEffect(() => {
+  //   setCurrentRef(currentSection.id)
+  //   console.log(currentSection)
+  // }, [currentSection])
+
+  // const option = {}
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver((entry) => {
+  //     if (entry[0].isIntersecting) {
+  //       setCurrentRef(entry[0])
+  //     }
+  //   }, option)
+
+  //   if (profileRef.current) {
+  //     observer.observe(profileRef.current)
+  //     const navData = navList.filter((nav) => nav.title === '프로필')
+  //     console.log(navData[0].id)
+  //   }
+  //   if (introRef.current) {
+  //     observer.observe(introRef.current)
+  //   }
+  //   if (careerRef.current) {
+  //     observer.observe(careerRef.current)
+  //   }
+  //   if (projectRef.current) {
+  //     observer.observe(projectRef.current)
+  //   }
+  //   if (experienceRef.current) {
+  //     observer.observe(experienceRef.current)
+  //   }
+  //   if (certificateRef.current) {
+  //     observer.observe(certificateRef.current)
+  //   }
+  //   if (educationRef.current) {
+  //     observer.observe(educationRef.current)
+  //   }
+  //   if (urlRef.current) {
+  //     observer.observe(urlRef.current)
+  //   }
+
+  //   return () => observer.disconnect()
+  // }, [])
+
   const handleClickList = (item, idx) => {
     const val = {
       id: item.id,
@@ -28,9 +75,7 @@ export default function NavBar({
     }
     updateCurrentSection(val)
 
-    console.log(item.title)
     if (type === 'preview') {
-      // 스크롤이동 이벤트 구현
       switch (item.title) {
         case '자기소개서':
           return introRef.current?.scrollIntoView({
@@ -75,6 +120,7 @@ export default function NavBar({
           return (
             <NavList
               clickIdx={currentSection.id}
+              // clickIdx={currentRef}
               listName={item.title}
               idx={idx}
               key={item.id}

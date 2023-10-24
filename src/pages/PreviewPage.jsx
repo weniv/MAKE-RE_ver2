@@ -83,7 +83,8 @@ export default function PreviewPage() {
           <Main ref={exportRef}>
             <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside type="preview" 
+          <Aside
+            type="preview"
             exportRef={exportRef}
             profileRef={profileRef}
             introRef={introRef}
@@ -100,21 +101,28 @@ export default function PreviewPage() {
     </>
   )
 }
-
 const Cont = styled.div`
   color: var(--surface-color);
   width: 100vw;
   display: flex;
+  align-items: flex-start;
   gap: 20px;
   justify-content: center;
   margin: 0 auto;
-  padding: 60px 0 120px;
+  padding: 130px 0 120px;
   background-color: var(--gray-lv1-color);
+
+  main::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const Main = styled.main`
   background-color: var(--background-color);
   border-radius: 16px;
+  max-height: 1258px;
+  overflow: hidden;
+  overflow-y: auto;
 
   @page {
     size: A4;
