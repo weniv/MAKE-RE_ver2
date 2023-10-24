@@ -268,7 +268,7 @@ export default function Profile() {
         <styles.Line />
         <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
-          <GithubApi />
+          {/* <GithubApi /> */}
         </styles.Section>
       </>
     </Layout>

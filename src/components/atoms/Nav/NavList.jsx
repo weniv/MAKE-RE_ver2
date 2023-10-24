@@ -6,7 +6,6 @@ import hamburgerIcon from '../../../assets/icon-hamburger.svg'
 import ColorContext from '../../../context/ColorContext'
 import { dndContext } from '../../../utils/dnd'
 import ColorIcon from '../ColorIcon/ColorIcon'
-import PageTypeContext from '../../../context/PageContext'
 
 export default function NavList({
   clickIdx,
@@ -17,7 +16,6 @@ export default function NavList({
   onClick,
 }) {
   const { mainColor } = useContext(ColorContext)
-  const { pageType } = useContext(PageTypeContext)
   const [clicked, setClickIdx] = useState(clickIdx === id)
 
   if (useContext(dndContext)) {
@@ -41,7 +39,6 @@ export default function NavList({
       isFill={true}
       clicked={clicked}
       onClick={onClick}
-      pageType={pageType}
       color={mainColor}
     >
       <>
@@ -111,8 +108,7 @@ const Cont = styled.div`
   ${(props) =>
     props.clicked &&
     css`
-      border: 2px solid
-        ${props.pageType === 'write' ? 'var(--primary-color)' : props.color};
+      border: 2px solid var(--primary-color);
       background-color: var(--gray-lv1-color);
     `}
 `

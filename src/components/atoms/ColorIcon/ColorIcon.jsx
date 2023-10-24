@@ -1,16 +1,13 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
-import PageTypeContext from '../../../context/PageContext'
 
 export default function ColorIcon({ type, iconPath, width, height }) {
-  const { pageType } = useContext(PageTypeContext)
   const { mainColor } = useContext(ColorContext)
 
   return (
     <>
       <Icon
-        pageType={pageType}
         color={mainColor}
         iconPath={iconPath}
         width={width}
@@ -25,8 +22,7 @@ const Icon = styled.div`
   width: ${(props) => props.width || '20px'};
   height: ${(props) => props.height || '20px'};
   border-radius: 50%;
-  background-color: ${(props) =>
-    props.pageType === 'write' ? 'var(--primary-color)' : props.color};
+  background-color: ${(props) => props.color || 'var(--primary-color)'};
   background-color: ${(props) => props.className && 'inherit'};
   mask-image: url(${(props) => props.iconPath});
   mask-size: 100%;
@@ -37,6 +33,9 @@ const Icon = styled.div`
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center center;
 
+  &.logo {
+    background-color: var(--primary-color);
+  }
   &.iconLv1 {
     background-color: var(--gray-lv4-color);
   }

@@ -10,7 +10,12 @@ export default function Header() {
       <HeaderLayout>
         <h1>
           <Link to="/MAKE-RE_ver2/">
-            <ColorIcon iconPath={Logo} width="176px" height="46px" />
+            <ColorIcon
+              iconPath={Logo}
+              width="176px"
+              height="46px"
+              type="logo"
+            />
             {/* <img src={Logo} alt="메이커리" /> */}
           </Link>
         </h1>
