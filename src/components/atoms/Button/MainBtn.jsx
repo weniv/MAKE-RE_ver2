@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
-import PageTypeContext from '../../../context/PageContext'
 import ColorContext from '../../../context/ColorContext'
 import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 
@@ -8,21 +7,15 @@ import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 // url, 경력, 프로젝트 추가 버튼인 경우 type설정 x
 export default function MainBtn({ onClick, children, type }) {
   const { mainColor } = useContext(ColorContext)
-  const { pageType } = useContext(PageTypeContext)
 
   return (
     <>
       {type ? (
-        <MainButton
-          mainColor={mainColor}
-          pageType={pageType}
-          onClick={onClick}
-          type={type}
-        >
+        <MainButton mainColor={mainColor} onClick={onClick} type={type}>
           {children}
         </MainButton>
       ) : (
-        <MainButton mainColor={mainColor} pageType={pageType} onClick={onClick}>
+        <MainButton mainColor={mainColor} onClick={onClick}>
           <PlusIcon width="16px" height="16px" />
           {children}
         </MainButton>
@@ -38,8 +31,7 @@ const MainButton = styled.button`
       width: 162px;
     `}
   height: 42px;
-  background-color: ${(props) =>
-    props.pageType === 'write' ? 'var(--primary-color)' : props.mainColor};
+  background-color: var(--primary-color);
   border-radius: 10px;
   padding: 13px 20px;
   color: #fff;

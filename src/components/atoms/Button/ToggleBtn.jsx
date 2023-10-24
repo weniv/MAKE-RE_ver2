@@ -3,21 +3,14 @@ import styled, { css } from 'styled-components'
 import LightIcon from '../../../assets/icon-light-mode.svg'
 import DarkIcon from '../../../assets/icon-dark-mode.svg'
 import ThemeContext from '../../../context/ThemeContext'
-import PageTypeContext from '../../../context/PageContext'
 import ColorContext from '../../../context/ColorContext'
 
 export default function ToggleBtn({ onClick }) {
   const { themeMode, toggleTheme } = useContext(ThemeContext)
   const { mainColor } = useContext(ColorContext)
-  const { pageType } = useContext(PageTypeContext)
 
   return (
-    <BtnCont
-      mainColor={mainColor}
-      pageType={pageType}
-      onClick={toggleTheme}
-      mode={themeMode}
-    >
+    <BtnCont mainColor={mainColor} onClick={toggleTheme} mode={themeMode}>
       <span className="ir">다크모드 온/오프 버튼</span>
       <Circle mode={themeMode} />
     </BtnCont>
@@ -33,8 +26,7 @@ const BtnCont = styled.button`
   border-radius: 40px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) =>
-    props.pageType === 'write' ? 'var(--primary-color)' : props.mainColor};
+  background-color: var(--primary-color);
   position: relative;
   display: flex;
   justify-content: center;
@@ -59,7 +51,6 @@ const Circle = styled.div`
     props.mode === 'light' ? `url(${LightIcon})` : `url(${DarkIcon})`};
 
   background-color: var(--background-color);
-
   background-repeat: no-repeat;
   background-position: center;
 `
