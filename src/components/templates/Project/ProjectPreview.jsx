@@ -158,7 +158,7 @@ const Badge = styled.li`
   height: 22px;
   display: inline-flex;
   background-color: #4f4f4f;
-  color: var(--background-color);
+  color: #ffffff;
   border-radius: 100px;
   padding: 5px 11px;
   align-items: center;
