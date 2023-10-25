@@ -28,7 +28,7 @@ export default function ProjectPreview() {
                       }
                       endDate={
                         data.inProgress
-                          ? '진행중'
+                          ? '진행 중'
                           : data.endDate
                           ? data.endDate
                           : '종료일'

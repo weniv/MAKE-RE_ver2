@@ -10,6 +10,10 @@ export default function CareerPreview() {
   const { mainColor } = useContext(ColorContext)
   const careerData = data.career
 
+  function formatDate(date) {
+    return date.replace('-', '. ') + '.'
+  }
+
   return (
     <>
       {data.career.length > 0 ? (
@@ -22,8 +26,10 @@ export default function CareerPreview() {
                   {data.startDate && (data.endDate || data.inProgress) ? (
                     <PreviewMonthItem
                       type={'career'}
-                      startDate={data.startDate}
-                      endDate={data.inProgress ? '재직중' : data.endDate}
+                      startDate={formatDate(data.startDate)}
+                      endDate={
+                        data.inProgress ? '재직 중' : formatDate(data.endDate)
+                      }
                       color={mainColor}
                       size={'0.75rem'}
                     />
