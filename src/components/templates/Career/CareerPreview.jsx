@@ -11,7 +11,9 @@ export default function CareerPreview() {
   const careerData = data.career
 
   function formatDate(date) {
-    return date.replace('-', '. ') + '.'
+    if (date) {
+      return date.replace('-', '. ') + '.'
+    }
   }
 
   return (
