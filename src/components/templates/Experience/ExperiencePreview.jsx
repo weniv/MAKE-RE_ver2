@@ -27,17 +27,13 @@ export default function ExperiencePreview() {
         <PreviewSection>
           <PreviewSubtitle>Experience</PreviewSubtitle>
           {expList.map((exp) => {
-            const isInvalid =
-              (!exp.startDate && !exp.endDate) ||
-              (!exp.startDate && exp.inProgress)
+            const isInvalid = !(exp.startDate || exp.endDate || exp.inProgress)
 
             return (
               <PreviewMonthItem
                 key={exp.id}
-                startDate={exp.startDate && formatDate(exp.startDate)}
-                endDate={
-                  exp.inProgress ? '' : exp.endDate && formatDate(exp.endDate)
-                }
+                startDate={formatDate(exp.startDate)}
+                endDate={exp.inProgress ? '진행 중' : formatDate(exp.endDate)}
                 title={exp.title}
                 isInvalid={isInvalid}
               />

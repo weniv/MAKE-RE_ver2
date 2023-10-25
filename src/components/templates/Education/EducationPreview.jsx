@@ -27,17 +27,13 @@ export default function EducationPreview() {
         <PreviewSection>
           <PreviewSubtitle>Education</PreviewSubtitle>
           {educationList.map((edu) => {
-            const isInvalid =
-              (!edu.startDate && !edu.endDate) ||
-              (!edu.startDate && edu.inProgress)
+            const isInvalid = !(edu.startDate || edu.endDate || edu.inProgress)
 
             return (
               <PreviewMonthItem
                 key={edu.id}
-                startDate={edu.startDate && formatDate(edu.startDate)}
-                endDate={
-                  edu.inProgress ? '' : edu.endDate && formatDate(edu.endDate)
-                }
+                startDate={formatDate(edu.startDate)}
+                endDate={edu.inProgress ? '진행 중' : formatDate(edu.endDate)}
                 title={edu.title}
                 isInvalid={isInvalid}
               />
