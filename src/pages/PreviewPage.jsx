@@ -38,11 +38,7 @@ export default function PreviewPage() {
 
   const CurrentComponent = navList.map((el, index) => {
     const Component = components[el.title]
-    return (
-      <div key={index}>
-        <Component />
-      </div>
-    )
+    return <Component key={index} />
   })
 
   // console.log('list', list)
