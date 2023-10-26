@@ -18,8 +18,6 @@ export default function Dnd({ children, state, setState }) {
       const newIdx = state.findIndex((data) => data.id === over.id)
       return arrayMove(state, oldIdx, newIdx)
     })
-
-    // window.localStorage.setItem('order', JSON.stringify(state))
   }
 
   const Sort = (id) => {
