@@ -4,20 +4,21 @@ import { styled } from 'styled-components'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { useReactToPrint } from 'react-to-print'
+import { saveData } from '../../../utils/saveData'
 
 export default function PreviewBox({ type, ...props }) {
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
   const saveLocalstorage = () => {
-    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+    saveData('resumeData', JSON.stringify(resumeData))
     console.log('데이터 저장 완료 - ⭐')
   }
 
   const movePreview = () => {
-    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+    saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
-    if (isRequired) {
+    if (isRequired !== false) {
       navigate('/MAKE-RE_ver2/preview')
     }
   }

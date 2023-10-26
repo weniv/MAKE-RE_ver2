@@ -13,6 +13,7 @@ import { Career } from '../components/templates/Career'
 import { Project } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
 import { ResumeContext } from '../context/ResumeContext'
+import { saveData } from '../utils/saveData'
 
 export default function WritePage() {
   const { currentSection } = useContext(RemoteContext)
@@ -31,7 +32,7 @@ export default function WritePage() {
   const CurrentComponent = components[currentSection.title]
 
   useEffect(() => {
-    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+    saveData('resumeData', JSON.stringify(resumeData))
     const data = JSON.parse(localStorage.getItem('resumeData'))
     if (data) {
       setResumeData(data)
