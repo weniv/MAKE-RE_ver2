@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
-export default function SaveBtn({ onClick, children }) {
-  return <SaveButton onClick={onClick}>{children}</SaveButton>
+export default function SaveBtn({ onClick, children, form }) {
+  return (
+    <SaveButton onClick={onClick} form={form}>
+      {children}
+    </SaveButton>
+  )
 }
 
 const SaveButton = styled.button`

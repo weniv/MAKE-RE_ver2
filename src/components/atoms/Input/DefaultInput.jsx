@@ -12,6 +12,7 @@ export default function DefaultInput({
   inputData,
   onChange,
   onKeyDown,
+  required,
 }) {
   return (
     <InputCont>
@@ -27,6 +28,7 @@ export default function DefaultInput({
         onChange={onChange}
         onKeyDown={onKeyDown}
         autoComplete="off"
+        required
       />
     </InputCont>
   )

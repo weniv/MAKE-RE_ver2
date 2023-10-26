@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function Career({
   idx,
@@ -14,6 +15,7 @@ export default function Career({
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
+  const { formRef } = useContext(ResumeContext)
 
   const handleResizeTextArea = (height) => {
     setTextAreaHeight('auto')
@@ -28,19 +30,29 @@ export default function Career({
       handleDelete={handleDelete}
     >
       <Wrap>
-        <DefaultInput
-          id="careerName"
-          type="text"
-          width="738px"
-          name="title"
-          placeholder="예) 위니브(WENIV)"
-          onChange={(e) => {
-            updateData(e, idx, careerData, setCareerData)
-          }}
-          inputData={career.title}
-        >
-          {'회사명'}
-        </DefaultInput>
+        <form id="requiredForm" ref={formRef}>
+          <DefaultInput
+            id="careerName"
+            type="text"
+            width="738px"
+            name="title"
+            placeholder="예) 위니브(WENIV)"
+            onChange={(e) => {
+              updateData(e, idx, careerData, setCareerData)
+            }}
+            inputData={career.title}
+            required
+          >
+            {'회사명'}
+          </DefaultInput>
+          {/* <button
+            onClick={() => {
+              console.log('111', formRef.current.checkValidity())
+            }}
+          >
+            testsdfdsfsdfd
+          </button> */}
+        </form>
         <DateWrap>
           <DateInput
             id="startDate"
@@ -93,6 +105,7 @@ export default function Career({
             updateData(e, idx, careerData, setCareerData)
           }}
           inputData={career.works}
+          lineHeight="21px"
         >
           {'담당 업무'}
         </DefaultTextarea>

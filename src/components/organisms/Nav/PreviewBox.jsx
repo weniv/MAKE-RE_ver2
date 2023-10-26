@@ -6,7 +6,7 @@ import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { useReactToPrint } from 'react-to-print'
 
 export default function PreviewBox({ type, ...props }) {
-  const { resumeData } = useContext(ResumeContext)
+  const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
   const saveLocalstorage = () => {
@@ -14,9 +14,12 @@ export default function PreviewBox({ type, ...props }) {
     console.log('데이터 저장 완료 - ⭐')
   }
 
-  const movePreview = async () => {
-    await localStorage.setItem('resumeData', JSON.stringify(resumeData))
-    navigate('/MAKE-RE_ver2/preview')
+  const movePreview = () => {
+    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+    const isRequired = formRef.current?.checkValidity()
+    if (isRequired) {
+      navigate('/MAKE-RE_ver2/preview')
+    }
   }
 
   const moveHome = () => {
@@ -32,8 +35,10 @@ export default function PreviewBox({ type, ...props }) {
     <Cont>
       {type === 'write' ? (
         <>
-          <SaveBtn onClick={saveLocalstorage}>임시저장</SaveBtn>
-          <MainBtn type="preview" onClick={movePreview}>
+          <SaveBtn onClick={saveLocalstorage} form="requiredForm">
+            임시저장
+          </SaveBtn>
+          <MainBtn type="preview" onClick={movePreview} form="requiredForm">
             미리보기
           </MainBtn>
         </>
