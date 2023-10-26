@@ -45,13 +45,6 @@ export default function Career({
           >
             {'회사명'}
           </DefaultInput>
-          {/* <button
-            onClick={() => {
-              console.log('111', formRef.current.checkValidity())
-            }}
-          >
-            testsdfdsfsdfd
-          </button> */}
         </form>
         <DateWrap>
           <DateInput
