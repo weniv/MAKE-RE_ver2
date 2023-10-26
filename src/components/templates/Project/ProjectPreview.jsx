@@ -38,10 +38,7 @@ export default function ProjectPreview() {
                     <ProjectWrap>
                       <Title>{data.title}</Title>
                       <p className="outline">{data.outline}</p>
-                      <Title>
-                        인원 <span>{data.people}</span>
-                      </Title>
-                      <Title>적용기술</Title>
+                      <p>{data.people}</p>
                       <ul>
                         {data.skills
                           .filter((skill) => skill !== '')
@@ -49,7 +46,6 @@ export default function ProjectPreview() {
                             <Badge className="list">{skill}</Badge>
                           ))}
                       </ul>
-                      <Title>기여 부분</Title>
                       <ul>
                         {data.contributions
                           .filter((cont) => cont !== '')
@@ -98,8 +94,11 @@ const Project = styled.section`
     }
   }
 
-  p.outline {
+  p {
     font-size: 0.875rem;
+  }
+
+  p.outline {
     white-space: pre-wrap;
     line-height: 1.25rem;
   }

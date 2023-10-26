@@ -82,6 +82,7 @@ export default function Project({
             updateData(e, idx, projectData, setProjectData)
           }}
           inputData={project.outline}
+          lineHeight="18px"
         >
           {'프로젝트 설명'}
         </DefaultTextarea>
