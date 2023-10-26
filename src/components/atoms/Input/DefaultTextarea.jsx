@@ -10,6 +10,7 @@ export default function DefaultTextarea({
   type,
   name,
   placeholder,
+  lineHeight,
   inputData,
   onChange,
   onKeyDown,
@@ -28,6 +29,7 @@ export default function DefaultTextarea({
         value={inputData}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        lineHeight={lineHeight}
         rows={1}
       />
     </Cont>
@@ -52,7 +54,7 @@ const TextArea = styled.textarea`
   min-height: 42px;
   height: ${(props) => props.height};
   font-size: ${(props) => (props.type === 'intro' ? '16px' : '14px')};
-  line-height: ${(props) => props.type === 'intro' && '28px'};
+  line-height: ${(props) => props.lineHeight};
   margin-right: ${(props) => props.marginRight};
   padding: ${(props) => (props.type === 'intro' ? '20px' : '11px 16px')};
   border-radius: 10px;
