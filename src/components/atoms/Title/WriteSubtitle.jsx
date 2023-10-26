@@ -16,4 +16,5 @@ const Title = styled.label`
   color: var(--surface-color);
   font-size: 20px;
   margin: 32px 0 24px;
+  font-weight: 700;
 `
