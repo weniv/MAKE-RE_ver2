@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -7,6 +7,7 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function Project({
   idx,
@@ -16,6 +17,7 @@ export default function Project({
   handleDelete,
 }) {
   const [isStill, setIsStill] = useState(project.inProgress)
+  const { formRef } = useContext(ResumeContext)
 
   return (
     <ComponentHeader
@@ -25,18 +27,20 @@ export default function Project({
       handleDelete={handleDelete}
     >
       <Wrap>
-        <DefaultInput
-          type="text"
-          width="738px"
-          name="title"
-          placeholder="프로젝트명을 입력합니다."
-          onChange={(e) => {
-            updateData(e, idx, projectData, setProjectData)
-          }}
-          inputData={project.title}
-        >
-          {'프로젝트명'}
-        </DefaultInput>
+        <form id="requiredForm" ref={formRef}>
+          <DefaultInput
+            type="text"
+            width="738px"
+            name="title"
+            placeholder="프로젝트명을 입력합니다."
+            onChange={(e) => {
+              updateData(e, idx, projectData, setProjectData)
+            }}
+            inputData={project.title}
+          >
+            {'프로젝트명'}
+          </DefaultInput>
+        </form>
         {/* 프로젝트 링크 */}
         <WriteSubtitle subtitle={'프로젝트 링크'} />
         <Cont>
