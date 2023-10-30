@@ -82,11 +82,13 @@ const Cont = styled.div`
   margin: 0 auto;
   padding: 60px 0 120px;
   background-color: var(--gray-lv1-color);
+  min-height: 100vh;
 `
 
 const Main = styled.main`
   background-color: var(--background-color);
   border-radius: 16px;
+  height: fit-content;
 
   @page {
     size: A4;

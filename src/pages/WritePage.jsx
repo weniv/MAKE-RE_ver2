@@ -57,6 +57,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-height: 100vh;
 `
 
 const Cont = styled.div`
