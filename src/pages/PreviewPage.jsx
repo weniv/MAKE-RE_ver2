@@ -45,8 +45,6 @@ export default function PreviewPage() {
     )
   })
 
-  // console.log('list', list)
-
   return (
     <>
       <Header />
