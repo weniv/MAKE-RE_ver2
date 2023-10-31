@@ -62,6 +62,7 @@ const GlobalStyles = createGlobalStyle`
         color: var(--surface-color);
         border: 1px solid var(--gray-lv2-color);
         background-color: var(--background-color);
+        cursor: auto;
     }
 
     input::placeholder,
@@ -72,6 +73,17 @@ const GlobalStyles = createGlobalStyle`
     input:focus,input:active,
     textarea:focus, textarea:active{
         outline: 2px solid var(--primary-color);
+    }
+
+    textarea {
+        &::-webkit-scrollbar {
+            width: 0.6rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(141, 146, 153, 0.5);
+            border-radius: 10px;
+        }
     }
 
 

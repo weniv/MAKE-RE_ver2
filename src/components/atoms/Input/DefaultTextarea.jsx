@@ -67,21 +67,4 @@ const TextArea = styled.textarea`
   resize: none;
   overflow-y: hidden;
   overflow-y: auto;
-
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: var(--gray-lv2-color);
-  }
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: var(--gray-lv3-color);
-  }
 `
