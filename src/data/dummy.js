@@ -15,7 +15,6 @@ export const resumeData = {
   career: [
     {
       id: 1,
-      companyName: '',
       startData: '',
       endData: '',
       inProgress: false,

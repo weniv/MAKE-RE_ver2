@@ -12,7 +12,7 @@ export default function CareerPreview() {
 
   return (
     <>
-      {data.career.length > 0 ? (
+      {careerData.length > 0 && !!careerData[0].title ? (
         <section>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap gap="40px">
