@@ -12,7 +12,6 @@ export default function Career() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [careerData, setCareerData] = useState(resumeData['career'])
   const [activeIdx, setActiveIdx] = useState(0)
-  const [isExpand, setIsExpand] = useState(false)
 
   useEffect(() => {
     setResumeData({
@@ -73,7 +72,6 @@ export default function Career() {
                   setCareerData={setCareerData}
                   activeIdx={activeIdx}
                   setActiveIdx={setActiveIdx}
-                  setIsExpand={setIsExpand}
                   key={idx}
                 />
               ))}

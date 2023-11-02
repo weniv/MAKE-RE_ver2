@@ -14,7 +14,6 @@ export default function Career({
   activeIdx,
   setActiveIdx,
   handleDelete,
-  setIsExpand,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
@@ -38,7 +37,6 @@ export default function Career({
       title={career.title ? career.title : null}
       handleDelete={handleDelete}
       setActiveIdx={setActiveIdx}
-      setIsExpand={setIsExpand}
       isActive={isActive}
       setIsActive={setIsActive}
     >
