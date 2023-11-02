@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/MAKE-RE_ver2/static/js/main.cbf9f263.js",
+    "main.js": "/MAKE-RE_ver2/static/js/main.2d21b13f.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "/MAKE-RE_ver2/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/icon-Url.svg": "/MAKE-RE_ver2/static/media/icon-Url.facffe7998f01ff891c946aa9a6d09bd.svg",
     "static/media/icon-liacat.svg": "/MAKE-RE_ver2/static/media/icon-liacat.64aa8a6daef259ee34965a59a3af709d.svg",
@@ -24,9 +24,9 @@
     "static/media/icon-triangle-up.svg": "/MAKE-RE_ver2/static/media/icon-triangle-up.5ac18ca629ef764bc83e60505335648b.svg",
     "static/media/icon-triangle-down.svg": "/MAKE-RE_ver2/static/media/icon-triangle-down.52c7cd2af2cebb6e75ef2ab40a5eead9.svg",
     "static/media/icon-light-mode.svg": "/MAKE-RE_ver2/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.cbf9f263.js.map": "/MAKE-RE_ver2/static/js/main.cbf9f263.js.map"
+    "main.2d21b13f.js.map": "/MAKE-RE_ver2/static/js/main.2d21b13f.js.map"
   },
   "entrypoints": [
-    "static/js/main.cbf9f263.js"
+    "static/js/main.2d21b13f.js"
   ]
 }
