@@ -28,7 +28,7 @@ export default function DefaultInput({
         onChange={onChange}
         onKeyDown={onKeyDown}
         autoComplete="off"
-        required
+        required={required ? required : 'false'}
       />
     </InputCont>
   )

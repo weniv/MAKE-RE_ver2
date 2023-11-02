@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
@@ -11,10 +11,14 @@ export default function Career({
   career,
   careerData,
   setCareerData,
+  activeIdx,
+  setActiveIdx,
   handleDelete,
+  setIsExpand,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
+  const [isActive, setIsActive] = useState(0)
   const { formRef } = useContext(ResumeContext)
 
   const handleResizeTextArea = (height) => {
@@ -22,17 +26,26 @@ export default function Career({
     setTextAreaHeight(height)
   }
 
+  useEffect(() => {
+    setIsActive(activeIdx === idx)
+  }, [activeIdx])
+
   return (
     <ComponentHeader
       id={career.id}
+      idx={idx}
       kind={'커리어'}
       title={career.title ? career.title : null}
       handleDelete={handleDelete}
+      setActiveIdx={setActiveIdx}
+      setIsExpand={setIsExpand}
+      isActive={isActive}
+      setIsActive={setIsActive}
     >
       <Wrap>
         <form id="requiredForm" ref={formRef}>
           <DefaultInput
-            id="careerName"
+            id="title"
             type="text"
             width="738px"
             name="title"

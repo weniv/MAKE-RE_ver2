@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import * as styles from './ComponentHeader-style'
 import DragIcon from '../../../assets/icon-hamburger.svg'
 import expandIcon from '../../../assets/icon-triangle-down.svg'
@@ -9,13 +9,15 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 
 export default function ComponentHeader({
   id,
+  idx,
   kind,
   title,
   children,
   handleDelete,
+  setActiveIdx,
+  isActive,
+  setIsActive,
 }) {
-  const [isExpand, setIsExpand] = useState(false)
-
   if (useContext(dndContext)) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { Style, Sort } = useContext(dndContext)
@@ -32,25 +34,22 @@ export default function ComponentHeader({
         <styles.Title>{title ? title : `새로운 ${kind}`}</styles.Title>
         <styles.ExpandBtn
           onClick={() => {
-            setIsExpand(!isExpand)
+            setActiveIdx(idx)
+            setIsActive(!isActive)
           }}
         >
           <ColorIcon
-            iconPath={!isExpand ? expandIcon : reduceIcon}
-            isExpand={isExpand}
+            iconPath={!isActive ? expandIcon : reduceIcon}
+            isExpand={isActive}
             type="iconLv1"
           />
-          {/* <styles.Img
-            src={!isExpand ? expandIcon : reduceIcon}
-            isExpand={isExpand}
-          /> */}
         </styles.ExpandBtn>
         <styles.DelBtn del onClick={handleDelete}>
           <ColorIcon type="iconLv2" iconPath={deleteIcon} />
         </styles.DelBtn>
       </styles.Header>
 
-      {isExpand ? <styles.Component>{children}</styles.Component> : null}
+      {isActive ? <styles.Component>{children}</styles.Component> : null}
     </styles.Cont>
   )
 }
