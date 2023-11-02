@@ -1,9 +1,10 @@
 import { styled } from 'styled-components'
 import NavList from '../../atoms/Nav/NavList'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
 import { ResumeContext } from '../../../context/ResumeContext'
+import { saveData } from '../../../utils/saveData'
 
 export default function NavBar({ type }) {
   const [isFill, setIsFill] = useState(false)
@@ -18,6 +19,11 @@ export default function NavBar({ type }) {
     }
     updateCurrentSection(val)
   }
+
+  //새로고침해도 변경된 nav 순서가 유지되는것이 좋지않을까
+  // useEffect(() => {
+  //   saveData('resumeOrder', JSON.stringify(navList))
+  // }, [navList])
 
   return (
     <Dnd state={navList} setState={setNavList}>
