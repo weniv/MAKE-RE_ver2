@@ -43,7 +43,12 @@ export default function NavList({
     >
       <>
         <p>{listName}</p>
-        <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
+        <DragBtn
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
+          listName={listName}
+        >
           <ColorIcon
             type="iconLv3"
             iconPath={hamburgerIcon}
@@ -109,4 +114,5 @@ const Cont = styled.div`
 const DragBtn = styled.button`
   position: absolute;
   right: 16px;
+  display: ${(props) => (props.listName === '프로필' ? 'none' : 'block')};
 `
