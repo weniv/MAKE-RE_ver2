@@ -4,13 +4,12 @@ import { PreviewSubtitle } from '../../atoms/Title'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
-import { SkillList } from '../../atoms/SkillList'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 
 export default function ProjectPreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const projectData = data.project
+  const projectData = data.project.filter((el) => !!el.title)
 
   return (
     <>

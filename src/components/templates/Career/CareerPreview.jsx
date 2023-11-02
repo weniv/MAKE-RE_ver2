@@ -8,11 +8,11 @@ import { PreviewMonthItem } from '../../atoms/PreviewItem'
 export default function CareerPreview() {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const careerData = data.career
+  const careerData = data.career.filter((el) => !!el.title)
 
   return (
     <>
-      {careerData.length > 0 && !!careerData[0].title ? (
+      {careerData.length > 0 ? (
         <section>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap gap="40px">

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -15,16 +15,27 @@ export default function Project({
   projectData,
   setProjectData,
   handleDelete,
+  activeIdx,
+  setActiveIdx,
 }) {
   const [isStill, setIsStill] = useState(project.inProgress)
+  const [isActive, setIsActive] = useState(0)
   const { formRef } = useContext(ResumeContext)
+
+  useEffect(() => {
+    setIsActive(activeIdx === idx)
+  }, [activeIdx])
 
   return (
     <ComponentHeader
       id={project.id}
+      idx={idx}
       kind={'프로젝트'}
       title={project.title ? project.title : null}
       handleDelete={handleDelete}
+      setActiveIdx={setActiveIdx}
+      isActive={isActive}
+      setIsActive={setIsActive}
     >
       <Wrap>
         <form id="requiredForm" ref={formRef}>

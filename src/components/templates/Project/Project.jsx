@@ -11,9 +11,13 @@ import { ResumeContext } from '../../../context/ResumeContext'
 export default function Project() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [projectData, setProjectData] = useState(resumeData['project'])
+  const [activeIdx, setActiveIdx] = useState(0)
 
   useEffect(() => {
-    setResumeData({ ...resumeData, project: projectData })
+    setResumeData({
+      ...resumeData,
+      project: projectData.filter((el, idx) => idx === 0 || !!el.title),
+    })
   }, [projectData])
 
   const maxId = projectData.reduce(
@@ -74,6 +78,8 @@ export default function Project() {
                   projectData={projectData}
                   setProjectData={setProjectData}
                   handleDelete={() => handleDelete(idx)}
+                  activeIdx={activeIdx}
+                  setActiveIdx={setActiveIdx}
                   key={idx}
                 />
               ))}
