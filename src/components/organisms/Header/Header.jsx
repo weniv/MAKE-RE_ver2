@@ -42,7 +42,6 @@ export default function Header({ options }) {
                 height="46px"
                 type="logo"
               />
-              {/* <img src={Logo} alt="메이커리" /> */}
             </Link>
           </h1>
         ) : (
@@ -55,7 +54,6 @@ export default function Header({ options }) {
                   height="46px"
                   type="logo"
                 />
-                {/* <img src={Logo} alt="메이커리" /> */}
               </Link>
             </h1>
             <BtnCont>
