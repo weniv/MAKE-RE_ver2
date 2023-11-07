@@ -47,7 +47,7 @@ export default function PreviewPage() {
 
   return (
     <>
-      <Header />
+      <Header options={{}} />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
           <Main ref={exportRef}>

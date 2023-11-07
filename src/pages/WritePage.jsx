@@ -41,7 +41,7 @@ export default function WritePage() {
 
   return (
     <>
-      <Header />
+      <Header options={{}} />
       <Cont>
         <Main>
           <CurrentComponent />
