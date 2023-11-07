@@ -31,6 +31,7 @@ const BtnCont = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
   transition: all 0.3s ease-in-out;
 `
 const Circle = styled.div`
