@@ -1,15 +1,38 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
-const LoginInput = ({ type, placeholder }) => {
-  return <Input type={type} placeholder={placeholder} />
-}
-
-const LoginButton = ({ children, addClass }) => {
-  return <Button className={addClass}>{children}</Button>
+const LoginInput = ({ name, type, placeholder, ref, onChange }) => {
+  return (
+    <Input
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      ref={ref}
+      onChange={onChange}
+    />
+  )
 }
 
 export default function LoginPage() {
+  const [input, setInput] = useState({
+    email: '',
+    password: '',
+  })
+  const [isActive, setIsActive] = useState(false)
+
+  const handleOnchange = (e) => {
+    const { name, value } = e.target
+    setInput({ ...input, [name]: value })
+  }
+
+  useEffect(() => {
+    if (!!input['email'] && !!input['password']) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
+  }, [{ ...input }])
+
   return (
     <Layout>
       <Header>Header</Header>
@@ -19,9 +42,26 @@ export default function LoginPage() {
           메이커리 로그인 후<br />
           나만의 이력서를 만들어 보세요.
         </p>
-        <LoginInput type={'email'} placeholder={'이메일을 입력하세요.'} />
-        <LoginInput type={'password'} placeholder={'비밀번호를 입력하세요.'} />
-        <LoginButton addClass="login">{'로그인'}</LoginButton>
+        <LoginInput
+          name="email"
+          type={'email'}
+          placeholder={'이메일을 입력하세요.'}
+          onChange={(e) => handleOnchange(e)}
+        />
+        <LoginInput
+          name="password"
+          type={'password'}
+          placeholder={'비밀번호를 입력하세요.'}
+          onChange={(e) => handleOnchange(e)}
+        />
+        <Button
+          className="login"
+          isActive={isActive}
+          disabled={!isActive}
+          onClick={() => console.log(111111)}
+        >
+          로그인
+        </Button>
         <Redirect>
           <p className="join">이메일로 회원가입</p>
           <p className="findPassword">비밀번호 찾기</p>
@@ -29,12 +69,8 @@ export default function LoginPage() {
         <div className="line">
           <p className="or">또는</p>
         </div>
-        <LoginButton addClass="github social">
-          {'GitHub 계정으로 로그인'}
-        </LoginButton>
-        <LoginButton addClass="google social">
-          {'Google 계정으로 로그인'}
-        </LoginButton>
+        <Button className="github social">GitHub 계정으로 로그인</Button>
+        <Button className="google social">Google 계정으로 로그인</Button>
       </Wrap>
     </Layout>
   )
@@ -118,6 +154,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-bottom: 2px solid #2e6ff2;
+    background-color: #f3f5fa;
   }
 `
 
@@ -147,9 +184,9 @@ const Button = styled.button`
   font-size: 14px;
 
   &.login {
-    background-color: #d9dbe0;
-    color: #8d9299;
     margin: 16px 20px;
+    background-color: ${({ isActive }) => (isActive ? '#2e6ff2' : '#d9dbe0')};
+    color: ${({ isActive }) => (isActive ? '#fff' : '#8d9299')};
   }
 
   &.social {
