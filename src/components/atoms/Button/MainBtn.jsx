@@ -5,6 +5,7 @@ import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 
 // 미리보기, PDF 내보내기 버튼인 경우 162px로 고정임으로 type="preview"를 props로 내려보내 주어 너비 값 고정시키기
 // url, 경력, 프로젝트 추가 버튼인 경우 type설정 x
+// width:100% 인 경우 type='full'
 export default function MainBtn({ onClick, children, type, form }) {
   const { mainColor } = useContext(ColorContext)
 
@@ -30,6 +31,11 @@ export default function MainBtn({ onClick, children, type, form }) {
 }
 
 const MainButton = styled.button`
+  ${(props) =>
+    props.type === 'full' &&
+    css`
+      width: 100%;
+    `}
   ${(props) =>
     props.type === 'preview' &&
     css`
