@@ -49,6 +49,8 @@ const MainContainer = styled.main`
   position: absolute;
   top: 0;
   padding: 0 1rem;
+  background-color: var(--background-color);
+  z-index: -1;
 
   & .img-licat {
     width: 30rem;
