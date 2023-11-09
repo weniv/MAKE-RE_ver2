@@ -1,5 +1,6 @@
 import Modal from 'react-modal'
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import EditIcon from '../../../assets/icon-pencil.svg'
 import MoreIcon from '../../../assets/icon-more.svg'
@@ -67,7 +68,9 @@ export default function Resume() {
             />
             {isMenuOpen && (
               <MenuList>
-                <li>이력서 수정</li>
+                <li>
+                  <Link to="/MAKE-RE_ver2">이력서 수정</Link>
+                </li>
                 <li>
                   <button onClick={() => setModalOpen(true)}>
                     이력서 삭제
@@ -139,7 +142,6 @@ const MoreBtn = styled.button`
 
 const MenuList = styled.ul`
   position: absolute;
-  top: calc(100% + 4px);
   top: 100%;
   right: 50%;
   transform: translateX(50%);
@@ -151,16 +153,19 @@ const MenuList = styled.ul`
   border: 1px solid var(--gray-lv2-color);
 
   li {
-    color: var(--surface-color);
-    font-size: 14px;
-    padding: 5px 10px;
-    line-height: 20px;
-    text-align: left;
     border-radius: 10px;
     transition: background-color 0.1s ease-in;
 
-    button {
+    button,
+    a {
+      font-size: 14px;
+      display: inline-block;
       color: var(--surface-color);
+      width: 100%;
+      text-align: left;
+      line-height: 20px;
+      padding: 5px 10px;
+      border-radius: 10px;
     }
 
     &:hover {
@@ -170,13 +175,6 @@ const MenuList = styled.ul`
 `
 
 const StyledModal = styled(Modal)`
-  .ReactModal__Overlay {
-    background-color: salmon !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   width: 350px;
   display: flex;
   flex-direction: column;
