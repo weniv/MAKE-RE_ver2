@@ -15,7 +15,7 @@ export default function DefaultInput({
   required,
 }) {
   return (
-    <InputCont>
+    <InputCont type={type}>
       <Label htmlFor={id}>{children}</Label>
       <Input
         id={id}
@@ -38,8 +38,8 @@ const InputCont = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 8px;
-  width: 100%;
+  gap: ${(props) => (props.type === 'resumeTitle' ? '0px' : '8px')};
+  width: ${(props) => (props.type === 'resumeTitle' ? '706px' : '100%')};
 `
 
 const Label = styled.label`
