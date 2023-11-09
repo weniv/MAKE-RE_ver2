@@ -95,6 +95,7 @@ const GlobalStyles = createGlobalStyle`
             background-color: rgba(141, 146, 153, 0.5);
             border-radius: 10px;
         }
+
     }
 
 
