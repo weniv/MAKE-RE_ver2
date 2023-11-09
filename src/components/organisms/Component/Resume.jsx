@@ -153,7 +153,7 @@ const MenuList = styled.ul`
   border: 1px solid var(--gray-lv2-color);
 
   li {
-    border-radius: 10px;
+    border-radius: 8px;
     transition: background-color 0.1s ease-in;
 
     button,
@@ -165,7 +165,7 @@ const MenuList = styled.ul`
       text-align: left;
       line-height: 20px;
       padding: 5px 10px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     &:hover {

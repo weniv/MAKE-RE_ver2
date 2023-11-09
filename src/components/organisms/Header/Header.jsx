@@ -59,16 +59,16 @@ export default function Header({ options }) {
             <BtnCont>
               {hasCreate && <MainBtn type="create">이력서 만들기</MainBtn>}
               {hasProfile && (
-                <ProfileBtn
-                  ref={menuRef}
-                  onClick={handleToggleMenu}
-                  isMenuOpen={isMenuOpen}
-                >
+                <ProfileBtn onClick={handleToggleMenu} isMenuOpen={isMenuOpen}>
                   <img alt="마이프로필" src={profileImg || LicatFace} />
                   {isMenuOpen && (
-                    <MenuList>
-                      <li>마이페이지</li>
-                      <li>로그아웃</li>
+                    <MenuList ref={menuRef}>
+                      <li>
+                        <Link to="/MAKE-RE_ver2/myresume">마이페이지</Link>
+                      </li>
+                      <li>
+                        <button>로그아웃</button>
+                      </li>
                     </MenuList>
                   )}
                 </ProfileBtn>
@@ -137,13 +137,20 @@ const MenuList = styled.ul`
   border: 1px solid var(--gray-lv2-color);
 
   li {
-    color: var(--surface-color);
-    font-size: 14px;
-    padding: 5px 10px;
-    line-height: 20px;
-    text-align: left;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: background-color 0.1s ease-in;
+
+    a,
+    button {
+      color: var(--surface-color);
+      font-size: 14px;
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      line-height: 20px;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
 
     &:hover {
       background-color: var(--gray-lv1-color);
