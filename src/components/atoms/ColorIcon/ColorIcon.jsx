@@ -45,4 +45,8 @@ const Icon = styled.div`
   &.iconLv3 {
     background-color: var(--gray-lv2-color);
   }
+
+  &.error {
+    background-color: var(--error-color);
+  }
 `

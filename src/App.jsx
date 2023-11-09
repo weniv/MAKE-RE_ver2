@@ -5,6 +5,7 @@ import {
   QuitPage,
   NotFoundPage,
   LandingPage,
+  MyResumePage
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Providers from './context/Providers'
@@ -20,6 +21,7 @@ function App() {
             <Route path="/MAKE-RE_ver2/write" element={<WritePage />} />
             <Route path="/MAKE-RE_ver2/preview" element={<PreviewPage />} />
             <Route path="/MAKE-RE_ver2/quit" element={<QuitPage />} />
+            <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

@@ -41,7 +41,7 @@ export default function WritePage() {
 
   return (
     <>
-      <Header options={{}} />
+      <Header options={{ hasProfile: true }} />
       <Cont>
         <Main>
           <CurrentComponent />

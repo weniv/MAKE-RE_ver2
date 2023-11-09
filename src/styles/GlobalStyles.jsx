@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
         --gray-lv2-color: ${(props) => props.theme.grayLv2Color};
         --gray-lv3-color: ${(props) => props.theme.grayLv3Color};
         --gray-lv4-color: ${(props) => props.theme.grayLv4Color};
+        --error-color: ${(props) => props.theme.errorColor};
 
         --code-purple: ${(props) => props.theme.codePurple};
         --code-pink: ${(props) => props.theme.codePink};
@@ -63,8 +64,10 @@ const GlobalStyles = createGlobalStyle`
         overflow: hidden;
     }
 
-    a 
-    {color: var(--surface-color);}
+    a {
+        color: var(--surface-color);
+        text-decoration: none;
+    }
 
     input, textarea {
         color: var(--surface-color);
