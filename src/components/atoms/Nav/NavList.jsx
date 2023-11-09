@@ -42,15 +42,13 @@ export default function NavList({
       color={mainColor}
     >
       <>
-        {isFill ? (
-          // NOTE: 다크모드 여부에 따른 primary-color 차이로 아래 컴포넌트 사용 필요
-          // <ColorIcon pageType={pageType} iconPath={CheckFillIcon} />
-          <CheckFillIcon fill={mainColor} alt="입력 완료" />
-        ) : (
-          <ColorIcon type="iconLv3" iconPath={checkIcon} />
-        )}
-        <NavText>{listName}</NavText>
-        <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
+        <p>{listName}</p>
+        <DragBtn
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
+          listName={listName}
+        >
           <ColorIcon
             type="iconLv3"
             iconPath={hamburgerIcon}
@@ -113,11 +111,8 @@ const Cont = styled.div`
     `}
 `
 
-const NavText = styled.p`
-  margin-left: 12px;
-`
-
 const DragBtn = styled.button`
   position: absolute;
   right: 16px;
+  display: ${(props) => (props.listName === '프로필' ? 'none' : 'block')};
 `

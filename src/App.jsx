@@ -1,32 +1,31 @@
 import GlobalStyles from './styles/GlobalStyles'
-import { ColorProvider } from './context/ColorContext'
-import { WritePage, PreviewPage } from './pages'
-import ResumeProvider from './context/ResumeContext'
-import { RemoteProvider } from './context/RemoteContext'
-import { ThemeProvider } from './context/ThemeContext'
+import {
+  WritePage,
+  PreviewPage,
+  QuitPage,
+  NotFoundPage,
+  LandingPage,
+  MyResumePage
+} from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Providers from './context/Providers'
 
 function App() {
   return (
     <div className="App">
-      <ColorProvider>
-        <ThemeProvider>
-          <RemoteProvider>
-            <GlobalStyles />
-            <ResumeProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/MAKE-RE_ver2" element={<WritePage />} />
-                  <Route
-                    path="/MAKE-RE_ver2/preview"
-                    element={<PreviewPage />}
-                  />
-                </Routes>
-              </BrowserRouter>
-            </ResumeProvider>
-          </RemoteProvider>
-        </ThemeProvider>
-      </ColorProvider>
+      <Providers>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/MAKE-RE_ver2" element={<LandingPage />} />
+            <Route path="/MAKE-RE_ver2/write" element={<WritePage />} />
+            <Route path="/MAKE-RE_ver2/preview" element={<PreviewPage />} />
+            <Route path="/MAKE-RE_ver2/quit" element={<QuitPage />} />
+            <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </BrowserRouter>
+      </Providers>
     </div>
   )
 }

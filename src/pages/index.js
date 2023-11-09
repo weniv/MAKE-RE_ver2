@@ -1,2 +1,6 @@
+export { default as LandingPage } from './LandingPage'
 export { default as WritePage } from './WritePage'
 export { default as PreviewPage } from './PreviewPage'
+export { default as QuitPage } from './QuitPage'
+export { default as NotFoundPage } from './NotFoundPage'
+export { default as MyResumePage } from './myResume'

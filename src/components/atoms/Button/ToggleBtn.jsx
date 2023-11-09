@@ -21,7 +21,7 @@ ToggleBtn.defaultProps = {
 }
 
 const BtnCont = styled.button`
-  width: 64px;
+  width: 56px;
   height: 32px;
   border-radius: 40px;
   border: none;
@@ -31,6 +31,7 @@ const BtnCont = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
   transition: all 0.3s ease-in-out;
 `
 const Circle = styled.div`
@@ -44,7 +45,7 @@ const Circle = styled.div`
   ${(props) =>
     props.mode === 'dark' &&
     css`
-      transform: translateX(32px);
+      transform: translateX(24px);
     `}
 
   background-image: ${(props) =>

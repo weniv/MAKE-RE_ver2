@@ -11,9 +11,13 @@ import { ResumeContext } from '../../../context/ResumeContext'
 export default function Career() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [careerData, setCareerData] = useState(resumeData['career'])
+  const [activeIdx, setActiveIdx] = useState(0)
 
   useEffect(() => {
-    setResumeData({ ...resumeData, career: careerData })
+    setResumeData({
+      ...resumeData,
+      career: careerData.filter((el, idx) => idx === 0 || !!el.title),
+    })
   }, [careerData])
 
   const maxId = careerData.reduce(
@@ -27,7 +31,6 @@ export default function Career() {
 
   const val = {
     id: nextId.current,
-    companyName: '',
     startDate: '',
     endDate: '',
     inProgress: false,
@@ -44,8 +47,6 @@ export default function Career() {
   const handleDelete = (idx) => {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
-
-  // console.log('resumeData', resumeData.career)
 
   return (
     <Dnd state={careerData} setState={setCareerData}>
@@ -69,6 +70,8 @@ export default function Career() {
                   handleDelete={() => handleDelete(idx)}
                   careerData={careerData}
                   setCareerData={setCareerData}
+                  activeIdx={activeIdx}
+                  setActiveIdx={setActiveIdx}
                   key={idx}
                 />
               ))}

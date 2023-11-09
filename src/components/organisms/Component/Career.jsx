@@ -1,46 +1,62 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function Career({
   idx,
   career,
   careerData,
   setCareerData,
+  activeIdx,
+  setActiveIdx,
   handleDelete,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
+  const [isActive, setIsActive] = useState(0)
+  const { formRef } = useContext(ResumeContext)
 
   const handleResizeTextArea = (height) => {
     setTextAreaHeight('auto')
     setTextAreaHeight(height)
   }
 
+  useEffect(() => {
+    setIsActive(activeIdx === idx)
+  }, [activeIdx])
+
   return (
     <ComponentHeader
       id={career.id}
+      idx={idx}
       kind={'커리어'}
       title={career.title ? career.title : null}
       handleDelete={handleDelete}
+      setActiveIdx={setActiveIdx}
+      isActive={isActive}
+      setIsActive={setIsActive}
     >
       <Wrap>
-        <DefaultInput
-          id="careerName"
-          type="text"
-          width="738px"
-          name="title"
-          placeholder="예) 위니브(WENIV)"
-          onChange={(e) => {
-            updateData(e, idx, careerData, setCareerData)
-          }}
-          inputData={career.title}
-        >
-          {'회사명'}
-        </DefaultInput>
+        <form id="requiredForm" ref={formRef}>
+          <DefaultInput
+            id="title"
+            type="text"
+            width="738px"
+            name="title"
+            placeholder="예) 위니브(WENIV)"
+            onChange={(e) => {
+              updateData(e, idx, careerData, setCareerData)
+            }}
+            inputData={career.title}
+            required
+          >
+            {'회사명'}
+          </DefaultInput>
+        </form>
         <DateWrap>
           <DateInput
             id="startDate"
@@ -93,6 +109,7 @@ export default function Career({
             updateData(e, idx, careerData, setCareerData)
           }}
           inputData={career.works}
+          lineHeight="21px"
         >
           {'담당 업무'}
         </DefaultTextarea>

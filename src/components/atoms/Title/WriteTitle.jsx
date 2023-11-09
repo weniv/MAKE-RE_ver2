@@ -26,6 +26,7 @@ const Wrap = styled.div`
 const Title = styled.h2`
   color: var(--surface-color);
   font-size: 32px;
+  font-weight: 700;
 `
 const Description = styled.p`
   color: var(--gray-lv4-color);
