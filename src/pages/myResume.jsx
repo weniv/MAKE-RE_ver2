@@ -5,8 +5,10 @@ import Header from '../components/organisms/Header/Header'
 import { Resume } from '../components/organisms/Component'
 import Footer from '../components/organisms/Footer/Footer'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
+import PlusIcon from '../assets/icon-+.svg'
+import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
 
-export default function myResumePage() {
+export default function MyResumePage() {
   return (
     <>
       <Header options={{ hasProfile: true, hasCreate: true }} />
@@ -22,6 +24,12 @@ export default function myResumePage() {
               <Wrap>
                 <Resume />
                 <Resume />
+                <AddCont>
+                  <AddBtn>
+                    <ColorIcon iconPath={PlusIcon} type="iconLv1" />
+                    이력서 만들기
+                  </AddBtn>
+                </AddCont>
               </Wrap>
             </Section>
           </Layout>
@@ -65,4 +73,26 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`
+
+const AddCont = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--gray-lv1-color);
+  border-radius: 16px;
+  padding: 35px 0;
+  margin: 0 auto;
+`
+
+const AddBtn = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--surface-color);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 20px 13px 16px;
+  border-radius: 10px;
+  background-color: var(--background-color);
 `

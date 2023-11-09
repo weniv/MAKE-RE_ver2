@@ -7,6 +7,7 @@ import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import { DefaultInput } from '../../atoms/Input'
+import { MainBtn } from '../../atoms/Button'
 
 const customStyles = {
   overlay: {
@@ -44,7 +45,7 @@ export default function Resume() {
         <Wrap>
           <TitleWrap>
             {isEditable ? (
-              <DefaultInput type="resumeTitle" />
+              <DefaultInput type="resumeTitle" inputData="기존 이력서 이름" />
             ) : (
               <>
                 <Title>홍길동의 이력서</Title>
@@ -59,7 +60,11 @@ export default function Resume() {
               </>
             )}
           </TitleWrap>
-          <MoreBtn onClick={handleToggleMenu} ref={menuRef}>
+          <MoreBtn
+            onClick={handleToggleMenu}
+            ref={menuRef}
+            isEditable={isEditable}
+          >
             <ColorIcon
               iconPath={MoreIcon}
               type="iconLv2"
@@ -92,7 +97,9 @@ export default function Resume() {
         <h5>이력서를 삭제하시겠어요?</h5>
         <p>삭제되는 모든 정보는 복구할 수 없어요.</p>
         <BtnWrap>
-          <CancelBtn onClick={() => setModalOpen(false)}>취소</CancelBtn>
+          <MainBtn type="fit" onClick={() => setModalOpen(false)}>
+            취소
+          </MainBtn>
           <ConfirmBtn>확인</ConfirmBtn>
         </BtnWrap>
       </StyledModal>
@@ -111,8 +118,8 @@ const Wrap = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: start;
+  margin-bottom: 40px;
 `
 
 const TitleWrap = styled.div`
@@ -132,7 +139,9 @@ const EditDate = styled.span`
 `
 
 const MoreBtn = styled.button`
-  position: relative;
+  position: absolute;
+  top: ${(props) => (props.isEditable ? '0px' : '-12px')};
+  right: -10px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -201,19 +210,21 @@ const StyledModal = styled(Modal)`
 `
 
 const BtnWrap = styled.div`
-  button {
-    padding: 11px 20px;
-    border-radius: 10px;
-  }
+  display: flex;
+  gap: 12px;
 `
 
-const CancelBtn = styled.button`
-  background-color: var(--primary-color);
-  color: #fff;
-`
 const ConfirmBtn = styled.button`
-  color: var(--surface-color);
+  padding: 1.1rem 2rem;
   border: 1px solid var(--gray-lv2-color);
-  background-color: var(--background-color);
-  margin-left: 12px;
+  border-radius: 10px;
+  background-color: inherit;
+  font-size: 1.4rem;
+  color: var(--surface-color);
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    background-color: var(--gray-lv1-color);
+  }
 `
