@@ -86,7 +86,7 @@ const Project = styled.section`
   div.description li:not(.list) {
     display: block;
     margin: 0;
-    line-height: 1.2rem;
+    line-height: 2rem;
 
     p {
       width: auto;
