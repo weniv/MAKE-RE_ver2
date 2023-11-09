@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
@@ -13,9 +13,14 @@ export default function Header({ options }) {
   const profileImg = resumeData['profile']['profileImg']
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const [isMenuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
+  }
+
+  const moveWrite = () => {
+    navigate('/MAKE-RE_ver2/write')
   }
 
   // 프로필 메뉴 외부 클릭 시 닫기
@@ -47,7 +52,7 @@ export default function Header({ options }) {
         ) : (
           <>
             <h1>
-              <Link to="/MAKE-RE_ver2/">
+              <Link to="/MAKE-RE_ver2">
                 <ColorIcon
                   iconPath={Logo}
                   width="176px"
@@ -57,7 +62,11 @@ export default function Header({ options }) {
               </Link>
             </h1>
             <BtnCont>
-              {hasCreate && <MainBtn type="create">이력서 만들기</MainBtn>}
+              {hasCreate && (
+                <MainBtn type="create" onClick={moveWrite}>
+                  이력서 만들기
+                </MainBtn>
+              )}
               {hasProfile && (
                 <ProfileBtn onClick={handleToggleMenu} isMenuOpen={isMenuOpen}>
                   <img alt="마이프로필" src={profileImg || LicatFace} />
