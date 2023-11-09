@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
     :root {
         --primary-color: ${(props) => props.theme.primaryColor};
         --secondary-color: ${(props) => props.theme.secondaryColor};
+        --activation-color: ${(props) => props.theme.activationColor};
         --background-color: ${(props) => props.theme.backgroundColor};
         --surface-color: ${(props) => props.theme.surfaceColor};
         --gray-lv1-color: ${(props) => props.theme.grayLv1Color};
@@ -17,6 +18,8 @@ const GlobalStyles = createGlobalStyle`
         --code-blue: ${(props) => props.theme.codeBlue};
         --code-green: ${(props) => props.theme.codeGreen};
         --code-orange: ${(props) => props.theme.codeOrange};
+
+        
         
         --shadow: ${(props) => props.theme.shadow};
 
