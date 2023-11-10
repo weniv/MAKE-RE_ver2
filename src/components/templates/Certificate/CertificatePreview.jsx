@@ -19,9 +19,10 @@ export default function CertificatePreview() {
   const hasCertificates = !!certificates.length
 
   function formatDate(date) {
-    return date.replace('-', '. ') + '.'
+    if (date) {
+      return date.replace('-', '. ') + '.'
+    }
   }
-
   return (
     <>
       {hasCertificates && (

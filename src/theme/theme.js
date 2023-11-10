@@ -8,6 +8,7 @@ export const lightTheme = {
   grayLv3Color: '#8d9299',
   grayLv4Color: '#47494d',
   activationColor: '#dee8ff',
+  errorColor: '#FF3440',
 
   shadow: '0px 4px 44px 0px rgba(0, 0, 0, 0.04)',
 
@@ -28,6 +29,7 @@ export const darkTheme = {
   grayLv3Color: '#d9dbe0',
   grayLv4Color: '#f3f5fa',
   activationColor: '#2b3444',
+  errorColor: '#FC7377',
 
   shadow: '0px 8px 12px 0px #00000033',
 

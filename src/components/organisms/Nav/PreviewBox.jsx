@@ -23,8 +23,8 @@ export default function PreviewBox({ type, ...props }) {
     }
   }
 
-  const moveHome = () => {
-    navigate('/MAKE-RE_ver2/')
+  const moveWrite = () => {
+    navigate('/MAKE-RE_ver2/write')
   }
 
   const exportPDF = useReactToPrint({
@@ -45,7 +45,7 @@ export default function PreviewBox({ type, ...props }) {
         </>
       ) : (
         <>
-          <SaveBtn onClick={moveHome}>돌아가기</SaveBtn>
+          <SaveBtn onClick={moveWrite}>돌아가기</SaveBtn>
           <MainBtn type="preview" onClick={exportPDF}>
             PDF로 내보내기
           </MainBtn>

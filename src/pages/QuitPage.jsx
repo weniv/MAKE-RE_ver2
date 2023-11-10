@@ -29,7 +29,7 @@ export default function QuitPage() {
 
 const Wrap = styled.div`
   width: 322px;
-  margin: 120px auto 0;
+  margin: 20rem auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;

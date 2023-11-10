@@ -10,6 +10,12 @@ export default function CareerPreview() {
   const { mainColor } = useContext(ColorContext)
   const careerData = data.career.filter((el) => !!el.title)
 
+  function formatDate(date) {
+    if (date) {
+      return date.replace('-', '. ') + '.'
+    }
+  }
+
   return (
     <>
       {careerData.length > 0 ? (
@@ -22,10 +28,12 @@ export default function CareerPreview() {
                   {data.startDate && (data.endDate || data.inProgress) ? (
                     <PreviewMonthItem
                       type={'career'}
-                      startDate={data.startDate}
-                      endDate={data.inProgress ? '재직중' : data.endDate}
+                      startDate={formatDate(data.startDate)}
+                      endDate={
+                        data.inProgress ? '재직 중' : formatDate(data.endDate)
+                      }
                       color={mainColor}
-                      size={'0.75rem'}
+                      size={'1.2rem'}
                     />
                   ) : null}
                   <Title>{data.title}</Title>
@@ -58,14 +66,14 @@ const Content = styled.div`
   }
 `
 const Title = styled.p`
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--surface-color);
 `
 
 const Works = styled.p`
   color: var(--surface-color);
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
   white-space: pre-wrap;
 `

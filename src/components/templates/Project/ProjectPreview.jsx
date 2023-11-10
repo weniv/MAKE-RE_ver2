@@ -27,7 +27,7 @@ export default function ProjectPreview() {
                       }
                       endDate={
                         data.inProgress
-                          ? '진행중'
+                          ? '진행 중'
                           : data.endDate
                           ? data.endDate
                           : '종료일'
@@ -86,7 +86,7 @@ const Project = styled.section`
   div.description li:not(.list) {
     display: block;
     margin: 0;
-    line-height: 1.2rem;
+    line-height: 2rem;
 
     p {
       width: auto;
@@ -94,12 +94,12 @@ const Project = styled.section`
   }
 
   p {
-    font-size: 0.875rem;
+    font-size: 1.4rem;
   }
 
   p.outline {
     white-space: pre-wrap;
-    line-height: 1.25rem;
+    line-height: 2rem;
   }
 
   & > * {
@@ -123,7 +123,7 @@ const ProjectWrap = styled.div`
   ul {
     display: flex;
     gap: 5px;
-    font-size: 0.875rem;
+    font-size: 1%.4;
   }
 
   ul:not(:has(li)) {
@@ -141,7 +141,7 @@ const ProjectWrap = styled.div`
 `
 
 const Title = styled.p`
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--surface-color);
   white-space: nowrap;

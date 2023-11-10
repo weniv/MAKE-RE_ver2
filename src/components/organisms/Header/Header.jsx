@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
@@ -13,9 +13,14 @@ export default function Header({ options }) {
   const profileImg = resumeData['profile']['profileImg']
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const [isMenuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
+  }
+
+  const moveWrite = () => {
+    navigate('/MAKE-RE_ver2/write')
   }
 
   // 프로필 메뉴 외부 클릭 시 닫기
@@ -47,7 +52,7 @@ export default function Header({ options }) {
         ) : (
           <>
             <h1>
-              <Link to="/MAKE-RE_ver2/">
+              <Link to="/MAKE-RE_ver2">
                 <ColorIcon
                   iconPath={Logo}
                   width="176px"
@@ -57,18 +62,22 @@ export default function Header({ options }) {
               </Link>
             </h1>
             <BtnCont>
-              {hasCreate && <MainBtn type="create">이력서 만들기</MainBtn>}
+              {hasCreate && (
+                <MainBtn type="create" onClick={moveWrite}>
+                  이력서 만들기
+                </MainBtn>
+              )}
               {hasProfile && (
-                <ProfileBtn
-                  ref={menuRef}
-                  onClick={handleToggleMenu}
-                  isMenuOpen={isMenuOpen}
-                >
+                <ProfileBtn onClick={handleToggleMenu} isMenuOpen={isMenuOpen}>
                   <img alt="마이프로필" src={profileImg || LicatFace} />
                   {isMenuOpen && (
-                    <MenuList>
-                      <li>마이페이지</li>
-                      <li>로그아웃</li>
+                    <MenuList ref={menuRef}>
+                      <li>
+                        <Link to="/MAKE-RE_ver2/myresume">마이페이지</Link>
+                      </li>
+                      <li>
+                        <button>로그아웃</button>
+                      </li>
                     </MenuList>
                   )}
                 </ProfileBtn>
@@ -135,15 +144,23 @@ const MenuList = styled.ul`
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
   border: 1px solid var(--gray-lv2-color);
+  z-index: 100000;
 
   li {
-    color: var(--surface-color);
-    font-size: 14px;
-    padding: 5px 10px;
-    line-height: 20px;
-    text-align: left;
-    border-radius: 10px;
+    border-radius: 8px;
     transition: background-color 0.1s ease-in;
+
+    a,
+    button {
+      color: var(--surface-color);
+      font-size: 14px;
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      line-height: 20px;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
 
     &:hover {
       background-color: var(--gray-lv1-color);

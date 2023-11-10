@@ -21,10 +21,10 @@ export default function PreviewMonthItem({
         endDate={endDate}
         color={color}
       >
-        {isInvalid
-          ? '-'
-          : type === 'certificate'
+        {type === 'certificate'
           ? date
+          : isInvalid
+          ? '-'
           : `${startDate} ~ ${endDate}`}
       </DateWrap>
       <p>{title}</p>
@@ -34,8 +34,8 @@ export default function PreviewMonthItem({
 
 PreviewMonthItem.defaultProps = {
   date: '-',
-  startDate: '-',
-  endDate: '-',
+  startDate: '',
+  endDate: '',
   content: '-',
 }
 
