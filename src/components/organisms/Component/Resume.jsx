@@ -1,22 +1,11 @@
-import Modal from 'react-modal'
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import EditIcon from '../../../assets/icon-pencil.svg'
 import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
-import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import { DefaultInput } from '../../atoms/Input'
-import { MainBtn } from '../../atoms/Button'
-
-const customStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}
+import DeleteModal from './DeleteModal'
 
 export default function Resume() {
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -88,21 +77,9 @@ export default function Resume() {
 
         <EditDate>마지막 수정: 2023.11.01</EditDate>
       </Cont>
-      <StyledModal
-        isOpen={isModalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        style={customStyles}
-      >
-        <ColorIcon iconPath={AlertIcon} type="error" />
-        <h5>이력서를 삭제하시겠어요?</h5>
-        <p>삭제되는 모든 정보는 복구할 수 없어요.</p>
-        <BtnWrap>
-          <MainBtn type="fit" onClick={() => setModalOpen(false)}>
-            취소
-          </MainBtn>
-          <ConfirmBtn>확인</ConfirmBtn>
-        </BtnWrap>
-      </StyledModal>
+      {isModalOpen && (
+        <DeleteModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+      )}
     </>
   )
 }
@@ -180,51 +157,5 @@ const MenuList = styled.ul`
     &:hover {
       background-color: var(--gray-lv1-color);
     }
-  }
-`
-
-const StyledModal = styled(Modal)`
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--background-color);
-  border: 1px solid var(--gray-lv2-color);
-  border-radius: 10px;
-  padding: 28px 45px;
-  box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
-
-  h5 {
-    font-weight: 700;
-    line-height: 22px;
-    color: var(--surface-color);
-    margin: 12px 0;
-  }
-
-  p {
-    color: var(--gray-lv4-color);
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 20px;
-  }
-`
-
-const BtnWrap = styled.div`
-  display: flex;
-  gap: 12px;
-`
-
-const ConfirmBtn = styled.button`
-  padding: 1.1rem 2rem;
-  border: 1px solid var(--gray-lv2-color);
-  border-radius: 10px;
-  background-color: inherit;
-  font-size: 1.4rem;
-  color: var(--surface-color);
-  cursor: pointer;
-  transition: all 0.1s ease-in;
-
-  &:hover {
-    background-color: var(--gray-lv1-color);
   }
 `
