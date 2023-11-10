@@ -9,6 +9,7 @@ const LabelInput = ({
   placeholder,
   handleOnChange,
   warning,
+  alertMsg,
 }) => {
   return (
     <div>
@@ -23,7 +24,7 @@ const LabelInput = ({
         onChange={handleOnChange}
         warning={warning}
       />
-      {warning ? <Alert>※ 사용 중인 이메일입니다.</Alert> : null}
+      {warning ? <Alert>{alertMsg}</Alert> : null}
     </div>
   )
 }
@@ -36,19 +37,29 @@ export default function SignupPage() {
     password: '',
     passwordConfirm: '',
   })
-  const [isActive, setIsActive] = useState(false)
-  const [isWarning, setIsWarning] = useState(false)
-  const [isDuplicate, setIsDuplicate] = useState(false)
+  const [isActive, setIsActive] = useState(false) // 회원가입 버튼 활성화 여부
+  const [isDuplicate, setIsDuplicate] = useState(false) // 이메일 중복여부
+  const [isValidate, setIsValidate] = useState(false) // 이메일 형식 검증
+  const [isConfirm, setIsConfirm] = useState(false) // 비밀번호 확인 일치 여부
 
+  // 버튼 활성화 조건에 이메일 인증 여부 추가할 것
   useEffect(() => {
-    if (!!input['email'] && !!input['password'] & !!input['passwordConfirm']) {
+    if (
+      !!input['email'] &&
+      !!input['password'] & !!input['passwordConfirm'] &&
+      isConfirm
+    ) {
       setIsActive(true)
     } else {
       setIsActive(false)
     }
 
-    setIsDuplicate(emailRegex.test(input['email']))
+    setIsValidate(emailRegex.test(input['email']))
   }, [{ ...input }])
+
+  useEffect(() => {
+    cofirmPassword()
+  }, [input['password'], input['passwordConfirm']])
 
   const handleOnchange = (e) => {
     const { name, value } = e.target
@@ -60,12 +71,21 @@ export default function SignupPage() {
     const testEmail = 'user1@mail.com'
     try {
       if (input['email'] === testEmail) {
-        setIsWarning(true)
+        setIsDuplicate(true)
       } else {
-        setIsWarning(false)
+        setIsDuplicate(false)
       }
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  // 비밀번호 확인
+  const cofirmPassword = () => {
+    if (input['password'] === input['passwordConfirm']) {
+      setIsConfirm(true)
+    } else {
+      setIsConfirm(false)
     }
   }
 
@@ -73,7 +93,7 @@ export default function SignupPage() {
     <Layout>
       <Title>회원가입</Title>
       <Form id="singupForm" method="POST">
-        <EmailWrap id="signupEmailForm" isDuplicate={isDuplicate}>
+        <EmailWrap id="signupEmailForm" isValidate={isValidate}>
           <LabelInput
             lableTitle="이메일"
             name="email"
@@ -82,13 +102,14 @@ export default function SignupPage() {
             handleOnChange={(e) => {
               handleOnchange(e)
             }}
-            warning={isWarning}
+            warning={isDuplicate}
+            alertMsg="※ 사용 중인 이메일입니다."
           />
           <button
             form="singupForm"
             type="button"
             onClick={CheckDuplicates}
-            disabled={!isDuplicate}
+            disabled={!isValidate}
           >
             인증
           </button>
@@ -110,6 +131,8 @@ export default function SignupPage() {
           handleOnChange={(e) => {
             handleOnchange(e)
           }}
+          warning={!isConfirm}
+          alertMsg="※ 비밀번호가 일치하지 않아요."
         />
       </Form>
       <Notice>
@@ -163,9 +186,9 @@ const EmailWrap = styled.div`
     border-radius: 10px;
     font-size: 14px;
     font-weight: 500;
-    background-color: ${({ isDuplicate }) =>
-      isDuplicate ? '#2e6ff2' : '#d9dbe0'};
-    color: ${({ isDuplicate }) => (isDuplicate ? '#fff' : '#8D9299')};
+    background-color: ${({ isValidate }) =>
+      isValidate ? '#2e6ff2' : '#d9dbe0'};
+    color: ${({ isValidate }) => (isValidate ? '#fff' : '#8D9299')};
   }
 `
 

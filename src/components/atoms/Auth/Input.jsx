@@ -38,7 +38,8 @@ const CommonInput = styled.input`
 
   &:focus {
     outline: none;
-    border-bottom: 2px solid #2e6ff2;
+    border-bottom: ${({ warning }) =>
+      warning ? '2px solid red;' : '2px solid #2e6ff2;'};
     background-color: #f3f5fa;
   }
 `
