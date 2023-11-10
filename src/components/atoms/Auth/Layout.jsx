@@ -27,5 +27,4 @@ const Content = styled.div`
   align-items: center;
   width: 322px;
   height: auto;
-  background-color: pink;
 `

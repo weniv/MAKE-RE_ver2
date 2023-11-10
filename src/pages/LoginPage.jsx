@@ -62,7 +62,7 @@ export default function LoginPage() {
         메이커리 로그인 후<br />
         나만의 이력서를 만들어 보세요.
       </Description>
-      <form id="loginform" onSubmit={sendLoginData}>
+      <Form id="loginform" onSubmit={sendLoginData}>
         <Input
           name="email"
           type={'email'}
@@ -75,7 +75,7 @@ export default function LoginPage() {
           placeholder={'비밀번호를 입력하세요.'}
           onChange={(e) => handleOnchange(e)}
         />
-      </form>
+      </Form>
       <Button
         form="loginform"
         className="login"
@@ -129,7 +129,14 @@ const Description = styled.p`
   line-height: 32px;
   color: #121314;
   text-align: center;
-  margin: 24px 0 52px 0;
+  margin: 24px 0 60px 0;
+`
+
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
 const Line = styled.div`
@@ -182,7 +189,7 @@ const Button = styled.button`
   font-size: 14px;
 
   &.login {
-    margin: 16px 20px;
+    margin: 24px 0 20px 0;
     background-color: ${({ isActive }) => (isActive ? '#2e6ff2' : '#d9dbe0')};
     color: ${({ isActive }) => (isActive ? '#fff' : '#8d9299')};
   }
