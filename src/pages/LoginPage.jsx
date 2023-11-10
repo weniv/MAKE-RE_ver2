@@ -1,5 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import Logo from '../assets/makere-logo.svg'
+import GithubLogo from '../assets/github-logo.svg'
+import GoogleLogo from '../assets/google-logo.svg'
 
 const LoginInput = ({ name, type, placeholder, ref, onChange }) => {
   return (
@@ -14,16 +18,12 @@ const LoginInput = ({ name, type, placeholder, ref, onChange }) => {
 }
 
 export default function LoginPage() {
+  const navigate = useNavigate()
   const [input, setInput] = useState({
     email: '',
     password: '',
   })
   const [isActive, setIsActive] = useState(false)
-
-  const handleOnchange = (e) => {
-    const { name, value } = e.target
-    setInput({ ...input, [name]: value })
-  }
 
   useEffect(() => {
     if (!!input['email'] && !!input['password']) {
@@ -33,44 +33,94 @@ export default function LoginPage() {
     }
   }, [{ ...input }])
 
+  const handleOnchange = (e) => {
+    const { name, value } = e.target
+    setInput({ ...input, [name]: value })
+  }
+
+  // 로그인 정보 전송
+  const sendLoginData = async (e) => {
+    e.preventDefault()
+    try {
+      console.log(input)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // 깃허브 로그인
+  const githubLogin = async () => {
+    try {
+      console.log('깃허브로 로그인')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // 구글 로그인
+  const googleLogin = async () => {
+    try {
+      console.log('구글로 로그인')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <Layout>
-      <Header>Header</Header>
       <Wrap>
         <div className="logo"></div>
         <p className="description">
           메이커리 로그인 후<br />
           나만의 이력서를 만들어 보세요.
         </p>
-        <LoginInput
-          name="email"
-          type={'email'}
-          placeholder={'이메일을 입력하세요.'}
-          onChange={(e) => handleOnchange(e)}
-        />
-        <LoginInput
-          name="password"
-          type={'password'}
-          placeholder={'비밀번호를 입력하세요.'}
-          onChange={(e) => handleOnchange(e)}
-        />
+        <form id="loginform" onSubmit={sendLoginData}>
+          <LoginInput
+            name="email"
+            type={'email'}
+            placeholder={'이메일을 입력하세요.'}
+            onChange={(e) => handleOnchange(e)}
+          />
+          <LoginInput
+            name="password"
+            type={'password'}
+            placeholder={'비밀번호를 입력하세요.'}
+            onChange={(e) => handleOnchange(e)}
+          />
+        </form>
         <Button
+          form="loginform"
           className="login"
           isActive={isActive}
           disabled={!isActive}
-          onClick={() => console.log(111111)}
         >
           로그인
         </Button>
         <Redirect>
-          <p className="join">이메일로 회원가입</p>
-          <p className="findPassword">비밀번호 찾기</p>
+          <p
+            className="join"
+            onClick={() => {
+              navigate('/MAKE-RE_ver2/signup')
+            }}
+          >
+            이메일로 회원가입
+          </p>
+          <p
+            className="findPassword"
+            onClick={() => console.log('비밀번호 찾기 페이지로 이동')}
+          >
+            비밀번호 찾기
+          </p>
         </Redirect>
         <div className="line">
           <p className="or">또는</p>
         </div>
-        <Button className="github social">GitHub 계정으로 로그인</Button>
-        <Button className="google social">Google 계정으로 로그인</Button>
+        <Button className="github social" onClick={githubLogin}>
+          GitHub 계정으로 로그인
+        </Button>
+        <Button className="google social" onClick={googleLogin}>
+          Google 계정으로 로그인
+        </Button>
       </Wrap>
     </Layout>
   )
@@ -85,13 +135,6 @@ const Layout = styled.section`
   height: 100vh;
 `
 
-const Header = styled.div`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 70px;
-`
-
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -104,6 +147,9 @@ const Wrap = styled.div`
     height: 80px;
     background-color: #2e6ff2;
     border-radius: 16px;
+    background-image: url(${Logo});
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 
   p.description {
@@ -165,6 +211,7 @@ const Redirect = styled.div`
     font-weight: 500;
     color: #8d9299;
     padding: 0 8px;
+    cursor: pointer;
   }
 
   p:hover {
@@ -193,9 +240,32 @@ const Button = styled.button`
     background-color: #ffffff;
     border: 1px solid #d9dbe0;
     color: #121314;
+
+    &:hover {
+      background-color: #f3f5fa;
+    }
   }
 
   &.github {
+    position: relative;
     margin: 0 0 11px 0;
+
+    &::before {
+      content: url(${GithubLogo});
+      position: absolute;
+      top: 9px;
+      left: 12px;
+    }
+  }
+
+  &.google {
+    position: relative;
+
+    &::before {
+      content: url(${GoogleLogo});
+      position: absolute;
+      top: 9px;
+      left: 12px;
+    }
   }
 `
