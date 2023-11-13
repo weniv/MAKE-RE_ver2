@@ -1,33 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Layout, Input } from '../components/atoms/Auth'
-
-const LabelInput = ({
-  lableTitle,
-  name,
-  type,
-  placeholder,
-  handleOnChange,
-  warning,
-  alertMsg,
-}) => {
-  return (
-    <div>
-      <Label htmlFor={name} warning={warning}>
-        {lableTitle}
-      </Label>
-      <Input
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        onChange={handleOnChange}
-        warning={warning}
-      />
-      {warning ? <Alert>{alertMsg}</Alert> : null}
-    </div>
-  )
-}
+import { AuthCode, Layout } from '../components/atoms/Auth'
+import { EmailInput, LabelInput } from '../components/organisms/Auth'
+import { WarningMsg } from '../components/atoms/Auth'
 
 let emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 
@@ -41,7 +16,10 @@ export default function SignupPage() {
   const [isDuplicate, setIsDuplicate] = useState(false) // 이메일 중복여부
   const [isValidate, setIsValidate] = useState(false) // 이메일 형식 검증
   const [isConfirm, setIsConfirm] = useState(false) // 비밀번호 확인 일치 여부
+  const [isOpen, setIsOpen] = useState(false) // 인증코드 창 활성화 여부
 
+  // console.log('input')
+  // console.log(input)
   // 버튼 활성화 조건에 이메일 인증 여부 추가할 것
   useEffect(() => {
     if (
@@ -61,6 +39,11 @@ export default function SignupPage() {
     cofirmPassword()
   }, [input['password'], input['passwordConfirm']])
 
+  useEffect(() => {
+    setIsOpen(false)
+    setIsDuplicate(false)
+  }, [input['email']])
+
   const handleOnchange = (e) => {
     const { name, value } = e.target
     setInput({ ...input, [name]: value })
@@ -68,6 +51,7 @@ export default function SignupPage() {
 
   // 이메일 중복 체크
   const CheckDuplicates = async () => {
+    setIsOpen(true)
     const testEmail = 'user1@mail.com'
     try {
       if (input['email'] === testEmail) {
@@ -92,48 +76,53 @@ export default function SignupPage() {
   return (
     <Layout>
       <Title>회원가입</Title>
-      <Form id="singupForm" method="POST">
+      <Form id="signupForm" method="POST">
         <EmailWrap id="signupEmailForm" isValidate={isValidate}>
           <LabelInput
-            lableTitle="이메일"
+            title="이메일"
             name="email"
             type="email"
-            placeholder={''}
             handleOnChange={(e) => {
               handleOnchange(e)
             }}
             warning={isDuplicate}
-            alertMsg="※ 사용 중인 이메일입니다."
           />
-          <button
-            form="singupForm"
+          <Button
+            form="signupForm"
             type="button"
             onClick={CheckDuplicates}
             disabled={!isValidate}
           >
             인증
-          </button>
+          </Button>
         </EmailWrap>
+        {isOpen ? (
+          <AuthCode
+            warning={isDuplicate}
+            alertMsg={'※ 사용 중인 이메일입니다.'}
+          />
+        ) : null}
         <LabelInput
-          lableTitle="비밀번호"
+          title="비밀번호"
           name="password"
           type="password"
-          placeholder={''}
           handleOnChange={(e) => {
             handleOnchange(e)
           }}
         />
+
         <LabelInput
-          lableTitle="비밀번호 확인"
+          title="비밀번호 확인"
           name="passwordConfirm"
           type="password"
-          placeholder={''}
           handleOnChange={(e) => {
             handleOnchange(e)
           }}
           warning={!isConfirm}
-          alertMsg="※ 비밀번호가 일치하지 않아요."
         />
+        {!isConfirm ? (
+          <WarningMsg>※ 비밀번호가 일치하지 않아요.</WarningMsg>
+        ) : null}
       </Form>
       <Notice>
         본인은 만 14세 이상이며, 메이커리의
@@ -160,21 +149,11 @@ const Form = styled.form`
   flex-direction: column;
   gap: 16px;
 `
-const Label = styled.label`
-  font-size: 12px;
-  font-weight: 500;
-  color: ${({ warning }) => (warning ? '#ff3440' : '#47494d')};
-`
-
-const Alert = styled.p`
-  font-size: 12px;
-  color: #ff3440;
-  padding-top: 8px;
-`
 
 const EmailWrap = styled.div`
   position: relative;
   display: flex;
+  gap: 8px;
 
   button {
     position: absolute;

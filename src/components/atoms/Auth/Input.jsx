@@ -5,8 +5,8 @@ export default function Input({
   id,
   name,
   type,
+  value,
   placeholder,
-  ref,
   onChange,
   warning,
 }) {
@@ -15,8 +15,8 @@ export default function Input({
       id={id}
       name={name}
       type={type}
+      value={value}
       placeholder={placeholder}
-      ref={ref}
       onChange={onChange}
       warning={warning}
     />
@@ -29,7 +29,8 @@ const CommonInput = styled.input`
   border: none;
   border-bottom: 2px solid #d9dbe0;
   padding-left: 8px;
-  border-bottom: ${({ warning }) => (warning ? '2px solid red;' : 'none')};
+  border-bottom: ${({ warning }) =>
+    warning ? '2px solid red;' : '2px solid #D9DBE0;'};
 
   &::placeholder {
     font-size: 16px;
