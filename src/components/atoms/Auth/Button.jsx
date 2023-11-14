@@ -17,7 +17,6 @@ export default function Button({ children, form, type, onClick, disabled }) {
 const ButtonComponent = styled.button`
   width: 80px;
   height: 42px;
-  background-color: #d9dbe0;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;

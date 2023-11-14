@@ -8,6 +8,7 @@ import {
   MyResumePage,
   LoginPage,
   SignupPage,
+  SignupDonePage,
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Providers from './context/Providers'
@@ -25,6 +26,7 @@ function App() {
             <Route path="/MAKE-RE_ver2/quit" element={<QuitPage />} />
             <Route path="/MAKE-RE_ver2/login" element={<LoginPage />} />
             <Route path="/MAKE-RE_ver2/signup" element={<SignupPage />} />
+            <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} />
             <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

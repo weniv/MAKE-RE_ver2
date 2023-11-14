@@ -4,6 +4,7 @@ import { AuthCode, Layout } from '../components/atoms/Auth'
 import { LabelInput } from '../components/organisms/Auth'
 import { WarningMsg } from '../components/atoms/Auth'
 import { issuanceCode } from '../utils/issuanceCode'
+import { useNavigate } from 'react-router-dom'
 
 let emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 
@@ -20,6 +21,7 @@ export default function SignupPage() {
   const [isOpen, setIsOpen] = useState(false) // 인증코드 창 활성화 여부
   const [isDone, setIsDone] = useState(false) // 이메일 인증 완료 여부
   const [code, setCode] = useState(null) // 이메일 인증 코드
+  const navigate = useNavigate()
 
   // 버튼 활성화 조건에 이메일 인증 여부 추가할 것
   useEffect(() => {
@@ -76,10 +78,15 @@ export default function SignupPage() {
     }
   }
 
+  // 회원가입 완료
+  const submitSignup = () => {
+    navigate('/MAKE-RE_ver2/done')
+  }
+
   return (
     <Layout>
       <Title>회원가입</Title>
-      <Form id="signupForm" method="POST">
+      <Form id="signupForm" method="POST" onSubmit={submitSignup}>
         <EmailWrap id="signupEmailForm" isValidate={isValidate}>
           <LabelInput
             title="이메일"
@@ -135,7 +142,12 @@ export default function SignupPage() {
         본인은 만 14세 이상이며, 메이커리의
         <br /> <span>이용 약관, 개인정보취급방침</span>을 확인하였습니다.
       </Notice>
-      <Button form="singupForm" isActive={isActive} disabled={!isActive}>
+      <Button
+        form="signupForm"
+        isActive={isActive}
+        disabled={!isActive}
+        type="submit"
+      >
         동의하고 회원가입
       </Button>
     </Layout>

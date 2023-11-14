@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import LogoIcon from '../assets/makere-logo.svg'
 import GithubLogo from '../assets/github-logo.svg'
 import GoogleLogo from '../assets/google-logo.svg'
-import { Layout, Input } from '../components/atoms/Auth'
+import { Logo, Layout, Input } from '../components/atoms/Auth'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -112,16 +111,6 @@ export default function LoginPage() {
     </Layout>
   )
 }
-
-const Logo = styled.div`
-  width: 80px;
-  height: 80px;
-  background-color: #2e6ff2;
-  border-radius: 16px;
-  background-image: url(${LogoIcon});
-  background-repeat: no-repeat;
-  background-position: center center;
-`
 
 const Description = styled.p`
   font-size: 24px;
