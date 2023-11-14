@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/MAKE-RE_ver2/static/js/main.b8f67360.js",
+    "main.js": "/MAKE-RE_ver2/static/js/main.bcd2eda2.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "/MAKE-RE_ver2/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/licat-404.png": "/MAKE-RE_ver2/static/media/licat-404.0e7ea41d79605921495b.png",
     "static/media/icon-Url.svg": "/MAKE-RE_ver2/static/media/icon-Url.facffe7998f01ff891c946aa9a6d09bd.svg",
@@ -10,6 +10,7 @@
     "static/media/github-logo.svg": "/MAKE-RE_ver2/static/media/github-logo.f13220846de47add2d48b21d0cae4ee1.svg",
     "static/media/img-icon-dark.svg": "/MAKE-RE_ver2/static/media/img-icon-dark.52b85b3f654b7ec3490264049e68cf74.svg",
     "static/media/img-icon.svg": "/MAKE-RE_ver2/static/media/img-icon.874fb93c7f6a7b62fa3310f7ba4ba3db.svg",
+    "static/media/icon-help-circle.svg": "/MAKE-RE_ver2/static/media/icon-help-circle.b759e62d9387f6f05cfc04fae7b67f22.svg",
     "static/media/google-logo.svg": "/MAKE-RE_ver2/static/media/google-logo.0cafb1a57b7529635bdd83a4bac5216b.svg",
     "static/media/icon-alert-circle.svg": "/MAKE-RE_ver2/static/media/icon-alert-circle.4d94e5c74f3237d7e9717cc5d73377de.svg",
     "static/media/icon-square-Check.svg": "/MAKE-RE_ver2/static/media/icon-square-Check.7dcac75c25ce52b8cd46149580d53930.svg",
@@ -19,6 +20,7 @@
     "static/media/icon-square-Check-fill.svg": "/MAKE-RE_ver2/static/media/icon-square-Check-fill.1e641cffaf59ab11b31a7821d3723691.svg",
     "static/media/icon-Check-fill.svg": "/MAKE-RE_ver2/static/media/icon-Check-fill.51e01a51d39041078595c754a6fb436a.svg",
     "static/media/icon-pencil.svg": "/MAKE-RE_ver2/static/media/icon-pencil.5353cc8a79b094e6ff0d20154bb7b7a3.svg",
+    "static/media/icon-email-auth.svg": "/MAKE-RE_ver2/static/media/icon-email-auth.5721a604478670eaf5c013267a98c4ba.svg",
     "static/media/icon-X.svg": "/MAKE-RE_ver2/static/media/icon-X.e34714896b824127fdc4bf1b991bb56c.svg",
     "static/media/icon-link.svg": "/MAKE-RE_ver2/static/media/icon-link.f06133d91d8878e61cd7b999caadc555.svg",
     "static/media/icon-+.svg": "/MAKE-RE_ver2/static/media/icon-+.163e1765a52161cbf41ff738ea8140ba.svg",
@@ -31,9 +33,9 @@
     "static/media/icon-triangle-down.svg": "/MAKE-RE_ver2/static/media/icon-triangle-down.52c7cd2af2cebb6e75ef2ab40a5eead9.svg",
     "static/media/icon-more.svg": "/MAKE-RE_ver2/static/media/icon-more.73922c2b8bacc5389ec06411afebc002.svg",
     "static/media/icon-light-mode.svg": "/MAKE-RE_ver2/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.b8f67360.js.map": "/MAKE-RE_ver2/static/js/main.b8f67360.js.map"
+    "main.bcd2eda2.js.map": "/MAKE-RE_ver2/static/js/main.bcd2eda2.js.map"
   },
   "entrypoints": [
-    "static/js/main.b8f67360.js"
+    "static/js/main.bcd2eda2.js"
   ]
 }
