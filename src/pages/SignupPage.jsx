@@ -17,15 +17,15 @@ export default function SignupPage() {
   const [isValidate, setIsValidate] = useState(false) // 이메일 형식 검증
   const [isConfirm, setIsConfirm] = useState(false) // 비밀번호 확인 일치 여부
   const [isOpen, setIsOpen] = useState(false) // 인증코드 창 활성화 여부
+  const [isDone, setIsDone] = useState(false) // 이메일 인증 완료 여부
 
-  // console.log('input')
-  // console.log(input)
   // 버튼 활성화 조건에 이메일 인증 여부 추가할 것
   useEffect(() => {
     if (
       !!input['email'] &&
       !!input['password'] & !!input['passwordConfirm'] &&
-      isConfirm
+      isConfirm &&
+      isDone
     ) {
       setIsActive(true)
     } else {
@@ -100,6 +100,8 @@ export default function SignupPage() {
           <AuthCode
             warning={isDuplicate}
             alertMsg={'※ 사용 중인 이메일입니다.'}
+            isDone={isDone}
+            setIsDone={setIsDone}
           />
         ) : null}
         <LabelInput

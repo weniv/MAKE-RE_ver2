@@ -4,11 +4,10 @@ import WarningMsg from './WarningMsg'
 import { Input, Button } from './index'
 import EmailAuthCheck from '../../../assets/icon-email-auth.svg'
 
-export default function AuthCode({ warning, alertMsg }) {
+export default function AuthCode({ warning, alertMsg, isDone, setIsDone }) {
   const [code, setCode] = useState(null) // code 번호
   const [isActive, setIsActive] = useState(true) // 확인 버튼 활성화 여부
   const [isOpen, setIsOpen] = useState(false)
-  const [isDone, setIsDone] = useState(false) // 인증 완료 여부
 
   const sendCode = () => {
     const exCode = '12345'
