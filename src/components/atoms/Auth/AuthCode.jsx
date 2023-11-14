@@ -2,36 +2,50 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import WarningMsg from './WarningMsg'
 import { Input, Button } from './index'
+import { issuanceCode } from '../../../utils/issuanceCode'
 import EmailAuthCheck from '../../../assets/icon-email-auth.svg'
+import HelpCircle from '../../../assets/icon-help-circle.svg'
 
-export default function AuthCode({ warning, alertMsg, isDone, setIsDone }) {
-  const [code, setCode] = useState(null) // code 번호
+export default function AuthCode({
+  warning,
+  alertMsg,
+  isDone,
+  setIsDone,
+  code,
+  setCode,
+}) {
+  const [inputCode, setInputCode] = useState(null) // 입력된 인증번호
   const [isActive, setIsActive] = useState(true) // 확인 버튼 활성화 여부
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false) // 이메일 인증 성공 여부
 
   const sendCode = () => {
-    const exCode = '12345'
     setIsOpen(true)
 
-    if (code === exCode) {
+    if (inputCode === code) {
       setIsDone(true)
+      setInputCode(code)
     } else {
       setIsDone(false)
+      setInputCode('')
     }
 
-    setCode('')
     setIsActive(true)
   }
 
   const handleCode = (e) => {
     const { value } = e.target
-    setCode(value)
+    setInputCode(value)
 
     if (value.length === 5) {
       setIsActive(false)
     } else {
       setIsActive(true)
     }
+  }
+
+  // 인증번호 발급
+  const getAuthCode = () => {
+    issuanceCode(setCode)
   }
 
   return (
@@ -50,8 +64,9 @@ export default function AuthCode({ warning, alertMsg, isDone, setIsDone }) {
                 id="authCode"
                 name="authCode"
                 type="text"
-                value={code}
+                value={inputCode}
                 onChange={(e) => handleCode(e)}
+                disabled={isDone}
               />
               <Button type="button" onClick={sendCode} disabled={isActive}>
                 확인
@@ -67,7 +82,9 @@ export default function AuthCode({ warning, alertMsg, isDone, setIsDone }) {
           </Cont>
           <ResendWrap>
             <p>인증코드를 받지 못하셨나요?</p>
-            <a>재전송</a>
+            <button type="button" onClick={getAuthCode}>
+              <a>재전송</a>
+            </button>
           </ResendWrap>
         </Wrap>
       )}
@@ -128,10 +145,18 @@ const InputWrap = styled.div`
 
 const ResendWrap = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 8px;
+  align-items: center;
   p {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: 12px;
     color: #47494d;
+
+    &::before {
+      content: url(${HelpCircle});
+    }
   }
 
   a {

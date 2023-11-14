@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { AuthCode, Layout } from '../components/atoms/Auth'
-import { EmailInput, LabelInput } from '../components/organisms/Auth'
+import { LabelInput } from '../components/organisms/Auth'
 import { WarningMsg } from '../components/atoms/Auth'
+import { issuanceCode } from '../utils/issuanceCode'
 
 let emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 
@@ -18,6 +19,7 @@ export default function SignupPage() {
   const [isConfirm, setIsConfirm] = useState(false) // 비밀번호 확인 일치 여부
   const [isOpen, setIsOpen] = useState(false) // 인증코드 창 활성화 여부
   const [isDone, setIsDone] = useState(false) // 이메일 인증 완료 여부
+  const [code, setCode] = useState(null) // 이메일 인증 코드
 
   // 버튼 활성화 조건에 이메일 인증 여부 추가할 것
   useEffect(() => {
@@ -58,6 +60,7 @@ export default function SignupPage() {
         setIsDuplicate(true)
       } else {
         setIsDuplicate(false)
+        issuanceCode(setCode)
       }
     } catch (err) {
       console.log(err)
@@ -102,6 +105,8 @@ export default function SignupPage() {
             alertMsg={'※ 사용 중인 이메일입니다.'}
             isDone={isDone}
             setIsDone={setIsDone}
+            code={code}
+            setCode={setCode}
           />
         ) : null}
         <LabelInput

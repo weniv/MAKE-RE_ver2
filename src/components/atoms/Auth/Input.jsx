@@ -9,6 +9,7 @@ export default function Input({
   placeholder,
   onChange,
   warning,
+  disabled,
 }) {
   return (
     <CommonInput
@@ -19,6 +20,7 @@ export default function Input({
       placeholder={placeholder}
       onChange={onChange}
       warning={warning}
+      disabled={disabled}
     />
   )
 }
@@ -41,6 +43,10 @@ const CommonInput = styled.input`
     outline: none;
     border-bottom: ${({ warning }) =>
       warning ? '2px solid red;' : '2px solid #2e6ff2;'};
+    background-color: #f3f5fa;
+  }
+
+  &:disabled {
     background-color: #f3f5fa;
   }
 `
