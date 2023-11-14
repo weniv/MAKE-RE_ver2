@@ -31,6 +31,7 @@ export default function LoginPage() {
     e.preventDefault()
     try {
       console.log(input)
+      navigate('/MAKE-RE_ver2')
     } catch (err) {
       console.log(err)
     }
