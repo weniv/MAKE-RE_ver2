@@ -32,7 +32,7 @@ export default function MyPageNav() {
 }
 
 const Aside = styled.aside`
-  width: 280px;
+  min-width: 280px;
   padding: 20px;
   border-radius: 16px;
   background-color: var(--background-color);
