@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import Logo from '../assets/makere-logo.svg'
 import GithubLogo from '../assets/github-logo.svg'
 import GoogleLogo from '../assets/google-logo.svg'
-
-const LoginInput = ({ name, type, placeholder, ref, onChange }) => {
-  return (
-    <Input
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      ref={ref}
-      onChange={onChange}
-    />
-  )
-}
+import { Logo, Layout, Input } from '../components/atoms/Auth'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -43,6 +31,7 @@ export default function LoginPage() {
     e.preventDefault()
     try {
       console.log(input)
+      navigate('/MAKE-RE_ver2')
     } catch (err) {
       console.log(err)
     }
@@ -68,139 +57,98 @@ export default function LoginPage() {
 
   return (
     <Layout>
-      <Wrap>
-        <div className="logo"></div>
-        <p className="description">
-          메이커리 로그인 후<br />
-          나만의 이력서를 만들어 보세요.
-        </p>
-        <form id="loginform" onSubmit={sendLoginData}>
-          <LoginInput
-            name="email"
-            type={'email'}
-            placeholder={'이메일을 입력하세요.'}
-            onChange={(e) => handleOnchange(e)}
-          />
-          <LoginInput
-            name="password"
-            type={'password'}
-            placeholder={'비밀번호를 입력하세요.'}
-            onChange={(e) => handleOnchange(e)}
-          />
-        </form>
-        <Button
-          form="loginform"
-          className="login"
-          isActive={isActive}
-          disabled={!isActive}
+      <Logo />
+      <Description>
+        메이커리 로그인 후<br />
+        나만의 이력서를 만들어 보세요.
+      </Description>
+      <Form id="loginform" onSubmit={sendLoginData}>
+        <Input
+          name="email"
+          type={'email'}
+          placeholder={'이메일을 입력하세요.'}
+          onChange={(e) => handleOnchange(e)}
+        />
+        <Input
+          name="password"
+          type={'password'}
+          placeholder={'비밀번호를 입력하세요.'}
+          onChange={(e) => handleOnchange(e)}
+        />
+      </Form>
+      <Button
+        form="loginform"
+        className="login"
+        isActive={isActive}
+        disabled={!isActive}
+      >
+        로그인
+      </Button>
+      <Redirect>
+        <p
+          className="join"
+          onClick={() => {
+            navigate('/MAKE-RE_ver2/signup')
+          }}
         >
-          로그인
-        </Button>
-        <Redirect>
-          <p
-            className="join"
-            onClick={() => {
-              navigate('/MAKE-RE_ver2/signup')
-            }}
-          >
-            이메일로 회원가입
-          </p>
-          <p
-            className="findPassword"
-            onClick={() => console.log('비밀번호 찾기 페이지로 이동')}
-          >
-            비밀번호 찾기
-          </p>
-        </Redirect>
-        <div className="line">
-          <p className="or">또는</p>
-        </div>
-        <Button className="github social" onClick={githubLogin}>
-          GitHub 계정으로 로그인
-        </Button>
-        <Button className="google social" onClick={googleLogin}>
-          Google 계정으로 로그인
-        </Button>
-      </Wrap>
+          이메일로 회원가입
+        </p>
+        <p
+          className="findPassword"
+          onClick={() => console.log('비밀번호 찾기 페이지로 이동')}
+        >
+          비밀번호 찾기
+        </p>
+      </Redirect>
+      <Line>
+        <p className="or">또는</p>
+      </Line>
+      <Button className="github social" onClick={githubLogin}>
+        GitHub 계정으로 로그인
+      </Button>
+      <Button className="google social" onClick={googleLogin}>
+        Google 계정으로 로그인
+      </Button>
     </Layout>
   )
 }
 
-const Layout = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100vw;
-  height: 100vh;
+const Description = styled.p`
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  color: #121314;
+  text-align: center;
+  margin: 24px 0 60px 0;
 `
 
-const Wrap = styled.div`
+const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 322px;
-  height: auto;
-
-  div.logo {
-    width: 80px;
-    height: 80px;
-    background-color: #2e6ff2;
-    border-radius: 16px;
-    background-image: url(${Logo});
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-
-  p.description {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 32px;
-    color: #121314;
-    text-align: center;
-    margin: 24px 0 52px 0;
-  }
-  div.line {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
-    color: #8d9299;
-    margin: 32px 0 24px 0;
-
-    p.or {
-      padding: 0 12px;
-      white-space: nowrap;
-    }
-
-    &::before,
-    &::after {
-      content: '';
-      width: 100%;
-      height: 1px;
-      background-color: #d9dbe0;
-    }
-  }
+  gap: 16px;
 `
 
-const Input = styled.input`
+const Line = styled.div`
   width: 100%;
-  height: 42px;
-  border: none;
-  border-bottom: 2px solid #d9dbe0;
-  padding-left: 8px;
-  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8d9299;
+  margin: 32px 0 24px 0;
 
-  &::placeholder {
-    font-size: 16px;
-    color: #8d9299;
+  p.or {
+    padding: 0 12px;
+    white-space: nowrap;
   }
 
-  &:focus {
-    outline: none;
-    border-bottom: 2px solid #2e6ff2;
-    background-color: #f3f5fa;
+  &::before,
+  &::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #d9dbe0;
   }
 `
 
@@ -231,7 +179,7 @@ const Button = styled.button`
   font-size: 14px;
 
   &.login {
-    margin: 16px 20px;
+    margin: 24px 0 20px 0;
     background-color: ${({ isActive }) => (isActive ? '#2e6ff2' : '#d9dbe0')};
     color: ${({ isActive }) => (isActive ? '#fff' : '#8d9299')};
   }
