@@ -7,14 +7,7 @@ import ColorContext from '../../../context/ColorContext'
 import { dndContext } from '../../../utils/dnd'
 import ColorIcon from '../ColorIcon/ColorIcon'
 
-export default function NavList({
-  clickIdx,
-  listName,
-  id,
-  isFill,
-  type,
-  onClick,
-}) {
+export default function NavList({ clickIdx, listName, id, type, onClick }) {
   const { mainColor } = useContext(ColorContext)
   const [clicked, setClickIdx] = useState(clickIdx === id)
 
@@ -34,46 +27,25 @@ export default function NavList({
   }, [clickIdx])
 
   return (
-    <Cont
-      key={id}
-      isFill={true}
-      clicked={clicked}
-      onClick={onClick}
-      color={mainColor}
-    >
+    <Cont key={id} clicked={clicked} onClick={onClick} color={mainColor}>
       <>
         <p>{listName}</p>
-        <DragBtn
-          ref={setNodeRef}
-          {...attributes}
-          {...listeners}
-          listName={listName}
-        >
-          <ColorIcon
-            type="iconLv3"
-            iconPath={hamburgerIcon}
-            width="16px"
-            height="16px"
-          />
-        </DragBtn>
-      </>
-      {/* {type === 'write' ? (
-        <>
-          {isFill ? (
-            <CheckFillIcon fill={mainColor} alt="입력 완료" />
-          ) : (
-            <img src={checkIcon} alt="입력 미완료" />
-          )}
-          <NavText>{listName}</NavText>
-          <DragBtn ref={setNodeRef} {...attributes} {...listeners}>
-            <img src={hamburgerIcon} />
+        {type === 'write' && (
+          <DragBtn
+            ref={setNodeRef}
+            {...attributes}
+            {...listeners}
+            listName={listName}
+          >
+            <ColorIcon
+              type="iconLv3"
+              iconPath={hamburgerIcon}
+              width="16px"
+              height="16px"
+            />
           </DragBtn>
-        </>
-      ) : (
-        <>
-          <NavText>{listName}</NavText>
-        </>
-      )} */}
+        )}
+      </>
     </Cont>
   )
 }
