@@ -1,12 +1,15 @@
 import React from 'react'
+import Header from '../../organisms/Header/Header'
 import styled from 'styled-components'
 
 export default function Layout({ children }) {
   return (
-    <Section>
-      <Header />
-      <Content>{children}</Content>
-    </Section>
+    <>
+      <Header options={{ isCenter: true, isWhite: true }} />
+      <Section>
+        <Content>{children}</Content>
+      </Section>
+    </>
   )
 }
 
@@ -16,10 +19,8 @@ const Section = styled.section`
   justify-content: center;
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 71px);
 `
-
-const Header = styled.div``
 
 const Content = styled.div`
   display: flex;
