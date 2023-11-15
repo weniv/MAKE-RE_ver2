@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { AuthCode, Layout } from '../components/atoms/Auth'
 import { LabelInput } from '../components/organisms/Auth'
@@ -140,7 +141,21 @@ export default function SignupPage() {
       </Form>
       <Notice>
         본인은 만 14세 이상이며, 메이커리의
-        <br /> <span>이용 약관, 개인정보취급방침</span>을 확인하였습니다.
+        <br />
+        <Link
+          to="https://www.notion.so/paullabworkspace/2023-12-01-54085dc36cd64e36bcd8b9a957673bdc?pvs=4"
+          target="_blank"
+        >
+          이용 약관
+        </Link>
+        ,
+        <Link
+          to="https://www.notion.so/paullabworkspace/2023-12-01-17147d5c603f45a6b49f0021d3769fa9?pvs=4"
+          target="_blank"
+        >
+          개인정보취급방침
+        </Link>
+        을 확인하였습니다.
       </Notice>
       <Button
         form="signupForm"
@@ -198,8 +213,12 @@ const Notice = styled.p`
   text-align: center;
   margin: 24px 0;
 
-  span {
+  a {
     color: #2e6ff2;
+
+    &:last-child {
+      margin-left: 3px;
+    }
   }
 `
 
