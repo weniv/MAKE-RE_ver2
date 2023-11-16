@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useRef, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -12,6 +18,7 @@ import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
 import { ResumeContext } from '../context/ResumeContext'
 import Footer from '../components/organisms/Footer/Footer'
+import RemoteContext from '../context/RemoteContext'
 
 export const LocalContext = createContext(null)
 
@@ -19,6 +26,11 @@ export default function PreviewPage() {
   const exportRef = useRef(null)
   const scrollRef = useRef([])
   const { navList } = useContext(ResumeContext)
+  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+
+  useEffect(() => {
+    updateCurrentSection({ id: 1, title: '프로필' })
+  }, [])
 
   const getLocalData = () => {
     const data = localStorage.getItem('resumeData')
