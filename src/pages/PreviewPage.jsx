@@ -18,12 +18,12 @@ export const LocalContext = createContext(null)
 export default function PreviewPage() {
   const exportRef = useRef(null)
   const { navList } = useContext(ResumeContext)
-  const getlocalData = () => {
+  const getLocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
   }
 
-  const [data, setData] = useState(getlocalData)
+  const [data, setData] = useState(getLocalData)
 
   const components = {
     프로필: ProfilePreview,
@@ -47,17 +47,7 @@ export default function PreviewPage() {
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
           <Main ref={exportRef}>
-            <Layout>
-              {CurrentComponent}
-              {/* <ProfilePreview />
-              <IntroPreview />
-              <CareerPreview />
-              <ProjectPreview />
-              <ExperiencePreview />
-              <CertificatePreview />
-              <EducationPreview />
-              <UrlPreview /> */}
-            </Layout>
+            <Layout>{CurrentComponent}</Layout>
           </Main>
           <Aside type="preview" exportRef={exportRef} />
         </Cont>
