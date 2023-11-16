@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function EducationPreview() {
+const EducationPreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const eduData = data.education
@@ -21,10 +22,14 @@ export default function EducationPreview() {
     }
   }
 
+  const sectionId = getSectionId('교육', 7)
+
   return (
     <>
       {hasEducation && (
-        <PreviewSection>
+        <PreviewSection
+          ref={(educationRef) => (ref.current[sectionId] = educationRef)}
+        >
           <PreviewSubtitle>Education</PreviewSubtitle>
           {educationList.map((edu) => {
             const isInvalid = !(edu.startDate || edu.endDate || edu.inProgress)
@@ -43,8 +48,11 @@ export default function EducationPreview() {
       )}
     </>
   )
-}
+})
+
 const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
+
+export default EducationPreview

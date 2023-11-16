@@ -6,8 +6,8 @@
 export default function getSectionId(sectionTitle, defaultID) {
   const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
   const section =
-    resumeOrder && resumeOrder.filter((item) => item.title === sectionTitle)
-  const sectionId = resumeOrder ? section[0].id : defaultID
+    resumeOrder && resumeOrder.findIndex((item) => item.title === sectionTitle)
+  const sectionId = resumeOrder ? section : defaultID
 
   return sectionId
 }

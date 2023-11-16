@@ -17,7 +17,9 @@ export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
   const exportRef = useRef(null)
+  const scrollRef = useRef([])
   const { navList } = useContext(ResumeContext)
+
   const getLocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
@@ -25,6 +27,8 @@ export default function PreviewPage() {
 
   const [data, setData] = useState(getLocalData)
 
+  const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
+  console.log(resumeOrder)
   const components = {
     프로필: ProfilePreview,
     자기소개서: IntroPreview,
@@ -38,7 +42,7 @@ export default function PreviewPage() {
 
   const CurrentComponent = navList.map((el, index) => {
     const Component = components[el.title]
-    return <Component key={index} />
+    return <Component key={index} ref={scrollRef} />
   })
 
   return (
@@ -49,7 +53,7 @@ export default function PreviewPage() {
           <Main ref={exportRef}>
             <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside type="preview" exportRef={exportRef} />
+          <Aside type="preview" exportRef={exportRef} scrollRef={scrollRef} />
         </Cont>
       </LocalContext.Provider>
       <Footer />
@@ -62,6 +66,7 @@ const Cont = styled.div`
   width: 100vw;
   display: flex;
   gap: 20px;
+  align-items: flex-start;
   justify-content: center;
   margin: 0 auto;
   padding: 60px 0 120px;

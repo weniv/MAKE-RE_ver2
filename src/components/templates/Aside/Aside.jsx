@@ -7,13 +7,15 @@ export default function Aside({ type, ...props }) {
   return (
     <AsideCont>
       {type === 'preview' && <ColorPicker type={type} />}
-      <NavBar type={type} />
+      <NavBar type={type} scrollRef={props.scrollRef} />
       <PreviewBox type={type} {...props} />
     </AsideCont>
   )
 }
 
 const AsideCont = styled.aside`
+  position: sticky;
+  top: 130px;
   display: flex;
   flex-direction: column;
   gap: 16px;

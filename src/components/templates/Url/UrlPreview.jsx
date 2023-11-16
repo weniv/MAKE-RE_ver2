@@ -1,20 +1,23 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import { PreviewSubtitle } from '../../atoms/Title'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import styled from 'styled-components'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function EducationPreview() {
+const EducationPreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const urlData = data.url
   const urlList = urlData.filter(
     (url) => url.content?.trim() || url.link?.trim()
   )
 
+  const sectionId = getSectionId('추가 URL', 8)
+
   return (
     <>
       {!!urlList.length && (
-        <PreviewSection>
+        <PreviewSection ref={(urlRef) => (ref.current[sectionId] = urlRef)}>
           <PreviewSubtitle>URL</PreviewSubtitle>
           <UrlListContainer>
             {urlList.map((url) => (
@@ -28,7 +31,7 @@ export default function EducationPreview() {
       )}
     </>
   )
-}
+})
 
 const UrlListContainer = styled.ul`
   display: flex;
@@ -51,3 +54,5 @@ const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
+
+export default EducationPreview
