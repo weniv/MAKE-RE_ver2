@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useRef, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import Header from '../components/organisms/Header/Header'
 import Aside from '../components/templates/Aside/Aside'
 import ProfilePreview from '../components/templates/Profile/ProfilePreview'
@@ -12,19 +18,29 @@ import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
 import { ResumeContext } from '../context/ResumeContext'
 import Footer from '../components/organisms/Footer/Footer'
+import RemoteContext from '../context/RemoteContext'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
   const exportRef = useRef(null)
+  const scrollRef = useRef([])
   const { navList } = useContext(ResumeContext)
-  const getlocalData = () => {
+  const { currentSection, updateCurrentSection } = useContext(RemoteContext)
+
+  useEffect(() => {
+    updateCurrentSection({ id: 1, title: '프로필' })
+  }, [])
+
+  const getLocalData = () => {
     const data = localStorage.getItem('resumeData')
     return JSON.parse(data)
   }
 
-  const [data, setData] = useState(getlocalData)
+  const [data, setData] = useState(getLocalData)
 
+  const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
+  console.log(resumeOrder)
   const components = {
     프로필: ProfilePreview,
     자기소개서: IntroPreview,
@@ -38,7 +54,7 @@ export default function PreviewPage() {
 
   const CurrentComponent = navList.map((el, index) => {
     const Component = components[el.title]
-    return <Component key={index} />
+    return <Component key={index} ref={scrollRef} />
   })
 
   return (
@@ -47,19 +63,9 @@ export default function PreviewPage() {
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
           <Main ref={exportRef}>
-            <Layout>
-              {CurrentComponent}
-              {/* <ProfilePreview />
-              <IntroPreview />
-              <CareerPreview />
-              <ProjectPreview />
-              <ExperiencePreview />
-              <CertificatePreview />
-              <EducationPreview />
-              <UrlPreview /> */}
-            </Layout>
+            <Layout>{CurrentComponent}</Layout>
           </Main>
-          <Aside type="preview" exportRef={exportRef} />
+          <Aside type="preview" exportRef={exportRef} scrollRef={scrollRef} />
         </Cont>
       </LocalContext.Provider>
       <Footer />
@@ -72,6 +78,7 @@ const Cont = styled.div`
   width: 100vw;
   display: flex;
   gap: 20px;
+  align-items: flex-start;
   justify-content: center;
   margin: 0 auto;
   padding: 60px 0 120px;

@@ -6,7 +6,7 @@ import RemoteContext from '../../../context/RemoteContext'
 import { saveData } from '../../../utils/saveData'
 import { remoteList } from '../../../data/dummy'
 
-export default function NavBar({ type }) {
+export default function NavBar({ type, scrollRef }) {
   const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
   const [navList, setNavList] = useState(resumeOrder ? resumeOrder : remoteList)
 
@@ -18,7 +18,25 @@ export default function NavBar({ type }) {
       title: item.title,
     }
     updateCurrentSection(val)
+
+    if (item.title === '프로필') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setNavIndex(null)
+    } else {
+      setNavIndex(idx)
+    }
+    // console.log('현재 클릭한 섹션은: ', item.title, item.id, idx)
+    // console.log('현재 항목 객체는: ', resumeOrder)
   }
+
+  const [navIndex, setNavIndex] = useState(null)
+
+  useEffect(() => {
+    if (type !== 'write') {
+      scrollRef.current[navIndex]?.scrollIntoView({ behavior: 'smooth' })
+      setNavIndex(null)
+    }
+  }, [scrollRef, navIndex])
 
   useEffect(() => {
     saveData('resumeOrder', JSON.stringify(navList))
