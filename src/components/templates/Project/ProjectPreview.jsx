@@ -24,6 +24,7 @@ const ProjectPreview = forwardRef((props, ref) => {
                 <ProjectItem>
                   <div className="description">
                     <PreviewMonthItem
+                      type="project"
                       startDate={
                         data.startDate ? `${data.startDate}\n` : '시작일\n'
                       }
