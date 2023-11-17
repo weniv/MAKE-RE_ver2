@@ -22,6 +22,7 @@ export default function ProjectPreview() {
                 <ProjectItem>
                   <div className="description">
                     <PreviewMonthItem
+                      type="project"
                       startDate={
                         data.startDate ? `${data.startDate}\n` : '시작일\n'
                       }

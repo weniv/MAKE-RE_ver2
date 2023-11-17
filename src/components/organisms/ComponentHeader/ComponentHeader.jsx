@@ -53,3 +53,14 @@ export default function ComponentHeader({
     </styles.Cont>
   )
 }
+ComponentHeader.defaultProps = {
+  id: 0,
+  idx: 0,
+  kind: '컴포넌트',
+  title: '',
+  children: null,
+  handleDelete: () => {},
+  setActiveIdx: () => {},
+  isActive: true,
+  setIsActive: () => {},
+}
