@@ -3,12 +3,12 @@ import NavList from '../../atoms/Nav/NavList'
 import { useContext, useEffect, useState } from 'react'
 import { Dnd } from '../../../utils'
 import RemoteContext from '../../../context/RemoteContext'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { saveData } from '../../../utils/saveData'
+import { remoteList } from '../../../data/dummy'
 
-export default function NavBar({ type }) {
-  const [isFill, setIsFill] = useState(false)
-  const { navList, setNavList } = useContext(ResumeContext)
+export default function NavBar({ type, scrollRef }) {
+  const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
+  const [navList, setNavList] = useState(resumeOrder ? resumeOrder : remoteList)
 
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
 
@@ -18,12 +18,29 @@ export default function NavBar({ type }) {
       title: item.title,
     }
     updateCurrentSection(val)
+
+    if (item.title === '프로필') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setNavIndex(null)
+    } else {
+      setNavIndex(idx)
+    }
+    // console.log('현재 클릭한 섹션은: ', item.title, item.id, idx)
+    // console.log('현재 항목 객체는: ', resumeOrder)
   }
 
-  //새로고침해도 변경된 nav 순서가 유지되는것이 좋지않을까
-  // useEffect(() => {
-  //   saveData('resumeOrder', JSON.stringify(navList))
-  // }, [navList])
+  const [navIndex, setNavIndex] = useState(null)
+
+  useEffect(() => {
+    if (type !== 'write') {
+      scrollRef.current[navIndex]?.scrollIntoView({ behavior: 'smooth' })
+      setNavIndex(null)
+    }
+  }, [scrollRef, navIndex])
+
+  useEffect(() => {
+    saveData('resumeOrder', JSON.stringify(navList))
+  }, [navList])
 
   return (
     <Dnd state={navList} setState={setNavList}>
@@ -36,7 +53,6 @@ export default function NavBar({ type }) {
               idx={idx}
               key={item.id}
               id={item.id}
-              isFill={isFill}
               type={type}
               onClick={() => {
                 handleClickList(item, idx)

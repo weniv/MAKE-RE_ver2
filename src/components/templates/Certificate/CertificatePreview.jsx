@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function CertificatePreview() {
+const CertificatePreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const certData = data.certificate
@@ -23,10 +24,15 @@ export default function CertificatePreview() {
       return date.replace('-', '. ') + '.'
     }
   }
+
+  const sectionId = getSectionId('자격증', 6)
+
   return (
     <>
       {hasCertificates && (
-        <PreviewSection>
+        <PreviewSection
+          ref={(certificateRef) => (ref.current[sectionId] = certificateRef)}
+        >
           <PreviewSubtitle>Certificate</PreviewSubtitle>
           {certificates.map((cert) => {
             const isInvalid = !cert.date
@@ -45,9 +51,11 @@ export default function CertificatePreview() {
       )}
     </>
   )
-}
+})
 
 const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
+
+export default CertificatePreview

@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function CareerPreview() {
+const CareerPreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const careerData = data.career.filter((el) => !!el.title)
@@ -16,10 +17,12 @@ export default function CareerPreview() {
     }
   }
 
+  const sectionId = getSectionId('커리어', 3)
+
   return (
     <>
       {careerData.length > 0 ? (
-        <section>
+        <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap gap="40px">
             {careerData &&
@@ -45,7 +48,7 @@ export default function CareerPreview() {
       ) : null}
     </>
   )
-}
+})
 
 const Wrap = styled.div`
   position: relative;
@@ -77,3 +80,5 @@ const Works = styled.p`
   line-height: 2rem;
   white-space: pre-wrap;
 `
+
+export default CareerPreview

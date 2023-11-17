@@ -1,20 +1,23 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { SkillList } from '../../atoms/SkillList'
 import styled from 'styled-components'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function IntroPreview() {
+const IntroPreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
   const introData = data.profile.intro
 
+  const sectionId = getSectionId('자기소개서', 2)
+
   return (
     <>
       {introData && (
-        <IntroSection>
+        <IntroSection ref={(introRef) => (ref.current[sectionId] = introRef)}>
           <PreviewSubtitle>Introduction</PreviewSubtitle>
           <IntroCont>{introData}</IntroCont>
         </IntroSection>
@@ -31,7 +34,7 @@ export default function IntroPreview() {
       )}
     </>
   )
-}
+})
 
 const IntroSection = styled.div`
   page-break-inside: avoid;
@@ -48,3 +51,5 @@ const IntroCont = styled.pre`
 const SkillSection = styled.section`
   margin-top: 40px;
 `
+
+export default IntroPreview

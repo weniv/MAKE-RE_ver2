@@ -1,20 +1,22 @@
-import React, { useContext } from 'react'
+import React, { forwardRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
+import getSectionId from '../../../utils/getSectionId'
 
-export default function ProjectPreview() {
+const ProjectPreview = forwardRef((props, ref) => {
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const projectData = data.project.filter((el) => !!el.title)
 
+  const sectionId = getSectionId('프로젝트', 4)
   return (
     <>
       {projectData.length > 0 ? (
-        <section>
+        <section ref={(projectRef) => (ref.current[sectionId] = projectRef)}>
           <PreviewSubtitle>Project</PreviewSubtitle>
           <Project>
             {projectData &&
@@ -72,7 +74,7 @@ export default function ProjectPreview() {
       ) : null}
     </>
   )
-}
+})
 
 const Project = styled.section`
   display: flex;
@@ -175,3 +177,5 @@ const LinkWrap = styled.div`
     align-items: center;
   }
 `
+
+export default ProjectPreview
