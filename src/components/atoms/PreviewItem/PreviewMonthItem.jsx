@@ -28,9 +28,9 @@ export default function PreviewMonthItem({
             <span>-</span>
           ) : (
             <>
-              <span>{startDate}</span>
+              <span>{startDate || '-'}</span>
               <span className="fit-span"> ~ </span>
-              <span className="end">{endDate}</span>
+              <span className="end">{endDate || '-'}</span>
             </>
           )}
         </FullDate>
