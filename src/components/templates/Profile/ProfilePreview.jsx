@@ -117,6 +117,7 @@ const ProfileBox = styled.div`
 `
 
 const DataList = styled.ul`
+  color: var(--surface-color);
   font-size: 14px;
 
   img.commit {
