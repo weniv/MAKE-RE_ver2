@@ -38,6 +38,7 @@ const IntroSection = styled.div`
   break-inside: avoid;
 `
 const IntroCont = styled.pre`
+  color: var(--surface-color);
   width: 100%;
   font-size: 14px;
   line-height: 20px;
