@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Layout } from '../components/organisms/Component'
 import { WriteTitle } from '../components/atoms/Title'
@@ -9,6 +10,37 @@ import PlusIcon from '../assets/icon-+.svg'
 import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
 
 export default function MyResumePage() {
+  const [resumes, setResumes] = useState([])
+
+  useEffect(() => {
+    // Django API endpoint 설정
+    const apiUrl = 'your_django_api_endpoint'
+
+    // 이력서 데이터 불러오기
+    const fetchResumes = async () => {
+      try {
+        const response = await fetch(apiUrl)
+        if (response.ok) {
+          const data = await response.json()
+          setResumes(data)
+        } else {
+          console.error('Failed to fetch resumes')
+        }
+      } catch (error) {
+        console.error('Error fetching resumes:', error)
+      }
+    }
+
+    fetchResumes()
+  }, [])
+
+  const handleAddResume = () => {
+    // 이력서 추가 로직
+    if (resumes.length < 3) {
+      setResumes((prevResumes) => [...prevResumes, <Resume />])
+    }
+  }
+
   return (
     <>
       <Header options={{ hasProfile: true, hasCreate: true }} />
@@ -30,6 +62,17 @@ export default function MyResumePage() {
                     이력서 만들기
                   </AddBtn>
                 </AddCont>
+                {/* {resumes.map((resume) => {
+                  return <Resume key={resume.id} />
+                })}
+                {resumes.length <= 2 && (
+                  <AddCont>
+                    <AddBtn onClick={handleAddResume}>
+                      <ColorIcon iconPath={PlusIcon} type="iconLv1" />
+                      이력서 만들기
+                    </AddBtn>
+                  </AddCont>
+                )} */}
               </Wrap>
             </Section>
           </Layout>
