@@ -14,6 +14,10 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
     },
   }
 
+  const handleDeleteResume = (idx) => {
+    console.log('이력서 삭제 로직')
+  }
+
   return (
     <StyledModal
       isOpen={isModalOpen}
@@ -27,7 +31,7 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
         <MainBtn type="fit" onClick={() => setModalOpen(false)}>
           취소
         </MainBtn>
-        <ConfirmBtn>확인</ConfirmBtn>
+        <ConfirmBtn onClick={handleDeleteResume}>확인</ConfirmBtn>
       </BtnWrap>
     </StyledModal>
   )

@@ -11,9 +11,22 @@ export default function Resume() {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [isEditable, setEditable] = useState(false)
+  const [resumeName, setResumeName] = useState('기존 이력서 이름') // resume.name
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
+  }
+
+  const handleInputChange = (e) => {
+    setResumeName(e.target.value)
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setEditable(false)
+
+      console.log('이력서 이름 수정 로직')
+    }
   }
 
   // 이력서 메뉴 외부 클릭 시 닫기
@@ -34,10 +47,15 @@ export default function Resume() {
         <Wrap>
           <TitleWrap>
             {isEditable ? (
-              <DefaultInput type="resumeTitle" inputData="기존 이력서 이름" />
+              <DefaultInput
+                type="resumeTitle"
+                inputData={resumeName}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+              />
             ) : (
               <>
-                <Title>홍길동의 이력서</Title>
+                <Title>{resumeName}</Title>
                 <button onClick={() => setEditable(true)}>
                   <ColorIcon
                     iconPath={EditIcon}
@@ -74,8 +92,7 @@ export default function Resume() {
             )}
           </MoreBtn>
         </Wrap>
-
-        <EditDate>마지막 수정: 2023.11.01</EditDate>
+        <EditDate>마지막 수정: 2023.11.01</EditDate> {/* resume.update_at */}
       </Cont>
       {isModalOpen && (
         <DeleteModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
