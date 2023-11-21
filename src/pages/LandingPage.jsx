@@ -4,6 +4,11 @@ import styled from 'styled-components'
 import { MainBtn } from '../components/atoms/Button'
 import Footer from '../components/organisms/Footer/Footer'
 import { useNavigate } from 'react-router-dom'
+import bannerImg from '../assets/banner.png'
+import desc1 from '../assets/desc-1.png'
+import desc2 from '../assets/desc-2.png'
+import desc3 from '../assets/desc-3.png'
+import desc4 from '../assets/desc-4.png'
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -25,18 +30,20 @@ export default function LandingPage() {
         <SliderBanner>
           <ul>
             <BannerItem>
-              <p className="title">
-                메이커리 서비스를 통해
-                <br />
-                개발자 이력서를 쉽게 만들어 보세요!
-              </p>
-              <p className="description">
-                &lt;MAKE:RE&gt;는 취업을 준비하시는 분들을 위한 이력서 작성
-                서비스입니다.
-              </p>
-              <MainBtn type="create" onClick={moveWrite}>
-                이력서 만들기
-              </MainBtn>
+              <div className="text-container">
+                <p className="title">
+                  메이커리 서비스를 통해
+                  <br />
+                  개발자 이력서를 쉽게 만들어 보세요!
+                </p>
+                <p className="description">
+                  &lt;MAKE:RE&gt;는 취업을 준비하시는 분들을 위한 이력서 작성
+                  서비스입니다.
+                </p>
+                <Button type="create" onClick={moveWrite}>
+                  개발자 이력서 만들기
+                </Button>
+              </div>
             </BannerItem>
           </ul>
         </SliderBanner>
@@ -55,11 +62,12 @@ export default function LandingPage() {
                   작성, 관리할 수 있어요.
                 </p>
                 <p className="description">
-                  이러이러하게 저러저러한 기능을 활용해서
-                  <br /> 편리하게 프로필을 관리하세요.
+                  년차, 연락처, 기술 블로그 등 프로필 항목을 편리하게 관리하고
+                  <br />
+                  이력서 생성 시 간편하게 불러와 사용하세요.
                 </p>
               </GuideDescription>
-              <GuideImg src="" alt="" />
+              <GuideImg src={desc1} alt="" />
             </li>
             <li>
               <GuideDescription>
@@ -75,21 +83,22 @@ export default function LandingPage() {
                   최대 3개까지 이력서를 생성 및 관리할 수 있어요.
                 </p>
               </GuideDescription>
-              <GuideImg src="" alt="" />
+              <GuideImg src={desc2} alt="" />
             </li>
             <li>
               <GuideDescription>
                 <span className="tag">커스터마이징</span>
                 <p className="title">
-                  나만의 이력서를
-                  <br /> 생성할 수 있어요.
+                  개성있는 나만의 이력서를
+                  <br />
+                  생성할 수 있어요.
                 </p>
                 <p className="description">
                   이력서 항목의 순서를 자유롭게 변경하고 <br />
                   원하는 색상을 지정해 이력서를 커스텀할 수 있어요.
                 </p>
               </GuideDescription>
-              <GuideImg src="" alt="" />
+              <GuideImg src={desc3} alt="" />
             </li>
             <li>
               <GuideDescription>
@@ -99,12 +108,12 @@ export default function LandingPage() {
                   PDF로 출력할 수 있어요.
                 </p>
                 <p className="description">
-                  한 페이지에 컨텐츠가 완벽하게 유지되며 잘리지 않는
+                  한 페이지에 컨텐츠가 완벽하게 유지되며
                   <br />
-                  자연스러운 레이아웃으로 출력할 수 있어요.
+                  잘리지 않는 자연스러운 레이아웃으로 출력할 수 있어요.
                 </p>
               </GuideDescription>
-              <GuideImg src="" alt="" />
+              <GuideImg src={desc4} alt="" />
             </li>
           </GuideList>
         </GuideContainer>
@@ -132,7 +141,6 @@ const SliderBanner = styled.section`
   width: 100%;
   height: 80rem;
   background-color: var(--activation-color);
-  text-align: center;
 
   & ul {
     width: 100%;
@@ -141,22 +149,49 @@ const SliderBanner = styled.section`
 `
 
 const BannerItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
+  background: url(${bannerImg}) no-repeat center bottom / 192rem 80rem #618dff;
+  color: var(--background-color);
+  margin: auto;
+
+  & .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    max-width: 120rem;
+    height: 100%;
+    margin: auto;
+    padding: 0 1rem;
+  }
 
   & .title {
     font-size: 4rem;
     line-height: 1.4;
     font-weight: 600;
-    color: var(--surface-color);
   }
 
   & .description {
-    margin: 2rem auto 3.2rem;
+    margin: 2rem 0 3.2rem;
+  }
+`
+
+const Button = styled.button`
+  height: 42px;
+  background-color: var(--background-color);
+  color: var(--surface-color);
+  border-radius: 1rem;
+  padding: 1.1rem 2rem;
+  line-height: 2rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.1s ease-in;
+
+  &:hover {
+    opacity: 0.9;
   }
 `
 const GuideImg = styled.img`
@@ -164,7 +199,8 @@ const GuideImg = styled.img`
   height: 30rem;
   border-radius: 3rem;
   overflow: hidden;
-  box-shadow: var(--shadow);
+  border: 2px solid var(--activation-color);
+  box-shadow: 0.4rem 0.4rem 2.4rem rgba(0, 0, 0, 0.1);
 `
 
 const GuideContainer = styled.div`
@@ -196,17 +232,18 @@ const GuideList = styled.ul`
 const GuideDescription = styled.div`
   display: flex;
   flex-direction: column;
+  font-size: 1.8rem;
   font-weight: 600;
   margin-right: auto;
-  line-height: 1.4;
+  line-height: 2.4rem;
 
   & .tag {
-    font-size: 1.8rem;
     color: var(--primary-color);
   }
 
   & .title {
     font-size: 4rem;
+    line-height: 5.6rem;
     margin: 1.2rem 0 2.4rem;
   }
 `
