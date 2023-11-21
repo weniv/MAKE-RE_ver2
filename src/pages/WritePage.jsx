@@ -1,5 +1,5 @@
-import { styled } from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { css, styled } from 'styled-components'
+import { useContext, useEffect, useState } from 'react'
 import Aside from '../components/templates/Aside/Aside'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
@@ -14,6 +14,9 @@ import { Project } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
 import { ResumeContext } from '../context/ResumeContext'
 import { saveData } from '../utils/saveData'
+import questionIcon from '../assets/icon-question-mark.svg'
+import closeIcon from '../assets/icon-X.svg'
+import ExplainOverlay from '../components/organisms/ExplainOverlay/ExplainOverlay'
 
 export default function WritePage() {
   const { currentSection } = useContext(RemoteContext)
@@ -28,6 +31,7 @@ export default function WritePage() {
     교육: Education,
     '추가 URL': Url,
   }
+  const [overlay, setOverlay] = useState(false)
 
   const CurrentComponent = components[currentSection.title]
 
@@ -41,12 +45,23 @@ export default function WritePage() {
 
   return (
     <>
+      {overlay && <ExplainOverlay />}
       <Header options={{ hasProfile: true }} />
       <Cont>
         <Main>
           <CurrentComponent />
         </Main>
         <Aside type="write" />
+        <ExplainBtn
+          type="button"
+          onMouseEnter={() => setOverlay(true)}
+          onMouseLeave={() => setOverlay(false)}
+        >
+          <Icon overlay={overlay} />
+        </ExplainBtn>
+        {/* <ExplainBtn type="button" onClick={() => setOverlay(!overlay)}>
+          <Icon overlay={overlay} />
+        </ExplainBtn> */}
       </Cont>
       <Footer />
     </>
@@ -68,4 +83,43 @@ const Cont = styled.div`
   display: flex;
   gap: 20px;
   justify-content: center;
+`
+
+const ExplainBtn = styled.button`
+  box-shadow: var(--shadow);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 2.8rem;
+  right: 2.8rem;
+  z-index: 1000;
+`
+
+const Icon = styled.div`
+  width: 2.8rem;
+  height: 2.8rem;
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  -webkit-mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+
+  ${(props) =>
+    props.overlay
+      ? css`
+          background-color: var(--gray-lv2-color);
+          mask-image: url(${closeIcon});
+          -webkit-mask-image: url(${closeIcon});
+        `
+      : css`
+          background-color: black;
+          mask-image: url(${questionIcon});
+          -webkit-mask-image: url(${questionIcon});
+        `}
 `

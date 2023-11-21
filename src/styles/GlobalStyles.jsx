@@ -20,8 +20,6 @@ const GlobalStyles = createGlobalStyle`
         --code-green: ${(props) => props.theme.codeGreen};
         --code-orange: ${(props) => props.theme.codeOrange};
 
-        
-        
         --shadow: ${(props) => props.theme.shadow};
 
     }

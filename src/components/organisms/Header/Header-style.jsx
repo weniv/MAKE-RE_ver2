@@ -53,7 +53,7 @@ export const MenuList = styled.ul`
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
   border: 1px solid var(--gray-lv2-color);
-  z-index: 100000;
+  z-index: 100;
 `
 
 export const MenuItem = styled.li`
