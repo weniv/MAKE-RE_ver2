@@ -152,7 +152,7 @@ const BannerItem = styled.li`
   width: 100%;
   height: 100%;
   background: url(${bannerImg}) no-repeat center bottom / 192rem 80rem #618dff;
-  color: var(--background-color);
+  color: white;
   margin: auto;
 
   & .text-container {
@@ -180,8 +180,8 @@ const BannerItem = styled.li`
 
 const Button = styled.button`
   height: 42px;
-  background-color: var(--background-color);
-  color: var(--surface-color);
+  background-color: white;
+  color: #121314;
   border-radius: 1rem;
   padding: 1.1rem 2rem;
   line-height: 2rem;
