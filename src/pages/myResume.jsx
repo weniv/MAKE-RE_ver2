@@ -51,7 +51,7 @@ export default function MyResumePage() {
             <Section>
               <WriteTitle
                 title="이력서 관리"
-                description="이력서는 최대 3개까지만 생성 및 관리할 수 있습니다."
+                description="이력서는 최대 3개까지 생성 및 관리할 수 있습니다."
               />
               <Wrap>
                 <Resume />
