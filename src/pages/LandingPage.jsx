@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { MainBtn } from '../components/atoms/Button'
 import Footer from '../components/organisms/Footer/Footer'
 import { useNavigate } from 'react-router-dom'
+import bannerImg from '../assets/banner.png'
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -25,18 +26,20 @@ export default function LandingPage() {
         <SliderBanner>
           <ul>
             <BannerItem>
-              <p className="title">
-                메이커리 서비스를 통해
-                <br />
-                개발자 이력서를 쉽게 만들어 보세요!
-              </p>
-              <p className="description">
-                &lt;MAKE:RE&gt;는 취업을 준비하시는 분들을 위한 이력서 작성
-                서비스입니다.
-              </p>
-              <MainBtn type="create" onClick={moveWrite}>
-                이력서 만들기
-              </MainBtn>
+              <div className="text-container">
+                <p className="title">
+                  메이커리 서비스를 통해
+                  <br />
+                  개발자 이력서를 쉽게 만들어 보세요!
+                </p>
+                <p className="description">
+                  &lt;MAKE:RE&gt;는 취업을 준비하시는 분들을 위한 이력서 작성
+                  서비스입니다.
+                </p>
+                <Button type="create" onClick={moveWrite}>
+                  개발자 이력서 만들기
+                </Button>
+              </div>
             </BannerItem>
           </ul>
         </SliderBanner>
@@ -132,7 +135,6 @@ const SliderBanner = styled.section`
   width: 100%;
   height: 80rem;
   background-color: var(--activation-color);
-  text-align: center;
 
   & ul {
     width: 100%;
@@ -141,22 +143,49 @@ const SliderBanner = styled.section`
 `
 
 const BannerItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
+  background: url(${bannerImg}) no-repeat center bottom / 192rem 80rem #618dff;
+  color: var(--background-color);
+  margin: auto;
+
+  & .text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    max-width: 120rem;
+    height: 100%;
+    margin: auto;
+    padding: 0 1rem;
+  }
 
   & .title {
     font-size: 4rem;
     line-height: 1.4;
     font-weight: 600;
-    color: var(--surface-color);
   }
 
   & .description {
-    margin: 2rem auto 3.2rem;
+    margin: 2rem 0 3.2rem;
+  }
+`
+
+const Button = styled.button`
+  height: 42px;
+  background-color: var(--background-color);
+  color: var(--surface-color);
+  border-radius: 1rem;
+  padding: 1.1rem 2rem;
+  line-height: 2rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.1s ease-in;
+
+  &:hover {
+    opacity: 0.9;
   }
 `
 const GuideImg = styled.img`
