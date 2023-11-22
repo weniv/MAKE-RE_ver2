@@ -41,22 +41,37 @@ export default function Career({
       setIsActive={setIsActive}
     >
       <Wrap>
-        <form id="requiredForm" ref={formRef}>
+        <div className="firstSectionWrap">
+          <form id="requiredForm" ref={formRef}>
+            <DefaultInput
+              id="title"
+              type="text"
+              width="100%"
+              name="title"
+              placeholder="예) 위니브(WENIV)"
+              onChange={(e) => {
+                updateData(e, idx, careerData, setCareerData)
+              }}
+              inputData={career.title}
+              required
+            >
+              {'회사명'}
+            </DefaultInput>
+          </form>
           <DefaultInput
-            id="title"
+            id="rank"
             type="text"
-            width="738px"
-            name="title"
-            placeholder="예) 위니브(WENIV)"
+            width="100%"
+            name="rank"
+            placeholder="예) 팀장"
             onChange={(e) => {
               updateData(e, idx, careerData, setCareerData)
             }}
-            inputData={career.title}
-            required
+            inputData={career.rank}
           >
-            {'회사명'}
+            {'직위'}
           </DefaultInput>
-        </form>
+        </div>
         <DateWrap>
           <DateInput
             id="startDate"
@@ -122,6 +137,12 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  div.firstSectionWrap {
+    display: grid;
+    grid-template-columns: 506px 220px;
+    gap: 12px;
+  }
 `
 
 const DateWrap = styled.div`
