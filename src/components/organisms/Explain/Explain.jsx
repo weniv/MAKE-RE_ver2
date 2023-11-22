@@ -33,20 +33,27 @@ export default function Explain({ mode, setMode }) {
 }
 
 const Position = {
-  light: `top: 8rem;
-    transform: translateX(40%);`,
-  move: ` top: 13.2rem;
-    transform: translateX(-110%);`,
-  drag: `top: 49rem;
-    transform: translateX(35%);`,
+  light: `top: 7.5rem;
+    right:0;
+    transform: translateX(39%);`,
+  move: ` 
+    inset: 0;
+    top: 13.2rem;
+    left:54%;`,
+  drag: `
+    inset: 0;
+    top: 48.5rem;
+    left:83.8%;`,
   pdf: `
+    inset: 0;
     top: 71rem;
-    right: -1rem;`,
+    left:83.5%;`,
 }
 
 const ExplainContainer = styled.div`
-  width: 119rem;
+  width: 100%;
   height: 100%;
+  max-width: 119rem;
   position: absolute;
   top: 0;
   left: 50%;

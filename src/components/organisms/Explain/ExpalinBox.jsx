@@ -17,8 +17,8 @@ const BoxContainer = styled.div`
   border: 2px solid white;
   border-radius: 1rem;
   width: fit-content;
+  height: fit-content;
   position: absolute;
-  right: 0;
 
   ${(props) => props.pos}
   ${(props) => props.dir === 'left' && css``}
