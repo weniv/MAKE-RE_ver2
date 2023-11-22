@@ -30,6 +30,8 @@ export default function Experience() {
     startDate: '',
     endDate: '',
     inProgress: false,
+    content: '',
+    link: '',
   }
 
   /** 경험 추가 */
