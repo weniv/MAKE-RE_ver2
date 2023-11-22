@@ -79,6 +79,6 @@ const ModeCont = styled.div`
   ${(props) =>
     props.mode &&
     `
-    filter: brightness(0.4);
+    filter: brightness(0.3);
   `}
 `

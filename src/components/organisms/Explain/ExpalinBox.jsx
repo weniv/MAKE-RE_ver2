@@ -2,9 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import iconPolygon from '../../../assets/icon-polygon.svg'
 
-export default function ExpalinBox({ children, dir }) {
+export default function ExpalinBox({ children, dir, pos }) {
   return (
-    <BoxContainer dir={dir}>
+    <BoxContainer dir={dir} pos={pos}>
       <Content>{children}</Content>
     </BoxContainer>
   )
@@ -17,7 +17,11 @@ const BoxContainer = styled.div`
   border: 2px solid white;
   border-radius: 1rem;
   width: fit-content;
-  position: relative;
+  position: absolute;
+  right: 0;
+
+  ${(props) => props.pos}
+  ${(props) => props.dir === 'left' && css``}
 
   &::after {
     content: '';
@@ -55,15 +59,17 @@ const Left = css`
 `
 
 const Content = styled.p`
+  white-space: nowrap;
+  word-break: keep-all;
   font-size: 1.8rem;
   line-height: 2.4rem;
   font-weight: 600;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 
-  & .explain {
+  & span {
     color: #ffe187;
     font-size: 1.6rem;
     line-height: 2.2rem;

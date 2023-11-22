@@ -22,7 +22,7 @@ const BtnCont = styled.button`
   position: fixed;
   bottom: 2.8rem;
   right: 2.8rem;
-  z-index: 1000;
+  z-index: 10000;
 `
 
 const Icon = styled.div`
