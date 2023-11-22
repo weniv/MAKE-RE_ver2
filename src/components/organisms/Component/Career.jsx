@@ -5,6 +5,7 @@ import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import { ResumeContext } from '../../../context/ResumeContext'
+import RequireInput from '../../atoms/Input/RequireInput'
 
 export default function Career({
   idx,
@@ -41,9 +42,9 @@ export default function Career({
       setIsActive={setIsActive}
     >
       <Wrap>
-        <div className="firstSectionWrap">
-          <form id="requiredForm" ref={formRef}>
-            <DefaultInput
+        <div>
+          <div className="firstSectionWrap">
+            <RequireInput
               id="title"
               type="text"
               width="100%"
@@ -53,24 +54,23 @@ export default function Career({
                 updateData(e, idx, careerData, setCareerData)
               }}
               inputData={career.title}
-              required
             >
               {'회사명'}
+            </RequireInput>
+            <DefaultInput
+              id="rank"
+              type="text"
+              width="100%"
+              name="rank"
+              placeholder="예) 팀장"
+              onChange={(e) => {
+                updateData(e, idx, careerData, setCareerData)
+              }}
+              inputData={career.rank}
+            >
+              {'직위'}
             </DefaultInput>
-          </form>
-          <DefaultInput
-            id="rank"
-            type="text"
-            width="100%"
-            name="rank"
-            placeholder="예) 팀장"
-            onChange={(e) => {
-              updateData(e, idx, careerData, setCareerData)
-            }}
-            inputData={career.rank}
-          >
-            {'직위'}
-          </DefaultInput>
+          </div>
         </div>
         <DateWrap>
           <DateInput
@@ -140,6 +140,7 @@ const Wrap = styled.div`
 
   div.firstSectionWrap {
     display: grid;
+    align-items: start;
     grid-template-columns: 506px 220px;
     gap: 12px;
   }

@@ -36,7 +36,7 @@ export default function PreviewBox({ type, ...props }) {
     <Cont>
       {type === 'write' ? (
         <>
-          <SaveBtn onClick={saveLocalstorage} form="requiredForm">
+          <SaveBtn onSubmit={saveLocalstorage} form="requiredForm">
             임시저장
           </SaveBtn>
           <MainBtn type="preview" onClick={movePreview} form="requiredForm">
