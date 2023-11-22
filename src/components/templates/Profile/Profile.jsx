@@ -14,7 +14,7 @@ import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 
-export default function Profile() {
+export default function Profile({ type, setIsReady }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [profileData, setProfileData] = useState(resumeData['profile'])
   const { mainColor } = useContext(ColorContext)
@@ -34,6 +34,12 @@ export default function Profile() {
   useEffect(() => {
     setResumeData({ ...resumeData, profile: profileData })
   }, [profileData])
+
+  useEffect(() => {
+    if (profileData.name) {
+      setIsReady(true)
+    }
+  }, [profileData.name])
 
   const fileRef = useRef(null)
 
@@ -96,10 +102,24 @@ export default function Profile() {
     <Layout>
       <>
         <styles.Section>
-          <WriteTitle
-            title="프로필"
-            description="자신을 간단히 소개해 주세요."
-          />
+          {type === 'userProfileSetting' && (
+            <WriteTitle
+              title="기본 프로필 설정"
+              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
+            />
+          )}
+          {type === 'myProfile' && (
+            <WriteTitle
+              title="기본 프로필"
+              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
+            />
+          )}
+          {type === 'resumeProfile' && (
+            <WriteTitle
+              title="프로필"
+              description="자신을 간단히 소개해 주세요."
+            />
+          )}
           <styles.ProfileCont>
             <styles.ImgCont>
               <styles.ImgLabel
@@ -149,19 +169,37 @@ export default function Profile() {
 
             <div>
               <styles.InputCont>
-                <DefaultInput
-                  id="name"
-                  type="text"
-                  placeholder="예) 홍길동"
-                  width="220px"
-                  marginRight="12px"
-                  inputData={profileData.name}
-                  onChange={(e) => {
-                    updateProfile(e, 'name', profileData, setProfileData)
-                  }}
-                >
-                  이름
-                </DefaultInput>
+                {(type === 'userProfileSetting') | (type === 'myProfile') ? (
+                  <DefaultInput
+                    essentialMsg="*필수 입력 정보입니다."
+                    id="name"
+                    type="text"
+                    placeholder="예) 홍길동"
+                    width="220px"
+                    marginRight="12px"
+                    inputData={profileData.name}
+                    onChange={(e) => {
+                      updateProfile(e, 'name', profileData, setProfileData)
+                    }}
+                  >
+                    이름
+                  </DefaultInput>
+                ) : (
+                  <DefaultInput
+                    id="name"
+                    type="text"
+                    placeholder="예) 홍길동"
+                    width="220px"
+                    marginRight="12px"
+                    inputData={profileData.name}
+                    onChange={(e) => {
+                      updateProfile(e, 'name', profileData, setProfileData)
+                    }}
+                  >
+                    이름
+                  </DefaultInput>
+                )}
+
                 <DefaultInput
                   id="enName"
                   type="text"
