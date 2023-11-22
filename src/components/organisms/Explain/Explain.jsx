@@ -35,10 +35,10 @@ export default function Explain({ mode, setMode }) {
 const Position = {
   light: `top: 8rem;
     transform: translateX(40%);`,
-  move: ` top: 13rem;
+  move: ` top: 13.2rem;
     transform: translateX(-110%);`,
   drag: `top: 49rem;
-    transform: translateX(36%);`,
+    transform: translateX(35%);`,
   pdf: `
     top: 71rem;
     right: -1rem;`,
