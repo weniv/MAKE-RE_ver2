@@ -36,7 +36,7 @@ export default function Profile({ type, setIsReady }) {
   }, [profileData])
 
   useEffect(() => {
-    if (profileData.name) {
+    if (profileData.name | setIsReady) {
       setIsReady(true)
     }
   }, [profileData.name])
