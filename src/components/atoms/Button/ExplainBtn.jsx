@@ -5,7 +5,11 @@ import questionIcon from '../../../assets/icon-question-mark.svg'
 
 export default function ExplainBtn({ mode, setMode }) {
   return (
-    <BtnCont onClick={() => setMode(!mode)}>
+    // <BtnCont onClick={() => setMode(!mode)}>
+    <BtnCont
+      onMouseEnter={() => setMode(true)}
+      onMouseLeave={() => setMode(false)}
+    >
       <Icon state={mode} />
     </BtnCont>
   )
