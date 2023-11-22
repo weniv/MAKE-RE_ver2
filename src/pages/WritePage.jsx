@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Aside from '../components/templates/Aside/Aside'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
@@ -14,6 +14,7 @@ import { Project } from '../components/templates/Project'
 import RemoteContext from '../context/RemoteContext'
 import { ResumeContext } from '../context/ResumeContext'
 import { saveData } from '../utils/saveData'
+import Explain from '../components/organisms/Explain/Explain'
 
 export default function WritePage() {
   const { currentSection } = useContext(RemoteContext)
@@ -28,6 +29,7 @@ export default function WritePage() {
     교육: Education,
     '추가 URL': Url,
   }
+  const [explainMode, setExplainMode] = useState(false)
 
   const CurrentComponent = components[currentSection.title]
 
@@ -41,14 +43,17 @@ export default function WritePage() {
 
   return (
     <>
-      <Header options={{ hasProfile: true }} />
-      <Cont>
-        <Main>
-          <CurrentComponent />
-        </Main>
-        <Aside type="write" />
-      </Cont>
-      <Footer />
+      <Explain mode={explainMode} setMode={setExplainMode} />
+      <ModeCont mode={explainMode}>
+        <Header options={{ hasProfile: true }} />
+        <Cont mode={explainMode}>
+          <Main>
+            <CurrentComponent />
+          </Main>
+          <Aside type="write" />
+        </Cont>
+        <Footer />
+      </ModeCont>
     </>
   )
 }
@@ -68,4 +73,12 @@ const Cont = styled.div`
   display: flex;
   gap: 20px;
   justify-content: center;
+`
+
+const ModeCont = styled.div`
+  ${(props) =>
+    props.mode &&
+    `
+    filter: brightness(0.4);
+  `}
 `
