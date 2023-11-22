@@ -3,6 +3,7 @@ import LinkIcon from '../../../assets/icon-Url.svg'
 
 export default function DefaultInput({
   children,
+  essentialMsg,
   width,
   marginRight,
   id,
@@ -16,7 +17,10 @@ export default function DefaultInput({
 }) {
   return (
     <InputCont type={type}>
-      <Label htmlFor={id}>{children}</Label>
+      <Label htmlFor={id}>
+        {children}
+        <strong> {essentialMsg}</strong>
+      </Label>
       <Input
         id={id}
         type={type}
@@ -45,6 +49,10 @@ const InputCont = styled.div`
 const Label = styled.label`
   color: var(--gray-lv4-color);
   font-size: 12px;
+  font-weight: 700;
+  strong {
+    color: var(--primary-color);
+  }
 `
 
 export const Input = styled.input`

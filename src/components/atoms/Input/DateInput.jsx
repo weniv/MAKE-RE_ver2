@@ -43,7 +43,7 @@ const Label = styled.label`
   font-size: 12px;
   color: var(--gray-lv4-color);
   margin-bottom: 8px;
-  font-weight: 500; // Medium
+  font-weight: 700;
 `
 
 const Input = styled.input`
