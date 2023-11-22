@@ -20,7 +20,7 @@ export default function Certificate({
     >
       <Wrap>
         <DefaultInput
-          id="certificateName"
+          id={`cert-title-${cert.id}`}
           type="text"
           width="738px"
           name="title"
@@ -30,9 +30,37 @@ export default function Certificate({
         >
           자격증명
         </DefaultInput>
+        <DetailWrap>
+          <DefaultInput
+            width="506px"
+            marginRight="0px"
+            id={`cert-issuer-${cert.id}`}
+            type="text"
+            name="issuer"
+            inputData={cert.issuer}
+            onChange={(e) => {
+              updateData(e, idx, certData, setCertData)
+            }}
+          >
+            발급 기관
+          </DefaultInput>
+          <DefaultInput
+            width="220px"
+            marginRight="0px"
+            id={`cert-score-${cert.id}`}
+            type="text"
+            name="score"
+            inputData={cert.score}
+            onChange={(e) => {
+              updateData(e, idx, certData, setCertData)
+            }}
+          >
+            취득 점수
+          </DefaultInput>
+        </DetailWrap>
         <DateWrap>
           <DateInput
-            id="startDate"
+            id={`cert-date-${cert.id}`}
             width="220px"
             name="date"
             inputData={cert.date}
@@ -50,6 +78,11 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+`
+
+const DetailWrap = styled.div`
+  display: flex;
+  gap: 12px;
 `
 
 const DateWrap = styled.div`

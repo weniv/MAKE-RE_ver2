@@ -23,11 +23,11 @@ export default function Education({
     >
       <Wrap>
         <DefaultInput
-          id="educationName"
+          id={`edu-title-${edu.id}`}
           type="text"
           width="738px"
           name="title"
-          placeholder="예) 위니브대학교 컴퓨터공학과"
+          placeholder="예) 위니브 방학 부트캠프"
           onChange={(e) => {
             updateData(e, idx, eduData, setEduData)
           }}
@@ -35,9 +35,23 @@ export default function Education({
         >
           교육명
         </DefaultInput>
+        <DefaultInput
+          width="100%"
+          marginRight="0px"
+          id={`edu-content-${edu.id}`}
+          type="text"
+          name="content"
+          placeholder="예) HTML / CSS / JavaScript를 활용한 포트폴리오 제작 및 배포"
+          inputData={edu.content}
+          onChange={(e) => {
+            updateData(e, idx, eduData, setEduData)
+          }}
+        >
+          설명
+        </DefaultInput>
         <DateWrap>
           <DateInput
-            id="startDate"
+            id={`edu-startDate-${edu.id}`}
             name="startDate"
             width="220px"
             inputData={edu.startDate}
@@ -47,7 +61,7 @@ export default function Education({
           </DateInput>
           <Tilde>~</Tilde>
           <DateInput
-            id="endDate"
+            id={`edu-endDate-${edu.id}`}
             name="endDate"
             width="220px"
             isStill={isStill}
