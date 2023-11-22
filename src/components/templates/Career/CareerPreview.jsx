@@ -19,6 +19,8 @@ const CareerPreview = forwardRef((props, ref) => {
 
   const sectionId = getSectionId('커리어', 3)
 
+  console.log('미리보기', careerData)
+
   return (
     <>
       {careerData.length > 0 ? (
@@ -40,7 +42,8 @@ const CareerPreview = forwardRef((props, ref) => {
                     />
                   ) : null}
                   <Title>{data.title}</Title>
-                  <Works>{data.works}</Works>
+                  <p className="rank">{data.rank}</p>
+                  <p className="works">{data.works}</p>
                 </Content>
               ))}
           </Wrap>
@@ -63,9 +66,24 @@ const Content = styled.div`
   gap: 16px;
   break-inside: avoid;
   page-break-inside: avoid;
+
   &:first-child {
     break-before: avoid;
     page-break-before: avoid;
+  }
+
+  p {
+    color: var(--surface-color);
+    white-space: pre-wrap;
+  }
+
+  p.rank {
+    font-size: 1.4rem;
+  }
+
+  p.works {
+    font-size: 1.4rem;
+    line-height: 2rem;
   }
 `
 const Title = styled.p`
