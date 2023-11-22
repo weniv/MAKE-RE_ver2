@@ -48,7 +48,7 @@ export default function WritePage() {
         <Header options={{ hasProfile: true }} />
         <Cont mode={explainMode}>
           <Main>
-            <CurrentComponent />
+            <CurrentComponent type="resumeProfile" />
           </Main>
           <Aside type="write" />
         </Cont>

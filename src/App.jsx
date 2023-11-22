@@ -12,6 +12,7 @@ import {
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Providers from './context/Providers'
+import ProfileSetting from './pages/ProfileSetting'
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
             <Route path="/MAKE-RE_ver2/signup" element={<SignupPage />} />
             <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} />
             <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
+            <Route
+              path="/MAKE-RE_ver2/profilesetting"
+              element={<ProfileSetting />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
