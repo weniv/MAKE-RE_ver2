@@ -52,9 +52,5 @@ const ExplainContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   padding: 10rem;
-  ${(props) =>
-    props.mode &&
-    css`
-      z-index: 2000;
-    `}
+  z-index: ${(props) => (props.mode ? 2000 : -1)};
 `
