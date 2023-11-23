@@ -27,6 +27,8 @@ const BtnCont = styled.button`
   bottom: 2.8rem;
   right: 2.8rem;
   z-index: 10000;
+  /* box-shadow: var(--shadow); */
+  box-shadow: 0px 5px 15px rgba(71, 73, 77, 0.1);
 `
 
 const Icon = styled.div`
