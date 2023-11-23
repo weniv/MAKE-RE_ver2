@@ -103,6 +103,7 @@ const Project = styled.section`
   p.outline {
     white-space: pre-wrap;
     line-height: 2rem;
+    color: var(--surface-color);
   }
 
   & > * {
