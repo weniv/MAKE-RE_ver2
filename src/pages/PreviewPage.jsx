@@ -62,9 +62,11 @@ export default function PreviewPage() {
       <Header options={{ hasProfile: true }} />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
-          <Main ref={exportRef}>
-            <Layout>{CurrentComponent}</Layout>
-          </Main>
+          <Margin ref={exportRef}>
+            <Main ref={exportRef}>
+              <Layout>{CurrentComponent}</Layout>
+            </Main>
+          </Margin>
           <Aside type="preview" exportRef={exportRef} scrollRef={scrollRef} />
         </Cont>
       </LocalContext.Provider>
@@ -89,11 +91,15 @@ const Cont = styled.div`
 const Main = styled.main`
   background-color: var(--background-color);
   border-radius: 16px;
+  width: fit-content;
   height: fit-content;
 
   @page {
     size: A4;
-    margin: 20mm;
+    margin: 0mm;
+  }
+  @media print {
+    padding: 10mm;
   }
 `
 
@@ -103,4 +109,9 @@ const Layout = styled.div`
   gap: 40px;
   width: 890px;
   padding: 74px 52px;
+`
+
+const Margin = styled.div`
+  @media print {
+  }
 `
