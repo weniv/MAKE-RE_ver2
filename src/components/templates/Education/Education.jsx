@@ -10,6 +10,7 @@ import { Dnd } from '../../../utils'
 export default function Education() {
   const { resumeData } = useContext(ResumeContext)
   const [eduData, setEduData] = useState(resumeData['education'])
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     resumeData['education'] = [...eduData]
@@ -42,6 +43,12 @@ export default function Education() {
   const deleteEdu = (idx) => {
     setEduData(eduData.filter((edu, i) => i !== idx))
   }
+
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={eduData} setState={setEduData}>
       <Layout>
@@ -63,6 +70,8 @@ export default function Education() {
                   eduData={eduData}
                   setEduData={setEduData}
                   key={idx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                 />
               ))}
           </ItemList>

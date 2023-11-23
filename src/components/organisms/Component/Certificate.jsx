@@ -10,6 +10,8 @@ export default function Certificate({
   certData,
   setCertData,
   deleteCert,
+  activeAccordion,
+  onAccordionClick,
 }) {
   return (
     <ComponentHeader
@@ -17,6 +19,8 @@ export default function Certificate({
       kind="자격증"
       title={cert.title ? cert.title : null}
       handleDelete={deleteCert}
+      isOpen={idx === activeAccordion}
+      onAccordionClick={() => onAccordionClick(idx)}
     >
       <Wrap>
         <DefaultInput

@@ -9,6 +9,7 @@ import { MainBtn } from '../../atoms/Button'
 export default function Url() {
   const { resumeData } = useContext(ResumeContext)
   const [urlData, setUrlData] = useState(resumeData['url'])
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     resumeData['url'] = [...urlData]
@@ -40,6 +41,11 @@ export default function Url() {
     setUrlData(urlData.filter((url, i) => i !== idx))
   }
 
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={urlData} setState={setUrlData}>
       <Layout>
@@ -61,6 +67,8 @@ export default function Url() {
                   urlData={urlData}
                   setUrlData={setUrlData}
                   key={idx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                 />
               ))}
           </ItemList>

@@ -11,7 +11,7 @@ import { ResumeContext } from '../../../context/ResumeContext'
 export default function Career() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [careerData, setCareerData] = useState(resumeData['career'])
-  const [activeIdx, setActiveIdx] = useState(0)
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     setResumeData({
@@ -48,6 +48,11 @@ export default function Career() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={careerData} setState={setCareerData}>
       <Layout>
@@ -70,9 +75,9 @@ export default function Career() {
                   handleDelete={() => handleDelete(idx)}
                   careerData={careerData}
                   setCareerData={setCareerData}
-                  activeIdx={activeIdx}
-                  setActiveIdx={setActiveIdx}
                   key={idx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                 />
               ))}
           </ItemList>

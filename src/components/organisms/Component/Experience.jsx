@@ -12,6 +12,8 @@ export default function Experience({
   expData,
   setExpData,
   deleteExp,
+  activeAccordion,
+  onAccordionClick,
 }) {
   const [isStill, setIsStill] = useState(exp.inProgress)
 
@@ -22,6 +24,8 @@ export default function Experience({
         id={exp.id}
         title={exp.title || null}
         handleDelete={deleteExp}
+        isOpen={idx === activeAccordion}
+        onAccordionClick={() => onAccordionClick(idx)}
       >
         <Cont>
           <DefaultInput

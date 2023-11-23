@@ -10,6 +10,7 @@ import { Dnd } from '../../../utils'
 export default function Experience() {
   const { resumeData } = useContext(ResumeContext)
   const [expData, setExpData] = useState(resumeData['experience'])
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     resumeData['experience'] = [...expData]
@@ -45,6 +46,11 @@ export default function Experience() {
     setExpData(expData.filter((exp, i) => i !== idx))
   }
 
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={expData} setState={setExpData}>
       <Layout>
@@ -66,6 +72,8 @@ export default function Experience() {
                   expData={expData}
                   setExpData={setExpData}
                   key={idx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                 />
               ))}
           </ItemList>
