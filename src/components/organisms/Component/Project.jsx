@@ -15,16 +15,11 @@ export default function Project({
   projectData,
   setProjectData,
   handleDelete,
-  activeIdx,
-  setActiveIdx,
+  activeAccordion,
+  onAccordionClick,
 }) {
   const [isStill, setIsStill] = useState(project.inProgress)
-  const [isActive, setIsActive] = useState(0)
   const { formRef } = useContext(ResumeContext)
-
-  useEffect(() => {
-    setIsActive(activeIdx === idx)
-  }, [activeIdx])
 
   return (
     <ComponentHeader
@@ -33,9 +28,8 @@ export default function Project({
       kind={'프로젝트'}
       title={project.title ? project.title : null}
       handleDelete={handleDelete}
-      setActiveIdx={setActiveIdx}
-      isActive={isActive}
-      setIsActive={setIsActive}
+      isOpen={idx === activeAccordion}
+      onAccordionClick={() => onAccordionClick(idx)}
     >
       <Wrap>
         <form id="requiredForm" ref={formRef}>

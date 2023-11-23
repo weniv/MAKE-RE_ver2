@@ -11,6 +11,8 @@ export default function Education({
   eduData,
   setEduData,
   deleteEdu,
+  activeAccordion,
+  onAccordionClick,
 }) {
   const [isStill, setIsStill] = useState(edu.inProgress)
 
@@ -20,6 +22,8 @@ export default function Education({
       id={edu.id}
       title={edu.title ? edu.title : null}
       handleDelete={deleteEdu}
+      isOpen={idx === activeAccordion}
+      onAccordionClick={() => onAccordionClick(idx)}
     >
       <Wrap>
         <DefaultInput

@@ -10,6 +10,7 @@ import { Dnd } from '../../../utils'
 export default function Certificate() {
   const { resumeData } = useContext(ResumeContext)
   const [certData, setCertData] = useState(resumeData['certificate'])
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     resumeData['certificate'] = [...certData]
@@ -41,6 +42,11 @@ export default function Certificate() {
     setCertData(certData.filter((cert, i) => i !== idx))
   }
 
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={certData} setState={setCertData}>
       <Layout>
@@ -62,6 +68,8 @@ export default function Certificate() {
                   certData={certData}
                   setCertData={setCertData}
                   key={idx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                 />
               ))}
           </ItemList>

@@ -4,7 +4,15 @@ import DefaultInput from '../../atoms/Input/DefaultInput'
 import { styled } from 'styled-components'
 import { updateData } from '../../../utils'
 
-export default function Url({ idx, url, urlData, setUrlData, deleteUrl }) {
+export default function Url({
+  idx,
+  url,
+  urlData,
+  setUrlData,
+  deleteUrl,
+  activeAccordion,
+  onAccordionClick,
+}) {
   return (
     <UrlItem>
       <ComponentHeader
@@ -12,6 +20,8 @@ export default function Url({ idx, url, urlData, setUrlData, deleteUrl }) {
         id={url.id}
         title={url.content || null}
         handleDelete={deleteUrl}
+        isOpen={idx === activeAccordion}
+        onAccordionClick={() => onAccordionClick(idx)}
       >
         <ItemCont>
           <DefaultInput

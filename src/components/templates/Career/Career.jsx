@@ -48,7 +48,7 @@ export default function Career() {
     setCareerData(careerData.filter((career, i) => i !== idx))
   }
 
-  // 아코디언 오픈
+  /** 아코디언 오픈 */
   const handleAccordionClick = (idx) => {
     setActiveAccordion(idx === activeAccordion ? null : idx)
   }
