@@ -108,6 +108,13 @@ const GlobalStyles = createGlobalStyle`
     .iconLv3 {
         background-color: var(--gray-lv2-color)
     }
+
+
+    @media print {
+        html, body {
+            background-color:var(--background-color);
+        }
+    }
 `
 
 export default GlobalStyles
