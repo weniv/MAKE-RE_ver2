@@ -35,13 +35,16 @@ const EducationPreview = forwardRef((props, ref) => {
             const isInvalid = !(edu.startDate || edu.endDate || edu.inProgress)
 
             return (
-              <PreviewMonthItem
-                key={edu.id}
-                startDate={formatDate(edu.startDate)}
-                endDate={edu.inProgress ? '진행 중' : formatDate(edu.endDate)}
-                title={edu.title}
-                isInvalid={isInvalid}
-              />
+              <>
+                <PreviewMonthItem
+                  key={edu.id}
+                  startDate={formatDate(edu.startDate)}
+                  endDate={edu.inProgress ? '진행 중' : formatDate(edu.endDate)}
+                  title={edu.title}
+                  isInvalid={isInvalid}
+                />
+                <Content>{edu.content}</Content>
+              </>
             )
           })}
         </PreviewSection>
@@ -53,6 +56,16 @@ const EducationPreview = forwardRef((props, ref) => {
 const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
+`
+
+const Content = styled.p`
+  font-size: 14px;
+  color: var(--gray-lv3-color);
+  margin-left: 156px;
+
+  &::before {
+    content: '- ';
+  }
 `
 
 export default EducationPreview
