@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
-import { ResumeContext } from '../../../context/ResumeContext'
+import RequireInput from '../../atoms/Input/RequireInput'
 
 export default function Career({
   idx,
@@ -17,7 +17,6 @@ export default function Career({
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
-  const { formRef } = useContext(ResumeContext)
 
   const handleResizeTextArea = (height) => {
     setTextAreaHeight('auto')
@@ -35,22 +34,35 @@ export default function Career({
       onAccordionClick={() => onAccordionClick(idx)}
     >
       <Wrap>
-        <form id="requiredForm" ref={formRef}>
-          <DefaultInput
-            id="title"
-            type="text"
-            width="738px"
-            name="title"
-            placeholder="예) 위니브(WENIV)"
-            onChange={(e) => {
-              updateData(e, idx, careerData, setCareerData)
-            }}
-            inputData={career.title}
-            required
-          >
-            {'회사명'}
-          </DefaultInput>
-        </form>
+        <div>
+          <div className="firstSectionWrap">
+            <RequireInput
+              id="title"
+              type="text"
+              width="100%"
+              name="title"
+              placeholder="예) 위니브(WENIV)"
+              onChange={(e) => {
+                updateData(e, idx, careerData, setCareerData)
+              }}
+              inputData={career.title}
+            >
+              {'회사명'}
+            </RequireInput>
+            <DefaultInput
+              id="rank"
+              type="text"
+              name="rank"
+              placeholder="예) 팀장"
+              onChange={(e) => {
+                updateData(e, idx, careerData, setCareerData)
+              }}
+              inputData={career.rank}
+            >
+              {'직위'}
+            </DefaultInput>
+          </div>
+        </div>
         <DateWrap>
           <DateInput
             id="startDate"
@@ -116,6 +128,13 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  div.firstSectionWrap {
+    display: grid;
+    align-items: start;
+    grid-template-columns: 506px 220px;
+    gap: 12px;
+  }
 `
 
 const DateWrap = styled.div`

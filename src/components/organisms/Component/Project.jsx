@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DefaultTextarea, DateInput } from '../../atoms/Input'
@@ -7,7 +7,7 @@ import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
 import Contribution from './Contribution'
 import Skills from './Skills'
-import { ResumeContext } from '../../../context/ResumeContext'
+import RequireInput from '../../atoms/Input/RequireInput'
 
 export default function Project({
   idx,
@@ -19,7 +19,6 @@ export default function Project({
   onAccordionClick,
 }) {
   const [isStill, setIsStill] = useState(project.inProgress)
-  const { formRef } = useContext(ResumeContext)
 
   return (
     <ComponentHeader
@@ -32,20 +31,18 @@ export default function Project({
       onAccordionClick={() => onAccordionClick(idx)}
     >
       <Wrap>
-        <form id="requiredForm" ref={formRef}>
-          <DefaultInput
-            type="text"
-            width="738px"
-            name="title"
-            placeholder="프로젝트명을 입력합니다."
-            onChange={(e) => {
-              updateData(e, idx, projectData, setProjectData)
-            }}
-            inputData={project.title}
-          >
-            {'프로젝트명'}
-          </DefaultInput>
-        </form>
+        <RequireInput
+          id="title"
+          type="text"
+          name="title"
+          placeholder="프로젝트명을 입력합니다."
+          onChange={(e) => {
+            updateData(e, idx, projectData, setProjectData)
+          }}
+          inputData={project.title}
+        >
+          {'프로젝트명'}
+        </RequireInput>
         {/* 프로젝트 링크 */}
         <WriteSubtitle subtitle={'프로젝트 링크'} />
         <Cont>
