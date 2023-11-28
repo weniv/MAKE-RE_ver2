@@ -11,7 +11,7 @@ import { ResumeContext } from '../../../context/ResumeContext'
 export default function Project() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const [projectData, setProjectData] = useState(resumeData['project'])
-  const [activeIdx, setActiveIdx] = useState(0)
+  const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
     setResumeData({
@@ -55,6 +55,11 @@ export default function Project() {
     setProjectData(projectData.filter((pro, i) => i !== idx))
   }
 
+  /** 아코디언 오픈 */
+  const handleAccordionClick = (idx) => {
+    setActiveAccordion(idx === activeAccordion ? null : idx)
+  }
+
   return (
     <Dnd state={projectData} setState={setProjectData}>
       <Layout>
@@ -78,8 +83,8 @@ export default function Project() {
                   projectData={projectData}
                   setProjectData={setProjectData}
                   handleDelete={() => handleDelete(idx)}
-                  activeIdx={activeIdx}
-                  setActiveIdx={setActiveIdx}
+                  activeAccordion={activeAccordion}
+                  onAccordionClick={handleAccordionClick}
                   key={idx}
                 />
               ))}

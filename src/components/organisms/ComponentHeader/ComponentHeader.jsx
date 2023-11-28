@@ -9,14 +9,12 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 
 export default function ComponentHeader({
   id,
-  idx,
   kind,
   title,
   children,
   handleDelete,
-  setActiveIdx,
-  isActive,
-  setIsActive,
+  isOpen,
+  onAccordionClick,
 }) {
   if (useContext(dndContext)) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -27,20 +25,15 @@ export default function ComponentHeader({
 
   return (
     <styles.Cont style={style}>
-      <styles.Header>
+      <styles.Header onClick={onAccordionClick}>
         <styles.Btn ref={setNodeRef} {...attributes} {...listeners}>
           <ColorIcon iconPath={DragIcon} type="iconLv2" />
         </styles.Btn>
         <styles.Title>{title ? title : `새로운 ${kind}`}</styles.Title>
-        <styles.ExpandBtn
-          onClick={() => {
-            setActiveIdx(idx)
-            setIsActive(!isActive)
-          }}
-        >
+        <styles.ExpandBtn onClick={() => {}}>
           <ColorIcon
-            iconPath={!isActive ? expandIcon : reduceIcon}
-            isExpand={isActive}
+            iconPath={isOpen ? reduceIcon : expandIcon}
+            isExpand={true}
             type="iconLv1"
           />
         </styles.ExpandBtn>
@@ -49,18 +42,16 @@ export default function ComponentHeader({
         </styles.DelBtn>
       </styles.Header>
 
-      {isActive ? <styles.Component>{children}</styles.Component> : null}
+      {isOpen && <styles.Component>{children}</styles.Component>}
     </styles.Cont>
   )
 }
+
 ComponentHeader.defaultProps = {
   id: 0,
-  idx: 0,
   kind: '컴포넌트',
   title: '',
-  children: null,
   handleDelete: () => {},
-  setActiveIdx: () => {},
-  isActive: true,
-  setIsActive: () => {},
+  isOpen: false,
+  onAccordionClick: () => {},
 }

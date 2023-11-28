@@ -38,13 +38,18 @@ const CertificatePreview = forwardRef((props, ref) => {
             const isInvalid = !cert.date
 
             return (
-              <PreviewMonthItem
-                type="certificate"
-                key={cert.id}
-                date={formatDate(cert.date)}
-                title={cert.title}
-                isInvalid={isInvalid}
-              />
+              <>
+                <PreviewMonthItem
+                  type="certificate"
+                  key={cert.id}
+                  date={formatDate(cert.date)}
+                  title={cert.title}
+                  isInvalid={isInvalid}
+                />
+                <DetailWrap>
+                  {cert.issuer} {cert.issuer && cert.score && '|'} {cert.score}
+                </DetailWrap>
+              </>
             )
           })}
         </PreviewSection>
@@ -56,6 +61,12 @@ const CertificatePreview = forwardRef((props, ref) => {
 const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
+`
+
+const DetailWrap = styled.div`
+  font-size: 14px;
+  color: var(--gray-lv3-color);
+  margin-left: 156px;
 `
 
 export default CertificatePreview
