@@ -1,10 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import { DefaultInput, DateInput, DefaultTextarea } from '../../atoms/Input'
 import { ProceedingBtn } from '../../atoms/Button'
 import { updateData } from '../../../utils'
-import { ResumeContext } from '../../../context/ResumeContext'
 import RequireInput from '../../atoms/Input/RequireInput'
 
 export default function Career({
@@ -18,7 +17,6 @@ export default function Career({
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
   const [textAreaHeight, setTextAreaHeight] = useState('auto')
-  const { formRef } = useContext(ResumeContext)
 
   const handleResizeTextArea = (height) => {
     setTextAreaHeight('auto')

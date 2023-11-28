@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import ColorIcon from '../ColorIcon/ColorIcon'

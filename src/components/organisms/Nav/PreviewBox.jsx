@@ -11,8 +11,7 @@ export default function PreviewBox({ type, ...props }) {
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
-  const saveLocalstorage = (e) => {
-    e.preventDefault()
+  const saveLocalstorage = () => {
     saveData('resumeData', JSON.stringify(resumeData))
     checkRequiredValidity(formRef) // 필수입력폼 검증
     console.log('데이터 저장 완료 - ⭐')
@@ -41,7 +40,8 @@ export default function PreviewBox({ type, ...props }) {
         <>
           <SaveBtn
             onClick={(e) => {
-              saveLocalstorage(e)
+              e.preventDefault()
+              saveLocalstorage()
             }}
             form="requiredForm"
           >
