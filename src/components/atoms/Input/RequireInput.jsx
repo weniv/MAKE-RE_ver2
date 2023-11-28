@@ -23,7 +23,6 @@ export function checkRequiredValidity(ref) {
 export default function RequireInput({
   id,
   type,
-  width = '100%',
   name,
   onChange,
   inputData,
@@ -33,41 +32,43 @@ export default function RequireInput({
   const { formRef } = useContext(ResumeContext)
 
   return (
-    <form id="requiredForm" ref={formRef}>
-      <InputCont type={type} className="inputWrap">
+    <Form id="requiredForm" ref={formRef}>
+      <div type={type} className="inputWrap">
         <label htmlFor={id}>{children}</label>
         <input
           id={id}
           type={type}
           name={name}
           placeholder={placeholder}
-          width={width}
           value={inputData}
           onChange={onChange}
           autoComplete="off"
-          // pattern=".*\S.*"
-          // required
         />
-      </InputCont>
-
+      </div>
       <Alert className="alertMsg">
         <ColorIcon iconPath={AlertIcon} type="error" width="14px" />
         <p className="requiredAlert">{`${children}은 필수로 입력해야 합니다.`}</p>
       </Alert>
-    </form>
+    </Form>
   )
 }
 
-const InputCont = styled.div`
-  display: inline-flex;
+const Form = styled.form`
+  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: ${(props) => (props.type === 'resumeTitle' ? '0px' : '8px')};
-  width: ${(props) => (props.type === 'resumeTitle' ? '706px' : '100%')};
+
+  div.inputWrap {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: ${(props) => (props.type === 'resumeTitle' ? '0px' : '8px')};
+    width: 100%;
+  }
 
   label {
     color: var(--gray-lv4-color);
     font-size: 12px;
+    font-weight: 700;
   }
 
   input {

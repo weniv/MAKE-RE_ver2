@@ -52,7 +52,6 @@ export default function Career({
             <DefaultInput
               id="rank"
               type="text"
-              width="100%"
               name="rank"
               placeholder="예) 팀장"
               onChange={(e) => {

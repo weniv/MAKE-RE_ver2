@@ -34,7 +34,6 @@ export default function Project({
         <RequireInput
           id="title"
           type="text"
-          width="100%"
           name="title"
           placeholder="프로젝트명을 입력합니다."
           onChange={(e) => {
