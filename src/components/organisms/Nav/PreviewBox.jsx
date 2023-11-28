@@ -5,13 +5,16 @@ import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { useReactToPrint } from 'react-to-print'
 import { saveData } from '../../../utils/saveData'
+import { checkRequiredValidity } from '../../atoms/Input/RequireInput'
 
 export default function PreviewBox({ type, ...props }) {
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
-  const saveLocalstorage = () => {
+  const saveLocalstorage = (e) => {
+    e.preventDefault()
     saveData('resumeData', JSON.stringify(resumeData))
+    checkRequiredValidity(formRef) // 필수입력폼 검증
     console.log('데이터 저장 완료 - ⭐')
   }
 
@@ -36,7 +39,12 @@ export default function PreviewBox({ type, ...props }) {
     <Cont>
       {type === 'write' ? (
         <>
-          <SaveBtn onSubmit={saveLocalstorage} form="requiredForm">
+          <SaveBtn
+            onClick={(e) => {
+              saveLocalstorage(e)
+            }}
+            form="requiredForm"
+          >
             임시저장
           </SaveBtn>
           <MainBtn type="preview" onClick={movePreview} form="requiredForm">

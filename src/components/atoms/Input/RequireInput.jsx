@@ -1,7 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import ColorIcon from '../ColorIcon/ColorIcon'
+import { ResumeContext } from '../../../context/ResumeContext'
+
+export function checkRequiredValidity(ref) {
+  const form = ref.current
+  const input = form?.querySelector('.inputWrap input')
+  const alertMsg = form?.querySelector('.alertMsg')
+
+  if (input) {
+    if (input?.value === '') {
+      alertMsg.style.display = 'flex'
+      input.style.outline = '2px solid var(--error-color)'
+    } else {
+      alertMsg.style.display = 'none'
+      input.style.outline = ''
+    }
+  }
+}
 
 export default function RequireInput({
   id,
@@ -13,9 +30,11 @@ export default function RequireInput({
   children,
   placeholder,
 }) {
+  const { formRef } = useContext(ResumeContext)
+
   return (
-    <form id="requiredForm">
-      <InputCont type={type}>
+    <form id="requiredForm" ref={formRef}>
+      <InputCont type={type} className="inputWrap">
         <label htmlFor={id}>{children}</label>
         <input
           id={id}
@@ -26,17 +45,15 @@ export default function RequireInput({
           value={inputData}
           onChange={onChange}
           autoComplete="off"
-          pattern=".*\S.*"
-          required
+          // pattern=".*\S.*"
+          // required
         />
       </InputCont>
 
-      {inputData ? null : (
-        <Alert>
-          <ColorIcon iconPath={AlertIcon} type="error" width="14px" />
-          <p className="requiredAlert">{`${children}은 필수로 입력해야 합니다.`}</p>
-        </Alert>
-      )}
+      <Alert className="alertMsg">
+        <ColorIcon iconPath={AlertIcon} type="error" width="14px" />
+        <p className="requiredAlert">{`${children}은 필수로 입력해야 합니다.`}</p>
+      </Alert>
     </form>
   )
 }
@@ -63,21 +80,14 @@ const InputCont = styled.div`
     background-repeat: no-repeat;
     background-size: 20px 20px;
     background-position: 12px;
-
-    &:focus {
-      outline: 2px solid var(--primary-color);
-    }
-
-    &:invalid:focus {
-      outline: 2px solid var(--error-color);
-    }
   }
 `
 
 const Alert = styled.div`
-  display: flex;
+  display: none;
   align-items: center;
   gap: 4px;
+
   p {
     font-size: 12px;
     font-weight: 500;
