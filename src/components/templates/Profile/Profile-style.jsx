@@ -4,6 +4,11 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 52px;
+
+  form.inputWrap {
+    display: flex;
+    gap: 8px;
+  }
 `
 
 export const ProfileCont = styled.div`

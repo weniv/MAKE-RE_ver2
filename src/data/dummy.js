@@ -1,7 +1,6 @@
 export const resumeData = {
   profile: {
     profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png', // 프로필 이미지 테스트용
-    // profileImg: '',
     name: '',
     enName: '',
     phoneNumber: '',

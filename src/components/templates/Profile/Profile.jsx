@@ -5,11 +5,12 @@ import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
-import { ImgBtn } from '../../atoms/Button'
+import { AddBtn, ImgBtn } from '../../atoms/Button'
 import { uploadImg, deleteImg } from '../../../utils'
 import { updateProfile } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
+import ProfileExImg from '../../../assets/icon-profileEx.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
@@ -20,6 +21,7 @@ export default function Profile({ type, setIsReady }) {
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
+  const skillListRef = useRef(null)
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('resumeData'))
@@ -36,8 +38,8 @@ export default function Profile({ type, setIsReady }) {
   }, [profileData])
 
   useEffect(() => {
-    if (profileData.name | setIsReady) {
-      setIsReady(true)
+    if (type === 'userProfileSetting') {
+      profileData.name ? setIsReady(true) : setIsReady(false)
     }
   }, [profileData.name])
 
@@ -57,15 +59,25 @@ export default function Profile({ type, setIsReady }) {
   }, [id, domain])
 
   // 엔터키 눌렀을 시, 기술 스택 추가
-  const createSkillList = (e) => {
-    if (e.keyCode === 13 && e.target.value) {
-      const newSkill = e.target.value
-      setProfileData({
-        ...profileData,
-        skills: [...profileData.skills, newSkill],
-      })
-      e.target.value = ''
-    }
+  // const createSkillList = (e) => {
+  //   if (e.keyCode === 13 && e.target.value) {
+  //     const newSkill = e.target.value
+  //     setProfileData({
+  //       ...profileData,
+  //       skills: [...profileData.skills, newSkill],
+  //     })
+  //     e.target.value = ''
+  //   }
+  // }
+
+  // 기술 스택 추가
+  const createSkillList = () => {
+    const newSkill = skillListRef.current.value
+    setProfileData({
+      ...profileData,
+      skills: [...profileData.skills, newSkill],
+    })
+    skillListRef.current.value = ''
   }
 
   // 기술 스택 삭제
@@ -212,7 +224,7 @@ export default function Profile({ type, setIsReady }) {
                 >
                   영문 이름
                 </DefaultInput>
-              </styles.InputCont>{' '}
+              </styles.InputCont>
               <styles.InputCont>
                 <DefaultInput
                   id="phoneNumber"
@@ -283,13 +295,23 @@ export default function Profile({ type, setIsReady }) {
         <styles.Line />
         <styles.Section>
           <WriteSubtitle subtitle="기술 스택" id="skills" />
-          <Input
-            id="skills"
-            onKeyDown={createSkillList}
-            type="text"
-            placeholder="예) Python"
-            width="260px"
-          />
+          <form
+            className="inputWrap"
+            id="addSkillsListForm"
+            onSubmit={(e) => {
+              e.preventDefault()
+              createSkillList()
+            }}
+          >
+            <Input
+              id="skills"
+              type="text"
+              placeholder="예) Python"
+              width="260px"
+              ref={skillListRef}
+            />
+            <AddBtn form="addSkillsListForm" />
+          </form>
           <styles.SkillListWrap>
             {profileData.skills &&
               profileData.skills.map((skill, i) => (

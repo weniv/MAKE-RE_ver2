@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <Providers>
         <GlobalStyles />
-        <BrowserRouter>
+        <BrowserRouter> 
           <Routes>
             <Route path="/MAKE-RE_ver2" element={<LandingPage />} />
             <Route path="/MAKE-RE_ver2/write" element={<WritePage />} />
@@ -30,7 +30,7 @@ function App() {
             <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} />
             <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
             <Route
-              path="/MAKE-RE_ver2/profilesetting"
+              path="/MAKE-RE_ver2/myProfile"
               element={<ProfileSetting />}
             />
             <Route path="*" element={<NotFoundPage />} />

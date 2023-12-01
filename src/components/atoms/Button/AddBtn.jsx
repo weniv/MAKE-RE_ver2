@@ -1,15 +1,15 @@
 import { styled } from 'styled-components'
 import { ReactComponent as PlusIcon } from '../../../assets/icon-+.svg'
 
-export default function AddBtn({ onClick }) {
+export default function AddBtn({ onClick, form }) {
   return (
-    <Cont onClick={onClick}>
+    <Cont onClick={onClick} form={form}>
       <PlusIcon width="20px" height="20px" />
     </Cont>
   )
 }
 
-const Cont = styled.div`
+const Cont = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -100,7 +100,7 @@ export default function DropBox({
           }}
         >
           {selectedData}
-          <ColorIcon type="iconLv1" iconPath={TriangleDown} />
+          <ColorIcon type="iconLv2" iconPath={TriangleDown} />
           {/* <img src={TriangleDown} /> */}
         </styles.DropBtn>
       ) : (
@@ -113,7 +113,7 @@ export default function DropBox({
             className="open"
           >
             {selectedData}
-            <ColorIcon type="iconLv1" iconPath={TriangleUp} />
+            <ColorIcon type="iconLv2" iconPath={TriangleUp} />
             {/* <img src={TriangleUp} /> */}
           </styles.DropBtn>
           {type === 'email' ? (
