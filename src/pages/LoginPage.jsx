@@ -56,7 +56,7 @@ export default function LoginPage() {
   }
 
   return (
-    <Layout>
+    <Layout auth>
       <Logo />
       <Description>
         메이커리 로그인 후<br />
@@ -100,7 +100,7 @@ export default function LoginPage() {
           비밀번호 찾기
         </p>
       </Redirect>
-      <Line>
+      {/* <Line>
         <p className="or">또는</p>
       </Line>
       <Button className="github social" onClick={githubLogin}>
@@ -108,7 +108,7 @@ export default function LoginPage() {
       </Button>
       <Button className="google social" onClick={googleLogin}>
         Google 계정으로 로그인
-      </Button>
+      </Button> */}
     </Layout>
   )
 }
