@@ -27,7 +27,7 @@ function App() {
             <Route path="/MAKE-RE_ver2/quit" element={<QuitPage />} />
             <Route path="/MAKE-RE_ver2/login" element={<LoginPage />} />
             <Route path="/MAKE-RE_ver2/signup" element={<SignupPage />} />
-            <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} />
+            {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
             <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
             <Route
               path="/MAKE-RE_ver2/profilesetting"
