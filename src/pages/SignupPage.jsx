@@ -81,11 +81,11 @@ export default function SignupPage() {
 
   // 회원가입 완료
   const submitSignup = () => {
-    navigate('/MAKE-RE_ver2/myProfile')
+    navigate('/MAKE-RE_ver2/profilesetting')
   }
 
   return (
-    <Layout>
+    <Layout auth>
       <Title>회원가입</Title>
       <Form id="signupForm" method="POST" onSubmit={submitSignup}>
         <EmailWrap id="signupEmailForm" isValidate={isValidate}>
