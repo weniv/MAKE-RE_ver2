@@ -172,7 +172,7 @@ export default function SignupPage() {
 const Title = styled.p`
   font-size: 32px;
   font-weight: 600;
-  color: #121314;
+  color: var(--surface-color);
   margin-bottom: 60px;
 `
 
@@ -195,26 +195,27 @@ const EmailWrap = styled.div`
     right: 0;
     width: 80px;
     height: 42px;
-    background-color: #d9dbe0;
+    background-color: var(--gray-lv2-color);
     border-radius: 10px;
     font-size: 14px;
     font-weight: 500;
     background-color: ${({ isValidate }) =>
-      isValidate ? '#2e6ff2' : '#d9dbe0'};
-    color: ${({ isValidate }) => (isValidate ? '#fff' : '#8D9299')};
+      isValidate ? 'var(--primary-color)' : 'var(--gray-lv2-color)'};
+    color: ${({ isValidate }) =>
+      isValidate ? '#fff' : 'var(--gray-lv3-color)'};
   }
 `
 
 const Notice = styled.p`
   font-size: 14px;
   line-height: 20px;
-  color: #47494d;
+  color: var(--gray-lv4-color);
   font-weight: 500;
   text-align: center;
   margin: 24px 0;
 
   a {
-    color: #2e6ff2;
+    color: var(--primary-color);
 
     &:last-child {
       margin-left: 3px;
@@ -228,6 +229,7 @@ const Button = styled.button`
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
-  background-color: ${({ isActive }) => (isActive ? '#2e6ff2' : '#d9dbe0')};
-  color: ${({ isActive }) => (isActive ? '#fff' : '#8d9299')};
+  background-color: ${({ isActive }) =>
+    isActive ? 'var(--primary-color)' : 'var(--gray-lv2-color)'};
+  color: ${({ isActive }) => (isActive ? '#fff' : 'var(--gray-lv3-color)')};
 `

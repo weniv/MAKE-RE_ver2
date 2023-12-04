@@ -32,7 +32,9 @@ const CommonInput = styled.input`
   border-bottom: 2px solid var(--gray-lv2-color);
   padding-left: 8px;
   border-bottom: ${({ warning }) =>
-    warning ? '2px solid red;' : '2px solid var(--gray-lv2-color);'};
+    warning
+      ? '2px solid var(--error-color);'
+      : '2px solid var(--gray-lv2-color);'};
 
   &::placeholder {
     font-size: 16px;
@@ -42,7 +44,9 @@ const CommonInput = styled.input`
   &:focus {
     outline: none;
     border-bottom: ${({ warning }) =>
-      warning ? '2px solid red;' : '2px solid #2e6ff2;'};
+      warning
+        ? '2px solid var(--error-color);'
+        : '2px solid var(--primary-color);'};
     background-color: var(--gray-lv1-color);
   }
 
