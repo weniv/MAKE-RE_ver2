@@ -117,7 +117,7 @@ const Description = styled.p`
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
-  color: #121314;
+  color: var(--surface-color);
   text-align: center;
   margin: 24px 0 60px 0;
 `
@@ -129,45 +129,45 @@ const Form = styled.form`
   gap: 16px;
 `
 
-const Line = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: #8d9299;
-  margin: 32px 0 24px 0;
+// const Line = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   font-size: 14px;
+//   font-weight: 500;
+//   color: #8d9299;
+//   margin: 32px 0 24px 0;
 
-  p.or {
-    padding: 0 12px;
-    white-space: nowrap;
-  }
+//   p.or {
+//     padding: 0 12px;
+//     white-space: nowrap;
+//   }
 
-  &::before,
-  &::after {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background-color: #d9dbe0;
-  }
-`
+//   &::before,
+//   &::after {
+//     content: '';
+//     width: 100%;
+//     height: 1px;
+//     background-color: #d9dbe0;
+//   }
+// `
 
 const Redirect = styled.div`
   display: flex;
   p {
     font-size: 14px;
     font-weight: 500;
-    color: #8d9299;
+    color: var(--gray-lv3-color);
     padding: 0 8px;
     cursor: pointer;
   }
 
   p:hover {
-    color: #2e6ff2;
+    color: var(--primary-color);
   }
 
   p:first-child {
-    border-right: 1.75px solid #8d9299;
+    border-right: 1.75px solid var(--gray-lv3-color);
   }
 `
 
@@ -180,8 +180,9 @@ const Button = styled.button`
 
   &.login {
     margin: 24px 0 20px 0;
-    background-color: ${({ isActive }) => (isActive ? '#2e6ff2' : '#d9dbe0')};
-    color: ${({ isActive }) => (isActive ? '#fff' : '#8d9299')};
+    background-color: ${({ isActive }) =>
+      isActive ? 'var(--primary-color)' : 'var(--gray-lv2-color)'};
+    color: ${({ isActive }) => (isActive ? '#fff' : 'var(--gray-lv3-color)')};
   }
 
   &.social {
@@ -190,7 +191,7 @@ const Button = styled.button`
     color: #121314;
 
     &:hover {
-      background-color: #f3f5fa;
+      background-color: var(--gray-lv1-color);
     }
   }
 

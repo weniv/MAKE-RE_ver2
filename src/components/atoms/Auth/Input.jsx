@@ -29,24 +29,24 @@ const CommonInput = styled.input`
   width: 100%;
   height: 42px;
   border: none;
-  border-bottom: 2px solid #d9dbe0;
+  border-bottom: 2px solid var(--gray-lv2-color);
   padding-left: 8px;
   border-bottom: ${({ warning }) =>
-    warning ? '2px solid red;' : '2px solid #D9DBE0;'};
+    warning ? '2px solid red;' : '2px solid var(--gray-lv2-color);'};
 
   &::placeholder {
     font-size: 16px;
-    color: #8d9299;
+    color: var(--gray-lv3-color);
   }
 
   &:focus {
     outline: none;
     border-bottom: ${({ warning }) =>
       warning ? '2px solid red;' : '2px solid #2e6ff2;'};
-    background-color: #f3f5fa;
+    background-color: var(--gray-lv1-color);
   }
 
   &:disabled {
-    background-color: #f3f5fa;
+    background-color: var(--gray-lv1-color);
   }
 `

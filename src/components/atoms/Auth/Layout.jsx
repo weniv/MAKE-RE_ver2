@@ -19,8 +19,9 @@ const Section = styled.section`
   justify-content: center;
   position: relative;
   width: 100vw;
-  height: calc(100% - 71px);
-  margin-top: ${(props) => (props.auth ? '60px' : '0')};
+  height: calc(100vh - 71px);
+  padding-top: ${(props) => (props.auth ? '60px' : '0')};
+  background-color: var(--background-color);
 `
 
 const Content = styled.div`
