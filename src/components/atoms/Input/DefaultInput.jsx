@@ -50,6 +50,7 @@ const Label = styled.label`
   color: var(--gray-lv4-color);
   font-size: 12px;
   font-weight: 700;
+
   strong {
     color: var(--primary-color);
   }

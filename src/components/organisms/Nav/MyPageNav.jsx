@@ -23,7 +23,7 @@ export default function MyPageNav() {
             isActive={activeNavItem === 1}
             onClick={() => handleNavItemClick(1)}
           >
-            <Link to="/MAKE-RE_ver2/mypage">프로필 페이지</Link>
+            <Link to="/MAKE-RE_ver2/myProfile">프로필 페이지</Link>
           </NavItem>
         </NavList>
       </nav>
