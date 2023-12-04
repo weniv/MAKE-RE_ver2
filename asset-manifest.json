@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/MAKE-RE_ver2/static/js/main.5ff3aca0.js",
+    "main.js": "/MAKE-RE_ver2/static/js/main.f8284f38.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "/MAKE-RE_ver2/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/banner.png": "/MAKE-RE_ver2/static/media/banner.3515b9a989f451d02264.png",
     "static/media/desc-4.png": "/MAKE-RE_ver2/static/media/desc-4.85324b4239ba7dcdb933.png",
@@ -10,6 +10,7 @@
     "static/media/licat-404.png": "/MAKE-RE_ver2/static/media/licat-404.0e7ea41d79605921495b.png",
     "static/media/icon-Url.svg": "/MAKE-RE_ver2/static/media/icon-Url.facffe7998f01ff891c946aa9a6d09bd.svg",
     "static/media/icon-liacat.svg": "/MAKE-RE_ver2/static/media/icon-liacat.64aa8a6daef259ee34965a59a3af709d.svg",
+    "static/media/icon-profileEx.svg": "/MAKE-RE_ver2/static/media/icon-profileEx.00302aea988bfaec1a10ecf9b988f1e2.svg",
     "static/media/icon-question-mark.svg": "/MAKE-RE_ver2/static/media/icon-question-mark.02fe44d6f35975bd7853ea4085f5d351.svg",
     "static/media/Logo.svg": "/MAKE-RE_ver2/static/media/Logo.f5c7c0443f56db06f7ad9e37dbb5bd71.svg",
     "static/media/icon-Calendar.svg": "/MAKE-RE_ver2/static/media/icon-Calendar.b904addc0c93b7a23d8c7f89709066a4.svg",
@@ -40,9 +41,9 @@
     "static/media/icon-polygon.svg": "/MAKE-RE_ver2/static/media/icon-polygon.ae85513423510fdc6466ec051e522de8.svg",
     "static/media/icon-more.svg": "/MAKE-RE_ver2/static/media/icon-more.73922c2b8bacc5389ec06411afebc002.svg",
     "static/media/icon-light-mode.svg": "/MAKE-RE_ver2/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.5ff3aca0.js.map": "/MAKE-RE_ver2/static/js/main.5ff3aca0.js.map"
+    "main.f8284f38.js.map": "/MAKE-RE_ver2/static/js/main.f8284f38.js.map"
   },
   "entrypoints": [
-    "static/js/main.5ff3aca0.js"
+    "static/js/main.f8284f38.js"
   ]
 }
