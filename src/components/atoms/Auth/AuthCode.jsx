@@ -102,17 +102,17 @@ const Cont = styled.div`
   padding: 20px;
   border-radius: 10px;
   margin: 0 0 12px 0;
-  border: 1px solid #d9dbe0;
+  border: 1px solid var(--gray-lv3-color);
 
   p.title {
     font-weight: 700;
     font-size: 16px;
-    color: #121314;
+    color: var(--surface-color);
   }
 
   p.description {
     font-size: 14px;
-    color: #47494d;
+    color: var(--gray-lv4-color);
   }
 
   p.alert {
@@ -124,7 +124,7 @@ const Cont = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
-    color: #2e6ff2;
+    color: var(--primary-color);
 
     &::before {
       content: url(${EmailAuthCheck});
@@ -132,7 +132,7 @@ const Cont = styled.div`
   }
 
   p.warning {
-    color: #ff3440;
+    color: var(--error-color);
   }
 `
 
@@ -152,7 +152,7 @@ const ResendWrap = styled.div`
     align-items: center;
     gap: 4px;
     font-size: 12px;
-    color: #47494d;
+    color: var(--gray-lv4-color);
 
     &::before {
       content: url(${HelpCircle});
@@ -162,7 +162,7 @@ const ResendWrap = styled.div`
   a {
     font-size: 12px;
     font-weight: 700;
-    color: #2e6ff2;
+    color: var(--primary-color);
     cursor: pointer;
   }
 `

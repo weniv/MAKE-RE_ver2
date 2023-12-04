@@ -7,6 +7,6 @@ export default function WarningMsg({ children }) {
 
 const Msg = styled.p`
   font-size: 12px;
-  color: #ff3440;
+  color: var(--error-color);
   margin-top: -8px;
 `

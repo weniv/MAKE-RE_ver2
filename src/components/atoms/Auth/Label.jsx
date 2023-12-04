@@ -12,5 +12,6 @@ export default function Label({ children, htmlFor, warning }) {
 const LableComponent = styled.label`
   font-size: 12px;
   font-weight: 500;
-  color: ${({ warning }) => (warning ? '#ff3440' : '#47494d')};
+  color: ${({ warning }) =>
+    warning ? 'var(--error-color)' : 'var(--gray-lv4-color)'};
 `

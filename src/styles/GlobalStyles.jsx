@@ -86,6 +86,17 @@ const GlobalStyles = createGlobalStyle`
         outline: 2px solid var(--primary-color);
     }
 
+    input:-webkit-autofill { 
+        -webkit-box-shadow: 0 0 0 30px var(--gray-lv1-color) inset ; 
+        -webkit-text-fill-color: var(--surface-color); 
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active { 
+        transition: background-color 5000s ease-in-out 0s; 
+    }
+
     textarea {
         &::-webkit-scrollbar {
             width: 0.6rem;
