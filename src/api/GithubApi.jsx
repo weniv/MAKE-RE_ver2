@@ -20,7 +20,9 @@ export default function GithubApi({ children }) {
   const [queryString, setQueryString] = useState(window.location.search)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
-  const [githubID, setGithubID] = useState(resumeData.github[0])
+  const [githubID, setGithubID] = useState(
+    resumeData.github ? resumeData.github[0] : null
+  )
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
   const [chartData, setChartData] = useState({
@@ -162,7 +164,7 @@ export default function GithubApi({ children }) {
       const data = await graphQLClient.request(query)
       setUserData(...userData, data.user)
       getPrimaryLanguage(data.user.repositories.nodes)
-      loadCommitImg()
+      // loadCommitImg()
     } catch (err) {
       console.log(err)
     }
@@ -229,10 +231,10 @@ export default function GithubApi({ children }) {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    redirectAuth()
-  }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   redirectAuth()
+  // }
 
   useEffect(() => {
     setColorCode(mainColor)
@@ -243,19 +245,33 @@ export default function GithubApi({ children }) {
   // }, [colorCode])
 
   // 깃허브 잔디 이미지 불러오기
-  const [commitSrc, setCommitSrc] = useState(resumeData.github[1])
-  const loadCommitImg = async () => {
-    let src = ''
+  const [commitSrc, setCommitSrc] = useState(
+    resumeData.github ? resumeData.github[1] : null
+  )
 
-    const userId = localStorage.getItem('userGithubId')
+  // const loadCommitImg = async () => {
+  //   let src = ''
 
-    if (userId) {
-      src =
-        'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
+  //   const userId = localStorage.getItem('userGithubId')
+
+  //   if (userId) {
+  //     src =
+  //       'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
+  //   }
+
+  //   setCommitSrc(src)
+  // }
+
+  useEffect(() => {
+    if (githubID) {
+      const commitImg = `https://ghchart.rshah.org/${
+        colorCode.split('#')[1]
+      }/${githubID}`
+
+      setCommitSrc(commitImg)
+      setResumeData({ ...resumeData, github: [githubID, commitImg] })
     }
-
-    setCommitSrc(src)
-  }
+  }, [colorCode])
 
   const loadCommitImgWithID = (e) => {
     e.preventDefault()
@@ -267,8 +283,16 @@ export default function GithubApi({ children }) {
 
       setCommitSrc(commitImg)
       setResumeData({ ...resumeData, github: [githubID, commitImg] })
-      console.log(commitSrc)
     }
+  }
+
+  const deleteCommitImgWithID = (e) => {
+    // 정말 제거하시겠습니까 얼럿추가
+    e.preventDefault()
+    setGithubID('')
+    setCommitSrc('')
+    setResumeData({ ...resumeData, github: ['', ''] })
+    return null
   }
 
   return (
@@ -287,9 +311,15 @@ export default function GithubApi({ children }) {
               }}
             />
           </div>
-          <MainBtn type="preview" onClick={loadCommitImgWithID}>
-            내 잔디 불러오기
-          </MainBtn>
+          {commitSrc ? (
+            <MainBtn type="preview" onClick={deleteCommitImgWithID}>
+              내 잔디 제거하기
+            </MainBtn>
+          ) : (
+            <MainBtn type="preview" onClick={loadCommitImgWithID}>
+              내 잔디 불러오기
+            </MainBtn>
+          )}
         </GithubForm>
       </GitHubCont>
 
