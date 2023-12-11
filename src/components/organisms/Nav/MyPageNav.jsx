@@ -2,12 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function MyPageNav() {
-  const [activeNavItem, setActiveNavItem] = useState(0)
-
-  const handleNavItemClick = (index) => {
-    setActiveNavItem(index)
-  }
+export default function MyPageNav({ currentNaveItem }) {
+  const [activeNavItem, setActiveNavItem] = useState(currentNaveItem)
 
   return (
     <Aside>
@@ -15,15 +11,19 @@ export default function MyPageNav() {
         <NavList>
           <NavItem
             isActive={activeNavItem === 0}
-            onClick={() => handleNavItemClick(0)}
+            onClick={() => {
+              setActiveNavItem(0)
+            }}
           >
             <Link to="/MAKE-RE_ver2/myresume">이력서 관리</Link>
           </NavItem>
           <NavItem
             isActive={activeNavItem === 1}
-            onClick={() => handleNavItemClick(1)}
+            onClick={() => {
+              setActiveNavItem(1)
+            }}
           >
-            <Link to="/MAKE-RE_ver2/myProfile">프로필 페이지</Link>
+            <Link to="/MAKE-RE_ver2/myprofile">프로필 페이지</Link>
           </NavItem>
         </NavList>
       </nav>
