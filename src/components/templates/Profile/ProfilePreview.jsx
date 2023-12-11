@@ -1,14 +1,31 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { LocalContext } from '../../../pages/PreviewPage'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import styled from 'styled-components'
 import ColorContext from '../../../context/ColorContext'
+import { ResumeContext } from '../../../context/ResumeContext'
 
 export default function ProfilePreview() {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const { data } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = data.profile
-  const commitUrl = data.github && data.github[1]
+  const [commitUrl, setCommitUrl] = useState(
+    data.github && data.github[1] ? data.github[1] : null
+  )
+
+  useEffect(() => {
+    if (data.github[1]) {
+      const urlArr = commitUrl.split('/')
+      const discardArr = urlArr.splice(3, 1, mainColor.split('#')[1])
+
+      setCommitUrl(urlArr.join('/'))
+      setResumeData({
+        ...resumeData,
+        github: [data.github[0], urlArr.join('/')],
+      })
+    }
+  }, [mainColor])
 
   return (
     <ProfileSection>
