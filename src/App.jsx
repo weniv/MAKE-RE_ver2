@@ -6,6 +6,7 @@ import {
   NotFoundPage,
   LandingPage,
   MyResumePage,
+  MyProfilePage,
   LoginPage,
   SignupPage,
   SignupDonePage,
@@ -29,6 +30,7 @@ function App() {
             <Route path="/MAKE-RE_ver2/signup" element={<SignupPage />} />
             {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
             <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
+            <Route path="/MAKE-RE_ver2/myprofile" element={<MyProfilePage />} />
             <Route
               path="/MAKE-RE_ver2/profilesetting"
               element={<ProfileSetting />}
