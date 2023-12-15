@@ -15,7 +15,7 @@ export default function ProfilePreview() {
   )
 
   useEffect(() => {
-    if (data.github[1]) {
+    if (data.github && data.github[1]) {
       const urlArr = commitUrl.split('/')
       const discardArr = urlArr.splice(3, 1, mainColor.split('#')[1])
 
