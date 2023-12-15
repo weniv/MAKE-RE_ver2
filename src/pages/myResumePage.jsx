@@ -12,27 +12,27 @@ import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
 export default function MyResumePage() {
   const [resumes, setResumes] = useState([])
 
-  useEffect(() => {
-    // Django API endpoint 설정
-    const apiUrl = 'your_django_api_endpoint'
+  // useEffect(() => {
+  //   // Django API endpoint 설정
+  //   const apiUrl = 'your_django_api_endpoint'
 
-    // 이력서 데이터 불러오기
-    const fetchResumes = async () => {
-      try {
-        const response = await fetch(apiUrl)
-        if (response.ok) {
-          const data = await response.json()
-          setResumes(data)
-        } else {
-          console.error('Failed to fetch resumes')
-        }
-      } catch (error) {
-        console.error('Error fetching resumes:', error)
-      }
-    }
+  //   // 이력서 데이터 불러오기
+  //   const fetchResumes = async () => {
+  //     try {
+  //       const response = await fetch(apiUrl)
+  //       if (response.ok) {
+  //         const data = await response.json()
+  //         setResumes(data)
+  //       } else {
+  //         console.error('Failed to fetch resumes')
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching resumes:', error)
+  //     }
+  //   }
 
-    fetchResumes()
-  }, [])
+  //   fetchResumes()
+  // }, [])
 
   const handleAddResume = () => {
     // 이력서 추가 로직
