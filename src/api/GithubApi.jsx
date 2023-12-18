@@ -18,8 +18,6 @@ export default function GithubApi({ children }) {
   const imgIcon = themeMode === 'light' ? AddImgIcon : AddImgIconDark
 
   const [queryString, setQueryString] = useState(window.location.search)
-  const { mainColor } = useContext(ColorContext)
-  const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [githubID, setGithubID] = useState(
     resumeData.github ? resumeData.github[0] : null
   )
@@ -236,10 +234,6 @@ export default function GithubApi({ children }) {
   //   redirectAuth()
   // }
 
-  useEffect(() => {
-    setColorCode(mainColor)
-  }, [mainColor])
-
   // useEffect(() => {
   //   loadCommitImg()
   // }, [colorCode])
@@ -248,40 +242,29 @@ export default function GithubApi({ children }) {
   const [commitSrc, setCommitSrc] = useState(
     resumeData.github ? resumeData.github[1] : null
   )
+  const [isValid, setIsValid] = useState(true)
 
-  // const loadCommitImg = async () => {
-  //   let src = ''
-
-  //   const userId = localStorage.getItem('userGithubId')
-
-  //   if (userId) {
-  //     src =
-  //       'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
-  //   }
-
-  //   setCommitSrc(src)
-  // }
+  const handleImageError = () => {
+    setIsValid(false)
+    console.error('Failed to load image for GitHub ID:', githubID)
+  }
 
   useEffect(() => {
     if (githubID) {
-      const commitImg = `https://ghchart.rshah.org/${
-        colorCode.split('#')[1]
-      }/${githubID}`
-
+      const commitImg = `https://ghchart.rshah.org/2e6ff2/${githubID}`
       setCommitSrc(commitImg)
       setResumeData({ ...resumeData, github: [githubID, commitImg] })
     }
-  }, [colorCode])
+  }, [])
 
   const loadCommitImgWithID = (e) => {
     e.preventDefault()
 
     if (githubID) {
-      const commitImg = `https://ghchart.rshah.org/${
-        colorCode.split('#')[1]
-      }/${githubID}`
+      const commitImg = `https://ghchart.rshah.org/2e6ff2/${githubID}`
 
       setCommitSrc(commitImg)
+      setIsValid(true)
       setResumeData({ ...resumeData, github: [githubID, commitImg] })
     }
   }
@@ -301,7 +284,10 @@ export default function GithubApi({ children }) {
         {/* <GithubForm onSubmit={handleSubmit}> */}
         <GithubForm>
           <div>
-            <label htmlFor="githubId">GitHub ID</label>
+            <label htmlFor="githubId">
+              GitHub ID
+              {!isValid && <strong> *유효하지 않은 아이디입니다.</strong>}
+            </label>
             <input
               id="githubId"
               type="text"
@@ -311,7 +297,7 @@ export default function GithubApi({ children }) {
               }}
             />
           </div>
-          {commitSrc ? (
+          {commitSrc && isValid ? (
             <MainBtn type="preview" onClick={deleteCommitImgWithID}>
               내 잔디 제거하기
             </MainBtn>
@@ -325,8 +311,8 @@ export default function GithubApi({ children }) {
 
       <Label>Contributions</Label>
       <CommitBox>
-        {commitSrc ? (
-          <CommitImg src={commitSrc} />
+        {commitSrc && isValid ? (
+          <CommitImg src={commitSrc} onError={handleImageError} />
         ) : (
           <img src={imgIcon} alt="" />
         )}
@@ -438,6 +424,10 @@ const GithubForm = styled.form`
     label {
       color: var(--gray-lv4-color);
       font-size: 12px;
+
+      strong {
+        color: #f96167;
+      }
     }
 
     input {
