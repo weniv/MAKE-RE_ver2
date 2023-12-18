@@ -21,6 +21,7 @@ export default function Profile({ type, setIsReady }) {
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isChange, setIsChange] = useState(false)
   const skillListRef = useRef(null)
 
   useEffect(() => {
@@ -260,13 +261,18 @@ export default function Profile({ type, setIsReady }) {
                   width="200px"
                   marginRight="8px"
                   inputData={domain === '직접 입력' ? '' : domain}
-                  onChange={(e) => setDomain(e.target.value)}
+                  onChange={(e) => {
+                    setDomain(e.target.value)
+                    setIsChange(true)
+                  }}
                 />
                 <DropBox
                   type="email"
                   width="131"
                   list={domainList}
                   setDomain={setDomain}
+                  setIsChange={setIsChange}
+                  isChange={isChange}
                 />
               </styles.InputCont>
               <styles.InputCont>
