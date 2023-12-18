@@ -13,6 +13,8 @@ export default function DropBox({
   setDomain,
   profileData,
   setProfileData,
+  setIsChange,
+  isChange,
 }) {
   const [isSelected, setIsSelected] = useState()
   const [selectedData, setSelectedData] = useState(
@@ -99,7 +101,8 @@ export default function DropBox({
             setIsSelected((isSelected) => !isSelected)
           }}
         >
-          {selectedData}
+          {!isChange ? selectedData : '직접 입력'}
+
           <ColorIcon type="iconLv2" iconPath={TriangleDown} />
           {/* <img src={TriangleDown} /> */}
         </styles.DropBtn>
@@ -125,6 +128,7 @@ export default function DropBox({
                     onClick={() => {
                       setSelectedData(item)
                       setIsSelected(false)
+                      setIsChange(false)
                       setDomain(item === '직접 입력' ? '' : item)
                     }}
                   >
