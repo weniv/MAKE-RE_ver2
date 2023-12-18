@@ -44,7 +44,7 @@ export default function Intro() {
             height="516px"
             width="100%"
             type="intro"
-            line-height="28px"
+            lineHeight="175%"
             placeholder="예) 풀스택 웹 개발자를 꿈꾸는 홍길동입니다."
             onChange={handleUpdateIntro}
             inputData={intro}
