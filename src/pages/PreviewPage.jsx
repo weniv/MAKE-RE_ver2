@@ -40,7 +40,7 @@ export default function PreviewPage() {
   const [data, setData] = useState(getLocalData)
 
   const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
-  console.log(resumeOrder)
+  // console.log(resumeOrder)
   const components = {
     프로필: ProfilePreview,
     자기소개서: IntroPreview,

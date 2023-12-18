@@ -19,7 +19,7 @@ const CareerPreview = forwardRef((props, ref) => {
 
   const sectionId = getSectionId('커리어', 3)
 
-  console.log('미리보기', careerData)
+  // console.log('미리보기', careerData)
 
   return (
     <>
