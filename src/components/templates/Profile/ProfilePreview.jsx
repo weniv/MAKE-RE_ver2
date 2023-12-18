@@ -14,15 +14,44 @@ export default function ProfilePreview() {
     data.github && data.github[1] ? data.github[1] : null
   )
 
+  // const [rootColorCode, setRootColorCode] = useState('')
+  const theme = localStorage.getItem('themMode')
+
+  const findRootColor = (variable) => {
+    switch (mainColor) {
+      case 'var(--code-purple)':
+        return theme === 'light' ? '#964dd1' : '#c893fd'
+      case 'var(--code-pink)':
+        return theme === 'light' ? '#c93864' : '#ed4779'
+      case 'var(--primary-color)':
+        return theme === 'light' ? '#2e6ff2' : '#3075ff'
+      case 'var(--code-green)':
+        return theme === 'light' ? '#328026' : '#50c140'
+      case 'var(--code-orange)':
+        return theme === 'light' ? '#ed7200' : '#ffa52a'
+      default:
+        return theme === 'light' ? '#2e6ff2' : '#3075ff'
+    }
+  }
+
   useEffect(() => {
     if (data.github && data.github[1]) {
-      const urlArr = commitUrl.split('/')
-      const discardArr = urlArr.splice(3, 1, mainColor.split('#')[1])
+      const githubID = commitUrl.split('/')[4]
 
-      setCommitUrl(urlArr.join('/'))
+      if (mainColor.split('#')[1]) {
+        setCommitUrl(
+          `https://ghchart.rshah.org/${mainColor.split('#')[1]}/${githubID}`
+        )
+      } else {
+        const rootColorCode = findRootColor(mainColor)
+        setCommitUrl(
+          `https://ghchart.rshah.org/${rootColorCode.split('#')[1]}/${githubID}`
+        )
+      }
+
       setResumeData({
         ...resumeData,
-        github: [data.github[0], urlArr.join('/')],
+        github: [data.github[0], commitUrl],
       })
     }
   }, [mainColor])
@@ -87,7 +116,7 @@ export default function ProfilePreview() {
     </ProfileSection>
   )
 }
-
+// `https://ghchart.rshah.org/2e6ff2/${githubID}`
 const ProfileSection = styled.section`
   display: flex;
   gap: 40px;
