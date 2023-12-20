@@ -52,5 +52,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://github.com/login/oauth"
+  "proxy": "http://127.0.0.1:8000"
 }

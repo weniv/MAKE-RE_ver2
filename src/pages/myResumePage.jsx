@@ -8,9 +8,27 @@ import Footer from '../components/organisms/Footer/Footer'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
 import PlusIcon from '../assets/icon-+.svg'
 import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
+import { getAllResume } from '../utils/fetchUtils'
 
 export default function MyResumePage() {
+  const userId = 1 // 변경필요
   const [resumes, setResumes] = useState([])
+
+  useEffect(() => {
+    const fetchData = async (id) => {
+      try {
+        const result = await getAllResume(id)
+        setResumes(result.data)
+      } catch (err) {
+        console.log('이력서를 불러오는 과정에서 에러가 발생했다')
+        console.log(err)
+      }
+    }
+
+    fetchData(userId)
+  }, [])
+
+  console.log('resumes', resumes)
 
   // useEffect(() => {
   //   // Django API endpoint 설정
@@ -54,8 +72,7 @@ export default function MyResumePage() {
                 description="이력서는 최대 3개까지 생성 및 관리할 수 있습니다."
               />
               <Wrap>
-                <Resume />
-                <Resume />
+                {resumes && resumes.map((resume) => <Resume resume={resume} />)}
                 <AddCont>
                   <AddBtn>
                     <ColorIcon iconPath={PlusIcon} type="iconLv1" />

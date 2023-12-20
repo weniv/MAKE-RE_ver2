@@ -9,7 +9,7 @@ import {
   MyProfilePage,
   LoginPage,
   SignupPage,
-  SignupDonePage,
+  // SignupDonePage,
 } from './pages'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Providers from './context/Providers'

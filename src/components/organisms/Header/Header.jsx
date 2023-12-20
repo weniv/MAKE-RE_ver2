@@ -7,6 +7,7 @@ import LicatFace from '../../../assets/icon-liacat.svg'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn } from '../../atoms/Button'
 import * as styles from './Header-style'
+import axios from 'axios'
 
 export default function Header({ options }) {
   const { resumeData } = useContext(ResumeContext)
@@ -15,13 +16,106 @@ export default function Header({ options }) {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
 
+  const data = {
+    account_id: 0,
+    name: '',
+    profiles: {
+      resume_id: 0,
+      profile_image: '',
+      name: '',
+      en_name: '',
+      phone_number: '',
+      email: '',
+      blog_url: '',
+      github_url: '',
+      skills: [],
+      career_years: 0,
+    },
+    introductions: {
+      resume_id: 0,
+      introduction: '',
+    },
+    careers: [
+      {
+        resume_id: 0,
+        title: '',
+        position: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+      },
+    ],
+    projects: [
+      {
+        resume_id: 0,
+        title: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+        project_link: '',
+        github_link: '',
+        sns_link: '',
+        skills: [],
+        contributions: [],
+        people: '',
+      },
+    ],
+    experiences: [
+      {
+        resume_id: 0,
+        title: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+        link: '',
+      },
+    ],
+    certificates: [
+      {
+        resume_id: 0,
+        title: '',
+        date: '',
+        issuer: '',
+        score: '',
+      },
+    ],
+    educations: [
+      {
+        resume_id: 0,
+        title: '',
+        start_date: '',
+        end_date: '',
+        description: '',
+      },
+    ],
+    urls: [
+      {
+        resume_id: 0,
+        link: '',
+        content: '',
+      },
+    ],
+  }
+
+  const createResume = async () => {
+    console.log('이력서 만드는 메서드')
+    // try {
+    //   const result = await axios.get('/api/v1/resume?id=1')
+    //   // navigate('/MAKE-RE_ver2/write')
+    //   console.log('result', result)
+    // } catch (err) {
+    //   console.log('err', err)
+    // }
+  }
+
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
   }
 
-  const moveWrite = () => {
-    navigate('/MAKE-RE_ver2/write')
-  }
+  // const moveWrite = () => {
+  //   createResume()
+  //   navigate('/MAKE-RE_ver2/write')
+  // }
 
   // 프로필 메뉴 외부 클릭 시 닫기
   const menuRef = useRef(null)
@@ -63,7 +157,7 @@ export default function Header({ options }) {
             </h1>
             <styles.BtnCont>
               {hasCreate && (
-                <MainBtn type="create" onClick={moveWrite}>
+                <MainBtn type="create" onClick={createResume}>
                   이력서 만들기
                 </MainBtn>
               )}

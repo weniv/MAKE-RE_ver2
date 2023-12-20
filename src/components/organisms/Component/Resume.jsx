@@ -7,11 +7,11 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
 
-export default function Resume() {
+export default function Resume({ resume }) {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [isEditable, setEditable] = useState(false)
-  const [resumeName, setResumeName] = useState('기존 이력서 이름') // resume.name
+  const [resumeName, setResumeName] = useState(resume.name)
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
@@ -92,7 +92,7 @@ export default function Resume() {
             )}
           </MoreBtn>
         </Wrap>
-        <EditDate>마지막 수정: 2023.11.01</EditDate> {/* resume.update_at */}
+        <EditDate>{`마지막 수정: ${resume.updated_at}`}</EditDate>
       </Cont>
       {isModalOpen && (
         <DeleteModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
