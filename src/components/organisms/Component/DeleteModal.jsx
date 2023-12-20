@@ -3,8 +3,15 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import { MainBtn } from '../../atoms/Button'
 import styled from 'styled-components'
+import { deleteResume } from '../../../utils/fetchUtils'
 
-export default function DeleteModal({ isModalOpen, setModalOpen }) {
+export default function DeleteModal({
+  isModalOpen,
+  setModalOpen,
+  resumeId,
+  fetchData,
+  userId,
+}) {
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -14,8 +21,10 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
     },
   }
 
-  const handleDeleteResume = (idx) => {
-    console.log('이력서 삭제 로직')
+  const handleDeleteResume = async (id) => {
+    await deleteResume(id)
+    setModalOpen(false)
+    fetchData(userId)
   }
 
   return (
@@ -31,7 +40,9 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
         <MainBtn type="fit" onClick={() => setModalOpen(false)}>
           취소
         </MainBtn>
-        <ConfirmBtn onClick={handleDeleteResume}>확인</ConfirmBtn>
+        <ConfirmBtn onClick={() => handleDeleteResume(resumeId)}>
+          확인
+        </ConfirmBtn>
       </BtnWrap>
     </StyledModal>
   )

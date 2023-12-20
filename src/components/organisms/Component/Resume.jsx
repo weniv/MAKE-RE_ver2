@@ -6,8 +6,9 @@ import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
+import { updateResume } from '../../../utils/fetchUtils'
 
-export default function Resume({ resume }) {
+export default function Resume({ resume, fetchData, userId }) {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [isEditable, setEditable] = useState(false)
@@ -21,11 +22,13 @@ export default function Resume({ resume }) {
     setResumeName(e.target.value)
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === 'Enter') {
       setEditable(false)
+      const updateData = {}
+      const result = await updateResume(resume.id, updateData)
 
-      console.log('이력서 이름 수정 로직')
+      console.log('이력서 이름 수정 로직', result)
     }
   }
 
@@ -95,7 +98,13 @@ export default function Resume({ resume }) {
         <EditDate>{`마지막 수정: ${resume.updated_at}`}</EditDate>
       </Cont>
       {isModalOpen && (
-        <DeleteModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+        <DeleteModal
+          isModalOpen={isModalOpen}
+          setModalOpen={setModalOpen}
+          userId={userId}
+          resumeId={resume.id}
+          fetchData={fetchData}
+        />
       )}
     </>
   )

@@ -8,56 +8,46 @@ import Footer from '../components/organisms/Footer/Footer'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
 import PlusIcon from '../assets/icon-+.svg'
 import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
-import { getAllResume } from '../utils/fetchUtils'
+import { createResume, getAllResume } from '../utils/fetchUtils'
 
 export default function MyResumePage() {
   const userId = 1 // 변경필요
   const [resumes, setResumes] = useState([])
 
-  useEffect(() => {
-    const fetchData = async (id) => {
-      try {
-        const result = await getAllResume(id)
-        setResumes(result.data)
-      } catch (err) {
-        console.log('이력서를 불러오는 과정에서 에러가 발생했다')
-        console.log(err)
-      }
+  const fetchData = async (id) => {
+    try {
+      const result = await getAllResume(id)
+      setResumes(result.data)
+    } catch (err) {
+      console.log(err)
     }
+  }
 
+  useEffect(() => {
     fetchData(userId)
   }, [])
 
-  console.log('resumes', resumes)
-
-  // useEffect(() => {
-  //   // Django API endpoint 설정
-  //   const apiUrl = 'your_django_api_endpoint'
-
-  //   // 이력서 데이터 불러오기
-  //   const fetchResumes = async () => {
-  //     try {
-  //       const response = await fetch(apiUrl)
-  //       if (response.ok) {
-  //         const data = await response.json()
-  //         setResumes(data)
-  //       } else {
-  //         console.error('Failed to fetch resumes')
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching resumes:', error)
-  //     }
-  //   }
-
-  //   fetchResumes()
-  // }, [])
-
-  const handleAddResume = () => {
-    // 이력서 추가 로직
-    if (resumes.length < 3) {
-      setResumes((prevResumes) => [...prevResumes, <Resume />])
+  const addNewResume = async () => {
+    try {
+      const result = await createResume()
+      fetchData(userId)
+    } catch (err) {
+      console.log(err)
     }
   }
+
+  // const fetchData = async (id) => {
+  //   try {
+  //     const result = await getAllResume(id)
+  //     setResumes(result.data)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchData(userId)
+  // }, [])
 
   return (
     <>
@@ -72,24 +62,20 @@ export default function MyResumePage() {
                 description="이력서는 최대 3개까지 생성 및 관리할 수 있습니다."
               />
               <Wrap>
-                {resumes && resumes.map((resume) => <Resume resume={resume} />)}
+                {resumes &&
+                  resumes.map((resume) => (
+                    <Resume
+                      resume={resume}
+                      fetchData={fetchData}
+                      userId={userId}
+                    />
+                  ))}
                 <AddCont>
-                  <AddBtn>
+                  <AddBtn onClick={addNewResume}>
                     <ColorIcon iconPath={PlusIcon} type="iconLv1" />
                     이력서 만들기
                   </AddBtn>
                 </AddCont>
-                {/* {resumes.map((resume) => {
-                  return <Resume key={resume.id} />
-                })}
-                {resumes.length <= 2 && (
-                  <AddCont>
-                    <AddBtn onClick={handleAddResume}>
-                      <ColorIcon iconPath={PlusIcon} type="iconLv1" />
-                      이력서 만들기
-                    </AddBtn>
-                  </AddCont>
-                )} */}
               </Wrap>
             </Section>
           </Layout>
