@@ -70,12 +70,14 @@ export default function MyResumePage() {
                       userId={userId}
                     />
                   ))}
-                <AddCont>
-                  <AddBtn onClick={addNewResume}>
-                    <ColorIcon iconPath={PlusIcon} type="iconLv1" />
-                    이력서 만들기
-                  </AddBtn>
-                </AddCont>
+                {resumes.length < 3 && (
+                  <AddCont>
+                    <AddBtn onClick={addNewResume}>
+                      <ColorIcon iconPath={PlusIcon} type="iconLv1" />
+                      이력서 만들기
+                    </AddBtn>
+                  </AddCont>
+                )}
               </Wrap>
             </Section>
           </Layout>
