@@ -7,6 +7,7 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
 import { updateResume } from '../../../utils/fetchUtils'
+import formateDate from '../../../utils/formatDate'
 
 export default function Resume({ resume, fetchData, userId }) {
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -95,7 +96,7 @@ export default function Resume({ resume, fetchData, userId }) {
             )}
           </MoreBtn>
         </Wrap>
-        <EditDate>{`마지막 수정: ${resume.updated_at}`}</EditDate>
+        <EditDate>{`마지막 수정: ${formateDate(resume.updated_at)}`}</EditDate>
       </Cont>
       {isModalOpen && (
         <DeleteModal
