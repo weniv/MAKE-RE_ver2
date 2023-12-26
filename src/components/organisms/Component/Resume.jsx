@@ -26,10 +26,10 @@ export default function Resume({ resume, fetchData, userId }) {
   const handleKeyDown = async (e) => {
     if (e.key === 'Enter') {
       setEditable(false)
-      const updateData = {}
+      const updateData = { name: resumeName }
       const result = await updateResume(resume.id, updateData)
 
-      console.log('이력서 이름 수정 로직', result)
+      console.log('이력서 이름 수정 완료', result)
     }
   }
 
