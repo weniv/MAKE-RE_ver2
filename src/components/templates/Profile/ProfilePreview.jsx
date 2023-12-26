@@ -56,7 +56,7 @@ export default function ProfilePreview() {
 
       setTimeout(() => {
         setIsLoading(false)
-      }, 500)
+      }, 700)
 
       setResumeData({
         ...resumeData,
@@ -120,9 +120,11 @@ export default function ProfilePreview() {
               alt="깃허브 커밋기록 이미지"
             />
           ) : (
-            <div className="loading">
-              <img src={Spinner} alt="" />
-            </div>
+            commitUrl && (
+              <div className="loading">
+                <img src={Spinner} alt="" />
+              </div>
+            )
           )}
         </DataList>
       </ProfileBox>
