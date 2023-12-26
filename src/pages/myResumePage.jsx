@@ -17,7 +17,13 @@ export default function MyResumePage() {
   const fetchData = async (id) => {
     try {
       const result = await getAllResume(id)
-      setResumes(result.data)
+
+      // 최근 수정일자(updated_at)를 기준으로 내림차순 정렬
+      const sortedResumes = result.data.sort(
+        (a, b) => b.updated_at - a.updated_at
+      )
+
+      setResumes(sortedResumes)
     } catch (err) {
       console.log(err)
     }
