@@ -11,7 +11,7 @@ import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
 import { createResume, getAllResume } from '../utils/fetchUtils'
 
 export default function MyResumePage() {
-  const userId = 1 // 변경필요
+  const userId = 3 // 변경필요
   const [resumes, setResumes] = useState([])
 
   const fetchData = async (id) => {
@@ -19,9 +19,11 @@ export default function MyResumePage() {
       const result = await getAllResume(id)
 
       // 최근 수정일자(updated_at)를 기준으로 내림차순 정렬
-      const sortedResumes = result.data.sort(
-        (a, b) => b.updated_at - a.updated_at
-      )
+      const sortedResumes = result.data.sort((a, b) => {
+        const dateA = new Date(a.updated_at)
+        const dateB = new Date(b.updated_at)
+        return dateB - dateA
+      })
 
       setResumes(sortedResumes)
     } catch (err) {
