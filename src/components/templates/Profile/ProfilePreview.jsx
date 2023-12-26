@@ -6,7 +6,7 @@ import ColorContext from '../../../context/ColorContext'
 import { ResumeContext } from '../../../context/ResumeContext'
 
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
-import Spinner from '../../../assets/spinner.gif'
+import Spinner from '../../../assets/loader.svg'
 
 export default function ProfilePreview() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
@@ -195,7 +195,7 @@ const DataList = styled.ul`
     justify-content: center;
 
     img {
-      width: 60px;
+      width: 50px;
     }
   }
 `
