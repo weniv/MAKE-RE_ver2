@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import styled from 'styled-components'
+
+import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { ResumeContext } from '../../../context/ResumeContext'
+
+import { PreviewProfileItem } from '../../atoms/PreviewItem'
+import Spinner from '../../../assets/spinner.gif'
 
 export default function ProfilePreview() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
@@ -14,7 +17,6 @@ export default function ProfilePreview() {
     data.github && data.github[1] ? data.github[1] : null
   )
 
-  // const [rootColorCode, setRootColorCode] = useState('')
   const theme = localStorage.getItem('themMode')
 
   const findRootColor = (variable) => {
@@ -34,8 +36,11 @@ export default function ProfilePreview() {
     }
   }
 
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     if (data.github && data.github[1]) {
+      setIsLoading(true)
       const githubID = commitUrl.split('/')[4]
 
       if (mainColor.split('#')[1]) {
@@ -48,6 +53,10 @@ export default function ProfilePreview() {
           `https://ghchart.rshah.org/${rootColorCode.split('#')[1]}/${githubID}`
         )
       }
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500)
 
       setResumeData({
         ...resumeData,
@@ -104,19 +113,23 @@ export default function ProfilePreview() {
                 : '신입'
             }
           ></PreviewProfileItem>
-          {commitUrl && (
+          {commitUrl && !isLoading ? (
             <img
               src={commitUrl}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
+          ) : (
+            <div className="loading">
+              <img src={Spinner} alt="" />
+            </div>
           )}
         </DataList>
       </ProfileBox>
     </ProfileSection>
   )
 }
-// `https://ghchart.rshah.org/2e6ff2/${githubID}`
+
 const ProfileSection = styled.section`
   display: flex;
   gap: 40px;
@@ -168,6 +181,19 @@ const DataList = styled.ul`
 
   img.commit {
     width: 100%;
+    height: 95px;
     margin-top: 12px;
+  }
+
+  div.loading {
+    width: 100%;
+    height: 107px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 60px;
+    }
   }
 `
