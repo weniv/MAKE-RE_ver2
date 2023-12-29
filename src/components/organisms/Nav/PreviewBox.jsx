@@ -21,12 +21,12 @@ export default function PreviewBox({ type, ...props }) {
     saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
     if (isRequired !== false) {
-      navigate('/MAKE-RE_ver2/preview')
+      navigate('/preview')
     }
   }
 
   const moveWrite = () => {
-    navigate('/MAKE-RE_ver2/write')
+    navigate('/write')
   }
 
   const exportPDF = useReactToPrint({

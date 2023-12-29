@@ -81,7 +81,7 @@ export default function SignupPage() {
 
   // 회원가입 완료
   const submitSignup = () => {
-    navigate('/MAKE-RE_ver2/profilesetting')
+    navigate('/profilesetting')
   }
 
   return (

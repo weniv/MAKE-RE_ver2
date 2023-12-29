@@ -7,7 +7,7 @@ export default function QuitPage() {
   const navigate = useNavigate()
 
   const moveMain = () => {
-    navigate('/MAKE-RE_ver2/')
+    navigate('/')
   }
 
   return (

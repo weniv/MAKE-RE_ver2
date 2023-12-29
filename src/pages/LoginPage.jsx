@@ -31,7 +31,7 @@ export default function LoginPage() {
     e.preventDefault()
     try {
       console.log(input)
-      navigate('/MAKE-RE_ver2')
+      navigate('/')
     } catch (err) {
       console.log(err)
     }
@@ -88,7 +88,7 @@ export default function LoginPage() {
         <p
           className="join"
           onClick={() => {
-            navigate('/MAKE-RE_ver2/signup')
+            navigate('/signup')
           }}
         >
           이메일로 회원가입

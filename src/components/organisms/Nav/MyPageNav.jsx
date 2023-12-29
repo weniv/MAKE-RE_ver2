@@ -15,7 +15,7 @@ export default function MyPageNav({ currentNaveItem }) {
               setActiveNavItem(0)
             }}
           >
-            <Link to="/MAKE-RE_ver2/myresume">이력서 관리</Link>
+            <Link to="/myresume">이력서 관리</Link>
           </NavItem>
           <NavItem
             isActive={activeNavItem === 1}
@@ -23,7 +23,7 @@ export default function MyPageNav({ currentNaveItem }) {
               setActiveNavItem(1)
             }}
           >
-            <Link to="/MAKE-RE_ver2/myprofile">프로필 페이지</Link>
+            <Link to="/myprofile">프로필 페이지</Link>
           </NavItem>
         </NavList>
       </nav>

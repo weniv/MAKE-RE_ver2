@@ -81,7 +81,7 @@ export default function Resume() {
             {isMenuOpen && (
               <MenuList>
                 <li>
-                  <Link to="/MAKE-RE_ver2/write">이력서 수정</Link>
+                  <Link to="/write">이력서 수정</Link>
                 </li>
                 <li>
                   <button onClick={() => setModalOpen(true)}>
