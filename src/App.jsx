@@ -22,17 +22,17 @@ function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="/MAKE-RE_ver2" element={<LandingPage />} />
-            <Route path="/MAKE-RE_ver2/write" element={<WritePage />} />
-            <Route path="/MAKE-RE_ver2/preview" element={<PreviewPage />} />
-            <Route path="/MAKE-RE_ver2/quit" element={<QuitPage />} />
-            <Route path="/MAKE-RE_ver2/login" element={<LoginPage />} />
-            <Route path="/MAKE-RE_ver2/signup" element={<SignupPage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/write" element={<WritePage />} />
+            <Route path="/preview" element={<PreviewPage />} />
+            <Route path="/quit" element={<QuitPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
             {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
-            <Route path="/MAKE-RE_ver2/myresume" element={<MyResumePage />} />
-            <Route path="/MAKE-RE_ver2/myprofile" element={<MyProfilePage />} />
+            <Route path="/myresume" element={<MyResumePage />} />
+            <Route path="/myprofile" element={<MyProfilePage />} />
             <Route
-              path="/MAKE-RE_ver2/profilesetting"
+              path="/profilesetting"
               element={<ProfileSetting />}
             />
             <Route path="*" element={<NotFoundPage />} />

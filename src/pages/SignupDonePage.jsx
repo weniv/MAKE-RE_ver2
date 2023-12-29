@@ -18,7 +18,7 @@ export default function SignupDonePage() {
         </p>
         <button
           onClick={() => {
-            navigate('/MAKE-RE_ver2/login')
+            navigate('/login')
           }}
         >
           로그인하기

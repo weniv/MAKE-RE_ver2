@@ -20,7 +20,7 @@ export default function Header({ options }) {
   }
 
   const moveWrite = () => {
-    navigate('/MAKE-RE_ver2/write')
+    navigate('/write')
   }
 
   // 프로필 메뉴 외부 클릭 시 닫기
@@ -40,7 +40,7 @@ export default function Header({ options }) {
       <styles.HeaderLayout isCenter={isCenter}>
         {isCenter ? (
           <h1>
-            <Link to="/MAKE-RE_ver2/">
+            <Link to="/">
               <ColorIcon
                 iconPath={Logo}
                 width="176px"
@@ -52,7 +52,7 @@ export default function Header({ options }) {
         ) : (
           <>
             <h1>
-              <Link to="/MAKE-RE_ver2">
+              <Link to="/">
                 <ColorIcon
                   iconPath={Logo}
                   width="176px"
@@ -76,7 +76,7 @@ export default function Header({ options }) {
                   {isMenuOpen && (
                     <styles.MenuList ref={menuRef}>
                       <styles.MenuItem>
-                        <Link to="/MAKE-RE_ver2/myresume">마이페이지</Link>
+                        <Link to="/myresume">마이페이지</Link>
                       </styles.MenuItem>
                       <styles.MenuItem>
                         <button>로그아웃</button>

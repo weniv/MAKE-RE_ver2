@@ -14,7 +14,7 @@ export default function LandingPage() {
   const navigate = useNavigate()
 
   const moveWrite = () => {
-    navigate('/MAKE-RE_ver2/write')
+    navigate('/write')
   }
   return (
     <>

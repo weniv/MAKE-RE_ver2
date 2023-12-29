@@ -10,7 +10,7 @@ export default function NotFoundPage() {
   const navigate = useNavigate()
 
   const goMain = () => {
-    navigate('/MAKE-RE_ver2')
+    navigate('/')
   }
   const goBack = () => {
     navigate(-1)
