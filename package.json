@@ -1,6 +1,7 @@
 {
   "name": "resume_ver2",
   "version": "0.1.0",
+  "homepage": "http://make-re.weniv.co.kr",
   "private": true,
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
