@@ -36,9 +36,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Set PUBLIC_URL
-        run: |
-          PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^.+\/(.+)$/\/\1\//')
-          echo PUBLIC_URL=$PUBLIC_URL > .env
+        run: echo "PUBLIC_URL=https://make-re.weniv.co.kr/" > .env
 
       - name: Build
         run: |
