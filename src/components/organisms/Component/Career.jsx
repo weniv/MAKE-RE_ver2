@@ -46,6 +46,7 @@ export default function Career({
                 updateData(e, idx, careerData, setCareerData)
               }}
               inputData={career.title}
+              maxLength={45}
             >
               {'회사명'}
             </RequireInput>

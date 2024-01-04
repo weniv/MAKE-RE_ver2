@@ -40,6 +40,7 @@ export default function Project({
             updateData(e, idx, projectData, setProjectData)
           }}
           inputData={project.title}
+          maxLength={45}
         >
           {'프로젝트명'}
         </RequireInput>
