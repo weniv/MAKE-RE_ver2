@@ -31,6 +31,7 @@ export default function Certificate({
           placeholder="예) 정보처리기사"
           onChange={(e) => updateData(e, idx, certData, setCertData)}
           inputData={cert.title}
+          maxLength={45}
         >
           자격증명
         </DefaultInput>

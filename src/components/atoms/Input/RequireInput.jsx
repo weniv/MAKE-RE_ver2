@@ -28,6 +28,7 @@ export default function RequireInput({
   inputData,
   children,
   placeholder,
+  maxLength,
 }) {
   const { formRef } = useContext(ResumeContext)
 
@@ -43,6 +44,7 @@ export default function RequireInput({
           value={inputData}
           onChange={onChange}
           autoComplete="off"
+          maxLength={maxLength}
         />
       </div>
       <Alert className="alertMsg">

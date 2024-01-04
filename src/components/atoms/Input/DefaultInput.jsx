@@ -14,6 +14,7 @@ export default function DefaultInput({
   onChange,
   onKeyDown,
   required,
+  maxLength,
 }) {
   return (
     <InputCont type={type}>
@@ -33,6 +34,7 @@ export default function DefaultInput({
         onKeyDown={onKeyDown}
         autoComplete="off"
         required={required ? required : 'false'}
+        maxLength={maxLength}
       />
     </InputCont>
   )

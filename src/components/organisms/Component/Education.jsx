@@ -36,6 +36,7 @@ export default function Education({
             updateData(e, idx, eduData, setEduData)
           }}
           inputData={edu.title}
+          maxLength={45}
         >
           교육명
         </DefaultInput>
