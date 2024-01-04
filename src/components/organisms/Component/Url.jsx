@@ -35,6 +35,7 @@ export default function Url({
             onChange={(e) => {
               updateData(e, idx, urlData, setUrlData)
             }}
+            maxLength={45}
           >
             URL 이름 또는 설명
           </DefaultInput>
