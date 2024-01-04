@@ -8,7 +8,20 @@
  */
 export default function updateData(e, idx, data, setData) {
   const { name, value } = e.target
+  if (e.target.maxLength !== -1 && value.length > e.target.maxLength) {
+    return
+  } else {
+    setData(
+      data.map((el, i) =>
+        i === idx
+          ? {
+              ...el,
+              [name]: value,
+            }
+          : el
+      )
+    )
+  }
 
-  setData(data.map((el, i) => (i === idx ? { ...el, [name]: value } : el)))
   return data
 }
