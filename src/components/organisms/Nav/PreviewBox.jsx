@@ -6,6 +6,8 @@ import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { useReactToPrint } from 'react-to-print'
 import { saveData } from '../../../utils/saveData'
 import { checkRequiredValidity } from '../../atoms/Input/RequireInput'
+import ThemeContext from '../../../context/ThemeContext'
+import { theme } from '../../../theme/theme'
 
 export default function PreviewBox({ type, ...props }) {
   const { resumeData, formRef } = useContext(ResumeContext)

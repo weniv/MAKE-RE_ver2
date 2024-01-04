@@ -19,6 +19,7 @@ import { ProjectPreview } from '../components/templates/Project'
 import { ResumeContext } from '../context/ResumeContext'
 import Footer from '../components/organisms/Footer/Footer'
 import RemoteContext from '../context/RemoteContext'
+import { lightTheme } from '../theme/theme'
 
 export const LocalContext = createContext(null)
 
@@ -62,11 +63,9 @@ export default function PreviewPage() {
       <Header options={{ hasProfile: true }} />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
-          <Margin ref={exportRef}>
-            <Main ref={exportRef}>
-              <Layout>{CurrentComponent}</Layout>
-            </Main>
-          </Margin>
+          <Main ref={exportRef}>
+            <Layout className="cont-print">{CurrentComponent}</Layout>
+          </Main>
           <Aside type="preview" exportRef={exportRef} scrollRef={scrollRef} />
         </Cont>
       </LocalContext.Provider>
@@ -95,11 +94,15 @@ const Main = styled.main`
   height: fit-content;
 
   @page {
-    size: A4;
-    margin: 0mm;
+    size: 210mm 297mm;
+    margin: 20mm 20mm 15mm;
   }
   @media print {
-    padding: 10mm;
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    zoom: 80%;
   }
 `
 
@@ -109,9 +112,7 @@ const Layout = styled.div`
   gap: 40px;
   width: 890px;
   padding: 74px 52px;
-`
-
-const Margin = styled.div`
   @media print {
+    padding: 0;
   }
 `
