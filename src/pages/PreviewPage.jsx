@@ -16,17 +16,18 @@ import EducationPreview from '../components/templates/Education/EducationPreview
 import UrlPreview from '../components/templates/Url/UrlPreview'
 import CareerPreview from '../components/templates/Career/CareerPreview'
 import { ProjectPreview } from '../components/templates/Project'
-import { ResumeContext } from '../context/ResumeContext'
 import Footer from '../components/organisms/Footer/Footer'
 import RemoteContext from '../context/RemoteContext'
-import { lightTheme } from '../theme/theme'
+// import { lightTheme } from '../theme/theme'
+import { remoteList } from '../data/dummy'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
   const exportRef = useRef(null)
   const scrollRef = useRef([])
-  const { navList } = useContext(ResumeContext)
+  const [navList, setNavList] = useState(resumeOrder ? resumeOrder : remoteList)
   const { currentSection, updateCurrentSection } = useContext(RemoteContext)
 
   useEffect(() => {
@@ -40,8 +41,6 @@ export default function PreviewPage() {
 
   const [data, setData] = useState(getLocalData)
 
-  const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
-  // console.log(resumeOrder)
   const components = {
     프로필: ProfilePreview,
     자기소개서: IntroPreview,
