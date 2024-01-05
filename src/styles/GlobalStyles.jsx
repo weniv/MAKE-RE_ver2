@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
+import { lightTheme } from '../theme/theme'
 
 const GlobalStyles = createGlobalStyle`
     :root {
@@ -26,6 +27,30 @@ const GlobalStyles = createGlobalStyle`
 
     }
     ${reset}
+    @media print {
+        :root {
+            --primary-color:  ${lightTheme.primaryColor};
+            --secondary-color: ${lightTheme.secondaryColor};
+            --activation-color: ${lightTheme.activationColor};
+            --background-color: ${lightTheme.backgroundColor};
+            --surface-color: ${lightTheme.surfaceColor};
+            --gray-lv1-color: ${lightTheme.grayLv1Color};
+            --gray-lv2-color: ${lightTheme.grayLv2Color};
+            --gray-lv3-color: ${lightTheme.grayLv3Color};
+            --gray-lv4-color: ${lightTheme.grayLv4Color};
+            --error-color: ${lightTheme.errorColor};
+
+            --code-purple: ${lightTheme.codePurple};
+            --code-pink: ${lightTheme.codePink};
+            --code-blue: ${lightTheme.codeBlue};
+            --code-green: ${lightTheme.codeGreen};
+            --code-orange: ${lightTheme.codeOrange};
+
+            
+            
+            --shadow: ${lightTheme.shadow};
+        }
+    }
 
     @font-face {
         font-family: 'Pretendard';

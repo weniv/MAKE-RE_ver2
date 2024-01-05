@@ -95,7 +95,7 @@ const Main = styled.main`
 
   @page {
     size: 210mm 297mm;
-    margin: 20mm 20mm 15mm;
+    margin: 20mm;
   }
   @media print {
     * {
