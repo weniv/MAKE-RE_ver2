@@ -8,6 +8,7 @@ import Footer from '../components/organisms/Footer/Footer'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
 import PlusIcon from '../assets/icon-+.svg'
 import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
+import { MetaData } from '../utils/metaData'
 
 export default function MyResumePage() {
   const [resumes, setResumes] = useState([])
@@ -41,8 +42,15 @@ export default function MyResumePage() {
     }
   }
 
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Header options={{ hasProfile: true, hasCreate: true }} />
       <Cont>
         <MyPageNav />

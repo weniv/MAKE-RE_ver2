@@ -20,6 +20,7 @@ import Footer from '../components/organisms/Footer/Footer'
 import RemoteContext from '../context/RemoteContext'
 // import { lightTheme } from '../theme/theme'
 import { remoteList } from '../data/dummy'
+import { MetaData } from '../utils/metaData'
 
 export const LocalContext = createContext(null)
 
@@ -57,8 +58,15 @@ export default function PreviewPage() {
     return <Component key={index} ref={scrollRef} />
   })
 
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Header options={{ hasProfile: true }} />
       <LocalContext.Provider value={{ data, setData }}>
         <Cont>
