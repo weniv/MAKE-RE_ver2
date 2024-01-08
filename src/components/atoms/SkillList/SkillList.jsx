@@ -38,7 +38,6 @@ const SkillLi = styled.li`
     props.type === 'delete' ? '0 16px 0 20px' : '0 20px 0'}; // 작성페이지
   padding: ${(props) =>
     props.type === 'preview' && '0 14px'}; // 미리보기 페이지
-  margin-right: 10px;
   gap: 6px;
   border-radius: 40px;
   color: ${(props) =>

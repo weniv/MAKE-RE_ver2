@@ -25,11 +25,13 @@ const IntroPreview = forwardRef((props, ref) => {
       {profileData?.skills.length > 0 && (
         <SkillSection>
           <PreviewSubtitle type="skills">Skills</PreviewSubtitle>
+          <SkillCont>
           {profileData.skills.map((skill, i) => (
             <SkillList key={i} type="preview">
               {skill}
             </SkillList>
           ))}
+          </SkillCont>
         </SkillSection>
       )}
     </>
@@ -48,9 +50,14 @@ const IntroCont = styled.pre`
   word-wrap: break-word;
   white-space: break-spaces;
 `
-
 const SkillSection = styled.section`
-  margin-top: 40px;
+  display: flex;
 `
+const SkillCont = styled.div`
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+`
+
 
 export default IntroPreview
