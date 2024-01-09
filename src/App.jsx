@@ -23,18 +23,15 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/write" element={<WritePage />} />
-            <Route path="/preview" element={<PreviewPage />} />
+            <Route path="/write/:id" element={<WritePage />} />
+            <Route path="/preview/:id" element={<PreviewPage />} />
             <Route path="/quit" element={<QuitPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
             <Route path="/myresume" element={<MyResumePage />} />
             <Route path="/myprofile" element={<MyProfilePage />} />
-            <Route
-              path="/profilesetting"
-              element={<ProfileSetting />}
-            />
+            <Route path="/profilesetting" element={<ProfileSetting />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
