@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import LinkIcon from '../../../assets/icon-Url.svg'
+import { useEffect, useRef } from 'react'
 
 export default function DefaultTextarea({
   children,
@@ -15,6 +16,18 @@ export default function DefaultTextarea({
   onChange,
   onKeyDown,
 }) {
+  const textareaRef = useRef()
+  const handleResizeHeight = () => {
+    textareaRef.current.style.height = 'auto' //height 초기화
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'
+  }
+
+  useEffect(() => {
+    if (!height) {
+      handleResizeHeight()
+    }
+  }, [inputData])
+
   return (
     <Cont type={type}>
       <Label htmlFor={id}>{children}</Label>
@@ -27,10 +40,11 @@ export default function DefaultTextarea({
         width={width}
         marginRight={marginRight}
         value={inputData}
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
         lineHeight={lineHeight}
         rows={1}
+        ref={textareaRef}
       />
     </Cont>
   )
@@ -67,4 +81,8 @@ const TextArea = styled.textarea`
   resize: none;
   overflow-y: hidden;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
