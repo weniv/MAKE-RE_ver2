@@ -14,10 +14,12 @@ import ProfileExImg from '../../../assets/icon-profileEx.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
+import { ProfileContext } from '../../../context/ProfileContext'
 
 export default function Profile({ type, setIsReady }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [profileData, setProfileData] = useState(resumeData['profile'])
+  const { profileData, setProfileData } = useContext(ProfileContext)
+  // const [profileData, setProfileData] = useState(resumeData['profile'])
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
@@ -25,10 +27,11 @@ export default function Profile({ type, setIsReady }) {
   const skillListRef = useRef(null)
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('resumeData'))
+    // const data = JSON.parse(localStorage.getItem('resumeData'))
+    const data = JSON.parse(localStorage.getItem('profileData'))
     if (data) {
-      setId(data['profile']['fullEmail'].split('@')[0])
-      setDomain(data['profile']['fullEmail'].split('@')[1])
+      setId(data['fullEmail'].split('@')[0])
+      setDomain(data['fullEmail'].split('@')[1])
       setResumeData(data)
       setIsLoaded(true)
     }
@@ -38,11 +41,11 @@ export default function Profile({ type, setIsReady }) {
     setResumeData({ ...resumeData, profile: profileData })
   }, [profileData])
 
-  useEffect(() => {
-    if (type === 'userProfileSetting') {
-      profileData.name ? setIsReady(true) : setIsReady(false)
-    }
-  }, [profileData.name])
+  // useEffect(() => {
+  //   if (type === 'userProfileSetting') {
+  //     profileData.name ? setIsReady(true) : setIsReady(false)
+  //   }
+  // }, [profileData.name])
 
   const fileRef = useRef(null)
 
@@ -115,12 +118,12 @@ export default function Profile({ type, setIsReady }) {
     <Layout>
       <>
         <styles.Section>
-          {type === 'userProfileSetting' && (
+          {/* {type === 'userProfileSetting' && (
             <WriteTitle
               title="기본 프로필 설정"
               description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
             />
-          )}
+          )} */}
           {type === 'myProfile' && (
             <WriteTitle
               title="기본 프로필"

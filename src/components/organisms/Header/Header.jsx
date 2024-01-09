@@ -6,11 +6,14 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn } from '../../atoms/Button'
+import { ProfileContext } from '../../../context/ProfileContext'
 import * as styles from './Header-style'
 
 export default function Header({ options }) {
   const { resumeData } = useContext(ResumeContext)
-  const profileImg = resumeData['profile']['profileImg']
+  const { profileData } = useContext(ProfileContext)
+  // const profileImg = resumeData['profile']['profileImg']
+  const profileImg = profileData['profileImg']
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const [isMenuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
