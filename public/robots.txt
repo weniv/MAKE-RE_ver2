@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /login
+Disallow: /signup
+Disallow: /quit
+Disallow: /write
+Disallow: /preview
+Disallow: /myresume
+Disallow: /myprofile
+Disallow: /profilesetting
+
+Sitemap: https://make-re.weniv.co.kr/sitemap.xml

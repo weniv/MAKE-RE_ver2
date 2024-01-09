@@ -4,6 +4,7 @@ import { MainBtn, SaveBtn } from '../components/atoms/Button'
 import styled from 'styled-components'
 import licat404 from '../assets/licat-404.png'
 import { useNavigate } from 'react-router-dom'
+import { MetaData } from '../utils/metaData'
 
 export default function NotFoundPage() {
   //라우팅을 변경하는 함수
@@ -16,8 +17,15 @@ export default function NotFoundPage() {
     navigate(-1)
   }
 
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Header options={{ isCenter: true, isWhite: true }} />
       <MainContainer>
         <img className="img-licat" src={licat404} alt="" />

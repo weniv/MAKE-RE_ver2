@@ -6,6 +6,7 @@ import { LabelInput } from '../components/organisms/Auth'
 import { WarningMsg } from '../components/atoms/Auth'
 import { issuanceCode } from '../utils/issuanceCode'
 import { useNavigate } from 'react-router-dom'
+import { MetaData } from '../utils/metaData'
 
 let emailRegex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
 
@@ -84,8 +85,16 @@ export default function SignupPage() {
     navigate('/profilesetting')
   }
 
+  const meta = {
+    title: 'MAKE:RE | 로그인',
+    description:
+      '메이커리의 회원이 되어 쉽고 빠른 이력서 커스텀을 시작해보세요',
+    url: 'https://make-re.weniv.co.kr/signup',
+  }
+
   return (
     <Layout auth>
+      <MetaData meta={meta} />
       <Title>회원가입</Title>
       <Form id="signupForm" method="POST" onSubmit={submitSignup}>
         <EmailWrap id="signupEmailForm" isValidate={isValidate}>
