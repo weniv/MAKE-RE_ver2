@@ -3,12 +3,13 @@ import Header from '../components/organisms/Header/Header'
 import styled from 'styled-components'
 import { MainBtn } from '../components/atoms/Button'
 import Footer from '../components/organisms/Footer/Footer'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import bannerImg from '../assets/banner.png'
 import desc1 from '../assets/desc-1.png'
 import desc2 from '../assets/desc-2.png'
 import desc3 from '../assets/desc-3.png'
 import desc4 from '../assets/desc-4.png'
+import { MetaData } from '../utils/metaData'
 
 export default function LandingPage() {
   const navigate = useNavigate()
@@ -16,8 +17,16 @@ export default function LandingPage() {
   const moveWrite = () => {
     navigate('/write')
   }
+
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Header
         options={{
           isCenter: false,

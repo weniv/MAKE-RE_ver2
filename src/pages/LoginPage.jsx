@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import GithubLogo from '../assets/github-logo.svg'
 import GoogleLogo from '../assets/google-logo.svg'
 import { Logo, Layout, Input } from '../components/atoms/Auth'
+import { MetaData } from '../utils/metaData'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -12,6 +13,12 @@ export default function LoginPage() {
     password: '',
   })
   const [isActive, setIsActive] = useState(false)
+
+  const meta = {
+    title: 'MAKE:RE | 로그인',
+    description: '메이커리에 로그인 하고 쉽고 빠르게 이력서를 커스텀해보세요',
+    url: 'https://make-re.weniv.co.kr/login',
+  }
 
   useEffect(() => {
     if (!!input['email'] && !!input['password']) {
@@ -57,6 +64,7 @@ export default function LoginPage() {
 
   return (
     <Layout auth>
+      <MetaData meta={meta} />
       <Logo />
       <Description>
         메이커리 로그인 후<br />
