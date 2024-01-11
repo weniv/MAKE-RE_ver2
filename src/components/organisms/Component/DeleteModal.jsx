@@ -1,10 +1,13 @@
+import { useContext } from 'react'
 import Modal from 'react-modal'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import { MainBtn } from '../../atoms/Button'
 import styled from 'styled-components'
+import ResumeContext from '../../../context/ResumeContext'
 
-export default function DeleteModal({ isModalOpen, setModalOpen }) {
+export default function DeleteModal({ isModalOpen, setModalOpen, id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -14,8 +17,10 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
     },
   }
 
-  const handleDeleteResume = (idx) => {
-    console.log('이력서 삭제 로직')
+  const handleDeleteResume = (id) => {
+    const updatedResumes = resumeData.filter((resume) => resume.id !== id)
+    setResumeData(updatedResumes)
+    setModalOpen(false)
   }
 
   return (
@@ -31,7 +36,7 @@ export default function DeleteModal({ isModalOpen, setModalOpen }) {
         <MainBtn type="fit" onClick={() => setModalOpen(false)}>
           취소
         </MainBtn>
-        <ConfirmBtn onClick={handleDeleteResume}>확인</ConfirmBtn>
+        <ConfirmBtn onClick={() => handleDeleteResume(id)}>확인</ConfirmBtn>
       </BtnWrap>
     </StyledModal>
   )

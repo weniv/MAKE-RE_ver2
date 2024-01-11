@@ -35,6 +35,10 @@ export const ProfileBtn = styled.button`
       : '1px solid var(--gray-lv2-color)'};
   margin-left: 20px;
 
+  &:active {
+    border: 2px solid var(--primary-color);
+  }
+
   img {
     width: 100%;
     height: 100%;

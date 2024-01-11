@@ -7,16 +7,26 @@ import { MainBtn } from '../../atoms/Button'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd } from '../../../utils'
 
-export default function Education() {
-  const { resumeData } = useContext(ResumeContext)
-  const [eduData, setEduData] = useState(resumeData['education'])
+export default function Education({ id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [eduData, setEduData] = useState(selectedResume.education)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    resumeData['education'] = [...eduData]
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, education: eduData }
+        }
+        return resume
+      })
+      console.log('교육 추가 후 resumeData: ', updatedResumeData)
+      return updatedResumeData
+    })
   }, [eduData])
 
-  const maxId = eduData.reduce(
+  const maxId = eduData?.reduce(
     (acc, cur) => {
       return acc.id > cur.id ? acc : cur
     },

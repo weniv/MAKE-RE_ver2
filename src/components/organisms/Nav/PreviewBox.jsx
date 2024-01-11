@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn, SaveBtn } from '../../atoms/Button'
@@ -10,6 +10,8 @@ import ThemeContext from '../../../context/ThemeContext'
 import { theme } from '../../../theme/theme'
 
 export default function PreviewBox({ type, ...props }) {
+  const { id } = useParams()
+
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
@@ -23,12 +25,12 @@ export default function PreviewBox({ type, ...props }) {
     saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
     if (isRequired !== false) {
-      navigate('/preview')
+      navigate(`/preview/${id}`)
     }
   }
 
   const moveWrite = () => {
-    navigate('/write')
+    navigate(`/write/${id}`)
   }
 
   const exportPDF = useReactToPrint({

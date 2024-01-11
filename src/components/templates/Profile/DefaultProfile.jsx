@@ -3,27 +3,19 @@ import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { AddBtn, ImgBtn } from '../../atoms/Button'
 import { uploadImg, deleteImg } from '../../../utils'
 import { updateProfile } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
-import ProfileExImg from '../../../assets/icon-profileEx.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { ProfileContext } from '../../../context/ProfileContext'
 
-export default function Profile({ id, type, setIsReady }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  console.log('현재 resumeData: ', resumeData)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [profileData, setProfileData] = useState(selectedResume.profile)
-
-  // const { profileData, setProfileData } = useContext(ProfileContext)
-  // const [profileData, setProfileData] = useState(resumeData['profile'])
+export default function DefaultProfile({ type }) {
+  const { profileData, setProfileData } = useContext(ProfileContext)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
@@ -31,26 +23,13 @@ export default function Profile({ id, type, setIsReady }) {
   const skillListRef = useRef(null)
 
   useEffect(() => {
-    // const data = JSON.parse(localStorage.getItem('resumeData'))
     const data = JSON.parse(localStorage.getItem('profileData'))
     if (data) {
-      setEmailId(data['fullEmail'].split('@')[0])
+      setId(data['fullEmail'].split('@')[0])
       setDomain(data['fullEmail'].split('@')[1])
-      setResumeData(data)
       setIsLoaded(true)
     }
   }, [])
-
-  useEffect(() => {
-    const updatedResumeData = resumeData.map((resume) => {
-      if (String(resume.id) === id) {
-        return { ...resume, profile: profileData }
-      }
-      return resume
-    })
-
-    setResumeData(updatedResumeData)
-  }, [profileData])
 
   const fileRef = useRef(null)
 
@@ -59,16 +38,16 @@ export default function Profile({ id, type, setIsReady }) {
   }
 
   // 이메일 설정
-  const [emailId, setEmailId] = useState('')
+  const [id, setId] = useState('')
   const [domain, setDomain] = useState('')
 
   useEffect(() => {
-    // const fullEmail = emailId && domain && [emailId, domain].join('@')
-    if (emailId !== '' && domain !== '') {
-      const fullEmail = [emailId, domain].join('@')
-      setProfileData({ ...profileData, fullEmail })
+    let fullEmail = ''
+    if (id !== '' && domain !== '') {
+      fullEmail = [id, domain].join('@')
     }
-  }, [emailId, domain])
+    setProfileData({ ...profileData, fullEmail })
+  }, [id, domain])
 
   // 엔터키 눌렀을 시, 기술 스택 추가
   // const createSkillList = (e) => {
@@ -126,24 +105,10 @@ export default function Profile({ id, type, setIsReady }) {
     <Layout>
       <>
         <styles.Section>
-          {/* {type === 'userProfileSetting' && (
-            <WriteTitle
-              title="기본 프로필 설정"
-              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
-            />
-          )} */}
-          {type === 'myProfile' && (
-            <WriteTitle
-              title="기본 프로필"
-              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
-            />
-          )}
-          {type === 'resumeProfile' && (
-            <WriteTitle
-              title="프로필"
-              description="자신을 간단히 소개해 주세요."
-            />
-          )}
+          <WriteTitle
+            title="기본 프로필"
+            description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
+          />
           <styles.ProfileCont>
             <styles.ImgCont>
               <styles.ImgLabel
@@ -193,36 +158,20 @@ export default function Profile({ id, type, setIsReady }) {
 
             <div>
               <styles.InputCont>
-                {(type === 'userProfileSetting') | (type === 'myProfile') ? (
-                  <DefaultInput
-                    essentialMsg="*필수 입력 정보입니다."
-                    id="name"
-                    type="text"
-                    placeholder="예) 홍길동"
-                    width="220px"
-                    marginRight="12px"
-                    inputData={profileData.name}
-                    onChange={(e) => {
-                      updateProfile(e, 'name', profileData, setProfileData)
-                    }}
-                  >
-                    이름
-                  </DefaultInput>
-                ) : (
-                  <DefaultInput
-                    id="name"
-                    type="text"
-                    placeholder="예) 홍길동"
-                    width="220px"
-                    marginRight="12px"
-                    inputData={profileData.name}
-                    onChange={(e) => {
-                      updateProfile(e, 'name', profileData, setProfileData)
-                    }}
-                  >
-                    이름
-                  </DefaultInput>
-                )}
+                <DefaultInput
+                  essentialMsg="*필수 입력 정보입니다."
+                  id="name"
+                  type="text"
+                  placeholder="예) 홍길동"
+                  width="220px"
+                  marginRight="12px"
+                  inputData={profileData.name}
+                  onChange={(e) => {
+                    updateProfile(e, 'name', profileData, setProfileData)
+                  }}
+                >
+                  이름
+                </DefaultInput>
 
                 <DefaultInput
                   id="enName"
@@ -259,10 +208,8 @@ export default function Profile({ id, type, setIsReady }) {
                   placeholder="예) paul-lab"
                   width="220px"
                   marginRight="12px"
-                  inputData={emailId}
-                  onChange={(e) => {
-                    setEmailId(e.target.value)
-                  }}
+                  inputData={id}
+                  onChange={(e) => setId(e.target.value)}
                 >
                   이메일
                 </DefaultInput>

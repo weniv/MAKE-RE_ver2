@@ -5,10 +5,10 @@ import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
 
-const EducationPreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
-  const urlData = data.url
-  const urlList = urlData.filter(
+const UrlPreview = forwardRef((props, ref) => {
+  const { selectedResume } = useContext(LocalContext)
+  const urlData = selectedResume.url
+  const urlList = urlData?.filter(
     (url) => url.content?.trim() || url.link?.trim()
   )
 
@@ -16,7 +16,7 @@ const EducationPreview = forwardRef((props, ref) => {
 
   return (
     <>
-      {!!urlList.length && (
+      {urlList && !!urlList.length && (
         <PreviewSection ref={(urlRef) => (ref.current[sectionId] = urlRef)}>
           <PreviewSubtitle>URL</PreviewSubtitle>
           <UrlListContainer>
@@ -55,4 +55,4 @@ const PreviewSection = styled.section`
   break-inside: avoid;
 `
 
-export default EducationPreview
+export default UrlPreview

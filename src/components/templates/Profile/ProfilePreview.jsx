@@ -10,11 +10,13 @@ import Spinner from '../../../assets/loader.svg'
 
 export default function ProfilePreview() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const { data } = useContext(LocalContext)
+  const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const profileData = data.profile
+  const profileData = selectedResume.profile
   const [commitUrl, setCommitUrl] = useState(
-    data.github && data.github[1] ? data.github[1] : null
+    selectedResume?.github && selectedResume.github[1]
+      ? selectedResume.github[1]
+      : null
   )
 
   const theme = localStorage.getItem('themMode')
@@ -39,7 +41,7 @@ export default function ProfilePreview() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (data.github && data.github[1]) {
+    if (selectedResume?.github && selectedResume.github[1]) {
       setIsLoading(true)
       const githubID = commitUrl.split('/')[4]
 
@@ -60,7 +62,7 @@ export default function ProfilePreview() {
 
       setResumeData({
         ...resumeData,
-        github: [data.github[0], commitUrl],
+        github: [selectedResume.github[0], commitUrl],
       })
     }
   }, [mainColor])
@@ -108,7 +110,7 @@ export default function ProfilePreview() {
           <PreviewProfileItem
             title="경력 사항"
             content={
-              profileData.careerLength
+              profileData?.careerLength
                 ? `${profileData?.careerLength}년차`
                 : '신입'
             }

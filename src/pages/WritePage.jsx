@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 import { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Aside from '../components/templates/Aside/Aside'
 import Header from '../components/organisms/Header/Header'
 import Footer from '../components/organisms/Footer/Footer'
@@ -18,6 +19,7 @@ import Explain from '../components/organisms/Explain/Explain'
 import { MetaData } from '../utils/metaData'
 
 export default function WritePage() {
+  const { id } = useParams()
   const { currentSection } = useContext(RemoteContext)
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const components = {
@@ -56,7 +58,7 @@ export default function WritePage() {
         <Header options={{ hasProfile: true }} />
         <Cont mode={explainMode}>
           <Main>
-            <CurrentComponent type="resumeProfile" />
+            <CurrentComponent type="resumeProfile" id={id} />
           </Main>
           <Aside type="write" />
         </Cont>

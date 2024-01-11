@@ -84,7 +84,7 @@ export default function Education({
             inputData={edu.inProgress}
             onChange={(e) => {
               setEduData(
-                eduData.map((el, i) =>
+                eduData?.map((el, i) =>
                   i === idx ? { ...el, inProgress: !isStill } : el
                 )
               )

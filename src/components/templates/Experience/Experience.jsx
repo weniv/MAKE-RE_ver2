@@ -7,13 +7,22 @@ import { ResumeContext } from '../../../context/ResumeContext'
 import { styled } from 'styled-components'
 import { Dnd } from '../../../utils'
 
-export default function Experience() {
-  const { resumeData } = useContext(ResumeContext)
-  const [expData, setExpData] = useState(resumeData['experience'])
+export default function Experience({ id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [expData, setExpData] = useState(selectedResume.experience)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    resumeData['experience'] = [...expData]
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, experience: expData }
+        }
+        return resume
+      })
+      return updatedResumeData
+    })
   }, [expData])
 
   const maxId = expData.reduce(

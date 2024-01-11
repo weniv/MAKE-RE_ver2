@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import EditIcon from '../../../assets/icon-pencil.svg'
@@ -6,12 +6,17 @@ import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
+import ResumeContext from '../../../context/ResumeContext'
 
-export default function Resume() {
+export default function Resume({ id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [isEditable, setEditable] = useState(false)
-  const [resumeName, setResumeName] = useState('기존 이력서 이름') // resume.name
+  const targetResume = resumeData.find((resume) => resume.id === id)
+  const [resumeName, setResumeName] = useState(
+    targetResume ? targetResume.name : '새로운 이력서'
+  )
 
   const handleToggleMenu = () => {
     setMenuOpen(!isMenuOpen)
@@ -22,10 +27,22 @@ export default function Resume() {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && resumeName !== '') {
       setEditable(false)
 
-      console.log('이력서 이름 수정 로직')
+      const updatedResumes = resumeData.map((resume) => {
+        if (resume.id === id) {
+          return {
+            ...resume,
+            name: resumeName,
+          }
+        }
+        return resume
+      })
+
+      setResumeData(updatedResumes)
+
+      setEditable(false)
     }
   }
 
@@ -52,6 +69,7 @@ export default function Resume() {
                 inputData={resumeName}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                maxLength={40}
               />
             ) : (
               <>
@@ -81,7 +99,7 @@ export default function Resume() {
             {isMenuOpen && (
               <MenuList>
                 <li>
-                  <Link to="/write">이력서 수정</Link>
+                  <Link to={`/write/${id}`}>이력서 수정</Link>
                 </li>
                 <li>
                   <button onClick={() => setModalOpen(true)}>
@@ -95,7 +113,11 @@ export default function Resume() {
         <EditDate>마지막 수정: 2023.11.01</EditDate> {/* resume.update_at */}
       </Cont>
       {isModalOpen && (
-        <DeleteModal isModalOpen={isModalOpen} setModalOpen={setModalOpen} />
+        <DeleteModal
+          isModalOpen={isModalOpen}
+          setModalOpen={setModalOpen}
+          id={id}
+        />
       )}
     </>
   )

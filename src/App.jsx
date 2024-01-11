@@ -25,8 +25,8 @@ function App() {
           <HelmetProvider>
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/write" element={<WritePage />} />
-              <Route path="/preview" element={<PreviewPage />} />
+              <Route path="/write/:id" element={<WritePage />} />
+              <Route path="/preview/:id" element={<PreviewPage />} />
               <Route path="/quit" element={<QuitPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />

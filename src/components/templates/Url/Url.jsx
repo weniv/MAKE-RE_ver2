@@ -6,13 +6,22 @@ import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd, addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
 
-export default function Url() {
-  const { resumeData } = useContext(ResumeContext)
-  const [urlData, setUrlData] = useState(resumeData['url'])
+export default function Url({ id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [urlData, setUrlData] = useState(selectedResume.url)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    resumeData['url'] = [...urlData]
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, url: urlData }
+        }
+        return resume
+      })
+      return updatedResumeData
+    })
   }, [urlData])
 
   const maxId = urlData.reduce(

@@ -7,17 +7,18 @@ import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
 
 const CertificatePreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
-  const { mainColor } = useContext(ColorContext)
-  const certData = data.certificate
-  const certificates = certData.filter((cert) => cert.date || cert.title.trim())
+  const { selectedResume } = useContext(LocalContext)
+  const certData = selectedResume.certificate
+  const certificates = certData?.filter(
+    (cert) => cert.date || cert.title.trim()
+  )
 
-  certificates.sort(
+  certificates?.sort(
     (a, b) =>
       parseInt(b.date.replace('-', '')) - parseInt(a.date.replace('-', ''))
   )
 
-  const hasCertificates = !!certificates.length
+  const hasCertificates = !!certificates?.length
 
   function formatDate(date) {
     if (date) {
