@@ -7,14 +7,13 @@ import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
 
 const EducationPreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
-  const { mainColor } = useContext(ColorContext)
-  const eduData = data.education
-  const educationList = eduData.filter(
+  const { selectedResume } = useContext(LocalContext)
+  const eduData = selectedResume.education
+  const educationList = eduData?.filter(
     (edu) => edu.startDate || edu.endDate || edu.title.trim()
   )
 
-  const hasEducation = !!educationList.length
+  const hasEducation = !!educationList?.length
 
   function formatDate(date) {
     if (date) {

@@ -7,16 +7,25 @@ import { MainBtn } from '../../atoms/Button'
 import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd } from '../../../utils'
 
-export default function Certificate() {
-  const { resumeData } = useContext(ResumeContext)
-  const [certData, setCertData] = useState(resumeData['certificate'])
+export default function Certificate({ id }) {
+  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [certData, setCertData] = useState(selectedResume.certificate)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    resumeData['certificate'] = [...certData]
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, certificate: certData }
+        }
+        return resume
+      })
+      return updatedResumeData
+    })
   }, [certData])
 
-  const maxId = certData.reduce(
+  const maxId = certData?.reduce(
     (acc, cur) => {
       return acc.id > cur.id ? acc : cur
     },

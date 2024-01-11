@@ -3,17 +3,23 @@ import Footer from '../components/organisms/Footer/Footer'
 import Header from '../components/organisms/Header/Header'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
 import Profile from '../components/templates/Profile/Profile'
+import DefaultProfile from '../components/templates/Profile/DefaultProfile'
+import { ProfileContext } from '../context/ProfileContext'
 import { useContext, useState } from 'react'
 import { ResumeContext } from '../context/ResumeContext'
 import { saveData } from '../utils/saveData'
 
 export default function MyProfilePage() {
   const [isReady, setIsReady] = useState(true)
-  const { resumeData } = useContext(ResumeContext)
+  const { profileData } = useContext(ProfileContext)
 
-  const submitProfile = () => {
-    console.log('데이터 저장완료')
-    saveData('resumeData', JSON.stringify(resumeData))
+  const saveProfile = (data) => {
+    if (profileData.name) {
+      saveData('profileData', JSON.stringify(data))
+      console.log('기본 프로필 저장 완료')
+    } else {
+      alert('이름을 입력해주세요.')
+    }
   }
 
   return (
@@ -22,8 +28,13 @@ export default function MyProfilePage() {
       <Cont>
         <MyPageNav currentNaveItem={1} />
         <Main>
-          <Profile type="myProfile" setIsReady={setIsReady} />
-          <Button isReady={isReady} disabled={!isReady} onClick={submitProfile}>
+          {/* <Profile type="myProfile" setIsReady={setIsReady} /> */}
+          <DefaultProfile setIsReady={setIsReady} />
+          <Button
+            isReady={isReady}
+            disabled={!isReady}
+            onClick={() => saveProfile(profileData)}
+          >
             수정하기
           </Button>
         </Main>

@@ -12,8 +12,8 @@ export const resumeList = [
       careerLength: 0,
       skills: [],
       github: '',
-      intro: '',
     },
+    intro: '',
     career: [
       {
         id: 1,
@@ -68,8 +68,8 @@ export const resumeItem = {
     careerLength: 0,
     skills: [],
     github: '',
-    intro: '',
   },
+  intro: '',
   career: [
     {
       id: 1,
@@ -131,6 +131,6 @@ export const profileData = {
   blog: '',
   careerLength: 0,
   skills: [],
-  github: '',
+  github: [],
   intro: '',
 }

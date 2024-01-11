@@ -5,27 +5,35 @@ import { DefaultTextarea } from '../../atoms/Input'
 import Layout from '../../organisms/Component/Layout'
 import { styled } from 'styled-components'
 
-export default function Intro() {
+export default function Intro({ id }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [intro, setIntro] = useState(resumeData['profile']['intro'])
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [intro, setIntro] = useState(selectedResume.intro)
   const maxCount = 1000
 
   useEffect(() => {
     if (intro.trim().length > maxCount) {
-      resumeData['profile']['intro'] = intro.slice(0, maxCount)
+      // resumeData['profile']['intro'] = intro.slice(0, maxCount)
       setIntro(intro.slice(0, maxCount))
-    } else {
-      // resumeData['profile']['intro'] = intro
-      setResumeData({
-        ...resumeData,
-        profile: { ...resumeData['profile'], intro },
-      })
     }
   }, [intro])
 
   function handleUpdateIntro(e) {
+    const updatedIntro = e.target.value
+
     if (intro.trim().length <= maxCount) {
-      setIntro(e.target.value)
+      setIntro(updatedIntro)
+
+      // Update the selectedResume's intro
+      const updatedResumeData = resumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, intro: updatedIntro }
+        }
+        return resume
+      })
+
+      // Update the entire resumeData
+      setResumeData(updatedResumeData)
     }
   }
 

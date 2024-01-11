@@ -8,15 +8,25 @@ import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function Career() {
+export default function Career({ id }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [careerData, setCareerData] = useState(resumeData['career'])
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [careerData, setCareerData] = useState(selectedResume.career)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData({
-      ...resumeData,
-      career: careerData.filter((el, idx) => idx === 0 || !!el.title),
+    // setResumeData({
+    //   ...resumeData,
+    //   career: careerData.filter((el, idx) => idx === 0 || !!el.title),
+    // })
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, career: careerData }
+        }
+        return resume
+      })
+      return updatedResumeData
     })
   }, [careerData])
 

@@ -54,7 +54,7 @@ export default function MyResumePage() {
     <>
       <Header options={{ hasProfile: true, hasCreate: true }} />
       <Cont>
-        <MyPageNav />
+        <MyPageNav currentNaveItem={0} />
         <Main>
           <Layout>
             <Section>

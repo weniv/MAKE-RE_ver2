@@ -8,14 +8,13 @@ import getSectionId from '../../../utils/getSectionId'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 
 const ExperiencePreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
-  const { mainColor } = useContext(ColorContext)
-  const expData = data.experience
-  const expList = expData.filter(
+  const { selectedResume } = useContext(LocalContext)
+  const expData = selectedResume.experience
+  const expList = expData?.filter(
     (exp) => exp.startDate || exp.endDate || exp.title.trim()
   )
 
-  const hasExperience = !!expList.length
+  const hasExperience = !!expList?.length
 
   function formatDate(date) {
     if (date) {

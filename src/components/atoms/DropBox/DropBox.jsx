@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import * as styles from './Dropbox-style'
 import ColorIcon from '../ColorIcon/ColorIcon'
 import ThemeContext from '../../../context/ThemeContext'
+import { ProfileContext } from '../../../context/ProfileContext'
 import { theme } from '../../../theme/theme'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
@@ -11,14 +12,16 @@ export default function DropBox({
   width,
   list,
   setDomain,
-  profileData,
-  setProfileData,
   setIsChange,
   isChange,
 }) {
+  const { profileData, setProfileData } = useContext(ProfileContext)
+  const domainText = profileData.fullEmail
+    ? profileData.fullEmail.split('@')[1]
+    : '직접 입력'
   const [isSelected, setIsSelected] = useState()
   const [selectedData, setSelectedData] = useState(
-    type === 'email' ? '직접 입력' : '신입'
+    type === 'email' ? domainText : '신입'
   )
   const { themeMode } = useContext(ThemeContext)
   // const previousData = null

@@ -23,11 +23,11 @@ export default function Resume({ id }) {
   }
 
   const handleInputChange = (e) => {
-    setResumeName(e.target.value.trim())
+    setResumeName(e.target.value)
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && resumeName !== '') {
       setEditable(false)
 
       const updatedResumes = resumeData.map((resume) => {
@@ -69,6 +69,7 @@ export default function Resume({ id }) {
                 inputData={resumeName}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
+                maxLength={40}
               />
             ) : (
               <>

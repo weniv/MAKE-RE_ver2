@@ -8,15 +8,25 @@ import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
 import { ResumeContext } from '../../../context/ResumeContext'
 
-export default function Project() {
+export default function Project({ id }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const [projectData, setProjectData] = useState(resumeData['project'])
+  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+  const [projectData, setProjectData] = useState(selectedResume.project)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData({
-      ...resumeData,
-      project: projectData.filter((el, idx) => idx === 0 || !!el.title),
+    // setResumeData({
+    //   ...resumeData,
+    //   project: projectData.filter((el, idx) => idx === 0 || !!el.title),
+    // })
+    setResumeData((prevResumeData) => {
+      const updatedResumeData = prevResumeData.map((resume) => {
+        if (String(resume.id) === id) {
+          return { ...resume, project: projectData }
+        }
+        return resume
+      })
+      return updatedResumeData
     })
   }, [projectData])
 

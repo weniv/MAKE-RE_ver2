@@ -4,15 +4,12 @@ import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import LicatFace from '../../../assets/icon-liacat.svg'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { MainBtn } from '../../atoms/Button'
 import { ProfileContext } from '../../../context/ProfileContext'
 import * as styles from './Header-style'
 
 export default function Header({ options }) {
-  const { resumeData } = useContext(ResumeContext)
   const { profileData } = useContext(ProfileContext)
-  // const profileImg = resumeData['profile']['profileImg']
   const profileImg = profileData['profileImg']
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -23,7 +20,7 @@ export default function Header({ options }) {
   }
 
   const moveWrite = () => {
-    navigate('/write')
+    navigate('/myresume')
   }
 
   // 프로필 메뉴 외부 클릭 시 닫기

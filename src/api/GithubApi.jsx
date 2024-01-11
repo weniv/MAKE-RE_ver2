@@ -9,17 +9,19 @@ import ThemeContext from '../context/ThemeContext'
 import AddImgIcon from '../assets/img-icon.svg'
 import AddImgIconDark from '../assets/img-icon-dark.svg'
 import { ResumeContext } from '../context/ResumeContext'
+import { ProfileContext } from '../context/ProfileContext'
 
 export const GithubContext = React.createContext()
 
 export default function GithubApi({ children }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
+  const { profileData, setProfileData } = useContext(ProfileContext)
   const { themeMode } = useContext(ThemeContext)
   const imgIcon = themeMode === 'light' ? AddImgIcon : AddImgIconDark
 
   const [queryString, setQueryString] = useState(window.location.search)
   const [githubID, setGithubID] = useState(
-    resumeData.github ? resumeData.github[0] : null
+    profileData.github ? profileData.github[0] : null
   )
   const [userName, setUserName] = useState('')
   const [userData, setUserData] = useState([])
@@ -240,7 +242,7 @@ export default function GithubApi({ children }) {
 
   // 깃허브 잔디 이미지 불러오기
   const [commitSrc, setCommitSrc] = useState(
-    resumeData.github ? resumeData.github[1] : null
+    profileData.github ? profileData.github[1] : null
   )
   const [isValid, setIsValid] = useState(true)
 
@@ -253,7 +255,8 @@ export default function GithubApi({ children }) {
     if (githubID) {
       const commitImg = `https://ghchart.rshah.org/2e6ff2/${githubID}`
       setCommitSrc(commitImg)
-      setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      // setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      setProfileData({ ...profileData, github: [githubID, commitImg] })
     }
   }, [])
 
@@ -265,7 +268,8 @@ export default function GithubApi({ children }) {
 
       setCommitSrc(commitImg)
       setIsValid(true)
-      setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      // setResumeData({ ...resumeData, github: [githubID, commitImg] })
+      setProfileData({ ...profileData, github: [githubID, commitImg] })
     }
   }
 
@@ -274,7 +278,8 @@ export default function GithubApi({ children }) {
     e.preventDefault()
     setGithubID('')
     setCommitSrc('')
-    setResumeData({ ...resumeData, github: ['', ''] })
+    // setResumeData({ ...resumeData, github: ['', ''] })
+    setProfileData({ ...profileData, github: ['', ''] })
     return null
   }
 

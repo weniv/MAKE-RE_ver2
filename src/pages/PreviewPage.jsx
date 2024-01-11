@@ -20,10 +20,13 @@ import Footer from '../components/organisms/Footer/Footer'
 import RemoteContext from '../context/RemoteContext'
 // import { lightTheme } from '../theme/theme'
 import { remoteList } from '../data/dummy'
+import { useParams } from 'react-router-dom'
 
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {
+  const { id } = useParams()
+
   const resumeOrder = JSON.parse(localStorage.getItem('resumeOrder'))
   const exportRef = useRef(null)
   const scrollRef = useRef([])
@@ -39,7 +42,14 @@ export default function PreviewPage() {
     return JSON.parse(data)
   }
 
-  const [data, setData] = useState(getLocalData)
+  // const [data, setData] = useState(getLocalData)
+  const [resumeData, setResumeData] = useState(getLocalData())
+  const [selectedResume, setSelectedResume] = useState({})
+
+  useEffect(() => {
+    const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+    setSelectedResume(selectedResume || {})
+  }, [id, resumeData])
 
   const components = {
     프로필: ProfilePreview,
@@ -60,7 +70,7 @@ export default function PreviewPage() {
   return (
     <>
       <Header options={{ hasProfile: true }} />
-      <LocalContext.Provider value={{ data, setData }}>
+      <LocalContext.Provider value={{ selectedResume, setSelectedResume }}>
         <Cont>
           <Main ref={exportRef}>
             <Layout className="cont-print">{CurrentComponent}</Layout>

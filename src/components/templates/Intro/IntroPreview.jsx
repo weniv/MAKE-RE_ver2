@@ -7,10 +7,10 @@ import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
 
 const IntroPreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
+  const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const profileData = data.profile
-  const introData = data.profile.intro
+  const profileData = selectedResume?.profile
+  const introData = selectedResume.intro
 
   const sectionId = getSectionId('자기소개서', 2)
 
@@ -26,11 +26,11 @@ const IntroPreview = forwardRef((props, ref) => {
         <SkillSection>
           <PreviewSubtitle type="skills">Skills</PreviewSubtitle>
           <SkillCont>
-          {profileData.skills.map((skill, i) => (
-            <SkillList key={i} type="preview">
-              {skill}
-            </SkillList>
-          ))}
+            {profileData.skills.map((skill, i) => (
+              <SkillList key={i} type="preview">
+                {skill}
+              </SkillList>
+            ))}
           </SkillCont>
         </SkillSection>
       )}
@@ -54,10 +54,9 @@ const SkillSection = styled.section`
   display: flex;
 `
 const SkillCont = styled.div`
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 `
-
 
 export default IntroPreview

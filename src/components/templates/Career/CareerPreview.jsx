@@ -7,9 +7,9 @@ import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import getSectionId from '../../../utils/getSectionId'
 
 const CareerPreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
+  const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const careerData = data.career.filter((el) => !!el.title)
+  const careerData = selectedResume.career?.filter((el) => !!el.title)
 
   function formatDate(date) {
     if (date) {
@@ -23,7 +23,7 @@ const CareerPreview = forwardRef((props, ref) => {
 
   return (
     <>
-      {careerData.length > 0 ? (
+      {careerData && careerData.length > 0 ? (
         <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap gap="40px">

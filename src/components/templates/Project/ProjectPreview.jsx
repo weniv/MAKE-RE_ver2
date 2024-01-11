@@ -8,14 +8,14 @@ import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import getSectionId from '../../../utils/getSectionId'
 
 const ProjectPreview = forwardRef((props, ref) => {
-  const { data } = useContext(LocalContext)
+  const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const projectData = data.project.filter((el) => !!el.title)
+  const projectData = selectedResume.project?.filter((el) => !!el.title)
 
   const sectionId = getSectionId('프로젝트', 4)
   return (
     <>
-      {projectData.length > 0 ? (
+      {projectData && projectData.length > 0 ? (
         <section ref={(projectRef) => (ref.current[sectionId] = projectRef)}>
           <PreviewSubtitle>Project</PreviewSubtitle>
           <Project>

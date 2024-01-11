@@ -50,7 +50,7 @@ export default function WritePage() {
         <Header options={{ hasProfile: true }} />
         <Cont mode={explainMode}>
           <Main>
-            <CurrentComponent type="resumeProfile" />
+            <CurrentComponent type="resumeProfile" id={id} />
           </Main>
           <Aside type="write" />
         </Cont>
