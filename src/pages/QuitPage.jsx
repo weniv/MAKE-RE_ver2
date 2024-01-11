@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../components/organisms/Header/Header'
 import { MainBtn } from '../components/atoms/Button'
+import { MetaData } from '../utils/metaData'
 
 export default function QuitPage() {
   const navigate = useNavigate()
@@ -10,8 +11,15 @@ export default function QuitPage() {
     navigate('/')
   }
 
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Header options={{ isCenter: true, isWhite: true }} />
       <main>
         <Wrap>

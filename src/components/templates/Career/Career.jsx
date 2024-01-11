@@ -88,6 +88,7 @@ export default function Career({ id }) {
                   key={idx}
                   activeAccordion={activeAccordion}
                   onAccordionClick={handleAccordionClick}
+                  row={1}
                 />
               ))}
           </ItemList>

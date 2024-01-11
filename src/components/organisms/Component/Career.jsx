@@ -16,12 +16,6 @@ export default function Career({
   onAccordionClick,
 }) {
   const [isStill, setIsStill] = useState(career.inProgress)
-  const [textAreaHeight, setTextAreaHeight] = useState('auto')
-
-  const handleResizeTextArea = (height) => {
-    setTextAreaHeight('auto')
-    setTextAreaHeight(height)
-  }
 
   return (
     <ComponentHeader
@@ -107,12 +101,11 @@ export default function Career({
             isStill={isStill}
           />
         </DateWrap>
+        {/* 새로고침시 문제 존재 */}
         <DefaultTextarea
-          height={`${textAreaHeight}px`}
           name="works"
           placeholder={'예) 스터디인 Front-End 개발'}
           onChange={(e) => {
-            handleResizeTextArea(e.target.scrollHeight)
             updateData(e, idx, careerData, setCareerData)
           }}
           inputData={career.works}

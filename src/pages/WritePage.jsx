@@ -16,6 +16,7 @@ import RemoteContext from '../context/RemoteContext'
 import { ResumeContext } from '../context/ResumeContext'
 import { saveData } from '../utils/saveData'
 import Explain from '../components/organisms/Explain/Explain'
+import { MetaData } from '../utils/metaData'
 
 export default function WritePage() {
   const { id } = useParams()
@@ -43,8 +44,15 @@ export default function WritePage() {
     }
   }, [currentSection])
 
+  const meta = {
+    title: 'MAKE:RE | 로그인',
+    description: '메이커리에 로그인 하고 쉽고 빠르게 이력서를 커스텀해보세요',
+    url: 'https://make-re.weniv.co.kr/login',
+  }
+
   return (
     <>
+      <MetaData meta={meta} />
       <Explain mode={explainMode} setMode={setExplainMode} />
       <ModeCont mode={explainMode}>
         <Header options={{ hasProfile: true }} />

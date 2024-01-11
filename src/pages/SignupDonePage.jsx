@@ -2,13 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import { Layout, Logo } from '../components/atoms/Auth'
 import { useNavigate } from 'react-router-dom'
+import { MetaData } from '../utils/metaData'
 
 const SERVICE_NAME = '메이커리'
 
 export default function SignupDonePage() {
   const navigate = useNavigate()
+
+  const meta = {
+    title: 'MAKE:RE',
+    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    url: 'https://make-re.weniv.co.kr/',
+  }
+
   return (
     <Layout>
+      <MetaData meta={meta} />
       <Wrap>
         <Logo />
         <p className="title">회원가입 완료!</p>

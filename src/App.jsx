@@ -14,6 +14,7 @@ import {
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Providers from './context/Providers'
 import ProfileSetting from './pages/ProfileSetting'
+import { HelmetProvider } from 'react-helmet-async'
 
 function App() {
   return (
@@ -21,19 +22,21 @@ function App() {
       <Providers>
         <GlobalStyles />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/write/:id" element={<WritePage />} />
-            <Route path="/preview/:id" element={<PreviewPage />} />
-            <Route path="/quit" element={<QuitPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
-            <Route path="/myresume" element={<MyResumePage />} />
-            <Route path="/myprofile" element={<MyProfilePage />} />
-            <Route path="/profilesetting" element={<ProfileSetting />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <HelmetProvider>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/write/:id" element={<WritePage />} />
+              <Route path="/preview/:id" element={<PreviewPage />} />
+              <Route path="/quit" element={<QuitPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              {/* <Route path="/MAKE-RE_ver2/done" element={<SignupDonePage />} /> */}
+              <Route path="/myresume" element={<MyResumePage />} />
+              <Route path="/myprofile" element={<MyProfilePage />} />
+              <Route path="/profilesetting" element={<ProfileSetting />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </HelmetProvider>
         </BrowserRouter>
       </Providers>
     </div>
