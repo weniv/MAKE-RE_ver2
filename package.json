@@ -22,6 +22,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
+    "react-snap": "^1.23.0",
     "react-to-print": "^2.14.15",
     "styled-components": "^6.0.2",
     "styled-reset": "^4.5.1",
@@ -33,7 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": [
