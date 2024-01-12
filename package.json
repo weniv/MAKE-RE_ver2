@@ -55,5 +55,10 @@
       "last 1 safari version"
     ]
   },
+  "reactSnap": {
+    "include": [
+      "/"
+    ]
+  },
   "proxy": "https://github.com/login/oauth"
 }
