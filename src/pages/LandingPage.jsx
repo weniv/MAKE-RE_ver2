@@ -14,8 +14,8 @@ import { MetaData } from '../utils/metaData'
 export default function LandingPage() {
   const navigate = useNavigate()
 
-  const moveWrite = () => {
-    navigate('/write')
+  const moveMyResume = () => {
+    navigate('/myresume')
   }
 
   const meta = {
@@ -49,7 +49,7 @@ export default function LandingPage() {
                   &lt;MAKE:RE&gt;는 취업을 준비하시는 분들을 위한 이력서 작성
                   서비스입니다.
                 </p>
-                <Button type="create" onClick={moveWrite}>
+                <Button type="create" onClick={moveMyResume}>
                   개발자 이력서 만들기
                 </Button>
               </div>
@@ -131,7 +131,7 @@ export default function LandingPage() {
           <p className="description">
             개발자 이력서를 편리하게 만드실 수 있을 거예요.
           </p>
-          <MainBtn type="create" onClick={moveWrite}>
+          <MainBtn type="create" onClick={moveMyResume}>
             이력서 만들기
           </MainBtn>
         </StartContainer>
