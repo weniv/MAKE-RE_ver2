@@ -49,18 +49,6 @@ export default function DefaultProfile({ type }) {
     setProfileData({ ...profileData, fullEmail })
   }, [id, domain])
 
-  // 엔터키 눌렀을 시, 기술 스택 추가
-  // const createSkillList = (e) => {
-  //   if (e.keyCode === 13 && e.target.value) {
-  //     const newSkill = e.target.value
-  //     setProfileData({
-  //       ...profileData,
-  //       skills: [...profileData.skills, newSkill],
-  //     })
-  //     e.target.value = ''
-  //   }
-  // }
-
   // 기술 스택 추가
   const createSkillList = () => {
     const newSkill = skillListRef.current.value
