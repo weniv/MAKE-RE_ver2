@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import EditIcon from '../../../assets/icon-pencil.svg'
+import DeleteIcon from '../../../assets/icon-X.svg'
 import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
@@ -58,6 +59,8 @@ export default function Resume({ id }) {
     document.addEventListener('mousedown', handleClickOutside)
   }, [menuRef])
 
+  console.log('isModalOpen', isModalOpen)
+
   return (
     <>
       <Cont>
@@ -73,7 +76,9 @@ export default function Resume({ id }) {
               />
             ) : (
               <>
-                <Title>{resumeName}</Title>
+                <Link to={`/write/${id}`}>
+                  <Title>{resumeName}</Title>
+                </Link>
                 <button onClick={() => setEditable(true)}>
                   <ColorIcon
                     iconPath={EditIcon}
@@ -85,7 +90,15 @@ export default function Resume({ id }) {
               </>
             )}
           </TitleWrap>
-          <MoreBtn
+          <DeleteBtn onClick={() => setModalOpen(true)}>
+            <ColorIcon
+              iconPath={DeleteIcon}
+              type="iconLv2"
+              width="20px"
+              height="20px"
+            />
+          </DeleteBtn>
+          {/* <MoreBtn
             onClick={handleToggleMenu}
             ref={menuRef}
             isEditable={isEditable}
@@ -108,7 +121,7 @@ export default function Resume({ id }) {
                 </li>
               </MenuList>
             )}
-          </MoreBtn>
+          </MoreBtn> */}
         </Wrap>
         <EditDate>마지막 수정: 2023.11.01</EditDate> {/* resume.update_at */}
       </Cont>
@@ -147,12 +160,18 @@ const Title = styled.h3`
   margin-right: 8px;
   font-weight: 700;
   color: var(--surface-color);
+
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 const EditDate = styled.span`
   color: var(--gray-lv4-color);
   font-size: 12px;
 `
+
+const DeleteBtn = styled.button``
 
 const MoreBtn = styled.button`
   position: absolute;
