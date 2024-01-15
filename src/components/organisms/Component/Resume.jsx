@@ -7,6 +7,7 @@ import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
 import ResumeContext from '../../../context/ResumeContext'
+import { getCurrentDate } from '../../../utils'
 
 export default function Resume({ id }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
@@ -110,7 +111,9 @@ export default function Resume({ id }) {
             )}
           </MoreBtn>
         </Wrap>
-        <EditDate>마지막 수정: 2023.11.01</EditDate> {/* resume.update_at */}
+        <EditDate>
+          마지막 수정: {targetResume.lastModified || getCurrentDate()}
+        </EditDate>
       </Cont>
       {isModalOpen && (
         <DeleteModal

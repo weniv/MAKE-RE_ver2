@@ -1,7 +1,10 @@
+import { getCurrentDate } from '../utils'
+
 export const resumeList = [
   {
     id: 1,
     name: '새로운 이력서',
+    lastModified: getCurrentDate(),
     profile: {
       profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png', // 프로필 이미지 테스트용
       name: '',
