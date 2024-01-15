@@ -9,8 +9,16 @@ export function ResumeProvider({ children }) {
   const [resumeData, setResumeData] = useState(storedData || initialData)
   const [navList, setNavList] = useState(remoteList)
   const formRef = useRef(null)
+  // useRef를 사용하여 초기 렌더링 여부를 확인하는 변수 선언
+  const isInitialRender = useRef(true)
 
   useEffect(() => {
+    // 이전 렌더링에서는 업데이트하지 않음
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      return
+    }
+
     // 이력서 데이터가 변경될 때마다 최종 수정일 업데이트
     const updatedResumeData = resumeData.map((resume) => ({
       ...resume,
