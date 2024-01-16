@@ -8,7 +8,7 @@ function MetaData({ meta }) {
       <meta name="description" content={meta.description} />
       <meta
         name="keywords"
-        content="메이커리, 위니브, 제주코딩베이스캠프, 개발자 이력서, 이력서, 개발자 커뮤니티, 개발자 이력서 makere, makere, weniv, jejucodingbasecamp,"
+        content="메이커리, 위니브, 제주코딩베이스캠프, 개발자 이력서, 이력서, 개발자 커뮤니티, 개발자 이력서 makere, make:re, makere, weniv, jejucodingbasecamp,"
       />
 
       {/* OG */}
