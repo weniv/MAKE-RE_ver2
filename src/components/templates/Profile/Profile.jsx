@@ -10,11 +10,9 @@ import { uploadImg, deleteImg } from '../../../utils'
 import { updateProfile } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
-import ProfileExImg from '../../../assets/icon-profileEx.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
-import { ProfileContext } from '../../../context/ProfileContext'
 
 export default function Profile({ id, type, setIsReady }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)

@@ -15,10 +15,6 @@ export default function Career({ id }) {
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    // setResumeData({
-    //   ...resumeData,
-    //   career: careerData.filter((el, idx) => idx === 0 || !!el.title),
-    // })
     setResumeData((prevResumeData) => {
       const updatedResumeData = prevResumeData.map((resume) => {
         if (String(resume.id) === id) {
