@@ -16,12 +16,19 @@ import GithubApi from '../../../api/GithubApi'
 
 export default function Profile({ id, type, setIsReady }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  console.log('현재 resumeData: ', resumeData)
   const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [profileData, setProfileData] = useState(selectedResume.profile)
 
-  // const { profileData, setProfileData } = useContext(ProfileContext)
-  // const [profileData, setProfileData] = useState(resumeData['profile'])
+  console.log('현재 resumeData: ', selectedResume.profile)
+
+  const getDefaultProfile = (resumeData) => {
+    const defaultProfileData = JSON.parse(localStorage.getItem('profileData'))
+    return resumeData.profile.name ? resumeData.profile : defaultProfileData
+  }
+
+  const [profileData, setProfileData] = useState(
+    getDefaultProfile(selectedResume)
+  )
+
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
@@ -29,8 +36,8 @@ export default function Profile({ id, type, setIsReady }) {
   const skillListRef = useRef(null)
 
   useEffect(() => {
-    // const data = JSON.parse(localStorage.getItem('resumeData'))
     const data = JSON.parse(localStorage.getItem('profileData'))
+
     if (data) {
       setEmailId(data['fullEmail'].split('@')[0])
       setDomain(data['fullEmail'].split('@')[1])
@@ -67,18 +74,6 @@ export default function Profile({ id, type, setIsReady }) {
       setProfileData({ ...profileData, fullEmail })
     }
   }, [emailId, domain])
-
-  // 엔터키 눌렀을 시, 기술 스택 추가
-  // const createSkillList = (e) => {
-  //   if (e.keyCode === 13 && e.target.value) {
-  //     const newSkill = e.target.value
-  //     setProfileData({
-  //       ...profileData,
-  //       skills: [...profileData.skills, newSkill],
-  //     })
-  //     e.target.value = ''
-  //   }
-  // }
 
   // 기술 스택 추가
   const createSkillList = () => {
@@ -124,12 +119,6 @@ export default function Profile({ id, type, setIsReady }) {
     <Layout>
       <>
         <styles.Section>
-          {/* {type === 'userProfileSetting' && (
-            <WriteTitle
-              title="기본 프로필 설정"
-              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
-            />
-          )} */}
           {type === 'myProfile' && (
             <WriteTitle
               title="기본 프로필"
