@@ -17,6 +17,12 @@ export const ProfileCont = styled.div`
   gap: 46px;
 `
 
+export const TitleCont = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 export const ImgCont = styled.div`
   position: relative;
   width: 146px;
