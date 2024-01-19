@@ -13,8 +13,13 @@ import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
+import { useProfileStore } from '../../../store/ProfileStore'
 
 export default function Profile({ id, type, setIsReady }) {
+  const { profileTestData } = useProfileStore()
+
+  console.log('profileTestData', profileTestData)
+
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const selectedResume = resumeData.find((resume) => String(resume.id) === id)
 

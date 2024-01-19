@@ -125,15 +125,29 @@ export const remoteList = [
   { id: 8, title: '추가 URL' },
 ]
 
+// export const profileData = {
+//   profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png', // 프로필 이미지 테스트용
+//   name: '',
+//   enName: '',
+//   phoneNumber: '',
+//   fullEmail: '',
+//   blog: '',
+//   careerLength: 0,
+//   skills: [],
+//   github: [],
+//   intro: '',
+// }
+
 export const profileData = {
-  profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png', // 프로필 이미지 테스트용
-  name: '',
-  enName: '',
-  phoneNumber: '',
-  fullEmail: '',
-  blog: '',
+  profileImg:
+    'https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg', // 프로필 이미지 테스트용
+  name: '테스트용 데이터',
+  enName: 'ㄴㅇㄹㄴ',
+  phoneNumber: 'ㄴㅇㄹ',
+  fullEmail: 'ㄴㅇㄹ',
+  blog: 'ㄴㅇㄹ',
   careerLength: 0,
-  skills: [],
-  github: [],
-  intro: '',
+  skills: ['ㄴㅇㄹ'],
+  github: ['ㄴㅇㄹ', 'ㄴㅇㄹㄴㅇ'],
+  intro: 'ㄴㅇㄹㅇ',
 }
