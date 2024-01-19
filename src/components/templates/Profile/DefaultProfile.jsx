@@ -13,6 +13,7 @@ import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { ProfileContext } from '../../../context/ProfileContext'
+import { MainBtn } from '../../atoms/Button'
 
 export default function DefaultProfile({ type }) {
   const { profileData, setProfileData } = useContext(ProfileContext)
@@ -93,10 +94,13 @@ export default function DefaultProfile({ type }) {
     <Layout>
       <>
         <styles.Section>
-          <WriteTitle
-            title="기본 프로필"
-            description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
-          />
+          <styles.TitleCont>
+            <WriteTitle
+              title="기본 프로필"
+              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
+            />
+            <MainBtn type="save">프로필 저장하기</MainBtn>
+          </styles.TitleCont>
           <styles.ProfileCont>
             <styles.ImgCont>
               <styles.ImgLabel
