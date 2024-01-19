@@ -40,7 +40,7 @@ export default function MyProfilePage() {
             disabled={!isReady}
             onClick={() => saveProfile(profileData)}
           >
-            수정하기
+            저장하기
           </Button>
         </Main>
       </Cont>
