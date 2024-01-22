@@ -18,8 +18,6 @@ import { useProfileStore } from '../../../store/ProfileStore'
 export default function Profile({ id, type, setIsReady }) {
   const { profileTestData } = useProfileStore()
 
-  console.log('profileTestData', profileTestData)
-
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const selectedResume = resumeData.find((resume) => String(resume.id) === id)
 
@@ -73,7 +71,6 @@ export default function Profile({ id, type, setIsReady }) {
   const [domain, setDomain] = useState('')
 
   useEffect(() => {
-    // const fullEmail = emailId && domain && [emailId, domain].join('@')
     if (emailId !== '' && domain !== '') {
       const fullEmail = [emailId, domain].join('@')
       setProfileData({ ...profileData, fullEmail })

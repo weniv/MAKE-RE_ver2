@@ -14,14 +14,44 @@ import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { ProfileContext } from '../../../context/ProfileContext'
 import { MainBtn } from '../../atoms/Button'
+import { useResumeStore } from '../../../store/ResumeStore'
+import { useProfileStore } from '../../../store/ProfileStore'
 
 export default function DefaultProfile({ type }) {
+  const { defaultProfileData, updateDefaultProfile } = useProfileStore()
+  const { resumeList, updateResumeData } = useResumeStore()
+
   const { profileData, setProfileData } = useContext(ProfileContext)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
   const [isChange, setIsChange] = useState(false)
   const skillListRef = useRef(null)
+
+  console.log('resumeList', resumeList)
+
+  const [testData, setTestData] = useState({
+    profileImg: 'https://api.mandarin.weniv.co.kr/1687337079735.png', // 프로필 이미지 테스트용
+    name: '',
+    enName: '',
+    phoneNumber: '',
+    fullEmail: '',
+    blog: '',
+    careerLength: 0,
+    skills: [],
+    github: [],
+    intro: '',
+  })
+
+  const updateProfileTest = (e) => {
+    setTestData({
+      ...testData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  // console.log('testData', testData)
+  // console.log('defaultProfileData', defaultProfileData)
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('profileData'))
@@ -99,7 +129,15 @@ export default function DefaultProfile({ type }) {
               title="기본 프로필"
               description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
             />
-            <MainBtn type="save">프로필 저장하기</MainBtn>
+            <MainBtn
+              type="save"
+              onClick={() => {
+                console.log('프로필 저장')
+                updateDefaultProfile(testData)
+              }}
+            >
+              프로필 저장하기
+            </MainBtn>
           </styles.TitleCont>
           <styles.ProfileCont>
             <styles.ImgCont>
@@ -108,12 +146,12 @@ export default function DefaultProfile({ type }) {
                 htmlFor="profile-upload"
                 className="profileImg"
               >
-                {profileData.profileImg ? (
+                {testData.profileImg ? (
                   <styles.ImgWrap>
                     <styles.Img
-                      src={profileData.profileImg}
+                      src={testData.profileImg}
                       alt={`${
-                        profileData.name || profileData.enName || '익명'
+                        testData.name || testData.enName || '익명'
                       } 님의 프로필 이미지`}
                     />
                     <ImgBtn
@@ -153,13 +191,15 @@ export default function DefaultProfile({ type }) {
                 <DefaultInput
                   essentialMsg="*필수 입력 정보입니다."
                   id="name"
+                  name="name"
                   type="text"
                   placeholder="예) 홍길동"
                   width="220px"
                   marginRight="12px"
-                  inputData={profileData.name}
+                  inputData={testData.name}
                   onChange={(e) => {
-                    updateProfile(e, 'name', profileData, setProfileData)
+                    updateProfileTest(e)
+                    // updateProfile(e, 'name', profileData, setProfileData)
                   }}
                 >
                   이름
@@ -167,12 +207,14 @@ export default function DefaultProfile({ type }) {
 
                 <DefaultInput
                   id="enName"
+                  name="enName"
                   type="text"
                   placeholder="예) Kildong Hong"
                   width="356px"
-                  inputData={profileData.enName}
+                  inputData={testData.enName}
                   onChange={(e) => {
-                    updateProfile(e, 'enName', profileData, setProfileData)
+                    updateProfileTest(e)
+                    // updateProfile(e, 'enName', profileData, setProfileData)
                   }}
                 >
                   영문 이름
@@ -181,13 +223,15 @@ export default function DefaultProfile({ type }) {
               <styles.InputCont>
                 <DefaultInput
                   id="phoneNumber"
+                  name="phoneNumber"
                   type="tel"
                   placeholder="예) 010-1234-5678"
                   width="220px"
                   marginRight="12px"
-                  inputData={profileData.phoneNumber}
+                  inputData={testData.phoneNumber}
                   onChange={(e) => {
-                    updateProfile(e, 'phoneNumber', profileData, setProfileData)
+                    updateProfileTest(e)
+                    // updateProfile(e, 'phoneNumber', profileData, setProfileData)
                   }}
                 >
                   전화번호
@@ -230,11 +274,13 @@ export default function DefaultProfile({ type }) {
               <styles.InputCont>
                 <DefaultInput
                   id="blog"
+                  name="blog"
                   type="url"
-                  onChange={(e) =>
-                    updateProfile(e, 'blog', profileData, setProfileData)
+                  onChange={
+                    (e) => updateProfileTest(e)
+                    // updateProfile(e, 'blog', profileData, setProfileData)
                   }
-                  inputData={profileData.blog}
+                  inputData={testData.blog}
                 >
                   기술 블로그 링크
                 </DefaultInput>

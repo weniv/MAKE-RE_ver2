@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { resumeItem } from '../data/dummy'
 import { getCurrentDate } from '../utils'
+import { defaultProfileData } from './ProfileStore'
 
 export const useResumeStore = create(
   persist(
@@ -27,6 +28,12 @@ export const useResumeStore = create(
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
             el.id === id ? { ...el, content: { ...el.content, name } } : el
+          ),
+        })),
+      updateResumeData: (id, name, obj) =>
+        set((prev) => ({
+          resumeList: prev.resumeList.map((el) =>
+            el.id === id ? { ...el, content: { [name]: { ...obj } } } : el
           ),
         })),
     }),

@@ -6,6 +6,7 @@ import { ProfileContext } from '../../../context/ProfileContext'
 import { theme } from '../../../theme/theme'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
+import { useProfileStore } from '../../../store/ProfileStore'
 
 export default function DropBox({
   type,
@@ -15,6 +16,8 @@ export default function DropBox({
   setIsChange,
   isChange,
 }) {
+  const { profileTestData, updateProfileData } = useProfileStore()
+
   const { profileData, setProfileData } = useContext(ProfileContext)
   const domainText = profileData.fullEmail
     ? profileData.fullEmail.split('@')[1]
