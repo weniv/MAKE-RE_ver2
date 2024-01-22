@@ -23,7 +23,6 @@ import { remoteList } from '../data/dummy'
 import { useParams } from 'react-router-dom'
 import { MetaData } from '../utils/metaData'
 
-
 export const LocalContext = createContext(null)
 
 export default function PreviewPage() {

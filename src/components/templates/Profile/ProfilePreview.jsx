@@ -1,27 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-
 import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
-import { ResumeContext } from '../../../context/ResumeContext'
-
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
 
 export default function ProfilePreview() {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
   const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const profileData = selectedResume.profile
-  const [commitUrl, setCommitUrl] = useState(
-    selectedResume?.github && selectedResume.github[1]
-      ? selectedResume.github[1]
-      : null
-  )
+  const profileData = selectedResume?.profile ? selectedResume.profile : {}
+  const [commitURL, setCommitURL] = useState(null)
 
   const theme = localStorage.getItem('themMode')
 
-  const findRootColor = (variable) => {
+  const findRootColor = (mainColor) => {
     switch (mainColor) {
       case 'var(--code-purple)':
         return theme === 'light' ? '#964dd1' : '#c893fd'
@@ -38,34 +30,19 @@ export default function ProfilePreview() {
     }
   }
 
-  const [isLoading, setIsLoading] = useState(true)
+  const githubID = profileData?.github?.[0]
 
   useEffect(() => {
-    if (selectedResume?.github && selectedResume.github[1]) {
-      setIsLoading(true)
-      const githubID = commitUrl.split('/')[4]
+    changeCommitColor(githubID)
+  }, [githubID, mainColor])
 
-      if (mainColor.split('#')[1]) {
-        setCommitUrl(
-          `https://ghchart.rshah.org/${mainColor.split('#')[1]}/${githubID}`
-        )
-      } else {
-        const rootColorCode = findRootColor(mainColor)
-        setCommitUrl(
-          `https://ghchart.rshah.org/${rootColorCode.split('#')[1]}/${githubID}`
-        )
-      }
+  const changeCommitColor = (id) => {
+    const color = mainColor.includes('var')
+      ? findRootColor(mainColor).replace('#', '')
+      : mainColor.replace('#', '')
 
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 700)
-
-      setResumeData({
-        ...resumeData,
-        github: [selectedResume.github[0], commitUrl],
-      })
-    }
-  }, [mainColor])
+    setCommitURL(`https://ghchart.rshah.org/${color}/${id}`)
+  }
 
   return (
     <ProfileSection>
@@ -115,18 +92,16 @@ export default function ProfilePreview() {
                 : '신입'
             }
           ></PreviewProfileItem>
-          {commitUrl && !isLoading ? (
+          {commitURL ? (
             <img
-              src={commitUrl}
+              src={commitURL}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
           ) : (
-            commitUrl && (
-              <div className="loading">
-                <img src={Spinner} alt="" />
-              </div>
-            )
+            <div className="loading">
+              <img src={Spinner} alt="" />
+            </div>
           )}
         </DataList>
       </ProfileBox>
