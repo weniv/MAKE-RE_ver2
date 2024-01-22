@@ -23,7 +23,7 @@ export default function Profile({ id, type, setIsReady }) {
   const { resumeData, setResumeData } = useContext(ResumeContext)
   const selectedResume = resumeData.find((resume) => String(resume.id) === id)
 
-  console.log('현재 resumeData: ', selectedResume.profile)
+  // console.log('현재 resumeData: ', selectedResume.profile)
 
   const getDefaultProfile = (resumeData) => {
     const defaultProfileData = JSON.parse(localStorage.getItem('profileData'))
