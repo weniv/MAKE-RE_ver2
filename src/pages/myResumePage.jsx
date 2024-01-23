@@ -12,34 +12,11 @@ import { ResumeContext } from '../context/ResumeContext'
 import { resumeItem } from '../data/dummy'
 import { MetaData } from '../utils/metaData'
 
-
 export default function MyResumePage() {
   const { resumeData, setResumeData } = useContext(ResumeContext)
-  const maxIdRef = useRef(Math.max(...resumeData.map((resume) => resume.id)))
-
-  // const [resumes, setResumes] = useState()
-
-  // useEffect(() => {
-  //   // Django API endpoint 설정
-  //   const apiUrl = 'your_django_api_endpoint'
-
-  //   // 이력서 데이터 불러오기
-  //   const fetchResumes = async () => {
-  //     try {
-  //       const response = await fetch(apiUrl)
-  //       if (response.ok) {
-  //         const data = await response.json()
-  //         setResumes(data)
-  //       } else {
-  //         console.error('Failed to fetch resumes')
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching resumes:', error)
-  //     }
-  //   }
-
-  //   fetchResumes()
-  // }, [])
+  const id =
+    resumeData.length === 0 ? 0 : Math.max(...resumeData.map((el) => el.id))
+  const maxIdRef = useRef(id)
 
   const handleAddResume = () => {
     maxIdRef.current += 1
