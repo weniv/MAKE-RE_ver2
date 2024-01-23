@@ -110,7 +110,7 @@ export default function Resume({ id }) {
             {isMenuOpen && (
               <MenuList>
                 <li>
-                  <button onClick={() => setEditable(true)}>이력서 수정</button>
+                  <button onClick={() => setEditable(true)}>타이틀 수정</button>
                 </li>
                 <li>
                   <button onClick={() => setModalOpen(true)}>
