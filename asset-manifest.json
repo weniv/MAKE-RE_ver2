@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "https://make-re.weniv.co.kr/static/js/main.d65ec826.js",
+    "main.js": "https://make-re.weniv.co.kr/static/js/main.c5b0f76c.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "https://make-re.weniv.co.kr/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/banner.png": "https://make-re.weniv.co.kr/static/media/banner.3515b9a989f451d02264.png",
     "static/media/desc-4.png": "https://make-re.weniv.co.kr/static/media/desc-4.85324b4239ba7dcdb933.png",
@@ -43,9 +43,9 @@
     "static/media/icon-polygon.svg": "https://make-re.weniv.co.kr/static/media/icon-polygon.ae85513423510fdc6466ec051e522de8.svg",
     "static/media/icon-more.svg": "https://make-re.weniv.co.kr/static/media/icon-more.73922c2b8bacc5389ec06411afebc002.svg",
     "static/media/icon-light-mode.svg": "https://make-re.weniv.co.kr/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.d65ec826.js.map": "https://make-re.weniv.co.kr/static/js/main.d65ec826.js.map"
+    "main.c5b0f76c.js.map": "https://make-re.weniv.co.kr/static/js/main.c5b0f76c.js.map"
   },
   "entrypoints": [
-    "static/js/main.d65ec826.js"
+    "static/js/main.c5b0f76c.js"
   ]
 }
