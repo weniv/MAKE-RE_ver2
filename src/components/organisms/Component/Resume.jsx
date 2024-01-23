@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import EditIcon from '../../../assets/icon-pencil.svg'
 import DeleteIcon from '../../../assets/icon-X.svg'
@@ -19,8 +19,10 @@ export default function Resume({ id }) {
   const [resumeName, setResumeName] = useState(
     targetResume ? targetResume.name : '새로운 이력서'
   )
+  const navigate = useNavigate()
 
-  const handleToggleMenu = () => {
+  const handleToggleMenu = (e) => {
+    e.stopPropagation()
     setMenuOpen(!isMenuOpen)
   }
 
@@ -62,9 +64,15 @@ export default function Resume({ id }) {
 
   console.log('isModalOpen', isModalOpen)
 
+  const moveResumeDetail = () => {
+    if (!isEditable) {
+      navigate(`/write/${id}`)
+    }
+  }
+
   return (
     <>
-      <Cont>
+      <Cont onClick={moveResumeDetail} isEditable={isEditable}>
         <Wrap>
           <TitleWrap>
             {isEditable ? (
@@ -76,30 +84,19 @@ export default function Resume({ id }) {
                 maxLength={40}
               />
             ) : (
-              <>
-                <Link to={`/write/${id}`}>
-                  <Title>{resumeName}</Title>
-                </Link>
-                <button onClick={() => setEditable(true)}>
-                  <ColorIcon
-                    iconPath={EditIcon}
-                    type="iconLv2"
-                    width="16px"
-                    height="16px"
-                  />
-                </button>
-              </>
+              <Title>{resumeName}</Title>
             )}
           </TitleWrap>
-          <DeleteBtn onClick={() => setModalOpen(true)}>
+
+          {/* <DeleteBtn onClick={() => setModalOpen(true)}>
             <ColorIcon
               iconPath={DeleteIcon}
               type="iconLv2"
               width="20px"
               height="20px"
             />
-          </DeleteBtn>
-          {/* <MoreBtn
+          </DeleteBtn> */}
+          <MoreBtn
             onClick={handleToggleMenu}
             ref={menuRef}
             isEditable={isEditable}
@@ -113,7 +110,7 @@ export default function Resume({ id }) {
             {isMenuOpen && (
               <MenuList>
                 <li>
-                  <Link to={`/write/${id}`}>이력서 수정</Link>
+                  <button onClick={() => setEditable(true)}>이력서 수정</button>
                 </li>
                 <li>
                   <button onClick={() => setModalOpen(true)}>
@@ -122,7 +119,7 @@ export default function Resume({ id }) {
                 </li>
               </MenuList>
             )}
-          </MoreBtn> */}
+          </MoreBtn>
         </Wrap>
         <EditDate>
           마지막 수정: {targetResume.lastModified || getCurrentDate()}
@@ -144,6 +141,19 @@ const Cont = styled.div`
   padding: 18px 20px;
   border-radius: 16px;
   max-width: 786px;
+
+  ${(props) => {
+    if (!props.isEditable) {
+      return `
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid var(--primary-color);
+        outline: 2px solid var(--primary-color);
+      }
+      `
+    }
+  }}
 `
 
 const Wrap = styled.div`
