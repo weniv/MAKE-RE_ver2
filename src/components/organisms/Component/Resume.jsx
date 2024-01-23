@@ -173,10 +173,6 @@ const Title = styled.h3`
   margin-right: 8px;
   font-weight: 700;
   color: var(--surface-color);
-
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 const EditDate = styled.span`
