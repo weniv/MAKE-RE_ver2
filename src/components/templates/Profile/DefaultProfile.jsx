@@ -14,17 +14,18 @@ import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { ProfileContext } from '../../../context/ProfileContext'
 import { MainBtn } from '../../atoms/Button'
+import { saveData } from '../../../utils/saveData'
 
 export default function DefaultProfile({ type }) {
-  const { profileData, setProfileData } = useContext(ProfileContext)
   const { mainColor } = useContext(ColorContext)
   const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
   const [isLoaded, setIsLoaded] = useState(false)
   const [isChange, setIsChange] = useState(false)
   const skillListRef = useRef(null)
+  const data = JSON.parse(localStorage.getItem('profileData'))
+  const [profileData, setProfileData] = useState(data)
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('profileData'))
     if (data) {
       setId(data['fullEmail'].split('@')[0])
       setDomain(data['fullEmail'].split('@')[1])
@@ -53,9 +54,8 @@ export default function DefaultProfile({ type }) {
   // 기술 스택 추가
   const createSkillList = () => {
     const newSkill = skillListRef.current.value
-    setProfileData({
-      ...profileData,
-      skills: [...profileData.skills, newSkill],
+    setProfileData((prevData) => {
+      return { ...prevData, skills: [...prevData.skills, newSkill] }
     })
     skillListRef.current.value = ''
   }
@@ -90,6 +90,15 @@ export default function DefaultProfile({ type }) {
     setCommitSrc(src)
   }
 
+  const saveProfile = (data) => {
+    if (profileData.name) {
+      saveData('profileData', JSON.stringify(data))
+      alert('프로필이 저장되었습니다.')
+    } else {
+      alert('이름을 입력해주세요.')
+    }
+  }
+
   return (
     <Layout>
       <>
@@ -99,7 +108,14 @@ export default function DefaultProfile({ type }) {
               title="기본 프로필"
               description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
             />
-            <MainBtn type="save">프로필 저장하기</MainBtn>
+            <MainBtn
+              type="save"
+              onClick={() => {
+                saveProfile(profileData)
+              }}
+            >
+              프로필 저장하기
+            </MainBtn>
           </styles.TitleCont>
           <styles.ProfileCont>
             <styles.ImgCont>
@@ -164,7 +180,6 @@ export default function DefaultProfile({ type }) {
                 >
                   이름
                 </DefaultInput>
-
                 <DefaultInput
                   id="enName"
                   type="text"
