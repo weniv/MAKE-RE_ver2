@@ -65,6 +65,5 @@
     ],
     "concurrency": 4,
     "timeout": 5000
-  },
-  "proxy": "https://github.com/login/oauth"
+  }
 }
