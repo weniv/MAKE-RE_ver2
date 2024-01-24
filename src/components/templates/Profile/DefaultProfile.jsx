@@ -163,6 +163,7 @@ export default function DefaultProfile({ type }) {
   const [phoneNumber, setPhoneNumber] = useState(getStoredData('phoneNumber')) // 전화번호
   const [blog, setBlog] = useState(getStoredData('blog')) // 기술 블로그 링크
   const [fullEmail, setFullEmail] = useState(getStoredData('fullEmail')) // 이메일
+  const [careerLength, setCareerLength] = useState(getStoredData('fullEmail')) // 경력
 
   /**
    * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
@@ -241,7 +242,6 @@ export default function DefaultProfile({ type }) {
             <MainBtn
               type="save"
               onClick={() => {
-                console.log('프로필 저장')
                 saveLocalStorage()
               }}
             >
@@ -381,6 +381,7 @@ export default function DefaultProfile({ type }) {
                   type="email"
                   width="131"
                   list={domainList}
+                  emailDomain={emailDomain}
                   setDomain={setEmailDomain}
                   setIsChange={setIsChange}
                   isChange={isChange}
@@ -455,14 +456,14 @@ export default function DefaultProfile({ type }) {
                   기술 블로그 링크
                 </DefaultInput>
               </styles.InputCont> */}
-              {/* <styles.Label>경력</styles.Label>
+              <styles.Label>경력</styles.Label>
               <DropBox
                 type="career"
-                profileData={profileData}
-                setProfileData={setProfileData}
+                // profileData={profileData}
+                // setProfileData={setProfileData}
                 width="179"
                 list={careerList}
-              /> */}
+              />
             </div>
           </styles.ProfileCont>
         </styles.Section>

@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useContext } from 'react'
 import * as styles from './Dropbox-style'
 import ColorIcon from '../ColorIcon/ColorIcon'
-import ThemeContext from '../../../context/ThemeContext'
 import { ProfileContext } from '../../../context/ProfileContext'
-import { theme } from '../../../theme/theme'
 import TriangleUp from '../../../assets/icon-triangle-up.svg'
 import TriangleDown from '../../../assets/icon-triangle-down.svg'
+
+const EmailDomainList = ['naver', 'daum', 'gmail']
 
 export default function DropBox({
   type,
@@ -14,20 +14,34 @@ export default function DropBox({
   setDomain,
   setIsChange,
   isChange,
+  emailDomain,
 }) {
   const { profileData, setProfileData } = useContext(ProfileContext)
-  const domainText = profileData.fullEmail
-    ? profileData.fullEmail.split('@')[1]
+  // const domainText = profileData.fullEmail
+  //   ? profileData.fullEmail.split('@')[1]
+  //   : '직접 입력'
+
+  /**
+   * 기본 제공되는 이메일 도메인을 사용하고 있는지 확인하는 함수
+   * @param {string}  DomainList - 메이커리에서 기본 제공하는 이메일 도메인 리스트
+   * @return {boolean} ture -기본 제공 도메인 / false - 커스텀 도메인
+   */
+  const checkIsCustomDomain = (DomainList) => {
+    if (emailDomain) {
+      return DomainList.some((domain) => emailDomain.includes(domain))
+    } else {
+      return ''
+    }
+  }
+
+  const domainText = checkIsCustomDomain(EmailDomainList)
+    ? emailDomain
     : '직접 입력'
+
   const [isSelected, setIsSelected] = useState()
   const [selectedData, setSelectedData] = useState(
     type === 'email' ? domainText : '신입'
   )
-  const { themeMode } = useContext(ThemeContext)
-  // const previousData = null
-  // const [selectedData, setSelectedData] = useState(
-  //   previousData ? previousData : '직접 입력'
-  // )
 
   // 첫 화면 렌더링 시 기존 경력 표시
   useEffect(() => {
@@ -120,7 +134,6 @@ export default function DropBox({
           >
             {selectedData}
             <ColorIcon type="iconLv2" iconPath={TriangleUp} />
-            {/* <img src={TriangleUp} /> */}
           </styles.DropBtn>
           {type === 'email' ? (
             <styles.ListBox width={width}>
