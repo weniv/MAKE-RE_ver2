@@ -96,3 +96,14 @@ export const SkillListWrap = styled.div`
   flex-wrap: wrap;
   gap: 6px;
 `
+
+export const Button = styled.button`
+  width: 240px;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  padding: 11px 0;
+  color: var(--background-color);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+`
