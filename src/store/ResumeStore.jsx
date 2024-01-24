@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { resumeItem } from '../data/dummy'
 import { getCurrentDate } from '../utils'
-import { defaultProfileData } from './ProfileStore'
 
 export const useResumeStore = create(
   persist(
