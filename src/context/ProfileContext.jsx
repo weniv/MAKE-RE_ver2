@@ -13,7 +13,7 @@ export default function ProfileProvider({ children }) {
   useEffect(() => {
     // 컴포넌트가 처음 마운트될 때 한 번만 실행
     if (!storedData) {
-      // 로컬 스토리지에 'profileData'가 없거나 유효한 JSON이 아닌 경우 초기 데이터 설정
+      // 로컬 스토리지에 'data'가 없거나 유효한 JSON이 아닌 경우 초기 데이터 설정
       localStorage.setItem('profileData', JSON.stringify(initialData))
       setProfileData(initialData)
     }

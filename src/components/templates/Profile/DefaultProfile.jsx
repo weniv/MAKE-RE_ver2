@@ -12,7 +12,6 @@ import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
-import { ProfileContext } from '../../../context/ProfileContext'
 import { MainBtn } from '../../atoms/Button'
 import { saveData } from '../../../utils/saveData'
 
@@ -100,8 +99,8 @@ export default function DefaultProfile({ type }) {
   }
 
   return (
-    <Layout>
-      <>
+    <>
+      <Layout>
         <styles.Section>
           <styles.TitleCont>
             <WriteTitle
@@ -303,7 +302,14 @@ export default function DefaultProfile({ type }) {
           <WriteSubtitle subtitle="GitHub" id="github" />
           <GithubApi />
         </styles.Section>
-      </>
-    </Layout>
+      </Layout>
+      <styles.Button
+        onClick={() => {
+          saveProfile(profileData)
+        }}
+      >
+        저장하기
+      </styles.Button>
+    </>
   )
 }
