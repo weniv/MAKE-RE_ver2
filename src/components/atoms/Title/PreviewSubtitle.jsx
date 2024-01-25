@@ -19,12 +19,13 @@ PreviewSubtitle.defaultProps = {
 
 const Subtitle = styled.h3`
   display: ${(props) => props.type && 'inline-block'};
-  margin-right: ${(props) => props.type && '18px'};
-  margin-bottom: ${(props) => !props.type && '20px'};
-  padding-bottom: ${(props) => !props.type && '10px'};
+  margin-right: ${(props) => props.type && '20px'};
+  margin-bottom: ${(props) => !props.type && '16px'};
+  padding-bottom: ${(props) => !props.type && '16px'};
 
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 24px;
 
   color: ${(props) => props.mainColor};
   border-bottom: ${(props) => !props.type && `1px solid ${props.mainColor}`};

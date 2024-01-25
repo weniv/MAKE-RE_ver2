@@ -47,13 +47,15 @@ PreviewMonthItem.defaultProps = {
   content: '-',
 }
 
-const Item = styled.li`
+const Item = styled.span`
+  min-width: 140px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  color: var(--surface-color);
+  // gap: 20px;
+  color: #47494d !important;
   font-size: ${(props) => props.size || '14px'};
   margin: ${(props) => (props.type === 'career' ? 0 : '10px auto')};
+  line-height: 22px;
 `
 
 const DateWrap = styled.p`

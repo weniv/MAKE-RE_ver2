@@ -30,7 +30,6 @@ export default function LandingPage() {
       <Header
         options={{
           isCenter: false,
-          hasProfile: true,
           hasCreate: true,
           isWhite: false,
         }}
