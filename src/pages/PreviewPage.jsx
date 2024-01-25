@@ -68,8 +68,60 @@ export default function PreviewPage() {
     return <Component key={index} ref={scrollRef} />
   })
 
+  // 각 섹션의 ref를 저장할 배열
+  // 섹션 수에 따라 조정
+  // const sectionRefs = [
+  //   useRef(null),
+  //   useRef(null),
+  //   useRef(null),
+  //   useRef(null),
+  //   useRef(null),
+  //   useRef(null),
+  //   useRef(null),
+  // ]
+
+  // const handleScroll = () => {
+  // 현재 스크롤 위치가 최상단인지 확인
+  // const isAtTop = window.scrollY === 0
+  // const currentPosition = isAtTop
+  //   ? window.scrollY
+  //   : window.scrollY + window.innerHeight / 2
+
+  // // 가장 가까운 섹션 찾기
+  // const closestSection = sectionRefs.find((ref) => {
+  //   const element = ref.current
+  //   if (element) {
+  //     const { offsetTop, offsetHeight } = element
+  //     if (isAtTop) {
+  //       // 최상단에 있을 때는 화면 상단에 가장 가까운 요소를 찾음
+  //       return offsetTop >= window.scrollY && offsetTop < window.innerHeight
+  //     } else {
+  //       // 그 외에는 화면 중앙에 가장 가까운 요소를 찾음
+  //       return (
+  //         offsetTop <= currentPosition &&
+  //         offsetTop + offsetHeight > currentPosition
+  //       )
+  //     }
+  //   }
+  //   return false
+  // })
+
+  // console.log('지금 활성화되어야하는 메뉴는: ', closestSection)
+  // 내비게이션 메뉴 활성화 로직 (선택적)
+  // 예: closestSection에 해당하는 메뉴 아이템 활성화
+  // }
+
+  // 스크롤 이벤트 리스너 추가
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll)
+
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [])
+
   const meta = {
-    title: 'MAKE:RE',
+    title: 'MAKE:RE | 이력서 미리보기',
     description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
     url: 'https://make-re.weniv.co.kr/',
   }
@@ -128,7 +180,7 @@ const Layout = styled.div`
   flex-direction: column;
   gap: 40px;
   width: 890px;
-  padding: 74px 52px;
+  padding: 74px 74px;
   @media print {
     padding: 0;
   }
