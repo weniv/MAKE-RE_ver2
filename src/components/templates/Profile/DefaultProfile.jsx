@@ -163,7 +163,9 @@ export default function DefaultProfile({ type }) {
   const [phoneNumber, setPhoneNumber] = useState(getStoredData('phoneNumber')) // 전화번호
   const [blog, setBlog] = useState(getStoredData('blog')) // 기술 블로그 링크
   const [fullEmail, setFullEmail] = useState(getStoredData('fullEmail')) // 이메일
-  const [careerLength, setCareerLength] = useState(getStoredData('fullEmail')) // 경력
+  const [careerLength, setCareerLength] = useState(
+    storedData ? storedData['careerLength'] : '신입'
+  ) // 경력
 
   /**
    * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
@@ -204,14 +206,15 @@ export default function DefaultProfile({ type }) {
   const saveLocalStorage = () => {
     console.log('저장 버튼 클릭됨')
     const val = {
-      name: defaultProfileName,
+      name,
       enName,
       phoneNumber,
       blog,
       fullEmail,
+      careerLength,
     }
 
-    if (!defaultProfileName.trim()) {
+    if (!name.trim()) {
       alert('이름을 입력하세요.')
     } else {
       localStorage.setItem('makere-default-profile', JSON.stringify(val))
@@ -383,8 +386,6 @@ export default function DefaultProfile({ type }) {
                   list={domainList}
                   emailDomain={emailDomain}
                   setDomain={setEmailDomain}
-                  setIsChange={setIsChange}
-                  isChange={isChange}
                 />
               </styles.InputCont>
               {/* 블로그 링크 */}
@@ -402,66 +403,12 @@ export default function DefaultProfile({ type }) {
                   기술 블로그 링크
                 </DefaultInput>
               </styles.InputCont>
-              {/* <styles.InputCont>
-                <DefaultInput
-                  id="emailId"
-                  type="text"
-                  placeholder="예) paul-lab"
-                  width="220px"
-                  marginRight="12px"
-                  inputData={
-                    storedData?.fullEmail
-                      ? storedData?.fullEmail?.split('@')[0]
-                      : id
-                  }
-                  onChange={(e) => {
-                    setId(e.target.value)
-                  }}
-                >
-                  이메일
-                </DefaultInput>
-                <span>@</span>
-                <DefaultInput
-                  id="emailDomain"
-                  type="text"
-                  placeholder="예) paul-lab"
-                  width="200px"
-                  marginRight="8px"
-                  inputData={domain === '직접 입력' ? '' : domain}
-                  onChange={(e) => {
-                    setDomain(e.target.value)
-                    setIsChange(true)
-                  }}
-                />
-                <DropBox
-                  type="email"
-                  width="131"
-                  list={domainList}
-                  setDomain={setDomain}
-                  setIsChange={setIsChange}
-                  isChange={isChange}
-                />
-              </styles.InputCont>
-              <styles.InputCont>
-                <DefaultInput
-                  id="blog"
-                  name="blog"
-                  type="url"
-                  inputData={blog}
-                  onChange={(e) => {
-                    updateDefaultProfile(e)
-                    setBlog(e.target.value)
-                  }}
-                >
-                  기술 블로그 링크
-                </DefaultInput>
-              </styles.InputCont> */}
               <styles.Label>경력</styles.Label>
               <DropBox
-                type="career"
-                // profileData={profileData}
-                // setProfileData={setProfileData}
                 width="179"
+                type="career"
+                careerLength={careerLength}
+                setCareerLength={setCareerLength}
                 list={careerList}
               />
             </div>
