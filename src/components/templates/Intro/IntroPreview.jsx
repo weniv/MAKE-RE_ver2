@@ -46,17 +46,18 @@ const IntroCont = styled.pre`
   color: var(--surface-color);
   width: 100%;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 28px;
   word-wrap: break-word;
   white-space: break-spaces;
 `
 const SkillSection = styled.section`
   display: flex;
+  align-items: center;
 `
 const SkillCont = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 `
 
 export default IntroPreview

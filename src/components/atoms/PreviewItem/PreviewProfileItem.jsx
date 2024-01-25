@@ -25,15 +25,13 @@ PreviewProfileItem.defaultProps = {
 const Item = styled.li`
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  margin: 10px auto;
+  gap: 4px;
   font-size: 14px;
 `
 
 const ItemTitle = styled.p`
-  font-weight: 700;
-  width: 92px;
+  font-weight: 600;
+  width: 100px;
 `
 
 const ItemLink = styled.a`

@@ -46,7 +46,7 @@ export default function WritePage() {
   }, [currentSection])
 
   const meta = {
-    title: 'MAKE:RE | 로그인',
+    title: 'MAKE:RE | 이력서 작성하기',
     description: '메이커리에 로그인 하고 쉽고 빠르게 이력서를 커스텀해보세요',
     url: 'https://make-re.weniv.co.kr/login',
   }

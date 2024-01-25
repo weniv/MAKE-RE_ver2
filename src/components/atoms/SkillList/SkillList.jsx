@@ -31,23 +31,24 @@ export default function SkillList({ children, onClick, type }) {
 }
 
 const SkillLi = styled.li`
-  height: ${(props) => (props.type === 'preview' ? '32px' : '40px')};
+  height: ${(props) => (props.type === 'preview' ? '' : '40px')};
   display: inline-flex;
   align-items: center;
   padding: ${(props) =>
     props.type === 'delete' ? '0 16px 0 20px' : '0 20px 0'}; // 작성페이지
   padding: ${(props) =>
-    props.type === 'preview' && '0 14px'}; // 미리보기 페이지
+    props.type === 'preview' && '10px 20px'}; // 미리보기 페이지
   gap: 6px;
   border-radius: 40px;
   color: ${(props) =>
     props.type === 'preview' ? props.mainColor : 'var(--primary-color)'};
   border: ${(props) =>
-    `2px solid ${
-      props.type === 'preview' ? props.mainColor : 'var(--primary-color)'
+    `solid ${
+      props.type === 'preview' ? `1px #d9dbe0` : '2px var(--primary-color)'
     }`};
   opacity: 0.9;
-  background-color: var(--background-color);
+  background-color: ${(props) =>
+    props.type === 'preview' ? '#f3f5fa' : 'var(--background-color)'};
   font-size: 14px;
   box-sizing: border-box;
   cursor: ${(props) => (props.type !== 'preview' ? 'pointer' : 'auto')};
