@@ -52,11 +52,12 @@ const IntroCont = styled.pre`
 `
 const SkillSection = styled.section`
   display: flex;
+  align-items: center;
 `
 const SkillCont = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 `
 
 export default IntroPreview
