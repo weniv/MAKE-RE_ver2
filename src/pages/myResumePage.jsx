@@ -38,7 +38,7 @@ export default function MyResumePage() {
   return (
     <>
       <MetaData meta={meta} />
-      <Header options={{ hasProfile: true, hasCreate: true }} />
+      <Header options={{ hasProfile: false, hasCreate: false }} />
       <Cont>
         <MyPageNav currentNaveItem={0} />
         <Main>
