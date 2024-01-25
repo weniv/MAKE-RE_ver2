@@ -19,14 +19,12 @@ const CareerPreview = forwardRef((props, ref) => {
 
   const sectionId = getSectionId('커리어', 3)
 
-  // console.log('미리보기', careerData)
-
   return (
     <>
       {careerData && careerData.length > 0 ? (
         <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
-          <Wrap gap="40px">
+          <Wrap>
             {careerData &&
               careerData.map((data) => (
                 <Content>
@@ -38,12 +36,15 @@ const CareerPreview = forwardRef((props, ref) => {
                         data.inProgress ? '재직 중' : formatDate(data.endDate)
                       }
                       color={mainColor}
-                      size={'1.2rem'}
                     />
                   ) : null}
-                  <Title>{data.title}</Title>
-                  <p className="rank">{data.rank}</p>
-                  <p className="works">{data.works}</p>
+                  <div>
+                    <Title>
+                      {data.title} <p className="rank">(직급: {data.rank})</p>
+                    </Title>
+
+                    <p className="works">{data.works}</p>
+                  </div>
                 </Content>
               ))}
           </Wrap>
@@ -57,46 +58,35 @@ const Wrap = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: ${(props) => props.gap || '16px'};
+  gap: 16px;
 `
 const Content = styled.div`
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  align-items: flex-start;
   break-inside: avoid;
   page-break-inside: avoid;
 
-  &:first-child {
-    break-before: avoid;
-    page-break-before: avoid;
-  }
-
-  p {
-    color: var(--surface-color);
-    white-space: pre-wrap;
-  }
-
-  p.rank {
-    font-size: 1.4rem;
-  }
-
   p.works {
-    font-size: 1.4rem;
-    line-height: 2rem;
+    line-height: 22px;
   }
 `
 const Title = styled.p`
-  font-size: 1.6rem;
-  font-weight: bold;
+  display: flex;
+  gap: 8px;
   color: var(--surface-color);
-`
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  margin-bottom: 12px;
 
-const Works = styled.p`
-  color: var(--surface-color);
-  font-size: 1.4rem;
-  line-height: 2rem;
-  white-space: pre-wrap;
+  p.rank {
+    color: #47494d;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 `
 
 export default CareerPreview
