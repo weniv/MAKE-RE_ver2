@@ -15,7 +15,7 @@ export default function MyProfilePage() {
   const saveProfile = (data) => {
     if (profileData.name) {
       saveData('profileData', JSON.stringify(data))
-      alert('프로필이 저장되었습니다.')
+      alert('프로필이 저장되었습니다.3232234')
     } else {
       alert('이름을 입력해주세요.')
     }

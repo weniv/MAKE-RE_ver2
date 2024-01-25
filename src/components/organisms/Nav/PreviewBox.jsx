@@ -8,20 +8,24 @@ import { saveData } from '../../../utils/saveData'
 import { checkRequiredValidity } from '../../atoms/Input/RequireInput'
 import ThemeContext from '../../../context/ThemeContext'
 import { theme } from '../../../theme/theme'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function PreviewBox({ type, ...props }) {
   const { id } = useParams()
+  const { saveResumeData } = useResumeStore()
 
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
 
   const saveLocalstorage = () => {
+    saveResumeData()
     saveData('resumeData', JSON.stringify(resumeData))
     checkRequiredValidity(formRef) // 필수입력폼 검증
     console.log('데이터 저장 완료 - ⭐')
   }
 
   const movePreview = () => {
+    saveResumeData()
     saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
     if (isRequired !== false) {

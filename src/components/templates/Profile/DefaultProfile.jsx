@@ -19,13 +19,7 @@ import { useDefaultProfileStore } from '../../../store/DefaultProfileStore'
 
 export default function DefaultProfile({ type }) {
   const { resumeList, updateResumeData } = useResumeStore()
-  const {
-    defaultProfileName,
-    updateDefaultProfileName,
-    defaultProfileData,
-    updateDefaultProfile,
-    updateDefaultDataWithVal,
-  } = useDefaultProfileStore()
+  const { defaultProfileData, updateDefaultProfile } = useDefaultProfileStore()
 
   const storedData = JSON.parse(localStorage.getItem('makere-default-profile'))
 
@@ -86,7 +80,6 @@ export default function DefaultProfile({ type }) {
   // useEffect(() => {
   //   // let email = []
   //   let fullEmail = [id, domain].join('@')
-  //   updateDefaultDataWithVal('fullEmail', fullEmail)
 
   //   // console.log('result', result.split('@'))
   // }, [id, domain])
@@ -311,7 +304,6 @@ export default function DefaultProfile({ type }) {
                   marginRight="12px"
                   inputData={name}
                   onChange={(e) => {
-                    updateDefaultProfileName(e)
                     updateDefaultProfile(e)
                     setName(e.target.value)
                   }}

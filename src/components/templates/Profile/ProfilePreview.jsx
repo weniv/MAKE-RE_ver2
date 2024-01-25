@@ -4,8 +4,15 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
+import { useParams } from 'react-router'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function ProfilePreview() {
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const currnetResume = resumeList.find((resume) => resume.id === id)
+  const currentProfileData = currnetResume.content.profile
+
   const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = selectedResume?.profile ? selectedResume.profile : {}
@@ -54,7 +61,8 @@ export default function ProfilePreview() {
 
       <ProfileBox mainColor={mainColor}>
         <span>
-          <strong>{profileData?.name}</strong>
+          <strong>{currentProfileData.name}</strong>
+          {/* <strong>{profileData?.name}</strong> */}
           {profileData?.enName}
         </span>
         <DataList>

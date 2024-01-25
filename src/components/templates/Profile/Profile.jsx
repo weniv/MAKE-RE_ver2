@@ -16,12 +16,12 @@ import GithubApi from '../../../api/GithubApi'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Profile({ id, type }) {
-  const { resumeList, updateResumeData } = useResumeStore()
+  const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
   const { resumeData, setResumeData } = useContext(ResumeContext)
   // const selectedResume = resumeData.find((resume) => String(resume.id) === id)
   const selectedResume = resumeList.find(
     (resume) => resume.id === parseInt(id)
-  ).content
+  )?.content
 
   /**
    * 최초 이력서 생성시 기본 프로필 정보 가져오는 함수
@@ -32,9 +32,14 @@ export default function Profile({ id, type }) {
     const defaultProfileData = JSON.parse(
       localStorage.getItem('makere-default-profile')
     )
-    return selectedResume?.profile.name
-      ? selectedResume?.profile
-      : defaultProfileData
+
+    if (!defaultProfileData) {
+      return selectedResume.profile
+    } else if (defaultProfileData) {
+      return selectedResume?.profile.name
+        ? selectedResume?.profile
+        : defaultProfileData
+    }
   }
 
   useEffect(() => {
@@ -46,7 +51,15 @@ export default function Profile({ id, type }) {
     getDefaultProfile(selectedResume)
   )
 
-  console.log('profileData', selectedResume.profile)
+  // 현재 선택된 이력서의 정보가 변경될때마다 이력서 정보 업데이트 (state)
+  useEffect(() => {
+    updateResumeData(id, 'profile', profileData)
+  }, [profileData])
+  // useEffect(() => {
+  //   updateResumeData(id, 'profile', selectedResume.profile)
+  // }, [selectedResume.profile])
+
+  // console.log('selectedResume.profile', selectedResume.profile)
   // console.log('resumeList', resumeList)
 
   // const { mainColor } = useContext(ColorContext)
@@ -149,8 +162,6 @@ export default function Profile({ id, type }) {
     // console.log('name', name)
   }, [])
 
-  // console.log('selectedResume', selectedResume.profile)
-
   return (
     <Layout>
       <>
@@ -159,14 +170,15 @@ export default function Profile({ id, type }) {
             title="프로필"
             description="자신을 간단히 소개해 주세요."
           />
-          <h2
+          {/* <h1
             onClick={() => {
-              console.log(1111111)
+              alert('프로필 저장')
               updateResumeData(id, 'profile', selectedResume.profile)
+              saveResumeData()
             }}
           >
             저장해보자
-          </h2>
+          </h1> */}
           <styles.ProfileCont>
             {/* <styles.ImgCont>
               <styles.ImgLabel
