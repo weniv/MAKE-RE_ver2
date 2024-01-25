@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import EditIcon from '../../../assets/icon-pencil.svg'
-import DeleteIcon from '../../../assets/icon-X.svg'
-// import MoreIcon from '../../../assets/icon-more.svg'
+
+import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
@@ -19,10 +18,12 @@ export default function Resume({ id, lastModified }) {
   const [resumeName, setResumeName] = useState(
     targetResume ? targetResume.content.name : '새로운 이력서'
   )
+  const navigate = useNavigate()
 
-  // const handleToggleMenu = () => {
-  //   setMenuOpen(!isMenuOpen)
-  // }
+  const handleToggleMenu = (e) => {
+    e.stopPropagation()
+    setMenuOpen(!isMenuOpen)
+  }
 
   const handleInputChange = (e) => {
     setResumeName(e.target.value)
@@ -48,11 +49,15 @@ export default function Resume({ id, lastModified }) {
     document.addEventListener('mousedown', handleClickOutside)
   }, [menuRef])
 
-  // console.log('isModalOpen', isModalOpen)
+  const moveResumeDetail = () => {
+    if (!isEditable) {
+      navigate(`/write/${id}`)
+    }
+  }
 
   return (
     <>
-      <Cont>
+      <Cont onClick={moveResumeDetail} isEditable={isEditable}>
         <Wrap>
           <TitleWrap>
             {isEditable ? (
@@ -64,29 +69,33 @@ export default function Resume({ id, lastModified }) {
                 maxLength={40}
               />
             ) : (
-              <>
-                <Link to={`/write/${id}`}>
-                  <Title>{resumeName}</Title>
-                </Link>
-                <button onClick={() => setEditable(true)}>
-                  <ColorIcon
-                    iconPath={EditIcon}
-                    type="iconLv2"
-                    width="16px"
-                    height="16px"
-                  />
-                </button>
-              </>
+              <Title>{resumeName}</Title>
             )}
           </TitleWrap>
-          <DeleteBtn onClick={() => setModalOpen(true)}>
+          <MoreBtn
+            onClick={handleToggleMenu}
+            ref={menuRef}
+            isEditable={isEditable}
+          >
             <ColorIcon
-              iconPath={DeleteIcon}
+              iconPath={MoreIcon}
               type="iconLv2"
               width="20px"
               height="20px"
             />
-          </DeleteBtn>
+            {isMenuOpen && (
+              <MenuList>
+                <li>
+                  <button onClick={() => setEditable(true)}>타이틀 수정</button>
+                </li>
+                <li>
+                  <button onClick={() => setModalOpen(true)}>
+                    이력서 삭제
+                  </button>
+                </li>
+              </MenuList>
+            )}
+          </MoreBtn>
         </Wrap>
         <EditDate>마지막 수정: {lastModified || getCurrentDate()}</EditDate>
       </Cont>
@@ -106,6 +115,19 @@ const Cont = styled.div`
   padding: 18px 20px;
   border-radius: 16px;
   max-width: 786px;
+
+  ${(props) => {
+    if (!props.isEditable) {
+      return `
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid var(--primary-color);
+        outline: 2px solid var(--primary-color);
+      }
+      `
+    }
+  }}
 `
 
 const Wrap = styled.div`
@@ -125,18 +147,12 @@ const Title = styled.h3`
   margin-right: 8px;
   font-weight: 700;
   color: var(--surface-color);
-
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 const EditDate = styled.span`
   color: var(--gray-lv4-color);
   font-size: 12px;
 `
-
-const DeleteBtn = styled.button``
 
 const MoreBtn = styled.button`
   position: absolute;
