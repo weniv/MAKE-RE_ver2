@@ -17,9 +17,7 @@ import { ResumeContext } from '../context/ResumeContext'
 import { saveData } from '../utils/saveData'
 import Explain from '../components/organisms/Explain/Explain'
 import { MetaData } from '../utils/metaData'
-import { NavLink } from 'react-router-dom'
-import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
-import BackIcon from '../assets/icon-Left-arrow.svg'
+import { GotoMypage } from '../components/atoms/Button'
 
 export default function WritePage() {
   const { id } = useParams()
@@ -60,9 +58,7 @@ export default function WritePage() {
       <ModeCont mode={explainMode}>
         <Header options={{ hasProfile: true }} />
         <Cont mode={explainMode}>
-          <NavLink to="/myresume" style={{ marginTop: '10px' }}>
-            <ColorIcon type="iconLv2" iconPath={BackIcon} />
-          </NavLink>
+          <GotoMypage />
           <Main>
             <CurrentComponent type="resumeProfile" id={id} />
           </Main>
