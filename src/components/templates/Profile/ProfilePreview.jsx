@@ -87,7 +87,9 @@ export default function ProfilePreview() {
           {/* github ID */}
           <PreviewProfileItem
             title="깃허브 아이디"
-            content={profileData?.github[0]}
+            content={
+              profileData && profileData[githubID] && profileData.github[0]
+            }
           ></PreviewProfileItem>
           {commitURL ? (
             <img
