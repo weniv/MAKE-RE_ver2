@@ -4,6 +4,7 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
+import LinkIcon from '../../../assets/icon-link2.svg'
 
 export default function ProfilePreview() {
   const { selectedResume } = useContext(LocalContext)
@@ -74,15 +75,6 @@ export default function ProfilePreview() {
             ></PreviewProfileItem>
           )}
 
-          {/* 기술 블로그 */}
-          {profileData?.blog && (
-            <PreviewProfileItem
-              title="기술 블로그"
-              type="link"
-              content={profileData?.blog}
-            ></PreviewProfileItem>
-          )}
-
           {/* 경력사항 */}
           <PreviewProfileItem
             title="경력 사항"
@@ -91,6 +83,11 @@ export default function ProfilePreview() {
                 ? `${profileData?.careerLength}년차`
                 : '신입'
             }
+          ></PreviewProfileItem>
+          {/* github ID */}
+          <PreviewProfileItem
+            title="깃허브 아이디"
+            content={profileData?.github[0]}
           ></PreviewProfileItem>
           {commitURL ? (
             <img
@@ -102,6 +99,15 @@ export default function ProfilePreview() {
             <div className="loading">
               <img src={Spinner} alt="" />
             </div>
+          )}
+
+          {/* 기술 블로그 */}
+          {profileData?.blog && (
+            <LinkBox>
+              <img src={LinkIcon} alt="" />
+              <span>기술 블로그</span>
+              <a href="">{profileData?.blog}</a>
+            </LinkBox>
           )}
         </DataList>
       </ProfileBox>
@@ -117,11 +123,11 @@ const ProfileSection = styled.section`
 `
 
 const ProfileImg = styled.div`
-  width: 142px;
-  height: 142px;
+  width: 152px;
+  height: 152px;
   border-radius: 100px;
-  border: ${(props) => `2px solid ${props.mainColor}`};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 100px;
+  border: 1px solid var(--grayLv2Color);
   overflow: hidden;
   flex-shrink: 0;
 
@@ -137,8 +143,8 @@ const ProfileBox = styled.div`
 
   span {
     display: block;
-    margin: 0 0 20px 0;
-    padding-bottom: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
     font-weight: 500;
     font-size: 16px;
     line-height: 23px;
@@ -157,11 +163,14 @@ const ProfileBox = styled.div`
 const DataList = styled.ul`
   color: var(--surface-color);
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
   img.commit {
     width: 100%;
     height: 95px;
-    margin-top: 12px;
+    margin: 4px 0 4px;
   }
 
   div.loading {
@@ -174,5 +183,28 @@ const DataList = styled.ul`
     img {
       width: 50px;
     }
+  }
+`
+
+const LinkBox = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f5fa;
+
+  span {
+    color: var(--grayLv4Color);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    border: none;
+    margin: 0 12px 0 4px;
+    padding: 0;
+  }
+
+  a {
+    color: var(--surfaceColor);
+    line-height: 20px;
   }
 `
