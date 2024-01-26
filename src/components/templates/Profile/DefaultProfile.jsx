@@ -16,6 +16,7 @@ import { ProfileContext } from '../../../context/ProfileContext'
 import { MainBtn } from '../../atoms/Button'
 import { useResumeStore } from '../../../store/ResumeStore'
 import { useDefaultProfileStore } from '../../../store/DefaultProfileStore'
+import { GetCommitRecord } from '../../atoms/Github'
 
 export default function DefaultProfile({ type }) {
   const { resumeList, updateResumeData } = useResumeStore()
@@ -38,7 +39,7 @@ export default function DefaultProfile({ type }) {
     if (storedData) {
       return storedData[key]
     } else {
-      if (key === 'skills') {
+      if (key === 'skills' || key === 'github') {
         return []
       } else {
         return ''
@@ -56,10 +57,11 @@ export default function DefaultProfile({ type }) {
     storedData ? storedData['careerLength'] : '신입'
   ) // 경력
   const [skills, setSkills] = useState(getStoredData('skills')) // 기술 스택
+  const [github, setGithub] = useState(getStoredData('github')) // Github
 
-  // useEffect(() => {
-  //   console.log('skills', skills)
-  // }, [skills])
+  useEffect(() => {
+    console.log('github', github)
+  }, [github])
 
   /**
    * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
@@ -107,6 +109,7 @@ export default function DefaultProfile({ type }) {
       fullEmail,
       careerLength,
       skills,
+      github,
     }
 
     if (!name.trim()) {
@@ -145,6 +148,10 @@ export default function DefaultProfile({ type }) {
   const deleteSkillItem = (e, idx) => {
     const result = skills.filter((_, i) => i !== idx)
     setSkills(result)
+  }
+
+  const getGithubCommit = () => {
+    const baseURL = `https://ghchart.rshah.org/${'min-bok'}`
   }
 
   return (
@@ -316,8 +323,9 @@ export default function DefaultProfile({ type }) {
         </styles.Section>
         <styles.Line />
         <styles.Section>
-          {/* <WriteSubtitle subtitle="GitHub" id="github" />
-          <GithubApi /> */}
+          <WriteSubtitle subtitle="GitHub" id="github" />
+          <GetCommitRecord github={github} setGithub={setGithub} />
+          {/* <GithubApi /> */}
         </styles.Section>
       </Layout>
       <MainBtn
