@@ -34,7 +34,7 @@ export const useResumeStore = create(
           ),
         })),
       // 이력서 내부 정보 수정
-      updateResumeData: (id, name, obj) =>
+      updateResumeData: (id, name, value) =>
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
             el.id === id
@@ -44,9 +44,9 @@ export const useResumeStore = create(
                     ...el.content,
                     [name]: Array.isArray(el.content[name])
                       ? el.content[name].map((item) =>
-                          item.id === obj.id ? { ...item, ...obj } : item
+                          item.id === value.id ? { ...item, ...value } : item
                         )
-                      : { ...el.content[name], ...obj },
+                      : { ...el.content[name], ...value },
                   },
                 }
               : el
