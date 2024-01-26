@@ -303,13 +303,14 @@ export default function DefaultProfile({ type }) {
           <GithubApi />
         </styles.Section>
       </Layout>
-      <styles.Button
+      <MainBtn
+        type="profile"
         onClick={() => {
           saveProfile(profileData)
         }}
       >
         저장하기
-      </styles.Button>
+      </MainBtn>
     </>
   )
 }
