@@ -18,15 +18,10 @@ import { useResumeStore } from '../../../store/ResumeStore'
 import { useDefaultProfileStore } from '../../../store/DefaultProfileStore'
 import { GetCommitRecord } from '../../atoms/Github'
 
-export default function DefaultProfile({ type }) {
-  const { resumeList, updateResumeData } = useResumeStore()
-  const { defaultProfileData, updateDefaultProfile } = useDefaultProfileStore()
+export default function DefaultProfile() {
+  const { updateDefaultProfile } = useDefaultProfileStore()
 
   const storedData = JSON.parse(localStorage.getItem('makere-default-profile'))
-
-  useEffect(() => {
-    console.log('기본 프로필 페이지')
-  }, [])
 
   const [isChange, setIsChange] = useState(false)
 
@@ -58,10 +53,6 @@ export default function DefaultProfile({ type }) {
   ) // 경력
   const [skills, setSkills] = useState(getStoredData('skills')) // 기술 스택
   const [github, setGithub] = useState(getStoredData('github')) // Github
-
-  useEffect(() => {
-    console.log('github', github)
-  }, [github])
 
   /**
    * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
@@ -100,7 +91,6 @@ export default function DefaultProfile({ type }) {
    * 로컬 스토리지에 정보 저장하는 함수, 저장할 정보를 val 객체안에 삽입
    */
   const saveLocalStorage = () => {
-    console.log('저장 버튼 클릭됨')
     const val = {
       name,
       enName,
@@ -150,10 +140,6 @@ export default function DefaultProfile({ type }) {
     setSkills(result)
   }
 
-  const getGithubCommit = () => {
-    const baseURL = `https://ghchart.rshah.org/${'min-bok'}`
-  }
-
   return (
     <>
       <Layout>
@@ -163,12 +149,7 @@ export default function DefaultProfile({ type }) {
               title="기본 프로필"
               description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
             />
-            <MainBtn
-              type="save"
-              onClick={() => {
-                saveLocalStorage()
-              }}
-            >
+            <MainBtn type="save" onClick={saveLocalStorage}>
               프로필 저장하기
             </MainBtn>
           </styles.TitleCont>
@@ -176,7 +157,6 @@ export default function DefaultProfile({ type }) {
             {/* 여기 이미지 들어가야함 */}
             <div>
               <styles.InputCont>
-                {/* 이름 */}
                 <DefaultInput
                   essentialMsg="*필수 입력 정보입니다."
                   id="name"
@@ -193,7 +173,6 @@ export default function DefaultProfile({ type }) {
                 >
                   이름
                 </DefaultInput>
-                {/* 영문 이름 */}
                 <DefaultInput
                   id="enName"
                   name="enName"
@@ -210,7 +189,6 @@ export default function DefaultProfile({ type }) {
                 </DefaultInput>
               </styles.InputCont>
               <styles.InputCont>
-                {/* 전화번호 */}
                 <DefaultInput
                   id="phoneNumber"
                   name="phoneNumber"
@@ -227,7 +205,6 @@ export default function DefaultProfile({ type }) {
                   전화번호
                 </DefaultInput>
               </styles.InputCont>
-              {/* 이메일 */}
               <styles.InputCont>
                 <DefaultInput
                   id="emailId"
@@ -263,7 +240,6 @@ export default function DefaultProfile({ type }) {
                   setDomain={setEmailDomain}
                 />
               </styles.InputCont>
-              {/* 블로그 링크 */}
               <styles.InputCont>
                 <DefaultInput
                   id="blog"
@@ -325,16 +301,9 @@ export default function DefaultProfile({ type }) {
         <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
           <GetCommitRecord github={github} setGithub={setGithub} />
-          {/* <GithubApi /> */}
         </styles.Section>
       </Layout>
-      <MainBtn
-        type="profile"
-        onClick={() => {
-          console.log('아래쪽 저장 버튼 클릭됨')
-          // saveProfile(profileData)
-        }}
-      >
+      <MainBtn type="profile" onClick={saveLocalStorage}>
         저장하기
       </MainBtn>
     </>
