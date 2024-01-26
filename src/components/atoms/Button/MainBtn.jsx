@@ -41,6 +41,11 @@ const MainButton = styled.button`
     css`
       width: 162px;
     `}
+    ${(props) =>
+    props.type === 'profile' &&
+    css`
+      width: 240px;
+    `}
   height: 42px;
   background-color: var(--primary-color);
   border-radius: 10px;

@@ -148,8 +148,8 @@ export default function DefaultProfile({ type }) {
   }
 
   return (
-    <Layout>
-      <>
+    <>
+      <Layout>
         <styles.Section>
           <styles.TitleCont>
             <WriteTitle
@@ -312,16 +312,6 @@ export default function DefaultProfile({ type }) {
                 {skill}
               </SkillList>
             ))}
-            {/* {profileData.skills &&
-              profileData.skills.map((skill, i) => (
-                <SkillList
-                  key={i}
-                  type="delete"
-                  onClick={(e) => deleteSkillItem(e, i)}
-                >
-                  {skill}
-                </SkillList>
-              ))} */}
           </styles.SkillListWrap>
         </styles.Section>
         <styles.Line />
@@ -329,7 +319,16 @@ export default function DefaultProfile({ type }) {
           {/* <WriteSubtitle subtitle="GitHub" id="github" />
           <GithubApi /> */}
         </styles.Section>
-      </>
-    </Layout>
+      </Layout>
+      <MainBtn
+        type="profile"
+        onClick={() => {
+          console.log('아래쪽 저장 버튼 클릭됨')
+          // saveProfile(profileData)
+        }}
+      >
+        저장하기
+      </MainBtn>
+    </>
   )
 }

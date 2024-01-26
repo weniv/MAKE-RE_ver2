@@ -35,13 +35,6 @@ export default function MyProfilePage() {
         <MyPageNav currentNaveItem={1} />
         <Main>
           <DefaultProfile setIsReady={setIsReady} />
-          <Button
-            isReady={isReady}
-            disabled={!isReady}
-            onClick={() => saveProfile(profileData)}
-          >
-            저장하기
-          </Button>
         </Main>
       </Cont>
       <Footer />
