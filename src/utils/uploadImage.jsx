@@ -15,7 +15,8 @@ export default async function uploadImage(e, data, setData) {
     const imageUrl =
       'https://api.mandarin.weniv.co.kr/' + response.data.filename
 
-    setData({ ...data, profileImg: imageUrl })
+    setData(imageUrl)
+    // setData({ ...data, profileImg: imageUrl })
   } catch (error) {
     console.log('프로필 이미지 변경에 실패했습니다.')
     console.error(error)

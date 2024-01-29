@@ -1,28 +1,23 @@
-import { useState, useContext, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
 import { SkillList } from '../../atoms/SkillList'
 import { AddBtn, ImgBtn } from '../../atoms/Button'
-import { uploadImg, deleteImg } from '../../../utils'
-import { updateProfile } from '../../../utils'
+import { uploadImg } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
-import ColorContext from '../../../context/ColorContext'
-import GithubApi from '../../../api/GithubApi'
-import { ProfileContext } from '../../../context/ProfileContext'
 import { MainBtn } from '../../atoms/Button'
-import { useResumeStore } from '../../../store/ResumeStore'
 import { useDefaultProfileStore } from '../../../store/DefaultProfileStore'
 import { GetCommitRecord } from '../../atoms/Github'
 
 export default function DefaultProfile() {
   const { updateDefaultProfile } = useDefaultProfileStore()
-
   const storedData = JSON.parse(localStorage.getItem('makere-default-profile'))
 
+  const fileRef = useRef(null)
   const [isChange, setIsChange] = useState(false)
 
   /**
@@ -36,6 +31,8 @@ export default function DefaultProfile() {
     } else {
       if (key === 'skills' || key === 'github') {
         return []
+      } else if (key === 'profileImg') {
+        return 'https://api.mandarin.weniv.co.kr/1687337079735.png' // 이거 왜 쓰는건지 궁금
       } else {
         return ''
       }
@@ -43,6 +40,7 @@ export default function DefaultProfile() {
   }
 
   // 기본 프로필 관련 state
+  const [profileImg, setProfileImg] = useState(getStoredData('profileImg')) // 프로필 이미지
   const [name, setName] = useState(getStoredData('name')) // 이름
   const [enName, setEnName] = useState(getStoredData('enName')) // 영문 이름
   const [phoneNumber, setPhoneNumber] = useState(getStoredData('phoneNumber')) // 전화번호
@@ -92,6 +90,7 @@ export default function DefaultProfile() {
    */
   const saveLocalStorage = () => {
     const val = {
+      profileImg,
       name,
       enName,
       phoneNumber,
@@ -154,7 +153,33 @@ export default function DefaultProfile() {
             </MainBtn>
           </styles.TitleCont>
           <styles.ProfileCont>
-            {/* 여기 이미지 들어가야함 */}
+            <styles.ImgCont>
+              <styles.ImgLabel
+                ref={fileRef}
+                htmlFor="profile-upload"
+                className="profileImg"
+              >
+                <styles.ImgWrap>
+                  <styles.Img
+                    src={profileImg ? profileImg : LicatFace}
+                    alt={`${name || enName || '익명'} 님의 프로필 이미지`}
+                  />
+                  <ImgBtn
+                    type="delete"
+                    onClick={() => {
+                      setProfileImg('')
+                    }}
+                  />
+                </styles.ImgWrap>
+              </styles.ImgLabel>
+              <input
+                className="profileInput"
+                type="file"
+                accept="image/*"
+                id="profile-upload"
+                onChange={(e) => uploadImg(e, profileImg, setProfileImg)}
+              />
+            </styles.ImgCont>
             <div>
               <styles.InputCont>
                 <DefaultInput
