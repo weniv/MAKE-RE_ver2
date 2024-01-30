@@ -177,6 +177,7 @@ export default function Profile({ id, type }) {
   const [name, setName] = useState(getDefaultData('name'))
   const [enName, setEnName] = useState(getDefaultData('enName'))
   const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
+  const [blog, setBlog] = useState(getDefaultData('blog'))
   const [skills, setSkills] = useState(getDefaultArrayData('skills'))
 
   // useEffect(() => {
@@ -342,16 +343,17 @@ export default function Profile({ id, type }) {
                 /> */}
               </styles.InputCont>
               <styles.InputCont>
-                {/* <DefaultInput
+                <DefaultInput
                   id="blog"
                   type="url"
-                  onChange={(e) =>
-                    updateProfile(e, 'blog', profileData, setProfileData)
-                  }
-                  inputData={profileData.blog}
+                  onChange={(e) => {
+                    setBlog(e.target.value)
+                    updateProfileData(id, 'blog', e.target.value)
+                  }}
+                  inputData={blog}
                 >
                   기술 블로그 링크
-                </DefaultInput> */}
+                </DefaultInput>
               </styles.InputCont>
               {/* <styles.Label>경력</styles.Label>
               <DropBox
