@@ -1,64 +1,5 @@
 import { getCurrentDate } from '../utils'
 
-export const resumeList = [
-  {
-    id: 1,
-    name: '새로운 이력서',
-    lastModified: getCurrentDate(),
-    profile: {
-      profileImg: '',
-      name: '',
-      enName: '',
-      phoneNumber: '',
-      fullEmail: '',
-      blog: '',
-      careerLength: 0,
-      skills: [],
-      github: '',
-    },
-    intro: '',
-    career: [
-      {
-        id: 1,
-        startData: '',
-        endData: '',
-        inProgress: false,
-        works: '',
-      },
-    ],
-    project: [
-      {
-        id: 1,
-        title: '',
-        demoLink: '',
-        githubLink: '',
-        snsLink: '',
-        outline: '',
-        people: '',
-        startDate: '',
-        endDate: '',
-        inProgress: false,
-        contributions: [''],
-        skills: [''],
-      },
-    ],
-    experience: [
-      {
-        id: 1,
-        title: '',
-        startDate: '',
-        endDate: '',
-        inProgress: false,
-      },
-    ],
-    certificate: [{ id: 1, title: '', date: '' }],
-    education: [
-      { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
-    ],
-    url: [{ id: 1, title: '', link: '' }],
-  },
-]
-
 export const resumeItem = {
   name: '새로운 이력서',
   profile: {
@@ -76,10 +17,11 @@ export const resumeItem = {
   career: [
     {
       id: 1,
-      startData: '',
+      startDate: '',
       endData: '',
       inProgress: false,
       works: '',
+      position: '',
     },
   ],
   project: [
@@ -89,7 +31,7 @@ export const resumeItem = {
       demoLink: '',
       githubLink: '',
       snsLink: '',
-      outline: '',
+      description: '',
       people: '',
       startDate: '',
       endDate: '',
@@ -105,14 +47,31 @@ export const resumeItem = {
       startDate: '',
       endDate: '',
       inProgress: false,
+      description: '',
+      link: '',
     },
   ],
-  certificate: [{ id: 1, title: '', date: '' }],
+  certificate: [{ id: 1, title: '', date: '', issuer: '', score: '' }],
   education: [
-    { id: 1, title: '', startDate: '', endDate: '', inProgress: false },
+    {
+      id: 1,
+      title: '',
+      startDate: '',
+      endDate: '',
+      inProgress: false,
+      description: '',
+    },
   ],
   url: [{ id: 1, title: '', link: '' }],
 }
+
+export const resumeList = [
+  {
+    id: 1,
+    lastModified: getCurrentDate(),
+    ...resumeItem,
+  },
+]
 
 export const remoteList = [
   { id: 1, title: '프로필' },
@@ -134,6 +93,5 @@ export const profileData = {
   blog: '',
   careerLength: 0,
   skills: [],
-  github: [],
-  intro: '',
+  github: '',
 }
