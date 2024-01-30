@@ -14,6 +14,7 @@ import * as styles from './Profile-style'
 import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { useResumeStore } from '../../../store/ResumeStore'
+import { GetCommitRecord } from '../../atoms/Github'
 
 export default function Profile({ id, type }) {
   // const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
@@ -179,6 +180,7 @@ export default function Profile({ id, type }) {
   const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
   const [blog, setBlog] = useState(getDefaultData('blog'))
   const [skills, setSkills] = useState(getDefaultArrayData('skills'))
+  const [github, setGithub] = useState(getDefaultData('github'))
 
   // useEffect(() => {
   //   console.log('resumeList', resumeList)
@@ -191,6 +193,10 @@ export default function Profile({ id, type }) {
   useEffect(() => {
     updateProfileData(id, 'skills', skills)
   }, [skills])
+
+  useEffect(() => {
+    updateProfileData(id, 'github', github)
+  }, [github])
 
   const skillListRef = useRef(null)
 
@@ -400,10 +406,10 @@ export default function Profile({ id, type }) {
           </styles.SkillListWrap>
         </styles.Section>
         <styles.Line />
-        {/* <styles.Section>
+        <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
-          <GithubApi />
-        </styles.Section> */}
+          <GetCommitRecord github={github} setGithub={setGithub} />
+        </styles.Section>
       </>
     </Layout>
   )

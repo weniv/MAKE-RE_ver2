@@ -88,13 +88,11 @@ export default function ProfilePreview() {
           ></PreviewProfileItem>
           <PreviewProfileItem
             title="깃허브 아이디"
-            content={
-              profileData && profileData[githubID] && profileData.github[0]
-            }
+            content={currentProfileData.github[0]}
           ></PreviewProfileItem>
           {commitURL ? (
             <img
-              src={commitURL}
+              src={`https://ghchart.rshah.org/2e6ff2/${currentProfileData.github[0]}`}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
