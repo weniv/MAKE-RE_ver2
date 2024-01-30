@@ -1,13 +1,5 @@
 import { getCurrentDate } from '../utils'
 
-export const resumeList = [
-  {
-    id: 1,
-    lastModified: getCurrentDate(),
-    ...resumeItem,
-  },
-]
-
 export const resumeItem = {
   name: '새로운 이력서',
   profile: {
@@ -72,6 +64,14 @@ export const resumeItem = {
   ],
   url: [{ id: 1, title: '', link: '' }],
 }
+
+export const resumeList = [
+  {
+    id: 1,
+    lastModified: getCurrentDate(),
+    ...resumeItem,
+  },
+]
 
 export const remoteList = [
   { id: 1, title: '프로필' },
