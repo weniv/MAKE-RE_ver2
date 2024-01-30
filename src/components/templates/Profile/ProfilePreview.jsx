@@ -63,26 +63,21 @@ export default function ProfilePreview() {
       <ProfileBox mainColor={mainColor}>
         <span>
           <strong>{currentProfileData.name}</strong>
-          {/* <strong>{profileData?.name}</strong> */}
           {currentProfileData.enName}
         </span>
         <DataList>
-          {/* 전화번호 */}
           {currentProfileData.phoneNumber && (
             <PreviewProfileItem
               title="전화번호"
               content={currentProfileData.phoneNumber}
             ></PreviewProfileItem>
           )}
-          {/* 이메일 */}
           {currentProfileData?.fullEmail !== '@' && (
             <PreviewProfileItem
               title="이메일"
               content={profileData?.fullEmail}
             ></PreviewProfileItem>
           )}
-
-          {/* 경력사항 */}
           <PreviewProfileItem
             title="경력 사항"
             content={
@@ -91,7 +86,6 @@ export default function ProfilePreview() {
                 : '신입'
             }
           ></PreviewProfileItem>
-          {/* github ID */}
           <PreviewProfileItem
             title="깃허브 아이디"
             content={
@@ -109,8 +103,6 @@ export default function ProfilePreview() {
               <img src={Spinner} alt="" />
             </div>
           )}
-
-          {/* 기술 블로그 */}
           {currentProfileData?.blog && (
             <LinkBox>
               <img src={LinkIcon} alt="" />

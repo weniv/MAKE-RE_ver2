@@ -48,7 +48,9 @@ export default function PreviewPage() {
   const [selectedResume, setSelectedResume] = useState({})
 
   useEffect(() => {
-    const selectedResume = resumeData.find((resume) => String(resume.id) === id)
+    const selectedResume = resumeData?.find(
+      (resume) => String(resume.id) === id
+    )
     setSelectedResume(selectedResume || {})
   }, [id, resumeData])
 

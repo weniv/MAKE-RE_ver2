@@ -140,9 +140,9 @@ export default function Profile({ id, type }) {
   const storedDefaultData = JSON.parse(
     localStorage.getItem('makere-default-profile')
   )
-  const profileData = selectedResume.content.profile
 
   const getDefaultData = (key) => {
+    const profileData = selectedResume ? selectedResume.content.profile : ''
     if (storedDefaultData && !profileData[key]) {
       return storedDefaultData[key]
     } else {
@@ -151,7 +151,9 @@ export default function Profile({ id, type }) {
   }
 
   const getDefaultArrayData = (key) => {
-    if (profileData[key].length === 0) {
+    const profileData = selectedResume ? selectedResume.content.profile : []
+
+    if (storedDefaultData && profileData[key].length === 0) {
       console.log(1111, storedDefaultData[key])
       return storedDefaultData[key]
     } else {
@@ -175,6 +177,7 @@ export default function Profile({ id, type }) {
   const [name, setName] = useState(getDefaultData('name'))
   const [enName, setEnName] = useState(getDefaultData('enName'))
   const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
+  const [skills, setSkills] = useState(getDefaultArrayData('skills'))
 
   // useEffect(() => {
   //   console.log('resumeList', resumeList)
@@ -183,6 +186,29 @@ export default function Profile({ id, type }) {
   useEffect(() => {
     updateProfileData(id, 'profileImg', profileImg)
   }, [profileImg])
+
+  useEffect(() => {
+    updateProfileData(id, 'skills', skills)
+  }, [skills])
+
+  const skillListRef = useRef(null)
+
+  /**
+   * 새로운 기술 스택 추가
+   */
+  const createSkillList = () => {
+    const newSkill = skillListRef.current.value
+    setSkills([...skills, newSkill])
+    skillListRef.current.value = ''
+  }
+
+  /**
+   * 기술 스택 삭제
+   */
+  const deleteSkillItem = (e, idx) => {
+    const result = skills.filter((_, i) => i !== idx)
+    setSkills(result)
+  }
 
   return (
     <Layout>
@@ -339,7 +365,7 @@ export default function Profile({ id, type }) {
           </styles.ProfileCont>
         </styles.Section>
         <styles.Line />
-        {/* <styles.Section>
+        <styles.Section>
           <WriteSubtitle subtitle="기술 스택" id="skills" />
           <form
             className="inputWrap"
@@ -359,8 +385,8 @@ export default function Profile({ id, type }) {
             <AddBtn form="addSkillsListForm" />
           </form>
           <styles.SkillListWrap>
-            {profileData.skills &&
-              profileData.skills.map((skill, i) => (
+            {skills &&
+              skills.map((skill, i) => (
                 <SkillList
                   key={i}
                   type="delete"
@@ -370,7 +396,7 @@ export default function Profile({ id, type }) {
                 </SkillList>
               ))}
           </styles.SkillListWrap>
-        </styles.Section> */}
+        </styles.Section>
         <styles.Line />
         {/* <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
