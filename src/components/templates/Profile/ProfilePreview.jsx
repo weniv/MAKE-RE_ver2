@@ -54,9 +54,9 @@ export default function ProfilePreview() {
 
   return (
     <ProfileSection>
-      {profileData?.profileImg && (
+      {currentProfileData?.profileImg && (
         <ProfileImg mainColor={mainColor}>
-          <img src={profileData?.profileImg} alt="" />
+          <img src={currentProfileData.profileImg} alt="" />
         </ProfileImg>
       )}
 
@@ -68,15 +68,14 @@ export default function ProfilePreview() {
         </span>
         <DataList>
           {/* 전화번호 */}
-          {profileData?.phoneNumber && (
+          {currentProfileData.phoneNumber && (
             <PreviewProfileItem
               title="전화번호"
               content={currentProfileData.phoneNumber}
             ></PreviewProfileItem>
           )}
-
           {/* 이메일 */}
-          {profileData?.fullEmail !== '@' && (
+          {currentProfileData?.fullEmail !== '@' && (
             <PreviewProfileItem
               title="이메일"
               content={profileData?.fullEmail}
@@ -112,11 +111,11 @@ export default function ProfilePreview() {
           )}
 
           {/* 기술 블로그 */}
-          {profileData?.blog && (
+          {currentProfileData?.blog && (
             <LinkBox>
               <img src={LinkIcon} alt="" />
               <span>기술 블로그</span>
-              <a href="">{profileData?.blog}</a>
+              <a href="">{currentProfileData.blog}</a>
             </LinkBox>
           )}
         </DataList>

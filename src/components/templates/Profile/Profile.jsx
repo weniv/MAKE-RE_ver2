@@ -125,15 +125,38 @@ export default function Profile({ id, type }) {
   //   setCommitSrc(src)
   // }
 
-  const getDefaultData = (key) => {
-    const storedDefaultData = JSON.parse(
-      localStorage.getItem('makere-default-profile')
-    )
+  // const getDefaultData = (key) => {
+  //   const storedDefaultData = JSON.parse(
+  //     localStorage.getItem('makere-default-profile')
+  //   )
 
-    if (storedDefaultData[key] && !selectedResume?.content.profile[key]) {
+  //   if (storedDefaultData[key] && !selectedResume?.content.profile[key]) {
+  //     return storedDefaultData[key]
+  //   } else {
+  //     return selectedResume?.content.profile[key]
+  //   }
+  // }
+
+  const storedDefaultData = JSON.parse(
+    localStorage.getItem('makere-default-profile')
+  )
+  const profileData = selectedResume.content.profile
+
+  const getDefaultData = (key) => {
+    if (storedDefaultData && !profileData[key]) {
       return storedDefaultData[key]
     } else {
-      return selectedResume?.content.profile[key]
+      return profileData[key]
+    }
+  }
+
+  const getDefaultArrayData = (key) => {
+    if (profileData[key].length === 0) {
+      console.log(1111, storedDefaultData[key])
+      return storedDefaultData[key]
+    } else {
+      console.log(2222, profileData[key])
+      return profileData[key]
     }
   }
 
@@ -156,6 +179,10 @@ export default function Profile({ id, type }) {
   // useEffect(() => {
   //   console.log('resumeList', resumeList)
   // }, [resumeList])
+
+  useEffect(() => {
+    updateProfileData(id, 'profileImg', profileImg)
+  }, [profileImg])
 
   return (
     <Layout>
@@ -237,6 +264,7 @@ export default function Profile({ id, type }) {
                   marginRight="12px"
                   inputData={phoneNumber}
                   onChange={(e) => {
+                    console.log('11', e.target.value)
                     setPhonNumber(parsePhoneNumber(e.target.value))
                     updateProfileData(
                       id,
