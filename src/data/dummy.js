@@ -3,69 +3,8 @@ import { getCurrentDate } from '../utils'
 export const resumeList = [
   {
     id: 1,
-    name: '새로운 이력서',
     lastModified: getCurrentDate(),
-    profile: {
-      profileImg: '',
-      name: '',
-      enName: '',
-      phoneNumber: '',
-      fullEmail: '',
-      blog: '',
-      careerLength: 0,
-      skills: [],
-      github: '',
-    },
-    intro: '',
-    career: [
-      {
-        id: 1,
-        startData: '',
-        endData: '',
-        inProgress: false,
-        works: '',
-        position: '',
-      },
-    ],
-    project: [
-      {
-        id: 1,
-        title: '',
-        demoLink: '',
-        githubLink: '',
-        snsLink: '',
-        description: '',
-        people: '',
-        startDate: '',
-        endDate: '',
-        inProgress: false,
-        contributions: [''],
-        skills: [''],
-      },
-    ],
-    experience: [
-      {
-        id: 1,
-        title: '',
-        startDate: '',
-        endDate: '',
-        inProgress: false,
-        description: '',
-        link: '',
-      },
-    ],
-    certificate: [{ id: 1, title: '', date: '', issuer: '', score: '' }],
-    education: [
-      {
-        id: 1,
-        title: '',
-        startDate: '',
-        endDate: '',
-        inProgress: false,
-        description: '',
-      },
-    ],
-    url: [{ id: 1, title: '', link: '' }],
+    ...resumeItem,
   },
 ]
 
@@ -86,7 +25,7 @@ export const resumeItem = {
   career: [
     {
       id: 1,
-      startData: '',
+      startDate: '',
       endData: '',
       inProgress: false,
       works: '',
