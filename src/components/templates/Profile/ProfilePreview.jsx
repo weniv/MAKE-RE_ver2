@@ -64,14 +64,14 @@ export default function ProfilePreview() {
         <span>
           <strong>{currentProfileData.name}</strong>
           {/* <strong>{profileData?.name}</strong> */}
-          {profileData?.enName}
+          {currentProfileData.enName}
         </span>
         <DataList>
           {/* 전화번호 */}
           {profileData?.phoneNumber && (
             <PreviewProfileItem
               title="전화번호"
-              content={profileData?.phoneNumber}
+              content={currentProfileData.phoneNumber}
             ></PreviewProfileItem>
           )}
 

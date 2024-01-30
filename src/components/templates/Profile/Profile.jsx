@@ -16,45 +16,23 @@ import GithubApi from '../../../api/GithubApi'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Profile({ id, type }) {
-  const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  // const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const selectedResume = resumeList.find(
-    (resume) => resume.id === parseInt(id)
-  )?.content
+  // const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
+  const { resumeList, updateProfileData } = useResumeStore()
+  const storedResumeData = JSON.parse(
+    localStorage.getItem('makere-resume-list')
+  )
+  const selectedResume = storedResumeData?.state.resumeList.find(
+    (el) => el.id === Number(id)
+  )
+
+  const profileRef = useRef(null)
 
   /**
    * 최초 이력서 생성시 기본 프로필 정보 가져오는 함수
    * @param {number}  selectedResume - 현재 선택된 이력서의 프로필 정보
    * @return {string} 이력서 프로필 정보
    */
-  const getDefaultProfile = (selectedResume) => {
-    const defaultProfileData = JSON.parse(
-      localStorage.getItem('makere-default-profile')
-    )
 
-    if (!defaultProfileData) {
-      return selectedResume.profile
-    } else if (defaultProfileData) {
-      return selectedResume?.profile.name
-        ? selectedResume?.profile
-        : defaultProfileData
-    }
-  }
-
-  useEffect(() => {
-    getDefaultProfile(selectedResume)
-  }, [selectedResume])
-
-  // 프로필 정보 state
-  const [profileData, setProfileData] = useState(
-    getDefaultProfile(selectedResume)
-  )
-
-  // 현재 선택된 이력서의 정보가 변경될때마다 이력서 정보 업데이트 (state)
-  useEffect(() => {
-    updateResumeData(id, 'profile', profileData)
-  }, [profileData])
   // useEffect(() => {
   //   updateResumeData(id, 'profile', selectedResume.profile)
   // }, [selectedResume.profile])
@@ -148,19 +126,36 @@ export default function Profile({ id, type }) {
   // }
 
   const getDefaultData = (key) => {
-    if (profileData) {
-      return profileData[key]
+    const storedDefaultData = JSON.parse(
+      localStorage.getItem('makere-default-profile')
+    )
+
+    if (storedDefaultData[key] && !selectedResume?.content.profile[key]) {
+      return storedDefaultData[key]
     } else {
-      return ''
+      return selectedResume?.content.profile[key]
     }
   }
 
-  const [name, setName] = useState(getDefaultData('name'))
+  /**
+   * 전화번호 사이에 하이픈 넣어주는 함수
+   * @param {string}  num - 변환할 전화번호
+   * @return {string} 하이픈을 넣어서 반환된 전화번호
+   */
+  const parsePhoneNumber = (num) => {
+    return num
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
+  }
 
-  // 콘솔을 찍어보자
-  useEffect(() => {
-    // console.log('name', name)
-  }, [])
+  const [profileImg, setProfileImg] = useState(getDefaultData('profileImg'))
+  const [name, setName] = useState(getDefaultData('name'))
+  const [enName, setEnName] = useState(getDefaultData('enName'))
+  const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
+
+  // useEffect(() => {
+  //   console.log('resumeList', resumeList)
+  // }, [resumeList])
 
   return (
     <Layout>
@@ -170,65 +165,38 @@ export default function Profile({ id, type }) {
             title="프로필"
             description="자신을 간단히 소개해 주세요."
           />
-          {/* <h1
-            onClick={() => {
-              alert('프로필 저장')
-              updateResumeData(id, 'profile', selectedResume.profile)
-              saveResumeData()
-            }}
-          >
-            저장해보자
-          </h1> */}
           <styles.ProfileCont>
-            {/* <styles.ImgCont>
+            <styles.ImgCont>
               <styles.ImgLabel
-                ref={fileRef}
+                ref={profileRef}
                 htmlFor="profile-upload"
                 className="profileImg"
               >
-                {profileData.profileImg ? (
-                  <styles.ImgWrap>
-                    <styles.Img
-                      src={profileData.profileImg}
-                      alt={`${
-                        profileData.name || profileData.enName || '익명'
-                      } 님의 프로필 이미지`}
-                    />
-                    <ImgBtn
-                      type="delete"
-                      profileData={profileData}
-                      setProfileData={setProfileData}
-                      onClick={(e) => deleteImg(e, profileData, setProfileData)}
-                    />
-                  </styles.ImgWrap>
-                ) : (
-                  <styles.ImgWrap>
-                    <styles.Img
-                      src={LicatFace}
-                      alt="프로필 기본 이미지"
-                      className="defaultImg"
-                    />
-                    <ImgBtn
-                      type="add"
-                      profileData={profileData}
-                      setProfileData={setProfileData}
-                      onClick={handleButtonClick}
-                    />
-                  </styles.ImgWrap>
-                )}
+                <styles.ImgWrap>
+                  <styles.Img
+                    src={profileImg ? profileImg : LicatFace}
+                    alt={`${name || enName || '익명'} 님의 프로필 이미지`}
+                  />
+                  <ImgBtn
+                    type="delete"
+                    onClick={() => {
+                      setProfileImg('')
+                    }}
+                  />
+                </styles.ImgWrap>
               </styles.ImgLabel>
               <input
                 className="profileInput"
                 type="file"
                 accept="image/*"
                 id="profile-upload"
-                onChange={(e) => uploadImg(e, profileData, setProfileData)}
+                onChange={(e) => {
+                  uploadImg(e, profileImg, setProfileImg)
+                }}
               />
-            </styles.ImgCont> */}
-
+            </styles.ImgCont>
             <div>
               <styles.InputCont>
-                {/* 이름 */}
                 <DefaultInput
                   essentialMsg="*필수 입력 정보입니다."
                   id="name"
@@ -240,25 +208,20 @@ export default function Profile({ id, type }) {
                   inputData={name}
                   onChange={(e) => {
                     setName(e.target.value)
-                    selectedResume.profile.name = e.target.value
-                    // setProfileData((prev) => ({
-                    //   ...prev,
-                    //   [e.target.name]: e.target.value,
-                    // }))
-                    // updateProfile(e, 'name', profileData, setProfileData)
+                    updateProfileData(id, 'name', e.target.value)
                   }}
                 >
                   이름
                 </DefaultInput>
-                {/* 영문 이름 */}
                 <DefaultInput
                   id="enName"
                   type="text"
                   placeholder="예) Kildong Hong"
                   width="356px"
-                  inputData={profileData.enName}
+                  inputData={enName}
                   onChange={(e) => {
-                    updateProfile(e, 'enName', profileData, setProfileData)
+                    setEnName(e.target.value)
+                    updateProfileData(id, 'enName', e.target.value)
                   }}
                 >
                   영문 이름
@@ -266,24 +229,27 @@ export default function Profile({ id, type }) {
               </styles.InputCont>
 
               <styles.InputCont>
-                {/* 전화번호 */}
                 <DefaultInput
                   id="phoneNumber"
                   type="tel"
                   placeholder="예) 010-1234-5678"
                   width="220px"
                   marginRight="12px"
-                  inputData={profileData.phoneNumber}
+                  inputData={phoneNumber}
                   onChange={(e) => {
-                    updateProfile(e, 'phoneNumber', profileData, setProfileData)
+                    setPhonNumber(parsePhoneNumber(e.target.value))
+                    updateProfileData(
+                      id,
+                      'phoneNumber',
+                      parsePhoneNumber(e.target.value)
+                    )
                   }}
                 >
                   전화번호
                 </DefaultInput>
               </styles.InputCont>
-              {/* 이메일 */}
               <styles.InputCont>
-                <DefaultInput
+                {/* <DefaultInput
                   id="emailId"
                   type="text"
                   placeholder="예) paul-lab"
@@ -319,11 +285,10 @@ export default function Profile({ id, type }) {
                   // setDomain={setDomain}
                   // setIsChange={setIsChange}
                   // isChange={isChange}
-                />
+                /> */}
               </styles.InputCont>
               <styles.InputCont>
-                {/* 기술 블로그 링크 */}
-                <DefaultInput
+                {/* <DefaultInput
                   id="blog"
                   type="url"
                   onChange={(e) =>
@@ -332,17 +297,16 @@ export default function Profile({ id, type }) {
                   inputData={profileData.blog}
                 >
                   기술 블로그 링크
-                </DefaultInput>
+                </DefaultInput> */}
               </styles.InputCont>
-              {/* 경력 */}
-              <styles.Label>경력</styles.Label>
+              {/* <styles.Label>경력</styles.Label>
               <DropBox
                 type="career"
                 profileData={profileData}
                 setProfileData={setProfileData}
                 width="179"
                 list={careerList}
-              />
+              /> */}
             </div>
           </styles.ProfileCont>
         </styles.Section>

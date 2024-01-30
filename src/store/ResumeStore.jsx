@@ -34,35 +34,57 @@ export const useResumeStore = create(
           ),
         })),
       // 이력서 내부 정보 수정
-      updateResumeData: (id, name, value) =>
-        set((prev) => ({
-          resumeList: prev.resumeList.map((el) =>
-            el.id === id
+      // updateResumeData: (id, chapter, key, value) =>
+      //   set((prev) => ({
+      //     resumeList: prev.resumeList.map((el) =>
+      //       el.id === id
+      //         ? { ...el, content: { ...el.content[chapter], [key]: value } }
+      //         : el
+      //     ),
+      updateProfileData: (id, key, value) => {
+        set((state) => ({
+          resumeList: state.resumeList.map((el) =>
+            Number(el.id) === Number(id)
               ? {
                   ...el,
                   content: {
                     ...el.content,
-                    [name]: Array.isArray(el.content[name])
-                      ? el.content[name].map((item) =>
-                          item.id === value.id ? { ...item, ...value } : item
-                        )
-                      : { ...el.content[name], ...value },
+                    profile: {
+                      ...el.content.profile,
+                      [key]: value,
+                    },
                   },
                 }
               : el
           ),
-        })),
+        }))
+      },
       // 수정된 이력서 정보를 명시적으로 저장 ex. 버튼 클릭 등
       saveResumeData: () => {
         const currentData = JSON.parse(
           localStorage.getItem('makere-resume-list')
         )
+        console.log('save save')
         localStorage.setItem('makere-resume-list', JSON.stringify(currentData))
       },
     }),
     {
       name: 'makere-resume-list',
       storage: createJSONStorage(() => localStorage), // 이력서 생성, 이름 수정, 삭제 관련
+      partialize: (state) => ({ resumeList: state.resumeList }),
+      onRehydrate: (state) => {
+        // 로컬 스토리지에서 데이터가 재로딩될 때 실행되는 함수
+        // resumeList의 길이가 변경되었을 때만 로컬 스토리지에 저장
+        if (
+          state.resumeList.length !==
+          JSON.parse(localStorage.getItem('makere-resume-list')).length
+        ) {
+          localStorage.setItem(
+            'makere-resume-list',
+            JSON.stringify(state.resumeList)
+          )
+        }
+      },
     }
   )
 )

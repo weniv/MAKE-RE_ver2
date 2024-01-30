@@ -12,7 +12,8 @@ import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function PreviewBox({ type, ...props }) {
   const { id } = useParams()
-  const { saveResumeData } = useResumeStore()
+  const { resumeList, saveResumeData } = useResumeStore()
+  const currentSection = JSON.parse(localStorage.getItem('section'))
 
   const { resumeData, formRef } = useContext(ResumeContext)
   const navigate = useNavigate()
@@ -26,7 +27,16 @@ export default function PreviewBox({ type, ...props }) {
 
   const movePreview = () => {
     saveResumeData()
-    saveData('resumeData', JSON.stringify(resumeData))
+    // resumeList.map((el) => {
+    //   if (!el.content.profile.name && currentSection?.id === 1) {
+    //     alert('이름을 입력하세요')
+    //   } else {
+    //     saveResumeData()
+    //     navigate(`/preview/${id}`)
+    //   }
+    // })
+
+    // saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
     if (isRequired !== false) {
       navigate(`/preview/${id}`)

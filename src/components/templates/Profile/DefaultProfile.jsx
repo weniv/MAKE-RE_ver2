@@ -31,8 +31,6 @@ export default function DefaultProfile() {
     } else {
       if (key === 'skills' || key === 'github') {
         return []
-      } else if (key === 'profileImg') {
-        return 'https://api.mandarin.weniv.co.kr/1687337079735.png' // 이거 왜 쓰는건지 궁금
       } else {
         return ''
       }
