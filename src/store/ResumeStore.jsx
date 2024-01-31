@@ -64,7 +64,6 @@ export const useResumeStore = create(
         const currentData = JSON.parse(
           localStorage.getItem('makere-resume-list')
         )
-        console.log('save save')
         localStorage.setItem('makere-resume-list', JSON.stringify(currentData))
       },
     }),

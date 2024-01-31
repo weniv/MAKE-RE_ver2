@@ -12,13 +12,21 @@ import * as styles from './Profile-style'
 import { MainBtn } from '../../atoms/Button'
 import { useDefaultProfileStore } from '../../../store/DefaultProfileStore'
 import { GetCommitRecord } from '../../atoms/Github'
+import {
+  getStoreEmailPart,
+  parsePhoneNumber,
+  joinEmail,
+  createSkillList,
+  deleteSkillItem,
+} from '../../../utils/profileUtils'
+import { moveToTop } from '../../../utils/scrollEvent'
 
 export default function DefaultProfile() {
   const { updateDefaultProfile } = useDefaultProfileStore()
   const storedData = JSON.parse(localStorage.getItem('makere-default-profile'))
 
   const fileRef = useRef(null)
-  const [isChange, setIsChange] = useState(false)
+  const skillListRef = useRef(null)
 
   /**
    * 저장된 기본 프로필 데이터 불러오는 함수
@@ -50,33 +58,11 @@ export default function DefaultProfile() {
   const [skills, setSkills] = useState(getStoredData('skills')) // 기술 스택
   const [github, setGithub] = useState(getStoredData('github')) // Github
 
-  /**
-   * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
-   * @param {number}  idx - 가져올 이메일 구성요소의 인덱스 (0-id, 1-domain)
-   * @return {string} 이메일 구성요소
-   */
-  const getStoreEmailPart = (idx) => {
-    if (fullEmail) {
-      return fullEmail.split('@')[idx]
-    } else {
-      return ''
-    }
-  }
-
   // 이메일 관련 state
-  const [emailId, setEmailId] = useState(getStoreEmailPart(0))
-  const [emailDomain, setEmailDomain] = useState(getStoreEmailPart(1))
-
-  /**
-   * 이메일 구성요소(id, domain)을 조합하여 완전한 이메일을 구성하는 함수
-   * @param {string}  id - 이메일 id (@ 기준 앞 부분)
-   * @param {string}  id - 이메일 domain (@ 기준 뒷 부분)
-   * @return {string} 이메일 (fullEmail)
-   */
-  const joinEmail = (id, domain) => {
-    let email = [id, domain].join('@')
-    return email
-  }
+  const [emailId, setEmailId] = useState(getStoreEmailPart(0, fullEmail))
+  const [emailDomain, setEmailDomain] = useState(
+    getStoreEmailPart(1, fullEmail)
+  )
 
   useEffect(() => {
     const email = joinEmail(emailId, emailDomain)
@@ -105,36 +91,6 @@ export default function DefaultProfile() {
       localStorage.setItem('makere-default-profile', JSON.stringify(val))
       alert('프로필이 저장되었습니다.')
     }
-  }
-
-  /**
-   * 전화번호 사이에 하이픈 넣어주는 함수
-   * @param {string}  num - 변환할 전화번호
-   * @return {string} 하이픈을 넣어서 반환된 전화번호
-   */
-  const parsePhoneNumber = (num) => {
-    return num
-      .replace(/[^0-9]/g, '')
-      .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
-  }
-
-  const skillListRef = useRef(null)
-
-  /**
-   * 새로운 기술 스택 추가
-   */
-  const createSkillList = () => {
-    const newSkill = skillListRef.current.value
-    setSkills([...skills, newSkill])
-    skillListRef.current.value = ''
-  }
-
-  /**
-   * 기술 스택 삭제
-   */
-  const deleteSkillItem = (e, idx) => {
-    const result = skills.filter((_, i) => i !== idx)
-    setSkills(result)
   }
 
   return (
@@ -252,7 +208,6 @@ export default function DefaultProfile() {
                   inputData={emailDomain}
                   onChange={(e) => {
                     setEmailDomain(e.target.value)
-                    setIsChange(true)
                   }}
                 />
                 <DropBox
@@ -296,7 +251,7 @@ export default function DefaultProfile() {
             id="addSkillsListForm"
             onSubmit={(e) => {
               e.preventDefault()
-              createSkillList()
+              createSkillList(skillListRef, skills, setSkills)
             }}
           >
             <Input
@@ -313,7 +268,7 @@ export default function DefaultProfile() {
               <SkillList
                 key={idx}
                 type="delete"
-                onClick={(e) => deleteSkillItem(e, idx)}
+                onClick={() => deleteSkillItem(idx, skills, setSkills)}
               >
                 {skill}
               </SkillList>
@@ -326,7 +281,13 @@ export default function DefaultProfile() {
           <GetCommitRecord github={github} setGithub={setGithub} />
         </styles.Section>
       </Layout>
-      <MainBtn type="profile" onClick={saveLocalStorage}>
+      <MainBtn
+        type="profile"
+        onClick={() => {
+          saveLocalStorage()
+          moveToTop()
+        }}
+      >
         저장하기
       </MainBtn>
     </>

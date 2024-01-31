@@ -1,148 +1,43 @@
-import { useState, useContext, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { AddBtn, ImgBtn } from '../../atoms/Button'
-import { uploadImg, deleteImg, updateData } from '../../../utils'
-import { updateProfile } from '../../../utils'
+import { uploadImg } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
-import ColorContext from '../../../context/ColorContext'
-import GithubApi from '../../../api/GithubApi'
-import { useResumeStore } from '../../../store/ResumeStore'
 import { GetCommitRecord } from '../../atoms/Github'
-import userEvent from '@testing-library/user-event'
+import {
+  parsePhoneNumber,
+  getStoreEmailPart,
+  joinEmail,
+  createSkillList,
+  deleteSkillItem,
+  useDataEffect,
+} from '../../../utils/profileUtils'
 
-export default function Profile({ id, type }) {
-  // const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
-  const { resumeList, updateProfileData } = useResumeStore()
+export default function Profile({ id }) {
   const storedResumeData = JSON.parse(
     localStorage.getItem('makere-resume-list')
   )
   const selectedResume = storedResumeData?.state.resumeList.find(
     (el) => el.id === Number(id)
   )
-
-  const profileRef = useRef(null)
-
-  /**
-   * 최초 이력서 생성시 기본 프로필 정보 가져오는 함수
-   * @param {number}  selectedResume - 현재 선택된 이력서의 프로필 정보
-   * @return {string} 이력서 프로필 정보
-   */
-
-  // useEffect(() => {
-  //   updateResumeData(id, 'profile', selectedResume.profile)
-  // }, [selectedResume.profile])
-
-  // console.log('selectedResume.profile', selectedResume.profile)
-  // console.log('resumeList', resumeList)
-
-  // const { mainColor } = useContext(ColorContext)
-  // const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
-  // const [isLoaded, setIsLoaded] = useState(false)
-  // const [isChange, setIsChange] = useState(false)
-  // const skillListRef = useRef(null)
-
-  // useEffect(() => {
-  //   const data = JSON.parse(localStorage.getItem('profileData'))
-
-  //   if (data) {
-  //     setEmailId(data['fullEmail'].split('@')[0])
-  //     setDomain(data['fullEmail'].split('@')[1])
-  //     setResumeData(data)
-  //     setIsLoaded(true)
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   const updatedResumeData = resumeData.map((resume) => {
-  //     if (String(resume.id) === id) {
-  //       return { ...resume, profile: profileData }
-  //     }
-  //     return resume
-  //   })
-
-  //   setResumeData(updatedResumeData)
-  // }, [profileData])
-
-  // const fileRef = useRef(null)
-
-  // const handleButtonClick = () => {
-  //   fileRef.current.click()
-  // }
-
-  // // 이메일 설정
-  // const [emailId, setEmailId] = useState('')
-  // const [domain, setDomain] = useState('')
-
-  // useEffect(() => {
-  //   if (emailId !== '' && domain !== '') {
-  //     const fullEmail = [emailId, domain].join('@')
-  //     setProfileData({ ...profileData, fullEmail })
-  //   }
-  // }, [emailId, domain])
-
-  // // 기술 스택 추가
-  // const createSkillList = () => {
-  //   const newSkill = skillListRef.current.value
-  //   setProfileData({
-  //     ...profileData,
-  //     skills: [...profileData.skills, newSkill],
-  //   })
-  //   skillListRef.current.value = ''
-  // }
-
-  // // 기술 스택 삭제
-  // const deleteSkillItem = (e, i) => {
-  //   setProfileData((prevData) => ({
-  //     ...prevData,
-  //     skills: prevData.skills.filter((_, idx) => idx !== i),
-  //   }))
-  // }
-
-  // useEffect(() => {
-  //   setColorCode(mainColor)
-  // }, [mainColor])
-
-  // useEffect(() => {
-  //   loadCommitImg()
-  // }, [colorCode])
-
-  // // 깃허브 잔디 이미지 불러오기
-  // const [commitSrc, setCommitSrc] = useState('')
-  // const loadCommitImg = async () => {
-  //   let src = ''
-
-  //   const userId = localStorage.getItem('userGithubId')
-  //   if (userId) {
-  //     src =
-  //       'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
-  //   }
-
-  //   setCommitSrc(src)
-  // }
-
-  // const getDefaultData = (key) => {
-  //   const storedDefaultData = JSON.parse(
-  //     localStorage.getItem('makere-default-profile')
-  //   )
-
-  //   if (storedDefaultData[key] && !selectedResume?.content.profile[key]) {
-  //     return storedDefaultData[key]
-  //   } else {
-  //     return selectedResume?.content.profile[key]
-  //   }
-  // }
-
   const storedDefaultData = JSON.parse(
     localStorage.getItem('makere-default-profile')
   )
 
+  const profileRef = useRef(null)
+  const skillListRef = useRef(null)
+
+  /**
+   * 기본 프로필 정보를 가져오는 함수
+   * @param {string}  key - 프로필 객체 내부의 key 값
+   * @return {string} 해당 key에 해당하는 기본 프로필 혹은 커스텀 value 값
+   */
   const getDefaultData = (key) => {
     const profileData = selectedResume ? selectedResume.content.profile : ''
     if (storedDefaultData && !profileData[key]) {
@@ -152,27 +47,18 @@ export default function Profile({ id, type }) {
     }
   }
 
+  /**
+   * 기본 프로필 정보를 가져오는 함수 (데이터가 배열 형식인 경우)
+   * @param {string}  key - 프로필 객체 내부의 key 값
+   * @return {[string]} 해당 key에 해당하는 기본 프로필 혹은 커스텀 value 값
+   */
   const getDefaultArrayData = (key) => {
     const profileData = selectedResume ? selectedResume.content.profile : []
-
     if (storedDefaultData && profileData[key].length === 0) {
-      // console.log(1111, storedDefaultData[key])
       return storedDefaultData[key]
     } else {
-      // console.log(2222, profileData[key])
       return profileData[key]
     }
-  }
-
-  /**
-   * 전화번호 사이에 하이픈 넣어주는 함수
-   * @param {string}  num - 변환할 전화번호
-   * @return {string} 하이픈을 넣어서 반환된 전화번호
-   */
-  const parsePhoneNumber = (num) => {
-    return num
-      .replace(/[^0-9]/g, '')
-      .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)
   }
 
   const [profileImg, setProfileImg] = useState(getDefaultData('profileImg'))
@@ -187,77 +73,27 @@ export default function Profile({ id, type }) {
     getDefaultData('careerLength') ? getDefaultData('careerLength') : '신입'
   )
 
-  /**
-   * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
-   * @param {number}  idx - 가져올 이메일 구성요소의 인덱스 (0-id, 1-domain)
-   * @return {string} 이메일 구성요소
-   */
-  const getStoreEmailPart = (idx) => {
-    if (fullEmail) {
-      return fullEmail.split('@')[idx]
-    } else {
-      return ''
-    }
-  }
-
   // 이메일 관련 state
-  const [emailId, setEmailId] = useState(getStoreEmailPart(0))
-  const [emailDomain, setEmailDomain] = useState(getStoreEmailPart(1))
+  const [emailId, setEmailId] = useState(getStoreEmailPart(0, fullEmail))
+  const [emailDomain, setEmailDomain] = useState(
+    getStoreEmailPart(1, fullEmail)
+  )
 
-  /**
-   * 이메일 구성요소(id, domain)을 조합하여 완전한 이메일을 구성하는 함수
-   * @param {string}  id - 이메일 id (@ 기준 앞 부분)
-   * @param {string}  id - 이메일 domain (@ 기준 뒷 부분)
-   * @return {string} 이메일 (fullEmail)
-   */
-  const joinEmail = (id, domain) => {
-    let email = [id, domain].join('@')
-    return email
-  }
-
+  // 이메일 id와 domain을 조합하여 full-email을 만들어줌
   useEffect(() => {
     const email = joinEmail(emailId, emailDomain)
     setFullEmail(email)
   }, [emailId, emailDomain])
 
-  useEffect(() => {
-    updateProfileData(id, 'profileImg', profileImg)
-  }, [profileImg])
-
-  useEffect(() => {
-    updateProfileData(id, 'skills', skills)
-  }, [skills])
-
-  useEffect(() => {
-    updateProfileData(id, 'fullEmail', fullEmail)
-  }, [fullEmail])
-
-  useEffect(() => {
-    updateProfileData(id, 'github', github)
-  }, [github])
-
-  useEffect(() => {
-    updateProfileData(id, 'careerLength', careerLength)
-  }, [careerLength])
-
-  const skillListRef = useRef(null)
-
-  /**
-   * 새로운 기술 스택 추가
-   */
-  const createSkillList = () => {
-    const newSkill = skillListRef.current.value
-    setSkills([...skills, newSkill])
-    skillListRef.current.value = ''
-  }
-
-  /**
-   * 기술 스택 삭제
-   */
-  const deleteSkillItem = (e, idx) => {
-    const result = skills.filter((_, i) => i !== idx)
-    setSkills(result)
-  }
+  useDataEffect(id, 'profileImg', profileImg)
+  useDataEffect(id, 'name', name)
+  useDataEffect(id, 'enName', enName)
+  useDataEffect(id, 'phoneNumber', phoneNumber)
+  useDataEffect(id, 'skills', skills)
+  useDataEffect(id, 'blog', blog)
+  useDataEffect(id, 'fullEmail', fullEmail)
+  useDataEffect(id, 'github', github)
+  useDataEffect(id, 'careerLength', careerLength)
 
   return (
     <Layout>
@@ -310,7 +146,6 @@ export default function Profile({ id, type }) {
                   inputData={name}
                   onChange={(e) => {
                     setName(e.target.value)
-                    updateProfileData(id, 'name', e.target.value)
                   }}
                 >
                   이름
@@ -323,7 +158,6 @@ export default function Profile({ id, type }) {
                   inputData={enName}
                   onChange={(e) => {
                     setEnName(e.target.value)
-                    updateProfileData(id, 'enName', e.target.value)
                   }}
                 >
                   영문 이름
@@ -341,11 +175,6 @@ export default function Profile({ id, type }) {
                   onChange={(e) => {
                     console.log('11', e.target.value)
                     setPhonNumber(parsePhoneNumber(e.target.value))
-                    updateProfileData(
-                      id,
-                      'phoneNumber',
-                      parsePhoneNumber(e.target.value)
-                    )
                   }}
                 >
                   전화번호
@@ -375,7 +204,6 @@ export default function Profile({ id, type }) {
                   inputData={emailDomain}
                   onChange={(e) => {
                     setEmailDomain(e.target.value)
-                    // setIsChange(true)
                   }}
                 />
                 <DropBox
@@ -392,7 +220,6 @@ export default function Profile({ id, type }) {
                   type="url"
                   onChange={(e) => {
                     setBlog(e.target.value)
-                    updateProfileData(id, 'blog', e.target.value)
                   }}
                   inputData={blog}
                 >
@@ -418,7 +245,7 @@ export default function Profile({ id, type }) {
             id="addSkillsListForm"
             onSubmit={(e) => {
               e.preventDefault()
-              createSkillList()
+              createSkillList(skillListRef, skills, setSkills)
             }}
           >
             <Input
@@ -436,7 +263,7 @@ export default function Profile({ id, type }) {
                 <SkillList
                   key={i}
                   type="delete"
-                  onClick={(e) => deleteSkillItem(e, i)}
+                  onClick={() => deleteSkillItem(i, skills, setSkills)}
                 >
                   {skill}
                 </SkillList>
