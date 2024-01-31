@@ -43,7 +43,7 @@ export const useResumeStore = create(
       updateResumeData: (id, key, value) =>
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
-            el.id === id
+            el.id === parseInt(id)
               ? { ...el, content: { ...el.content, [key]: value } }
               : el
           ),
