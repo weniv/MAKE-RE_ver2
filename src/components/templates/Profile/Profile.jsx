@@ -115,12 +115,21 @@ export default function Profile({ id }) {
                     src={profileImg ? profileImg : LicatFace}
                     alt={`${name || enName || '익명'} 님의 프로필 이미지`}
                   />
-                  <ImgBtn
-                    type="delete"
-                    onClick={() => {
-                      setProfileImg('')
-                    }}
-                  />
+                  {profileImg ? (
+                    <ImgBtn
+                      type="delete"
+                      onClick={() => {
+                        setProfileImg('')
+                      }}
+                    />
+                  ) : (
+                    <ImgBtn
+                      type="add"
+                      onClick={() => {
+                        profileRef.current.click()
+                      }}
+                    />
+                  )}
                 </styles.ImgWrap>
               </styles.ImgLabel>
               <input
