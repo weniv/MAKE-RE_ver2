@@ -72,17 +72,17 @@ export default function ProfilePreview() {
               content={currentProfileData.phoneNumber}
             ></PreviewProfileItem>
           )}
-          {currentProfileData?.fullEmail !== '@' && (
+          {currentProfileData.fullEmail !== '@' && (
             <PreviewProfileItem
               title="이메일"
-              content={profileData?.fullEmail}
+              content={currentProfileData.fullEmail}
             ></PreviewProfileItem>
           )}
           <PreviewProfileItem
             title="경력 사항"
             content={
-              profileData?.careerLength
-                ? `${profileData?.careerLength}년차`
+              currentProfileData.careerLength
+                ? `${currentProfileData.careerLength}차`
                 : '신입'
             }
           ></PreviewProfileItem>

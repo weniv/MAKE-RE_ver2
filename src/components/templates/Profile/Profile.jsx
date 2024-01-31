@@ -15,6 +15,7 @@ import ColorContext from '../../../context/ColorContext'
 import GithubApi from '../../../api/GithubApi'
 import { useResumeStore } from '../../../store/ResumeStore'
 import { GetCommitRecord } from '../../atoms/Github'
+import userEvent from '@testing-library/user-event'
 
 export default function Profile({ id, type }) {
   // const { resumeList, updateResumeData, saveResumeData } = useResumeStore()
@@ -155,10 +156,10 @@ export default function Profile({ id, type }) {
     const profileData = selectedResume ? selectedResume.content.profile : []
 
     if (storedDefaultData && profileData[key].length === 0) {
-      console.log(1111, storedDefaultData[key])
+      // console.log(1111, storedDefaultData[key])
       return storedDefaultData[key]
     } else {
-      console.log(2222, profileData[key])
+      // console.log(2222, profileData[key])
       return profileData[key]
     }
   }
@@ -179,12 +180,45 @@ export default function Profile({ id, type }) {
   const [enName, setEnName] = useState(getDefaultData('enName'))
   const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
   const [blog, setBlog] = useState(getDefaultData('blog'))
+  const [fullEmail, setFullEmail] = useState(getDefaultData('fullEmail'))
   const [skills, setSkills] = useState(getDefaultArrayData('skills'))
   const [github, setGithub] = useState(getDefaultData('github'))
+  const [careerLength, setCareerLength] = useState(
+    getDefaultData('careerLength') ? getDefaultData('careerLength') : '신입'
+  )
 
-  // useEffect(() => {
-  //   console.log('resumeList', resumeList)
-  // }, [resumeList])
+  /**
+   * 저장된 이메일 id와 이메일 domain 값을 가져오는 함수
+   * @param {number}  idx - 가져올 이메일 구성요소의 인덱스 (0-id, 1-domain)
+   * @return {string} 이메일 구성요소
+   */
+  const getStoreEmailPart = (idx) => {
+    if (fullEmail) {
+      return fullEmail.split('@')[idx]
+    } else {
+      return ''
+    }
+  }
+
+  // 이메일 관련 state
+  const [emailId, setEmailId] = useState(getStoreEmailPart(0))
+  const [emailDomain, setEmailDomain] = useState(getStoreEmailPart(1))
+
+  /**
+   * 이메일 구성요소(id, domain)을 조합하여 완전한 이메일을 구성하는 함수
+   * @param {string}  id - 이메일 id (@ 기준 앞 부분)
+   * @param {string}  id - 이메일 domain (@ 기준 뒷 부분)
+   * @return {string} 이메일 (fullEmail)
+   */
+  const joinEmail = (id, domain) => {
+    let email = [id, domain].join('@')
+    return email
+  }
+
+  useEffect(() => {
+    const email = joinEmail(emailId, emailDomain)
+    setFullEmail(email)
+  }, [emailId, emailDomain])
 
   useEffect(() => {
     updateProfileData(id, 'profileImg', profileImg)
@@ -195,8 +229,16 @@ export default function Profile({ id, type }) {
   }, [skills])
 
   useEffect(() => {
+    updateProfileData(id, 'fullEmail', fullEmail)
+  }, [fullEmail])
+
+  useEffect(() => {
     updateProfileData(id, 'github', github)
   }, [github])
+
+  useEffect(() => {
+    updateProfileData(id, 'careerLength', careerLength)
+  }, [careerLength])
 
   const skillListRef = useRef(null)
 
@@ -310,17 +352,15 @@ export default function Profile({ id, type }) {
                 </DefaultInput>
               </styles.InputCont>
               <styles.InputCont>
-                {/* <DefaultInput
+                <DefaultInput
                   id="emailId"
                   type="text"
                   placeholder="예) paul-lab"
                   width="220px"
                   marginRight="12px"
-                  // inputData={emailId}
-                  inputData={profileData.fullEmail.split('@')[0]}
+                  inputData={emailId}
                   onChange={(e) => {
-                    console.log(profileData)
-                    // setEmailId(e.target.value)
+                    setEmailId(e.target.value)
                   }}
                 >
                   이메일
@@ -332,10 +372,9 @@ export default function Profile({ id, type }) {
                   placeholder="예) paul-lab"
                   width="200px"
                   marginRight="8px"
-                  // inputData={domain === '직접 입력' ? '' : domain}
-                  inputData={profileData.fullEmail.split('@')[1]}
+                  inputData={emailDomain}
                   onChange={(e) => {
-                    // setDomain(e.target.value)
+                    setEmailDomain(e.target.value)
                     // setIsChange(true)
                   }}
                 />
@@ -343,10 +382,9 @@ export default function Profile({ id, type }) {
                   type="email"
                   width="131"
                   list={domainList}
-                  // setDomain={setDomain}
-                  // setIsChange={setIsChange}
-                  // isChange={isChange}
-                /> */}
+                  emailDomain={emailDomain}
+                  setDomain={setEmailDomain}
+                />
               </styles.InputCont>
               <styles.InputCont>
                 <DefaultInput
@@ -361,14 +399,14 @@ export default function Profile({ id, type }) {
                   기술 블로그 링크
                 </DefaultInput>
               </styles.InputCont>
-              {/* <styles.Label>경력</styles.Label>
+              <styles.Label>경력</styles.Label>
               <DropBox
-                type="career"
-                profileData={profileData}
-                setProfileData={setProfileData}
                 width="179"
+                type="career"
+                careerLength={careerLength}
+                setCareerLength={setCareerLength}
                 list={careerList}
-              /> */}
+              />
             </div>
           </styles.ProfileCont>
         </styles.Section>
