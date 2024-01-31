@@ -15,12 +15,6 @@ const EducationPreview = forwardRef((props, ref) => {
 
   const hasEducation = !!educationList?.length
 
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
-
   const sectionId = getSectionId('교육', 7)
 
   return (
@@ -37,11 +31,12 @@ const EducationPreview = forwardRef((props, ref) => {
               <>
                 <PreviewMonthItem
                   key={edu.id}
-                  startDate={formatDate(edu.startDate)}
-                  endDate={edu.inProgress ? '진행 중' : formatDate(edu.endDate)}
-                  title={edu.title}
+                  startDate={edu.startDate}
+                  endDate={edu.endDate}
+                  inProgress={edu.inProgress}
                   isInvalid={isInvalid}
                 />
+                <p>{edu.title}</p>
                 <Content>{edu.content}</Content>
               </>
             )

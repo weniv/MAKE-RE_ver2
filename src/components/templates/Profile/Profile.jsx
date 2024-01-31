@@ -40,7 +40,8 @@ export default function Profile({ id }) {
    */
   const getDefaultData = (key) => {
     const profileData = selectedResume ? selectedResume.content.profile : ''
-    if (storedDefaultData && !profileData[key]) {
+
+    if (storedDefaultData && !profileData['name']) {
       return storedDefaultData[key]
     } else {
       return profileData[key]
@@ -115,12 +116,21 @@ export default function Profile({ id }) {
                     src={profileImg ? profileImg : LicatFace}
                     alt={`${name || enName || '익명'} 님의 프로필 이미지`}
                   />
-                  <ImgBtn
-                    type="delete"
-                    onClick={() => {
-                      setProfileImg('')
-                    }}
-                  />
+                  {profileImg ? (
+                    <ImgBtn
+                      type="delete"
+                      onClick={() => {
+                        setProfileImg('')
+                      }}
+                    />
+                  ) : (
+                    <ImgBtn
+                      type="add"
+                      onClick={() => {
+                        profileRef.current.click()
+                      }}
+                    />
+                  )}
                 </styles.ImgWrap>
               </styles.ImgLabel>
               <input

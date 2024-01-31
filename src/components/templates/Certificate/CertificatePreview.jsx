@@ -20,12 +20,6 @@ const CertificatePreview = forwardRef((props, ref) => {
 
   const hasCertificates = !!certificates?.length
 
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
-
   const sectionId = getSectionId('자격증', 6)
 
   return (
@@ -43,10 +37,10 @@ const CertificatePreview = forwardRef((props, ref) => {
                 <PreviewMonthItem
                   type="certificate"
                   key={cert.id}
-                  date={formatDate(cert.date)}
-                  title={cert.title}
+                  startDate={cert.date}
                   isInvalid={isInvalid}
                 />
+                <p>{cert.title}</p>
                 <DetailWrap>
                   {cert.issuer} {cert.issuer && cert.score && '|'} {cert.score}
                 </DetailWrap>

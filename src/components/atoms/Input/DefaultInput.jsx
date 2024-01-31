@@ -35,6 +35,7 @@ export default function DefaultInput({
         autoComplete="off"
         required={required ? required : 'false'}
         maxLength={maxLength}
+        autoFocus
       />
     </InputCont>
   )

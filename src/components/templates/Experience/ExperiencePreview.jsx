@@ -16,12 +16,6 @@ const ExperiencePreview = forwardRef((props, ref) => {
 
   const hasExperience = !!expList?.length
 
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
-
   const sectionId = getSectionId('경험', 5)
 
   return (
@@ -39,11 +33,12 @@ const ExperiencePreview = forwardRef((props, ref) => {
               <>
                 <PreviewMonthItem
                   key={exp.id}
-                  startDate={formatDate(exp.startDate)}
-                  endDate={exp.inProgress ? '진행 중' : formatDate(exp.endDate)}
-                  title={exp.title}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  inProgress={exp.inProgress}
                   isInvalid={isInvalid}
                 />
+                <p>{exp.title}</p>
                 <p>{exp.content}</p>
                 <PreviewLink link={exp.link} />
               </>
