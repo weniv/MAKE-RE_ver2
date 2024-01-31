@@ -6,14 +6,10 @@ import { styled } from 'styled-components'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Intro({ id }) {
-  const storedResumeData = JSON.parse(
-    localStorage.getItem('makere-resume-list')
-  )
-  const selectedResume = storedResumeData?.state.resumeList.find(
-    (el) => el.id === Number(id)
-  )
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === parseInt(id))
+
   const [intro, setIntro] = useState(selectedResume.content.intro)
-  const updateResumeData = useResumeStore((state) => state.updateResumeData)
 
   const maxCount = 1000
 
