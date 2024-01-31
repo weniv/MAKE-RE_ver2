@@ -1,19 +1,24 @@
-import { useState, useEffect, useContext } from 'react'
-import { ResumeContext } from '../../../context/ResumeContext'
+import { useState, useEffect } from 'react'
 import { WriteTitle } from '../../atoms/Title'
 import { DefaultTextarea } from '../../atoms/Input'
 import Layout from '../../organisms/Component/Layout'
 import { styled } from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Intro({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [intro, setIntro] = useState(selectedResume.intro)
+  const storedResumeData = JSON.parse(
+    localStorage.getItem('makere-resume-list')
+  )
+  const selectedResume = storedResumeData?.state.resumeList.find(
+    (el) => el.id === Number(id)
+  )
+  const [intro, setIntro] = useState(selectedResume.content.intro)
+  const updateResumeData = useResumeStore((state) => state.updateResumeData)
+
   const maxCount = 1000
 
   useEffect(() => {
     if (intro.trim().length > maxCount) {
-      // resumeData['profile']['intro'] = intro.slice(0, maxCount)
       setIntro(intro.slice(0, maxCount))
     }
   }, [intro])
@@ -23,17 +28,7 @@ export default function Intro({ id }) {
 
     if (intro.trim().length <= maxCount) {
       setIntro(updatedIntro)
-
-      // Update the selectedResume's intro
-      const updatedResumeData = resumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, intro: updatedIntro }
-        }
-        return resume
-      })
-
-      // Update the entire resumeData
-      setResumeData(updatedResumeData)
+      updateResumeData(Number(id), 'intro', updatedIntro)
     }
   }
 

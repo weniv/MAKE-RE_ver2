@@ -1,21 +1,21 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { SkillList } from '../../atoms/SkillList'
-import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
-import { useParams } from 'react-router-dom'
-import { useResumeStore } from '../../../store/ResumeStore'
+import styled from 'styled-components'
 
 const IntroPreview = forwardRef((props, ref) => {
   const id = useParams().id
-  const { resumeList } = useResumeStore()
-  const currnetResume = resumeList.find((resume) => resume.id === Number(id))
-  const currentProfileData = currnetResume.content.profile
+  const storedResumeData = JSON.parse(
+    localStorage.getItem('makere-resume-list')
+  )
+  const selectedResume = storedResumeData?.state.resumeList.find(
+    (el) => el.id === Number(id)
+  )
 
-  const { selectedResume } = useContext(LocalContext)
-  const introData = selectedResume.intro
-
+  const currentProfileData = selectedResume.content.profile
+  const introData = selectedResume.content.intro
   const sectionId = getSectionId('자기소개서', 2)
 
   return (

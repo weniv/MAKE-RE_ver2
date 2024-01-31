@@ -34,13 +34,14 @@ export const useResumeStore = create(
           ),
         })),
       // 이력서 내부 정보 수정
-      // updateResumeData: (id, chapter, key, value) =>
-      //   set((prev) => ({
-      //     resumeList: prev.resumeList.map((el) =>
-      //       el.id === id
-      //         ? { ...el, content: { ...el.content[chapter], [key]: value } }
-      //         : el
-      //     ),
+      updateResumeData: (id, key, value) =>
+        set((prev) => ({
+          resumeList: prev.resumeList.map((el) =>
+            el.id === id
+              ? { ...el, content: { ...el.content, [key]: value } }
+              : el
+          ),
+        })),
       updateProfileData: (id, key, value) => {
         set((state) => ({
           resumeList: state.resumeList.map((el) =>
