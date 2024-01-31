@@ -22,6 +22,7 @@ export const resumeItem = {
       inProgress: false,
       works: '',
       position: '',
+      rank: '',
     },
   ],
   project: [

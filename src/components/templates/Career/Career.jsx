@@ -34,6 +34,7 @@ export default function Career({ id }) {
     endDate: '',
     inProgress: false,
     works: '',
+    rank: '',
   }
 
   /** 커리어 추가 */
