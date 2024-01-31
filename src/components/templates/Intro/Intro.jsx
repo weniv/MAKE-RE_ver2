@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
-import { ResumeContext } from '../../../context/ResumeContext'
+import { useState, useEffect } from 'react'
 import { WriteTitle } from '../../atoms/Title'
 import { DefaultTextarea } from '../../atoms/Input'
 import Layout from '../../organisms/Component/Layout'
@@ -16,13 +15,10 @@ export default function Intro({ id }) {
   const [intro, setIntro] = useState(selectedResume.content.intro)
   const updateResumeData = useResumeStore((state) => state.updateResumeData)
 
-  // const { resumeData, setResumeData } = useContext(ResumeContext)
-  // const selectedResume = resumeData.find((resume) => String(resume.id) === id)
   const maxCount = 1000
 
   useEffect(() => {
     if (intro.trim().length > maxCount) {
-      // resumeData['profile']['intro'] = intro.slice(0, maxCount)
       setIntro(intro.slice(0, maxCount))
     }
   }, [intro])
