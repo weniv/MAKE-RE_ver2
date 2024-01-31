@@ -11,12 +11,6 @@ const CareerPreview = forwardRef((props, ref) => {
   const { mainColor } = useContext(ColorContext)
   const careerData = selectedResume.career?.filter((el) => !!el.title)
 
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
-
   const sectionId = getSectionId('커리어', 3)
 
   return (
@@ -31,10 +25,9 @@ const CareerPreview = forwardRef((props, ref) => {
                   {data.startDate && (data.endDate || data.inProgress) ? (
                     <PreviewMonthItem
                       type={'career'}
-                      startDate={formatDate(data.startDate)}
-                      endDate={
-                        data.inProgress ? '재직 중' : formatDate(data.endDate)
-                      }
+                      startDate={data.startDate}
+                      endDate={data.endData}
+                      inProgress={data.inProgress}
                       color={mainColor}
                     />
                   ) : null}

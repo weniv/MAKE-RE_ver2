@@ -25,16 +25,9 @@ const ProjectPreview = forwardRef((props, ref) => {
                   <div className="description">
                     <PreviewMonthItem
                       type="project"
-                      startDate={
-                        data.startDate ? `${data.startDate}\n` : '시작일\n'
-                      }
-                      endDate={
-                        data.inProgress
-                          ? '진행 중'
-                          : data.endDate
-                          ? data.endDate
-                          : '종료일'
-                      }
+                      startDate={data.startDate}
+                      endDate={data.endDate}
+                      inProgress={data.inProgress}
                       color={mainColor}
                     ></PreviewMonthItem>
                     <ProjectWrap>
