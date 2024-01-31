@@ -21,6 +21,7 @@ export default function Intro({ id }) {
     if (intro.trim().length > maxCount) {
       setIntro(intro.slice(0, maxCount))
     }
+    updateResumeData(Number(id), 'intro', intro)
   }, [intro])
 
   function handleUpdateIntro(e) {
@@ -31,8 +32,6 @@ export default function Intro({ id }) {
       updateResumeData(Number(id), 'intro', updatedIntro)
     }
   }
-
-  useEffect(() => {}, [intro])
 
   return (
     <Layout>
