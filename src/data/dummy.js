@@ -1,7 +1,6 @@
 import { getCurrentDate } from '../utils'
 
 export const resumeItem = {
-  name: '새로운 이력서',
   profile: {
     profileImg: '',
     name: '',

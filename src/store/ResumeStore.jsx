@@ -8,7 +8,12 @@ export const useResumeStore = create(
     (set) => ({
       // 이력서 리스트
       resumeList: [
-        { id: 1, content: resumeItem, lastModified: getCurrentDate() },
+        {
+          id: 1,
+          name: '새로운 이력서',
+          content: resumeItem,
+          lastModified: getCurrentDate(),
+        },
       ],
       // 이력서 관리 > 새로운 이력서 생성
       createNewResume: (val) =>
@@ -18,6 +23,7 @@ export const useResumeStore = create(
             {
               id: val.id,
               content: val.content,
+              name: '새로운 이력서',
             },
           ],
         })),
@@ -30,7 +36,7 @@ export const useResumeStore = create(
       updateResumeName: (id, name) =>
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
-            el.id === id ? { ...el, content: { ...el.content, name } } : el
+            el.id === id ? { ...el, name: name } : el
           ),
         })),
       // 이력서 내부 정보 수정

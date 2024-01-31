@@ -16,7 +16,7 @@ export default function Resume({ id, lastModified }) {
   const { resumeList, updateResumeName } = useResumeStore()
   const targetResume = resumeList.find((resume) => resume.id === id)
   const [resumeName, setResumeName] = useState(
-    targetResume ? targetResume.content.name : '새로운 이력서'
+    targetResume ? targetResume.name : '새로운 이력서'
   )
   const navigate = useNavigate()
 
