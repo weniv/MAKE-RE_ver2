@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
-import IconLeftArrow from '../../../assets/IconLeftArrow'
+import ColorIcon from '../ColorIcon/ColorIcon'
+import IconLeftArrow from '../../../assets/icon-Left-arrow.svg'
 
 export default function GotoMypage() {
-  const [isHover, setIsHover] = useState(false)
   return (
-    <Link
-      to="/myresume"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-    >
-      <IconLeftArrow className="icon" hover={isHover} />
+    <Link to="/myresume">
+      <ColorIcon iconPath={IconLeftArrow} type="iconLv2" />
     </Link>
   )
 }
@@ -24,4 +20,8 @@ const Link = styled(NavLink)`
   height: 42px;
   background-color: var(--background-color);
   border-radius: 10px;
+
+  div:hover {
+    background-color: var(--surface-color);
+  }
 `
