@@ -16,6 +16,7 @@ export const resumeItem = {
   career: [
     {
       id: 1,
+      title: '',
       startDate: '',
       endData: '',
       inProgress: false,

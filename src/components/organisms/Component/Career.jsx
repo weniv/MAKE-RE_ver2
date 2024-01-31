@@ -37,6 +37,7 @@ export default function Career({
               name="title"
               placeholder="예) 위니브(WENIV)"
               onChange={(e) => {
+                console.log('title', e.target.value)
                 updateData(e, idx, careerData, setCareerData)
               }}
               inputData={career.title}

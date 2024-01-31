@@ -48,6 +48,7 @@ export const useResumeStore = create(
               : el
           ),
         })),
+      // profile 데이터 수정 (obj 데이터)
       updateProfileData: (id, key, value) => {
         set((state) => ({
           resumeList: state.resumeList.map((el) =>
@@ -60,6 +61,22 @@ export const useResumeStore = create(
                       ...el.content.profile,
                       [key]: value,
                     },
+                  },
+                }
+              : el
+          ),
+        }))
+      },
+      // arr 데이터 수정
+      updateArrayData: (id, chapter, arr) => {
+        set((state) => ({
+          resumeList: state.resumeList.map((el) =>
+            Number(el.id) === Number(id)
+              ? {
+                  ...el,
+                  content: {
+                    ...el.content,
+                    [chapter]: arr,
                   },
                 }
               : el
