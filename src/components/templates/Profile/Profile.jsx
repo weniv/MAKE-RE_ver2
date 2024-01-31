@@ -40,7 +40,8 @@ export default function Profile({ id }) {
    */
   const getDefaultData = (key) => {
     const profileData = selectedResume ? selectedResume.content.profile : ''
-    if (storedDefaultData && !profileData[key]) {
+
+    if (storedDefaultData && !profileData['name']) {
       return storedDefaultData[key]
     } else {
       return profileData[key]
