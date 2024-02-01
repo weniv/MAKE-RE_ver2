@@ -43,11 +43,11 @@ export default function Education({
         <DefaultInput
           width="100%"
           marginRight="0px"
-          id={`edu-content-${edu.id}`}
+          id={`edu-description-${edu.id}`}
           type="text"
-          name="content"
+          name="description"
           placeholder="예) HTML / CSS / JavaScript를 활용한 포트폴리오 제작 및 배포"
-          inputData={edu.content}
+          inputData={edu.description}
           onChange={(e) => {
             updateData(e, idx, eduData, setEduData)
           }}

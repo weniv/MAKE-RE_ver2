@@ -1,14 +1,17 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
-import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import styled from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const EducationPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const eduData = selectedResume.education
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const eduData = selectedResume.content.education
   const educationList = eduData?.filter(
     (edu) => edu.startDate || edu.endDate || edu.title.trim()
   )
@@ -37,7 +40,7 @@ const EducationPreview = forwardRef((props, ref) => {
                   isInvalid={isInvalid}
                 />
                 <p>{edu.title}</p>
-                <Content>{edu.content}</Content>
+                <Content>{edu.description}</Content>
               </>
             )
           })}
