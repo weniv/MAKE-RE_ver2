@@ -1,11 +1,8 @@
-import React, { useRef, useContext, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { ExpItem, Layout } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
-import { addData } from '../../../utils'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { styled } from 'styled-components'
-import { Dnd } from '../../../utils'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Experience({ id }) {
