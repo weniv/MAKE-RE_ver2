@@ -1,28 +1,21 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { addData } from '../../../utils'
 import { styled } from 'styled-components'
 import { Layout, CertItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd } from '../../../utils'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Certificate({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [certData, setCertData] = useState(selectedResume.certificate)
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === parseInt(id))
+
+  const [certData, setCertData] = useState(selectedResume.content.certificate)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData((prevResumeData) => {
-      const updatedResumeData = prevResumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, certificate: certData }
-        }
-        return resume
-      })
-      return updatedResumeData
-    })
+    updateResumeData(id, 'certificate', certData)
   }, [certData])
 
   const maxId = certData?.reduce(

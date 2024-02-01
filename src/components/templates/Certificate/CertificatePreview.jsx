@@ -1,14 +1,17 @@
 import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import { useParams } from 'react-router-dom'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const CertificatePreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const certData = selectedResume.certificate
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const certData = selectedResume.content.certificate
   const certificates = certData?.filter(
     (cert) => cert.date || cert.title.trim()
   )
