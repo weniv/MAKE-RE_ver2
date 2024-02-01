@@ -4,15 +4,12 @@ import { PreviewSubtitle } from '../../atoms/Title'
 import { SkillList } from '../../atoms/SkillList'
 import getSectionId from '../../../utils/getSectionId'
 import styled from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const IntroPreview = forwardRef((props, ref) => {
-  const id = useParams().id
-  const storedResumeData = JSON.parse(
-    localStorage.getItem('makere-resume-list')
-  )
-  const selectedResume = storedResumeData?.state.resumeList.find(
-    (el) => el.id === Number(id)
-  )
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
 
   const currentProfileData = selectedResume.content.profile
   const introData = selectedResume.content.intro
