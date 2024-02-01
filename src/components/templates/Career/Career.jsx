@@ -9,13 +9,14 @@ import { Layout } from '../../organisms/Component'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Career({ id }) {
-  const { resumeList, updateArrayData } = useResumeStore()
+  const { resumeList, updateResumeData } = useResumeStore()
   const selectedResume = resumeList.find((resume) => String(resume.id) === id)
+  
   const [careerData, setCareerData] = useState(selectedResume.content.career)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    updateArrayData(id, 'career', careerData)
+    updateResumeData(id, 'career', careerData)
   }, [careerData])
 
   const maxId = careerData.reduce(

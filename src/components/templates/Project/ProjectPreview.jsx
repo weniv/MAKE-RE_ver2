@@ -2,68 +2,73 @@ import React, { forwardRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
-import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import getSectionId from '../../../utils/getSectionId'
+import { useParams } from 'react-router'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const ProjectPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+  const projectData = selectedResume.content.project
   const { mainColor } = useContext(ColorContext)
-  const projectData = selectedResume.project?.filter((el) => !!el.title)
-
   const sectionId = getSectionId('프로젝트', 4)
+
   return (
     <>
       {projectData && projectData.length > 0 ? (
-        <section ref={(projectRef) => (ref.current[sectionId] = projectRef)}>
-          <PreviewSubtitle>Project</PreviewSubtitle>
-          <Project>
-            {projectData &&
-              projectData.map((data) => (
-                <ProjectItem>
-                  <div className="description">
-                    <PreviewMonthItem
-                      type="project"
-                      startDate={data.startDate}
-                      endDate={data.endDate}
-                      inProgress={data.inProgress}
-                      color={mainColor}
-                    ></PreviewMonthItem>
-                    <ProjectWrap>
-                      <Title>{data.title}</Title>
-                      <p className="outline">{data.outline}</p>
-                      <p>{data.people}</p>
-                      <ul>
-                        {data.skills
-                          .filter((skill) => skill !== '')
-                          .map((skill) => (
-                            <Badge className="list">{skill}</Badge>
-                          ))}
-                      </ul>
-                      <ul>
-                        {data.contributions
-                          .filter((cont) => cont !== '')
-                          .map((cont) => (
-                            <li className="list">{cont}</li>
-                          ))}
-                      </ul>
-                    </ProjectWrap>
-                  </div>
-                  <LinkWrap>
-                    <div className="linkCont">
-                      <Title>깃허브 링크 </Title>
-                      <PreviewLink link={data.githubLink}></PreviewLink>
+        <>
+          <section ref={(projectRef) => (ref.current[sectionId] = projectRef)}>
+            <PreviewSubtitle>Project</PreviewSubtitle>
+            <Project>
+              {projectData &&
+                projectData.map((data) => (
+                  <ProjectItem>
+                    <div className="description">
+                      <PreviewMonthItem
+                        type="project"
+                        startDate={data.startDate}
+                        endDate={data.endDate}
+                        inProgress={data.inProgress}
+                        color={mainColor}
+                      ></PreviewMonthItem>
+                      <ProjectWrap>
+                        <Title>{data.title}</Title>
+                        <p className="outline">{data.outline}</p>
+                        <p>{data.people}</p>
+                        <ul>
+                          {data.skills
+                            .filter((skill) => skill !== '')
+                            .map((skill) => (
+                              <Badge className="list">{skill}</Badge>
+                            ))}
+                        </ul>
+                        <ul>
+                          {data.contributions
+                            .filter((cont) => cont !== '')
+                            .map((cont) => (
+                              <li className="list">{cont}</li>
+                            ))}
+                        </ul>
+                      </ProjectWrap>
                     </div>
-                    <div className="linkCont">
-                      <Title>프로젝트 링크</Title>
-                      <PreviewLink link={data.demoLink}></PreviewLink>
-                    </div>
-                  </LinkWrap>
-                </ProjectItem>
-              ))}
-          </Project>
-        </section>
+                    <LinkWrap>
+                      <div className="linkCont">
+                        <Title>깃허브 링크 </Title>
+                        <PreviewLink link={data.githubLink}></PreviewLink>
+                      </div>
+                      <div className="linkCont">
+                        <Title>프로젝트 링크</Title>
+                        <PreviewLink link={data.demoLink}></PreviewLink>
+                      </div>
+                    </LinkWrap>
+                  </ProjectItem>
+                ))}
+            </Project>
+          </section>
+        </>
       ) : null}
     </>
   )

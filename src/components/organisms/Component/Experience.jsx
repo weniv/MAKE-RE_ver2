@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { css, styled } from 'styled-components'
+import { styled } from 'styled-components'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import DefaultInput from '../../atoms/Input/DefaultInput'
 import { DateInput } from '../../atoms/Input'

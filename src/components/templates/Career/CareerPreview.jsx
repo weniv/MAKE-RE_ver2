@@ -7,7 +7,7 @@ import getSectionId from '../../../utils/getSectionId'
 import { useResumeStore } from '../../../store/ResumeStore'
 import { useParams } from 'react-router-dom'
 
-const CareerPreview = forwardRef((ref) => {
+const CareerPreview = forwardRef((props, ref) => {
   const id = Number(useParams().id)
 
   const { resumeList } = useResumeStore()
@@ -21,8 +21,7 @@ const CareerPreview = forwardRef((ref) => {
   return (
     <>
       {currentCareerData && currentCareerData.length > 0 ? (
-        <>
-          {/* <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}> */}
+        <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap>
             {currentCareerData &&
@@ -52,8 +51,7 @@ const CareerPreview = forwardRef((ref) => {
                 </Content>
               ))}
           </Wrap>
-          {/* </section> */}
-        </>
+        </section>
       ) : null}
     </>
   )
