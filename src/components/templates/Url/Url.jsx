@@ -1,27 +1,20 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { styled } from 'styled-components'
 import { Layout, UrlItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd, addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Url({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [urlData, setUrlData] = useState(selectedResume.url)
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === parseInt(id))
+
+  const [urlData, setUrlData] = useState(selectedResume.content.url)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData((prevResumeData) => {
-      const updatedResumeData = prevResumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, url: urlData }
-        }
-        return resume
-      })
-      return updatedResumeData
-    })
+    updateResumeData(id, 'url', urlData)
   }, [urlData])
 
   const maxId = urlData.reduce(
@@ -35,7 +28,7 @@ export default function Url({ id }) {
 
   const val = {
     id: nextId.current,
-    content: '',
+    title: '',
     link: '',
   }
 
