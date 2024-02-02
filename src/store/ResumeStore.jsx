@@ -67,22 +67,6 @@ export const useResumeStore = create(
           ),
         }))
       },
-      // arr 데이터 수정
-      updateArrayData: (id, chapter, arr) => {
-        set((state) => ({
-          resumeList: state.resumeList.map((el) =>
-            Number(el.id) === Number(id)
-              ? {
-                  ...el,
-                  content: {
-                    ...el.content,
-                    [chapter]: arr,
-                  },
-                }
-              : el
-          ),
-        }))
-      },
       // 수정된 이력서 정보를 명시적으로 저장 ex. 버튼 클릭 등
       saveResumeData: () => {
         const currentData = JSON.parse(
