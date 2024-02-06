@@ -80,11 +80,7 @@ export default function ProfilePreview() {
           )}
           <PreviewProfileItem
             title="경력 사항"
-            content={
-              currentProfileData.careerLength
-                ? `${currentProfileData.careerLength}차`
-                : '신입'
-            }
+            content={currentProfileData.careerLength}
           ></PreviewProfileItem>
           <PreviewProfileItem
             title="깃허브 아이디"
