@@ -29,13 +29,11 @@ export const ProfileBtn = styled.button`
   border-radius: 50%;
   border: 1px solid var(--gray-lv2-color);
   background-color: var(--background-color);
-  border: ${(props) =>
-    props.isMenuOpen
-      ? '2px solid var(--primary-color)'
-      : '1px solid var(--gray-lv2-color)'};
+  border: 1px solid var(--gray-lv2-color);
   margin-left: 20px;
+  transition: border 0.05s ease-in;
 
-  &:active {
+  &:hover {
     border: 2px solid var(--primary-color);
   }
 
@@ -43,6 +41,7 @@ export const ProfileBtn = styled.button`
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    background-color: var(--gray-lv1-color);
   }
 `
 
