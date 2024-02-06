@@ -61,6 +61,7 @@ const Cont = styled.div`
 const Label = styled.label`
   color: var(--gray-lv4-color);
   font-size: 12px;
+  font-weight: 700;
 `
 
 const TextArea = styled.textarea`
