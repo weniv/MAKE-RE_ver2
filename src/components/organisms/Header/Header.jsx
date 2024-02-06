@@ -1,16 +1,17 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../assets/Logo.svg'
 import ToggleBtn from '../../atoms/Button/ToggleBtn'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import { MainBtn } from '../../atoms/Button'
-import { ProfileContext } from '../../../context/ProfileContext'
 import * as styles from './Header-style'
 
 export default function Header({ options }) {
-  const { profileData } = useContext(ProfileContext)
-  const profileImg = profileData['profileImg']
+  const storedDefaultData = JSON.parse(
+    localStorage.getItem('makere-default-profile')
+  )
+  const profileImg = storedDefaultData.profileImg
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const [isMenuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
