@@ -115,7 +115,7 @@ const Cont = styled.div`
   padding: 18px 20px;
   border-radius: 16px;
   max-width: 786px;
-  transition: border 0.1s ease-in;
+  transition: border 0.1s ease-in, outline 0.1s ease-in;
 
   ${(props) => {
     if (!props.isEditable) {
