@@ -8,7 +8,7 @@ export const resumeItem = {
     phoneNumber: '',
     fullEmail: '',
     blog: '',
-    careerLength: 0,
+    careerLength: '',
     skills: [],
     github: '',
   },
@@ -92,7 +92,7 @@ export const profileData = {
   phoneNumber: '',
   fullEmail: '',
   blog: '',
-  careerLength: 0,
+  careerLength: '',
   skills: [],
   github: '',
 }
