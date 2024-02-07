@@ -31,7 +31,7 @@ export const ProfileBtn = styled.button`
   background-color: var(--background-color);
   border: 1px solid var(--gray-lv2-color);
   margin-left: 20px;
-  transition: border 0.05s ease-in;
+  transition: border 0.1s ease-in;
 
   &:hover {
     border: 2px solid var(--primary-color);

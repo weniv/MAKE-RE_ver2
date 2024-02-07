@@ -19,7 +19,9 @@ const Cont = styled.button`
   border-radius: 10px;
   margin-bottom: 12px;
   cursor: pointer;
+  transition: opacity 0.1s ease-in;
+
   &:hover {
-    opacity: 0.7;
+    opacity: 0.9;
   }
 `
