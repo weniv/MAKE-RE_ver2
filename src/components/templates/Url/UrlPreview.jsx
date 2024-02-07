@@ -1,13 +1,17 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewSubtitle } from '../../atoms/Title'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const UrlPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const urlData = selectedResume.url
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const urlData = selectedResume.content.url
   const urlList = urlData?.filter(
     (url) => url.content?.trim() || url.link?.trim()
   )
@@ -22,7 +26,7 @@ const UrlPreview = forwardRef((props, ref) => {
           <UrlListContainer>
             {urlList.map((url) => (
               <li>
-                <UrlContent>{url.content}</UrlContent>
+                <UrlContent>{url.title}</UrlContent>
                 <PreviewLink link={url.link} />
               </li>
             ))}

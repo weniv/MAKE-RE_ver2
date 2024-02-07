@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ComponentHeader from '../ComponentHeader/ComponentHeader'
 import DefaultInput from '../../atoms/Input/DefaultInput'
 import { styled } from 'styled-components'
@@ -27,11 +27,11 @@ export default function Url({
           <DefaultInput
             width="100%"
             marginRight="0px"
-            id={`url-content-${url.id}`}
+            id={`url-title-${url.id}`}
             type="text"
-            name="content"
+            name="title"
             placeholder="예) 포트폴리오 노션 페이지"
-            inputData={url.content}
+            inputData={url.title}
             onChange={(e) => {
               updateData(e, idx, urlData, setUrlData)
             }}

@@ -1,21 +1,20 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import EditIcon from '../../../assets/icon-pencil.svg'
-import DeleteIcon from '../../../assets/icon-X.svg'
+
 import MoreIcon from '../../../assets/icon-more.svg'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import { DefaultInput } from '../../atoms/Input'
 import DeleteModal from './DeleteModal'
-import ResumeContext from '../../../context/ResumeContext'
 import { getCurrentDate } from '../../../utils'
+import { useResumeStore } from '../../../store/ResumeStore'
 
-export default function Resume({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
+export default function Resume({ id, lastModified }) {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [isEditable, setEditable] = useState(false)
-  const targetResume = resumeData.find((resume) => resume.id === id)
+  const { resumeList, updateResumeName } = useResumeStore()
+  const targetResume = resumeList.find((resume) => resume.id === id)
   const [resumeName, setResumeName] = useState(
     targetResume ? targetResume.name : '새로운 이력서'
   )
@@ -33,19 +32,7 @@ export default function Resume({ id }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && resumeName !== '') {
       setEditable(false)
-
-      const updatedResumes = resumeData.map((resume) => {
-        if (resume.id === id) {
-          return {
-            ...resume,
-            name: resumeName,
-          }
-        }
-        return resume
-      })
-
-      setResumeData(updatedResumes)
-
+      updateResumeName(id, resumeName)
       setEditable(false)
     }
   }
@@ -61,8 +48,6 @@ export default function Resume({ id }) {
     }
     document.addEventListener('mousedown', handleClickOutside)
   }, [menuRef])
-
-  console.log('isModalOpen', isModalOpen)
 
   const moveResumeDetail = () => {
     if (!isEditable) {
@@ -87,15 +72,6 @@ export default function Resume({ id }) {
               <Title>{resumeName}</Title>
             )}
           </TitleWrap>
-
-          {/* <DeleteBtn onClick={() => setModalOpen(true)}>
-            <ColorIcon
-              iconPath={DeleteIcon}
-              type="iconLv2"
-              width="20px"
-              height="20px"
-            />
-          </DeleteBtn> */}
           <MoreBtn
             onClick={handleToggleMenu}
             ref={menuRef}
@@ -121,9 +97,7 @@ export default function Resume({ id }) {
             )}
           </MoreBtn>
         </Wrap>
-        <EditDate>
-          마지막 수정: {targetResume.lastModified || getCurrentDate()}
-        </EditDate>
+        <EditDate>마지막 수정: {lastModified || getCurrentDate()}</EditDate>
       </Cont>
       {isModalOpen && (
         <DeleteModal
@@ -179,8 +153,6 @@ const EditDate = styled.span`
   color: var(--gray-lv4-color);
   font-size: 12px;
 `
-
-const DeleteBtn = styled.button``
 
 const MoreBtn = styled.button`
   position: absolute;

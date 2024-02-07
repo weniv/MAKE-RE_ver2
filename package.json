@@ -26,7 +26,8 @@
     "react-to-print": "^2.14.15",
     "styled-components": "^6.0.2",
     "styled-reset": "^4.5.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

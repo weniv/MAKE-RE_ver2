@@ -1,46 +1,49 @@
 import React, { forwardRef, useContext } from 'react'
 import styled from 'styled-components'
 import { PreviewSubtitle } from '../../atoms/Title'
-import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import getSectionId from '../../../utils/getSectionId'
+import { useResumeStore } from '../../../store/ResumeStore'
+import { useParams } from 'react-router-dom'
 
 const CareerPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const { mainColor } = useContext(ColorContext)
-  const careerData = selectedResume.career?.filter((el) => !!el.title)
+  const id = Number(useParams().id)
 
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
+  const { resumeList } = useResumeStore()
+  const { mainColor } = useContext(ColorContext)
+
+  const currnetResume = resumeList.find((resume) => resume.id === id)
+  const currentCareerData = currnetResume.content.career
 
   const sectionId = getSectionId('커리어', 3)
 
   return (
     <>
-      {careerData && careerData.length > 0 ? (
+      {currentCareerData && currentCareerData.length > 0 ? (
         <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap>
-            {careerData &&
-              careerData.map((data) => (
+            {currentCareerData &&
+              currentCareerData.map((data) => (
                 <Content>
                   {data.startDate && (data.endDate || data.inProgress) ? (
-                    <PreviewMonthItem
-                      type={'career'}
-                      startDate={formatDate(data.startDate)}
-                      endDate={
-                        data.inProgress ? '재직 중' : formatDate(data.endDate)
-                      }
-                      color={mainColor}
-                    />
+                    <>
+                      <PreviewMonthItem
+                        type={'career'}
+                        startDate={data.startDate}
+                        endDate={data.endData}
+                        inProgress={data.inProgress}
+                        color={mainColor}
+                      />
+                    </>
                   ) : null}
                   <div>
                     <Title>
-                      {data.title} <p className="rank">(직급: {data.rank})</p>
+                      {data.title}
+                      {data.rank ? (
+                        <p className="rank">({`직급: ${data.rank}`})</p>
+                      ) : null}
                     </Title>
 
                     <p className="works">{data.works}</p>

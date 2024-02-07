@@ -1,13 +1,12 @@
-import { useContext } from 'react'
 import Modal from 'react-modal'
 import ColorIcon from '../../atoms/ColorIcon/ColorIcon'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import { MainBtn } from '../../atoms/Button'
 import styled from 'styled-components'
-import ResumeContext from '../../../context/ResumeContext'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function DeleteModal({ isModalOpen, setModalOpen, id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const { deleteResume } = useResumeStore()
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -18,8 +17,7 @@ export default function DeleteModal({ isModalOpen, setModalOpen, id }) {
   }
 
   const handleDeleteResume = (id) => {
-    const updatedResumes = resumeData.filter((resume) => resume.id !== id)
-    setResumeData(updatedResumes)
+    deleteResume(id)
     setModalOpen(false)
   }
 

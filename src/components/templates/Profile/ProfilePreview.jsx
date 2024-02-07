@@ -5,8 +5,15 @@ import ColorContext from '../../../context/ColorContext'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
 import LinkIcon from '../../../assets/icon-link2.svg'
+import { useParams } from 'react-router'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function ProfilePreview() {
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const currnetResume = resumeList.find((resume) => resume.id === id)
+  const currentProfileData = currnetResume.content.profile
+
   const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
   const profileData = selectedResume?.profile ? selectedResume.profile : {}
@@ -47,53 +54,41 @@ export default function ProfilePreview() {
 
   return (
     <ProfileSection>
-      {profileData?.profileImg && (
+      {currentProfileData?.profileImg && (
         <ProfileImg mainColor={mainColor}>
-          <img src={profileData?.profileImg} alt="" />
+          <img src={currentProfileData.profileImg} alt="" />
         </ProfileImg>
       )}
 
       <ProfileBox mainColor={mainColor}>
         <span>
-          <strong>{profileData?.name}</strong>
-          {profileData?.enName}
+          <strong>{currentProfileData.name}</strong>
+          {currentProfileData.enName}
         </span>
         <DataList>
-          {/* 전화번호 */}
-          {profileData?.phoneNumber && (
+          {currentProfileData.phoneNumber && (
             <PreviewProfileItem
               title="전화번호"
-              content={profileData?.phoneNumber}
+              content={currentProfileData.phoneNumber}
             ></PreviewProfileItem>
           )}
-
-          {/* 이메일 */}
-          {profileData?.fullEmail !== '@' && (
+          {currentProfileData.fullEmail !== '@' && (
             <PreviewProfileItem
               title="이메일"
-              content={profileData?.fullEmail}
+              content={currentProfileData.fullEmail}
             ></PreviewProfileItem>
           )}
-
-          {/* 경력사항 */}
           <PreviewProfileItem
             title="경력 사항"
-            content={
-              profileData?.careerLength
-                ? `${profileData?.careerLength}년차`
-                : '신입'
-            }
+            content={currentProfileData.careerLength}
           ></PreviewProfileItem>
-          {/* github ID */}
           <PreviewProfileItem
             title="깃허브 아이디"
-            content={
-              profileData && profileData[githubID] && profileData.github[0]
-            }
+            content={currentProfileData.github[0]}
           ></PreviewProfileItem>
           {commitURL ? (
             <img
-              src={commitURL}
+              src={`https://ghchart.rshah.org/2e6ff2/${currentProfileData.github[0]}`}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
@@ -102,13 +97,11 @@ export default function ProfilePreview() {
               <img src={Spinner} alt="" />
             </div>
           )}
-
-          {/* 기술 블로그 */}
-          {profileData?.blog && (
+          {currentProfileData?.blog && (
             <LinkBox>
               <img src={LinkIcon} alt="" />
               <span>기술 블로그</span>
-              <a href="">{profileData?.blog}</a>
+              <a href="">{currentProfileData.blog}</a>
             </LinkBox>
           )}
         </DataList>

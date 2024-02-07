@@ -1,25 +1,22 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
-import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import styled from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const EducationPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const eduData = selectedResume.education
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const eduData = selectedResume.content.education
   const educationList = eduData?.filter(
     (edu) => edu.startDate || edu.endDate || edu.title.trim()
   )
 
   const hasEducation = !!educationList?.length
-
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
 
   const sectionId = getSectionId('교육', 7)
 
@@ -37,12 +34,13 @@ const EducationPreview = forwardRef((props, ref) => {
               <>
                 <PreviewMonthItem
                   key={edu.id}
-                  startDate={formatDate(edu.startDate)}
-                  endDate={edu.inProgress ? '진행 중' : formatDate(edu.endDate)}
-                  title={edu.title}
+                  startDate={edu.startDate}
+                  endDate={edu.endDate}
+                  inProgress={edu.inProgress}
                   isInvalid={isInvalid}
                 />
-                <Content>{edu.content}</Content>
+                <p>{edu.title}</p>
+                <Content>{edu.description}</Content>
               </>
             )
           })}

@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react'
+import { useRef } from 'react'
 import styled from 'styled-components'
 import { Layout } from '../components/organisms/Component'
 import { WriteTitle } from '../components/atoms/Title'
@@ -8,25 +8,20 @@ import Footer from '../components/organisms/Footer/Footer'
 import MyPageNav from '../components/organisms/Nav/MyPageNav'
 import PlusIcon from '../assets/icon-+.svg'
 import ColorIcon from '../components/atoms/ColorIcon/ColorIcon'
-import { ResumeContext } from '../context/ResumeContext'
 import { resumeItem } from '../data/dummy'
 import { MetaData } from '../utils/metaData'
+import { useResumeStore } from '../store/ResumeStore'
 
 export default function MyResumePage() {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
+  const { resumeList, createNewResume } = useResumeStore()
   const id =
-    resumeData.length === 0 ? 0 : Math.max(...resumeData.map((el) => el.id))
+    resumeList.length === 0 ? 0 : Math.max(...resumeList.map((el) => el.id))
   const maxIdRef = useRef(id)
 
   const handleAddResume = () => {
     maxIdRef.current += 1
-
-    const newResume = {
-      id: maxIdRef.current,
-      ...resumeItem,
-    }
-
-    setResumeData((prevResumes) => [...prevResumes, newResume])
+    const val = { id: maxIdRef.current, content: resumeItem }
+    createNewResume(val)
   }
 
   const meta = {
@@ -49,10 +44,16 @@ export default function MyResumePage() {
                 description="이력서는 최대 3개까지 생성 및 관리할 수 있습니다."
               />
               <Wrap>
-                {resumeData.map((resume) => {
-                  return <Resume key={resume.id} id={resume.id} />
+                {resumeList.map((resume) => {
+                  return (
+                    <Resume
+                      key={resume.id}
+                      id={resume.id}
+                      lastModified={resume.lastModified}
+                    />
+                  )
                 })}
-                {resumeData.length <= 2 && (
+                {resumeList.length <= 2 && (
                   <AddCont>
                     <AddBtn onClick={handleAddResume}>
                       <ColorIcon iconPath={PlusIcon} type="iconLv1" />
@@ -60,18 +61,6 @@ export default function MyResumePage() {
                     </AddBtn>
                   </AddCont>
                 )}
-
-                {/* {resumes.map((resume) => {
-                  return <Resume key={resume.id} />
-                })}
-                {resumes.length <= 2 && (
-                  <AddCont>
-                    <AddBtn onClick={handleAddResume}>
-                      <ColorIcon iconPath={PlusIcon} type="iconLv1" />
-                      이력서 만들기
-                    </AddBtn>
-                  </AddCont>
-                )} */}
               </Wrap>
             </Section>
           </Layout>

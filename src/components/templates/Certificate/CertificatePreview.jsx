@@ -1,14 +1,17 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
 import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const CertificatePreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const certData = selectedResume.certificate
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const certData = selectedResume.content.certificate
   const certificates = certData?.filter(
     (cert) => cert.date || cert.title.trim()
   )
@@ -19,12 +22,6 @@ const CertificatePreview = forwardRef((props, ref) => {
   )
 
   const hasCertificates = !!certificates?.length
-
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
 
   const sectionId = getSectionId('자격증', 6)
 
@@ -43,10 +40,10 @@ const CertificatePreview = forwardRef((props, ref) => {
                 <PreviewMonthItem
                   type="certificate"
                   key={cert.id}
-                  date={formatDate(cert.date)}
-                  title={cert.title}
+                  startDate={cert.date}
                   isInvalid={isInvalid}
                 />
+                <p>{cert.title}</p>
                 <DetailWrap>
                   {cert.issuer} {cert.issuer && cert.score && '|'} {cert.score}
                 </DetailWrap>

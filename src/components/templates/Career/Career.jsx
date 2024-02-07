@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { CareerItem } from '../../organisms/Component'
@@ -6,24 +6,17 @@ import { addData } from '../../../utils'
 import { MainBtn } from '../../atoms/Button'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
-import { ResumeContext } from '../../../context/ResumeContext'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Career({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [careerData, setCareerData] = useState(selectedResume.career)
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => String(resume.id) === id)
+  
+  const [careerData, setCareerData] = useState(selectedResume.content.career)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData((prevResumeData) => {
-      const updatedResumeData = prevResumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, career: careerData }
-        }
-        return resume
-      })
-      return updatedResumeData
-    })
+    updateResumeData(id, 'career', careerData)
   }, [careerData])
 
   const maxId = careerData.reduce(
@@ -37,10 +30,12 @@ export default function Career({ id }) {
 
   const val = {
     id: nextId.current,
+    title: '',
     startDate: '',
     endDate: '',
     inProgress: false,
     works: '',
+    rank: '',
   }
 
   /** 커리어 추가 */
@@ -51,7 +46,7 @@ export default function Career({ id }) {
 
   /** 커리어 삭제 */
   const handleDelete = (idx) => {
-    setCareerData(careerData.filter((career, i) => i !== idx))
+    setCareerData(careerData.filter((_, i) => i !== idx))
   }
 
   /** 아코디언 오픈 */

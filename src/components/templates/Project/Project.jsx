@@ -6,28 +6,17 @@ import { MainBtn } from '../../atoms/Button'
 import { addData } from '../../../utils'
 import { Dnd } from '../../../utils'
 import { Layout } from '../../organisms/Component'
-import { ResumeContext } from '../../../context/ResumeContext'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Project({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [projectData, setProjectData] = useState(selectedResume.project)
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === parseInt(id))
+
+  const [projectData, setProjectData] = useState(selectedResume.content.project)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    // setResumeData({
-    //   ...resumeData,
-    //   project: projectData.filter((el, idx) => idx === 0 || !!el.title),
-    // })
-    setResumeData((prevResumeData) => {
-      const updatedResumeData = prevResumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, project: projectData }
-        }
-        return resume
-      })
-      return updatedResumeData
-    })
+    updateResumeData(id, 'project', projectData)
   }, [projectData])
 
   const maxId = projectData.reduce(

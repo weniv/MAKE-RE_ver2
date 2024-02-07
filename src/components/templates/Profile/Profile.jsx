@@ -1,229 +1,179 @@
-import { useState, useContext, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { WriteSubtitle, WriteTitle } from '../../atoms/Title'
 import Layout from '../../organisms/Component/Layout'
 import DefaultInput, { Input } from '../../atoms/Input/DefaultInput'
 import DropBox from '../../atoms/DropBox/DropBox'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { SkillList } from '../../atoms/SkillList'
 import { AddBtn, ImgBtn } from '../../atoms/Button'
-import { uploadImg, deleteImg } from '../../../utils'
-import { updateProfile } from '../../../utils'
+import { uploadImg } from '../../../utils'
 import { domainList, careerList } from '../../../data/profileDropbox'
 import LicatFace from '../../../assets/icon-liacat.svg'
 import * as styles from './Profile-style'
-import ColorContext from '../../../context/ColorContext'
-import GithubApi from '../../../api/GithubApi'
+import { GetCommitRecord } from '../../atoms/Github'
+import {
+  parsePhoneNumber,
+  getStoreEmailPart,
+  joinEmail,
+  createSkillList,
+  deleteSkillItem,
+  useDataEffect,
+} from '../../../utils/profileUtils'
 
-export default function Profile({ id, type, setIsReady }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-
-  // console.log('현재 resumeData: ', selectedResume.profile)
-
-  const getDefaultProfile = (resumeData) => {
-    const defaultProfileData = JSON.parse(localStorage.getItem('profileData'))
-    return resumeData.profile.name ? resumeData.profile : defaultProfileData
-  }
-
-  const [profileData, setProfileData] = useState(
-    getDefaultProfile(selectedResume)
+export default function Profile({ id }) {
+  const storedResumeData = JSON.parse(
+    localStorage.getItem('makere-resume-list')
+  )
+  const selectedResume = storedResumeData?.state.resumeList.find(
+    (el) => el.id === Number(id)
+  )
+  const storedDefaultData = JSON.parse(
+    localStorage.getItem('makere-default-profile')
   )
 
-  const { mainColor } = useContext(ColorContext)
-  const [colorCode, setColorCode] = useState(mainColor.split('#')[1])
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [isChange, setIsChange] = useState(false)
+  const profileRef = useRef(null)
   const skillListRef = useRef(null)
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('profileData'))
+  /**
+   * 기본 프로필 정보를 가져오는 함수
+   * @param {string}  key - 프로필 객체 내부의 key 값
+   * @return {string} 해당 key에 해당하는 기본 프로필 혹은 커스텀 value 값
+   */
+  const getDefaultData = (key) => {
+    const profileData = selectedResume ? selectedResume.content.profile : ''
 
-    if (data) {
-      setEmailId(data['fullEmail'].split('@')[0])
-      setDomain(data['fullEmail'].split('@')[1])
-      setResumeData(data)
-      setIsLoaded(true)
+    if (storedDefaultData && !profileData['name']) {
+      return storedDefaultData[key]
+    } else {
+      return profileData[key]
     }
-  }, [])
-
-  useEffect(() => {
-    const updatedResumeData = resumeData.map((resume) => {
-      if (String(resume.id) === id) {
-        return { ...resume, profile: profileData }
-      }
-      return resume
-    })
-
-    setResumeData(updatedResumeData)
-  }, [profileData])
-
-  const fileRef = useRef(null)
-
-  const handleButtonClick = () => {
-    fileRef.current.click()
   }
 
-  // 이메일 설정
-  const [emailId, setEmailId] = useState('')
-  const [domain, setDomain] = useState('')
-
-  useEffect(() => {
-    // const fullEmail = emailId && domain && [emailId, domain].join('@')
-    if (emailId !== '' && domain !== '') {
-      const fullEmail = [emailId, domain].join('@')
-      setProfileData({ ...profileData, fullEmail })
+  /**
+   * 기본 프로필 정보를 가져오는 함수 (데이터가 배열 형식인 경우)
+   * @param {string}  key - 프로필 객체 내부의 key 값
+   * @return {[string]} 해당 key에 해당하는 기본 프로필 혹은 커스텀 value 값
+   */
+  const getDefaultArrayData = (key) => {
+    const profileData = selectedResume ? selectedResume.content.profile : []
+    if (storedDefaultData && profileData[key].length === 0) {
+      return storedDefaultData[key]
+    } else {
+      return profileData[key]
     }
-  }, [emailId, domain])
-
-  // 기술 스택 추가
-  const createSkillList = () => {
-    const newSkill = skillListRef.current.value
-    setProfileData({
-      ...profileData,
-      skills: [...profileData.skills, newSkill],
-    })
-    skillListRef.current.value = ''
   }
 
-  // 기술 스택 삭제
-  const deleteSkillItem = (e, i) => {
-    setProfileData((prevData) => ({
-      ...prevData,
-      skills: prevData.skills.filter((_, idx) => idx !== i),
-    }))
-  }
+  const [profileImg, setProfileImg] = useState(getDefaultData('profileImg'))
+  const [name, setName] = useState(getDefaultData('name'))
+  const [enName, setEnName] = useState(getDefaultData('enName'))
+  const [phoneNumber, setPhonNumber] = useState(getDefaultData('phoneNumber'))
+  const [blog, setBlog] = useState(getDefaultData('blog'))
+  const [fullEmail, setFullEmail] = useState(getDefaultData('fullEmail'))
+  const [skills, setSkills] = useState(getDefaultArrayData('skills'))
+  const [github, setGithub] = useState(getDefaultData('github'))
+  const [careerLength, setCareerLength] = useState(
+    getDefaultData('careerLength') ? getDefaultData('careerLength') : '신입'
+  )
 
+  // 이메일 관련 state
+  const [emailId, setEmailId] = useState(getStoreEmailPart(0, fullEmail))
+  const [emailDomain, setEmailDomain] = useState(
+    getStoreEmailPart(1, fullEmail)
+  )
+
+  // 이메일 id와 domain을 조합하여 full-email을 만들어줌
   useEffect(() => {
-    setColorCode(mainColor)
-  }, [mainColor])
+    const email = joinEmail(emailId, emailDomain)
+    setFullEmail(email)
+  }, [emailId, emailDomain])
 
-  useEffect(() => {
-    loadCommitImg()
-  }, [colorCode])
-
-  // 깃허브 잔디 이미지 불러오기
-  const [commitSrc, setCommitSrc] = useState('')
-  const loadCommitImg = async () => {
-    let src = ''
-
-    const userId = localStorage.getItem('userGithubId')
-    if (userId) {
-      src =
-        'https://ghchart.rshah.org/' + `/${colorCode.split('#')[1]}/` + userId
-    }
-
-    setCommitSrc(src)
-  }
+  useDataEffect(id, 'profileImg', profileImg)
+  useDataEffect(id, 'name', name)
+  useDataEffect(id, 'enName', enName)
+  useDataEffect(id, 'phoneNumber', phoneNumber)
+  useDataEffect(id, 'skills', skills)
+  useDataEffect(id, 'blog', blog)
+  useDataEffect(id, 'fullEmail', fullEmail)
+  useDataEffect(id, 'github', github)
+  useDataEffect(id, 'careerLength', careerLength)
 
   return (
     <Layout>
       <>
         <styles.Section>
-          {type === 'myProfile' && (
-            <WriteTitle
-              title="기본 프로필"
-              description="서비스에서 사용될 기본 프로필 정보를 작성해 주세요."
-            />
-          )}
-          {type === 'resumeProfile' && (
-            <WriteTitle
-              title="프로필"
-              description="자신을 간단히 소개해 주세요."
-            />
-          )}
+          <WriteTitle
+            title="프로필"
+            description="자신을 간단히 소개해 주세요."
+          />
           <styles.ProfileCont>
             <styles.ImgCont>
               <styles.ImgLabel
-                ref={fileRef}
+                ref={profileRef}
                 htmlFor="profile-upload"
                 className="profileImg"
               >
-                {profileData.profileImg ? (
-                  <styles.ImgWrap>
-                    <styles.Img
-                      src={profileData.profileImg}
-                      alt={`${
-                        profileData.name || profileData.enName || '익명'
-                      } 님의 프로필 이미지`}
-                    />
+                <styles.ImgWrap>
+                  <styles.Img
+                    src={profileImg ? profileImg : LicatFace}
+                    alt={`${name || enName || '익명'} 님의 프로필 이미지`}
+                  />
+                  {profileImg ? (
                     <ImgBtn
                       type="delete"
-                      profileData={profileData}
-                      setProfileData={setProfileData}
-                      onClick={(e) => deleteImg(e, profileData, setProfileData)}
+                      onClick={() => {
+                        setProfileImg('')
+                      }}
                     />
-                  </styles.ImgWrap>
-                ) : (
-                  <styles.ImgWrap>
-                    <styles.Img
-                      src={LicatFace}
-                      alt="프로필 기본 이미지"
-                      className="defaultImg"
-                    />
+                  ) : (
                     <ImgBtn
                       type="add"
-                      profileData={profileData}
-                      setProfileData={setProfileData}
-                      onClick={handleButtonClick}
+                      onClick={() => {
+                        profileRef.current.click()
+                      }}
                     />
-                  </styles.ImgWrap>
-                )}
+                  )}
+                </styles.ImgWrap>
               </styles.ImgLabel>
               <input
                 className="profileInput"
                 type="file"
                 accept="image/*"
                 id="profile-upload"
-                onChange={(e) => uploadImg(e, profileData, setProfileData)}
+                onChange={(e) => {
+                  uploadImg(e, profileImg, setProfileImg)
+                }}
               />
             </styles.ImgCont>
-
             <div>
               <styles.InputCont>
-                {(type === 'userProfileSetting') | (type === 'myProfile') ? (
-                  <DefaultInput
-                    essentialMsg="*필수 입력 정보입니다."
-                    id="name"
-                    type="text"
-                    placeholder="예) 홍길동"
-                    width="220px"
-                    marginRight="12px"
-                    inputData={profileData.name}
-                    onChange={(e) => {
-                      updateProfile(e, 'name', profileData, setProfileData)
-                    }}
-                  >
-                    이름
-                  </DefaultInput>
-                ) : (
-                  <DefaultInput
-                    id="name"
-                    type="text"
-                    placeholder="예) 홍길동"
-                    width="220px"
-                    marginRight="12px"
-                    inputData={profileData.name}
-                    onChange={(e) => {
-                      updateProfile(e, 'name', profileData, setProfileData)
-                    }}
-                  >
-                    이름
-                  </DefaultInput>
-                )}
-
+                <DefaultInput
+                  essentialMsg="*필수 입력 정보입니다."
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="예) 홍길동"
+                  width="220px"
+                  marginRight="12px"
+                  inputData={name}
+                  onChange={(e) => {
+                    setName(e.target.value)
+                  }}
+                >
+                  이름
+                </DefaultInput>
                 <DefaultInput
                   id="enName"
                   type="text"
                   placeholder="예) Kildong Hong"
                   width="356px"
-                  inputData={profileData.enName}
+                  inputData={enName}
                   onChange={(e) => {
-                    updateProfile(e, 'enName', profileData, setProfileData)
+                    setEnName(e.target.value)
                   }}
                 >
                   영문 이름
                 </DefaultInput>
               </styles.InputCont>
+
               <styles.InputCont>
                 <DefaultInput
                   id="phoneNumber"
@@ -231,9 +181,10 @@ export default function Profile({ id, type, setIsReady }) {
                   placeholder="예) 010-1234-5678"
                   width="220px"
                   marginRight="12px"
-                  inputData={profileData.phoneNumber}
+                  inputData={phoneNumber}
                   onChange={(e) => {
-                    updateProfile(e, 'phoneNumber', profileData, setProfileData)
+                    console.log('11', e.target.value)
+                    setPhonNumber(parsePhoneNumber(e.target.value))
                   }}
                 >
                   전화번호
@@ -260,39 +211,37 @@ export default function Profile({ id, type, setIsReady }) {
                   placeholder="예) paul-lab"
                   width="200px"
                   marginRight="8px"
-                  inputData={domain === '직접 입력' ? '' : domain}
+                  inputData={emailDomain}
                   onChange={(e) => {
-                    setDomain(e.target.value)
-                    setIsChange(true)
+                    setEmailDomain(e.target.value)
                   }}
                 />
                 <DropBox
                   type="email"
                   width="131"
                   list={domainList}
-                  setDomain={setDomain}
-                  setIsChange={setIsChange}
-                  isChange={isChange}
+                  emailDomain={emailDomain}
+                  setDomain={setEmailDomain}
                 />
               </styles.InputCont>
               <styles.InputCont>
                 <DefaultInput
                   id="blog"
                   type="url"
-                  onChange={(e) =>
-                    updateProfile(e, 'blog', profileData, setProfileData)
-                  }
-                  inputData={profileData.blog}
+                  onChange={(e) => {
+                    setBlog(e.target.value)
+                  }}
+                  inputData={blog}
                 >
                   기술 블로그 링크
                 </DefaultInput>
               </styles.InputCont>
               <styles.Label>경력</styles.Label>
               <DropBox
-                type="career"
-                profileData={profileData}
-                setProfileData={setProfileData}
                 width="179"
+                type="career"
+                careerLength={careerLength}
+                setCareerLength={setCareerLength}
                 list={careerList}
               />
             </div>
@@ -306,7 +255,7 @@ export default function Profile({ id, type, setIsReady }) {
             id="addSkillsListForm"
             onSubmit={(e) => {
               e.preventDefault()
-              createSkillList()
+              createSkillList(skillListRef, skills, setSkills)
             }}
           >
             <Input
@@ -319,12 +268,12 @@ export default function Profile({ id, type, setIsReady }) {
             <AddBtn form="addSkillsListForm" />
           </form>
           <styles.SkillListWrap>
-            {profileData.skills &&
-              profileData.skills.map((skill, i) => (
+            {skills &&
+              skills.map((skill, i) => (
                 <SkillList
                   key={i}
                   type="delete"
-                  onClick={(e) => deleteSkillItem(e, i)}
+                  onClick={() => deleteSkillItem(i, skills, setSkills)}
                 >
                   {skill}
                 </SkillList>
@@ -334,7 +283,7 @@ export default function Profile({ id, type, setIsReady }) {
         <styles.Line />
         <styles.Section>
           <WriteSubtitle subtitle="GitHub" id="github" />
-          <GithubApi />
+          <GetCommitRecord github={github} setGithub={setGithub} />
         </styles.Section>
       </>
     </Layout>

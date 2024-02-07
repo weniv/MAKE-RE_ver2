@@ -1,26 +1,23 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewMonthItem } from '../../atoms/PreviewItem'
 import { PreviewSubtitle } from '../../atoms/Title'
-import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
+import styled from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const ExperiencePreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const expData = selectedResume.experience
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
+
+  const expData = selectedResume.content.experience
   const expList = expData?.filter(
     (exp) => exp.startDate || exp.endDate || exp.title.trim()
   )
 
   const hasExperience = !!expList?.length
-
-  function formatDate(date) {
-    if (date) {
-      return date.replace('-', '. ') + '.'
-    }
-  }
 
   const sectionId = getSectionId('경험', 5)
 
@@ -39,13 +36,14 @@ const ExperiencePreview = forwardRef((props, ref) => {
               <>
                 <PreviewMonthItem
                   key={exp.id}
-                  startDate={formatDate(exp.startDate)}
-                  endDate={exp.inProgress ? '진행 중' : formatDate(exp.endDate)}
-                  title={exp.title}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  inProgress={exp.inProgress}
                   isInvalid={isInvalid}
                 />
+                <p>{exp.title}</p>
                 <p>{exp.content}</p>
-                <PreviewLink link={exp.link} />
+                {exp.link && <PreviewLink link={exp.link} />}
               </>
             )
           })}
@@ -59,7 +57,4 @@ const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
-
-const Content = styled.p`
-margin`
 export default ExperiencePreview

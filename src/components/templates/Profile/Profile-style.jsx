@@ -52,10 +52,7 @@ export const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  &.defaultImg {
-    background: var(--gray-lv1-color);
-  }
+  background-color: var(--gray-lv1-color);
 `
 
 export const InputCont = styled.div`

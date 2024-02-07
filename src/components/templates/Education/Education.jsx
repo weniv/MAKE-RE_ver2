@@ -1,29 +1,21 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { addData } from '../../../utils'
 import { styled } from 'styled-components'
 import { Layout, EduItem } from '../../organisms/Component'
 import { WriteTitle } from '../../atoms/Title'
 import { MainBtn } from '../../atoms/Button'
-import { ResumeContext } from '../../../context/ResumeContext'
 import { Dnd } from '../../../utils'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function Education({ id }) {
-  const { resumeData, setResumeData } = useContext(ResumeContext)
-  const selectedResume = resumeData.find((resume) => String(resume.id) === id)
-  const [eduData, setEduData] = useState(selectedResume.education)
+  const { resumeList, updateResumeData } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === parseInt(id))
+
+  const [eduData, setEduData] = useState(selectedResume.content.education)
   const [activeAccordion, setActiveAccordion] = useState(0)
 
   useEffect(() => {
-    setResumeData((prevResumeData) => {
-      const updatedResumeData = prevResumeData.map((resume) => {
-        if (String(resume.id) === id) {
-          return { ...resume, education: eduData }
-        }
-        return resume
-      })
-      console.log('교육 추가 후 resumeData: ', updatedResumeData)
-      return updatedResumeData
-    })
+    updateResumeData(id, 'education', eduData)
   }, [eduData])
 
   const maxId = eduData?.reduce(
@@ -38,6 +30,7 @@ export default function Education({ id }) {
   const val = {
     id: nextId.current,
     title: '',
+    description: '',
     startDate: '',
     endDate: '',
     inProgress: false,

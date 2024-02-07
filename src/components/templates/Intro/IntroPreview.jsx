@@ -1,17 +1,18 @@
-import React, { forwardRef, useContext } from 'react'
-import { LocalContext } from '../../../pages/PreviewPage'
-import ColorContext from '../../../context/ColorContext'
+import React, { forwardRef } from 'react'
+import { useParams } from 'react-router-dom'
 import { PreviewSubtitle } from '../../atoms/Title'
 import { SkillList } from '../../atoms/SkillList'
-import styled from 'styled-components'
 import getSectionId from '../../../utils/getSectionId'
+import styled from 'styled-components'
+import { useResumeStore } from '../../../store/ResumeStore'
 
 const IntroPreview = forwardRef((props, ref) => {
-  const { selectedResume } = useContext(LocalContext)
-  const { mainColor } = useContext(ColorContext)
-  const profileData = selectedResume?.profile
-  const introData = selectedResume.intro
+  const id = Number(useParams().id)
+  const { resumeList } = useResumeStore()
+  const selectedResume = resumeList.find((resume) => resume.id === id)
 
+  const currentProfileData = selectedResume.content.profile
+  const introData = selectedResume.content.intro
   const sectionId = getSectionId('자기소개서', 2)
 
   return (
@@ -22,11 +23,11 @@ const IntroPreview = forwardRef((props, ref) => {
           <IntroCont>{introData}</IntroCont>
         </IntroSection>
       )}
-      {profileData?.skills.length > 0 && (
+      {currentProfileData?.skills.length > 0 && (
         <SkillSection>
           <PreviewSubtitle type="skills">Skills</PreviewSubtitle>
           <SkillCont>
-            {profileData.skills.map((skill, i) => (
+            {currentProfileData.skills.map((skill, i) => (
               <SkillList key={i} type="preview">
                 {skill}
               </SkillList>
