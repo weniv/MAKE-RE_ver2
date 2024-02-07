@@ -23,6 +23,12 @@ export default function DefaultTextarea({
   }
 
   useEffect(() => {
+    if (type === 'intro') {
+      textareaRef.current.focus()
+    }
+  }, [])
+
+  useEffect(() => {
     if (!height) {
       handleResizeHeight()
     }
