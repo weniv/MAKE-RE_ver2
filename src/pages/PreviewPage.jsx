@@ -124,7 +124,7 @@ export default function PreviewPage() {
 
   const meta = {
     title: 'MAKE:RE | 이력서 미리보기',
-    description: '쉽게 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
+    description: '쉽고 빠르게 이력서를 커스텀할 수 있는 웹 서비스',
     url: 'https://make-re.weniv.co.kr/',
   }
 
