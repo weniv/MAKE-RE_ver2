@@ -10,7 +10,7 @@ export default function Header({ options }) {
   const storedDefaultData = JSON.parse(
     localStorage.getItem('makere-default-profile')
   )
-  const profileImg = storedDefaultData.profileImg
+  const profileImg = storedDefaultData?.profileImg
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const navigate = useNavigate()
 
