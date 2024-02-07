@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "https://make-re.weniv.co.kr/static/js/main.c3f002af.js",
+    "main.js": "https://make-re.weniv.co.kr/static/js/main.7352ca0a.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "https://make-re.weniv.co.kr/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/banner.png": "https://make-re.weniv.co.kr/static/media/banner.3515b9a989f451d02264.png",
     "static/media/desc-4.png": "https://make-re.weniv.co.kr/static/media/desc-4.85324b4239ba7dcdb933.png",
@@ -29,10 +29,10 @@
     "static/media/icon-hamburger.svg": "https://make-re.weniv.co.kr/static/media/icon-hamburger.2a6d592fa8c96a7f25f0158f31f85de5.svg",
     "static/media/icon-square-Check-fill.svg": "https://make-re.weniv.co.kr/static/media/icon-square-Check-fill.1e641cffaf59ab11b31a7821d3723691.svg",
     "static/media/icon-Check-fill.svg": "https://make-re.weniv.co.kr/static/media/icon-Check-fill.51e01a51d39041078595c754a6fb436a.svg",
-    "static/media/icon-pencil.svg": "https://make-re.weniv.co.kr/static/media/icon-pencil.5353cc8a79b094e6ff0d20154bb7b7a3.svg",
     "static/media/icon-email-auth.svg": "https://make-re.weniv.co.kr/static/media/icon-email-auth.5721a604478670eaf5c013267a98c4ba.svg",
     "static/media/icon-X.svg": "https://make-re.weniv.co.kr/static/media/icon-X.e34714896b824127fdc4bf1b991bb56c.svg",
     "static/media/icon-link.svg": "https://make-re.weniv.co.kr/static/media/icon-link.f06133d91d8878e61cd7b999caadc555.svg",
+    "static/media/icon-Left-arrow.svg": "https://make-re.weniv.co.kr/static/media/icon-Left-arrow.f4afeb6c872c81f7cee30f97eea29aec.svg",
     "static/media/icon-+.svg": "https://make-re.weniv.co.kr/static/media/icon-+.163e1765a52161cbf41ff738ea8140ba.svg",
     "static/media/img-trash-icon-dark.svg": "https://make-re.weniv.co.kr/static/media/img-trash-icon-dark.10fd530d91747e4a3be61aa9f165ff64.svg",
     "static/media/img-trash-icon.svg": "https://make-re.weniv.co.kr/static/media/img-trash-icon.b3d0fb03eae93365714de004caa1e398.svg",
@@ -43,9 +43,9 @@
     "static/media/icon-polygon.svg": "https://make-re.weniv.co.kr/static/media/icon-polygon.ae85513423510fdc6466ec051e522de8.svg",
     "static/media/icon-more.svg": "https://make-re.weniv.co.kr/static/media/icon-more.73922c2b8bacc5389ec06411afebc002.svg",
     "static/media/icon-light-mode.svg": "https://make-re.weniv.co.kr/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.c3f002af.js.map": "https://make-re.weniv.co.kr/static/js/main.c3f002af.js.map"
+    "main.7352ca0a.js.map": "https://make-re.weniv.co.kr/static/js/main.7352ca0a.js.map"
   },
   "entrypoints": [
-    "static/js/main.c3f002af.js"
+    "static/js/main.7352ca0a.js"
   ]
 }
