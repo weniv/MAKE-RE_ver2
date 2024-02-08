@@ -6,13 +6,11 @@ import { MainBtn, SaveBtn } from '../../atoms/Button'
 import { useReactToPrint } from 'react-to-print'
 import { saveData } from '../../../utils/saveData'
 import { checkRequiredValidity } from '../../atoms/Input/RequireInput'
-import ThemeContext from '../../../context/ThemeContext'
-import { theme } from '../../../theme/theme'
 import { useResumeStore } from '../../../store/ResumeStore'
 
 export default function PreviewBox({ type, ...props }) {
   const { id } = useParams()
-  const { resumeList, saveResumeData } = useResumeStore()
+  const { saveResumeData } = useResumeStore()
   const currentSection = JSON.parse(localStorage.getItem('section'))
 
   const { resumeData, formRef } = useContext(ResumeContext)
@@ -27,19 +25,11 @@ export default function PreviewBox({ type, ...props }) {
 
   const movePreview = () => {
     saveResumeData()
-    // resumeList.map((el) => {
-    //   if (!el.content.profile.name && currentSection?.id === 1) {
-    //     alert('이름을 입력하세요')
-    //   } else {
-    //     saveResumeData()
-    //     navigate(`/preview/${id}`)
-    //   }
-    // })
-
-    // saveData('resumeData', JSON.stringify(resumeData))
     const isRequired = formRef.current?.checkValidity()
     if (isRequired !== false) {
       navigate(`/preview/${id}`)
+    } else {
+      checkRequiredValidity(formRef)
     }
   }
 
@@ -65,7 +55,14 @@ export default function PreviewBox({ type, ...props }) {
           >
             임시저장
           </SaveBtn>
-          <MainBtn type="preview" onClick={movePreview} form="requiredForm">
+          <MainBtn
+            type="preview"
+            onClick={(e) => {
+              e.preventDefault()
+              movePreview()
+            }}
+            form="requiredForm"
+          >
             미리보기
           </MainBtn>
         </>

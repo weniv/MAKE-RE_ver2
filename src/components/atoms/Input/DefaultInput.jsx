@@ -13,7 +13,6 @@ export default function DefaultInput({
   inputData,
   onChange,
   onKeyDown,
-  required,
   maxLength,
 }) {
   return (
@@ -33,7 +32,6 @@ export default function DefaultInput({
         onChange={onChange}
         onKeyDown={onKeyDown}
         autoComplete="off"
-        required={required ? required : 'false'}
         maxLength={maxLength}
         autoFocus
       />

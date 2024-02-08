@@ -18,6 +18,7 @@ import {
   deleteSkillItem,
   useDataEffect,
 } from '../../../utils/profileUtils'
+import RequireInput from '../../atoms/Input/RequireInput'
 
 export default function Profile({ id }) {
   const storedResumeData = JSON.parse(
@@ -145,33 +146,35 @@ export default function Profile({ id }) {
             </styles.ImgCont>
             <div>
               <styles.InputCont>
-                <DefaultInput
-                  essentialMsg="*필수 입력 정보입니다."
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="예) 홍길동"
-                  width="220px"
-                  marginRight="12px"
-                  inputData={name}
-                  onChange={(e) => {
-                    setName(e.target.value)
-                  }}
-                >
-                  이름
-                </DefaultInput>
-                <DefaultInput
-                  id="enName"
-                  type="text"
-                  placeholder="예) Kildong Hong"
-                  width="356px"
-                  inputData={enName}
-                  onChange={(e) => {
-                    setEnName(e.target.value)
-                  }}
-                >
-                  영문 이름
-                </DefaultInput>
+                <styles.NameWrap>
+                  <RequireInput
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="예) 홍길동"
+                    marginRight="12px"
+                    inputData={name}
+                    onChange={(e) => {
+                      setName(e.target.value)
+                    }}
+                    maxLength={10}
+                    width="220px"
+                  >
+                    {'이름'}
+                  </RequireInput>
+                  <DefaultInput
+                    id="enName"
+                    type="text"
+                    placeholder="예) Kildong Hong"
+                    width="356px"
+                    inputData={enName}
+                    onChange={(e) => {
+                      setEnName(e.target.value)
+                    }}
+                  >
+                    영문 이름
+                  </DefaultInput>
+                </styles.NameWrap>
               </styles.InputCont>
 
               <styles.InputCont>

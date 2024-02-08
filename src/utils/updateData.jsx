@@ -23,7 +23,5 @@ export default function updateData(e, idx, data, setData) {
     )
   }
 
-  console.log('data', data)
-
   return data
 }
