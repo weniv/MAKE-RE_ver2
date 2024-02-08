@@ -7,6 +7,8 @@ import Spinner from '../../../assets/loader.svg'
 import LinkIcon from '../../../assets/icon-link2.svg'
 import { useParams } from 'react-router'
 import { useResumeStore } from '../../../store/ResumeStore'
+import { Title } from 'chart.js'
+import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 
 export default function ProfilePreview() {
   const id = Number(useParams().id)
@@ -38,7 +40,7 @@ export default function ProfilePreview() {
     }
   }
 
-  const githubID = profileData?.github?.[0]
+  const githubID = currentProfileData.github[0]
 
   useEffect(() => {
     changeCommitColor(githubID)
@@ -88,7 +90,7 @@ export default function ProfilePreview() {
           ></PreviewProfileItem>
           {commitURL ? (
             <img
-              src={`https://ghchart.rshah.org/2e6ff2/${currentProfileData.github[0]}`}
+              src={commitURL}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
