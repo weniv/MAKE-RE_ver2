@@ -13,8 +13,8 @@ const CareerPreview = forwardRef((props, ref) => {
   const { resumeList } = useResumeStore()
   const { mainColor } = useContext(ColorContext)
 
-  const currnetResume = resumeList.find((resume) => resume.id === id)
-  const currentCareerData = currnetResume.content.career
+  const currentResume = resumeList.find((resume) => resume.id === id)
+  const currentCareerData = currentResume.content.career
 
   const sectionId = getSectionId('커리어', 3)
 

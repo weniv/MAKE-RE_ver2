@@ -11,8 +11,8 @@ import { useResumeStore } from '../../../store/ResumeStore'
 export default function ProfilePreview() {
   const id = Number(useParams().id)
   const { resumeList } = useResumeStore()
-  const currnetResume = resumeList.find((resume) => resume.id === id)
-  const currentProfileData = currnetResume.content.profile
+  const currentResume = resumeList.find((resume) => resume.id === id)
+  const currentProfileData = currentResume.content.profile
 
   const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
@@ -88,7 +88,7 @@ export default function ProfilePreview() {
           ></PreviewProfileItem>
           {commitURL ? (
             <img
-              src={`https://ghchart.rshah.org/2e6ff2/${currentProfileData.github[0]}`}
+              src={`https://ghchart.rshah.org/${currentProfileData.github[0]}`}
               className="commit"
               alt="깃허브 커밋기록 이미지"
             />
