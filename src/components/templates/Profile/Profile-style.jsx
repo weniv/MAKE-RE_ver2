@@ -59,11 +59,19 @@ export const InputCont = styled.div`
   display: flex;
   margin-bottom: 24px;
   align-items: flex-end;
+  justify-content: space-between;
 
   span {
     color: var(--surface-color);
     margin: 0 8px 13px 0;
   }
+`
+
+export const NameWrap = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  gap: 16px;
 `
 
 export const Label = styled.label`

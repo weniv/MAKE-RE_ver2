@@ -20,7 +20,9 @@ const CareerPreview = forwardRef((props, ref) => {
 
   return (
     <>
-      {currentCareerData && currentCareerData.length > 0 ? (
+      {currentCareerData &&
+      currentCareerData.length > 0 &&
+      currentCareerData[0].title ? (
         <section ref={(careerRef) => (ref.current[sectionId] = careerRef)}>
           <PreviewSubtitle>Career</PreviewSubtitle>
           <Wrap>

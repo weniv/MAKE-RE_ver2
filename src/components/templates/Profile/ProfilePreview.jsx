@@ -4,10 +4,8 @@ import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
-import LinkIcon from '../../../assets/icon-link2.svg'
 import { useParams } from 'react-router'
 import { useResumeStore } from '../../../store/ResumeStore'
-import { Title } from 'chart.js'
 import PreviewLink from '../../atoms/PreviewItem/PreviewLink'
 
 export default function ProfilePreview() {
@@ -16,9 +14,7 @@ export default function ProfilePreview() {
   const currentResume = resumeList.find((resume) => resume.id === id)
   const currentProfileData = currentResume.content.profile
 
-  const { selectedResume } = useContext(LocalContext)
   const { mainColor } = useContext(ColorContext)
-  const profileData = selectedResume?.profile ? selectedResume.profile : {}
   const [commitURL, setCommitURL] = useState(null)
 
   const theme = localStorage.getItem('themMode')
@@ -100,11 +96,10 @@ export default function ProfilePreview() {
             </div>
           )}
           {currentProfileData?.blog && (
-            <LinkBox>
-              <img src={LinkIcon} alt="" />
-              <span>기술 블로그</span>
-              <a href="">{currentProfileData.blog}</a>
-            </LinkBox>
+            <PreviewLink
+              link={currentProfileData.blog}
+              title={'기술 블로그'}
+            ></PreviewLink>
           )}
         </DataList>
       </ProfileBox>
@@ -180,28 +175,5 @@ const DataList = styled.ul`
     img {
       width: 50px;
     }
-  }
-`
-
-const LinkBox = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  background: #f3f5fa;
-
-  span {
-    color: var(--grayLv4Color);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    border: none;
-    margin: 0 12px 0 4px;
-    padding: 0;
-  }
-
-  a {
-    color: var(--surfaceColor);
-    line-height: 20px;
   }
 `

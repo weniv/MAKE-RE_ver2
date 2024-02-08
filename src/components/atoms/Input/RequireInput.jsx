@@ -29,11 +29,12 @@ export default function RequireInput({
   children,
   placeholder,
   maxLength,
+  width,
 }) {
   const { formRef } = useContext(ResumeContext)
 
   return (
-    <Form id="requiredForm" ref={formRef}>
+    <Form id="requiredForm" ref={formRef} width={width}>
       <div type={type} className="inputWrap">
         <label htmlFor={id}>{children}</label>
         <input
@@ -45,6 +46,7 @@ export default function RequireInput({
           onChange={onChange}
           autoComplete="off"
           maxLength={maxLength}
+          required
         />
       </div>
       <Alert className="alertMsg">
@@ -64,7 +66,7 @@ const Form = styled.form`
     flex-direction: column;
     justify-content: flex-end;
     gap: ${(props) => (props.type === 'resumeTitle' ? '0px' : '8px')};
-    width: 100%;
+    width: ${(props) => (props.width ? props.width : '100%')};
   }
 
   label {
@@ -74,7 +76,6 @@ const Form = styled.form`
   }
 
   input {
-    width: ${(props) => props.width};
     height: 42px;
     margin-right: ${(props) => props.marginRight};
     padding: 11px 0 11px;
