@@ -115,7 +115,7 @@ const Cont = styled.div`
   padding: 18px 20px;
   border-radius: 16px;
   max-width: 786px;
-  transition: border 0.1s ease-in, outline 0.1s ease-in;
+  transition: outline 0.05s ease-in;
 
   ${(props) => {
     if (!props.isEditable) {
@@ -123,8 +123,7 @@ const Cont = styled.div`
       cursor: pointer;
 
       &:hover {
-        border: 1px solid var(--primary-color);
-        outline: 1px solid var(--primary-color);
+        outline: 2px solid var(--primary-color);
       }
       `
     }
