@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "https://make-re.weniv.co.kr/static/js/main.5fb2c401.js",
+    "main.js": "https://make-re.weniv.co.kr/static/js/main.678e089d.js",
     "static/media/제코베_포트폴리오_템플릿_배포용_최종수정.pptx": "https://make-re.weniv.co.kr/static/media/제코베_포트폴리오_템플릿_배포용_최종수정.4b90d977bc6020ceeef1.pptx",
     "static/media/banner.png": "https://make-re.weniv.co.kr/static/media/banner.3515b9a989f451d02264.png",
     "static/media/desc-4.png": "https://make-re.weniv.co.kr/static/media/desc-4.85324b4239ba7dcdb933.png",
@@ -9,7 +9,6 @@
     "static/media/desc-2.png": "https://make-re.weniv.co.kr/static/media/desc-2.20c2e697cbb04e341720.png",
     "static/media/licat-404.png": "https://make-re.weniv.co.kr/static/media/licat-404.0e7ea41d79605921495b.png",
     "static/media/OG.png": "https://make-re.weniv.co.kr/static/media/OG.3892fe12be1b5c94de5a.png",
-    "static/media/icon-link2.svg": "https://make-re.weniv.co.kr/static/media/icon-link2.1d87cf551786c8251acba26846bbaf0f.svg",
     "static/media/icon-Url.svg": "https://make-re.weniv.co.kr/static/media/icon-Url.facffe7998f01ff891c946aa9a6d09bd.svg",
     "index.html": "https://make-re.weniv.co.kr/index.html",
     "static/media/icon-liacat.svg": "https://make-re.weniv.co.kr/static/media/icon-liacat.64aa8a6daef259ee34965a59a3af709d.svg",
@@ -43,9 +42,9 @@
     "static/media/icon-polygon.svg": "https://make-re.weniv.co.kr/static/media/icon-polygon.ae85513423510fdc6466ec051e522de8.svg",
     "static/media/icon-more.svg": "https://make-re.weniv.co.kr/static/media/icon-more.73922c2b8bacc5389ec06411afebc002.svg",
     "static/media/icon-light-mode.svg": "https://make-re.weniv.co.kr/static/media/icon-light-mode.46cdc56522c51ea30ca508defdea2a4d.svg",
-    "main.5fb2c401.js.map": "https://make-re.weniv.co.kr/static/js/main.5fb2c401.js.map"
+    "main.678e089d.js.map": "https://make-re.weniv.co.kr/static/js/main.678e089d.js.map"
   },
   "entrypoints": [
-    "static/js/main.5fb2c401.js"
+    "static/js/main.678e089d.js"
   ]
 }
