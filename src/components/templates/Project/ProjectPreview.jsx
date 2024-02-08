@@ -18,7 +18,7 @@ const ProjectPreview = forwardRef((props, ref) => {
 
   return (
     <>
-      {projectData && projectData.length > 0 ? (
+      {projectData && projectData.length > 0 && projectData[0].title ? (
         <>
           <section ref={(projectRef) => (ref.current[sectionId] = projectRef)}>
             <PreviewSubtitle>Project</PreviewSubtitle>
