@@ -55,14 +55,24 @@ const ProjectPreview = forwardRef((props, ref) => {
                       </ProjectWrap>
                     </div>
                     <LinkWrap>
-                      <div className="linkCont">
-                        <Title>깃허브 링크 </Title>
-                        <PreviewLink link={data.githubLink}></PreviewLink>
-                      </div>
-                      <div className="linkCont">
-                        <Title>프로젝트 링크</Title>
-                        <PreviewLink link={data.demoLink}></PreviewLink>
-                      </div>
+                      {data.githubLink && (
+                        <div className="linkCont">
+                          <Title>깃허브 링크 </Title>
+                          <PreviewLink link={data.githubLink}></PreviewLink>
+                        </div>
+                      )}
+                      {data.demoLink && (
+                        <div className="linkCont">
+                          <Title>프로젝트 링크</Title>
+                          <PreviewLink link={data.demoLink}></PreviewLink>
+                        </div>
+                      )}
+                      {data.snsLink && (
+                        <div className="linkCont">
+                          <Title>프로젝트 SNS 링크</Title>
+                          <PreviewLink link={data.snsLink}></PreviewLink>
+                        </div>
+                      )}
                     </LinkWrap>
                   </ProjectItem>
                 ))}
