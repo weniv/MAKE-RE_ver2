@@ -80,6 +80,7 @@ const Content = styled.div`
 
   p.works {
     line-height: 22px;
+    white-space: pre-wrap;
   }
 `
 const Title = styled.p`
