@@ -34,7 +34,7 @@ const CareerPreview = forwardRef((props, ref) => {
                       <PreviewMonthItem
                         type={'career'}
                         startDate={data.startDate}
-                        endDate={data.endData}
+                        endDate={data.endDate}
                         inProgress={data.inProgress}
                         color={mainColor}
                       />
