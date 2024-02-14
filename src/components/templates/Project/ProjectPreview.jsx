@@ -39,34 +39,40 @@ const ProjectPreview = forwardRef((props, ref) => {
                     <ProjectWrap>
                       <p className="outline">{data.outline}</p>
                       <InformationBox>
-                        <li>
-                          <span className="title">개발 인원</span>
-                          <span>{data.people}</span>
-                        </li>
-                        <li>
-                          <span className="title">기여 부분</span>
-                          <span>
-                            <ul>
-                              {data.contributions
-                                .filter((cont) => cont !== '')
-                                .map((cont) => (
-                                  <li className="list">- {cont}</li>
-                                ))}
-                            </ul>
-                          </span>
-                        </li>
-                        <li>
-                          <span className="title">적용 기술</span>
-                          <span>
-                            <ul className="skills">
-                              {data.skills
-                                .filter((skill) => skill !== '')
-                                .map((skill) => (
-                                  <Badge className="list">{skill}</Badge>
-                                ))}
-                            </ul>
-                          </span>
-                        </li>
+                        {data.people && (
+                          <li>
+                            <span className="title">개발 인원</span>
+                            <span>{data.people}</span>
+                          </li>
+                        )}
+                        {data.contributions[0] !== '' && (
+                          <li>
+                            <span className="title">기여 부분</span>
+                            <span>
+                              <ul>
+                                {data.contributions
+                                  .filter((cont) => cont !== '')
+                                  .map((cont) => (
+                                    <li className="list">- {cont}</li>
+                                  ))}
+                              </ul>
+                            </span>
+                          </li>
+                        )}
+                        {data.skills.length > 0 && (
+                          <li>
+                            <span className="title">적용 기술</span>
+                            <span>
+                              <ul className="skills">
+                                {data.skills
+                                  .filter((skill) => skill !== '')
+                                  .map((skill) => (
+                                    <Badge className="list">{skill}</Badge>
+                                  ))}
+                              </ul>
+                            </span>
+                          </li>
+                        )}
                       </InformationBox>
                     </ProjectWrap>
                     <LinkWrap>
@@ -171,7 +177,11 @@ const InformationBox = styled.ul`
   flex-direction: column;
   gap: 16px;
   border-radius: 8px;
-  border: 1px solid #d9dbe0;
+  border: 1px solid var(--gray-lv2-color);
+
+  &:empty {
+    display: none;
+  }
 
   li {
     display: flex;
