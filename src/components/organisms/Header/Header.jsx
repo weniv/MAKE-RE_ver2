@@ -14,12 +14,12 @@ export default function Header({ options }) {
   const { isCenter, hasCreate, hasProfile, isWhite } = options
   const navigate = useNavigate()
 
-  const moveWrite = () => {
+  const moveMyResume = () => {
     navigate('/myresume')
   }
 
-  const moveMypage = () => {
-    navigate('/myresume')
+  const moveMyProfile = () => {
+    navigate('/myprofile')
   }
 
   return (
@@ -50,12 +50,12 @@ export default function Header({ options }) {
             </h1>
             <styles.BtnCont>
               {hasCreate && (
-                <MainBtn type="create" onClick={moveWrite}>
+                <MainBtn type="create" onClick={moveMyResume}>
                   이력서 만들기
                 </MainBtn>
               )}
               {hasProfile && (
-                <styles.ProfileBtn onClick={moveMypage}>
+                <styles.ProfileBtn onClick={moveMyProfile}>
                   <img alt="마이프로필" src={profileImg || LicatFace} />
                 </styles.ProfileBtn>
               )}
