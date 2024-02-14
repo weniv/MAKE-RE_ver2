@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { styled } from 'styled-components'
 import LinkIcon from '../../../assets/icon-Url.svg'
 
@@ -14,7 +15,16 @@ export default function DefaultInput({
   onChange,
   onKeyDown,
   maxLength,
+  isFirst,
 }) {
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (isFirst && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
+
   return (
     <InputCont type={type}>
       <Label htmlFor={id}>
@@ -22,6 +32,7 @@ export default function DefaultInput({
         <strong> {essentialMsg}</strong>
       </Label>
       <Input
+        ref={inputRef}
         id={id}
         type={type}
         name={name}
@@ -33,7 +44,6 @@ export default function DefaultInput({
         onKeyDown={onKeyDown}
         autoComplete="off"
         maxLength={maxLength}
-        autoFocus
       />
     </InputCont>
   )

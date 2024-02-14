@@ -37,6 +37,7 @@ export default function Education({
           }}
           inputData={edu.title}
           maxLength={45}
+          isFirst={true}
         >
           교육명
         </DefaultInput>

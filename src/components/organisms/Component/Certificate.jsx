@@ -32,6 +32,7 @@ export default function Certificate({
           onChange={(e) => updateData(e, idx, certData, setCertData)}
           inputData={cert.title}
           maxLength={45}
+          isFirst={true}
         >
           자격증명
         </DefaultInput>

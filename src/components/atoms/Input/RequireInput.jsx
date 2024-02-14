@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import AlertIcon from '../../../assets/icon-alert-circle.svg'
 import ColorIcon from '../ColorIcon/ColorIcon'
@@ -32,12 +32,20 @@ export default function RequireInput({
   width,
 }) {
   const { formRef } = useContext(ResumeContext)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
 
   return (
     <Form id="requiredForm" ref={formRef} width={width}>
       <div type={type} className="inputWrap">
         <label htmlFor={id}>{children}</label>
         <input
+          ref={inputRef}
           id={id}
           type={type}
           name={name}
