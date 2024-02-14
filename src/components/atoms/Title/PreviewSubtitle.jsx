@@ -20,7 +20,7 @@ PreviewSubtitle.defaultProps = {
 const Subtitle = styled.h3`
   display: ${(props) => props.type && 'inline-block'};
   margin-right: ${(props) => props.type && '20px'};
-  margin-bottom: ${(props) => !props.type && '16px'};
+  margin-bottom: ${(props) => !props.type && '24px'};
   padding-bottom: ${(props) => !props.type && '16px'};
 
   font-size: 18px;
