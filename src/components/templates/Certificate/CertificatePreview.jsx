@@ -32,39 +32,58 @@ const CertificatePreview = forwardRef((props, ref) => {
           ref={(certificateRef) => (ref.current[sectionId] = certificateRef)}
         >
           <PreviewSubtitle>Certificate</PreviewSubtitle>
-          {certificates.map((cert) => {
-            const isInvalid = !cert.date
+          <FlexBox>
+            {certificates.map((cert) => {
+              const isInvalid = !cert.date
 
-            return (
-              <>
-                <PreviewMonthItem
-                  type="certificate"
-                  key={cert.id}
-                  startDate={cert.date}
-                  isInvalid={isInvalid}
-                />
-                <p>{cert.title}</p>
-                <DetailWrap>
-                  {cert.issuer} {cert.issuer && cert.score && '|'} {cert.score}
-                </DetailWrap>
-              </>
-            )
-          })}
+              return (
+                <CertificateWrap>
+                  <PreviewMonthItem
+                    type="certificate"
+                    key={cert.id}
+                    startDate={cert.date}
+                    isInvalid={isInvalid}
+                  />
+                  <CertificateContents>
+                    <p>{cert.title}</p>
+                    <DetailWrap>
+                      {cert.issuer} {cert.issuer && cert.score && '|'}{' '}
+                      {cert.score}
+                    </DetailWrap>
+                  </CertificateContents>
+                </CertificateWrap>
+              )
+            })}
+          </FlexBox>
         </PreviewSection>
       )}
     </>
   )
 })
-
 const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
 
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const CertificateWrap = styled.div`
+  display: grid;
+  grid-template-columns: 140px 1fr;
+`
+const CertificateContents = styled.div`
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
 const DetailWrap = styled.div`
   font-size: 14px;
   color: var(--gray-lv3-color);
-  margin-left: 156px;
 `
 
 export default CertificatePreview
