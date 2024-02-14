@@ -26,8 +26,7 @@ const UrlPreview = forwardRef((props, ref) => {
           <UrlListContainer>
             {urlList.map((url) => (
               <li>
-                <UrlContent>{url.title}</UrlContent>
-                <PreviewLink link={url.link} />
+                <PreviewLink link={url.link} title={url.title} />
               </li>
             ))}
           </UrlListContainer>
@@ -40,18 +39,7 @@ const UrlPreview = forwardRef((props, ref) => {
 const UrlListContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-
-  & li {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-`
-
-const UrlContent = styled.p`
-  font-size: 16px;
-  font-weight: 700;
+  gap: 16px;
 `
 
 const PreviewSection = styled.section`

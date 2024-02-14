@@ -24,6 +24,7 @@ export default function PreviewLink({ link, title }) {
 
 const LinkItem = styled.a`
   text-decoration: none;
+  font-size: 14px;
 
   &:hover {
     text-decoration: underline;

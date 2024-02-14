@@ -27,23 +27,31 @@ const EducationPreview = forwardRef((props, ref) => {
           ref={(educationRef) => (ref.current[sectionId] = educationRef)}
         >
           <PreviewSubtitle>Education</PreviewSubtitle>
-          {educationList.map((edu) => {
-            const isInvalid = !(edu.startDate || edu.endDate || edu.inProgress)
+          <FlexBox>
+            {educationList.map((edu) => {
+              const isInvalid = !(
+                edu.startDate ||
+                edu.endDate ||
+                edu.inProgress
+              )
 
-            return (
-              <>
-                <PreviewMonthItem
-                  key={edu.id}
-                  startDate={edu.startDate}
-                  endDate={edu.endDate}
-                  inProgress={edu.inProgress}
-                  isInvalid={isInvalid}
-                />
-                <p>{edu.title}</p>
-                <Content>{edu.description}</Content>
-              </>
-            )
-          })}
+              return (
+                <EducationWrap>
+                  <PreviewMonthItem
+                    key={edu.id}
+                    startDate={edu.startDate}
+                    endDate={edu.endDate}
+                    inProgress={edu.inProgress}
+                    isInvalid={isInvalid}
+                  />
+                  <EducationContents>
+                    <p>{edu.title}</p>
+                    <Content>{edu.description}</Content>
+                  </EducationContents>
+                </EducationWrap>
+              )
+            })}
+          </FlexBox>
         </PreviewSection>
       )}
     </>
@@ -54,15 +62,27 @@ const PreviewSection = styled.section`
   page-break-inside: avoid;
   break-inside: avoid;
 `
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const EducationWrap = styled.div`
+  display: grid;
+  grid-template-columns: 140px 1fr;
+`
+
+const EducationContents = styled.div`
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
 
 const Content = styled.p`
   font-size: 14px;
   color: var(--gray-lv3-color);
-  margin-left: 156px;
-
-  &::before {
-    content: '- ';
-  }
 `
 
 export default EducationPreview
