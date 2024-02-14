@@ -135,6 +135,7 @@ const ProjectItem = styled.div`
 const ProjectTitle = styled.h4`
   display: flex;
   gap: 16px;
+  align-items: center;
 `
 
 const ProjectWrap = styled.div`
