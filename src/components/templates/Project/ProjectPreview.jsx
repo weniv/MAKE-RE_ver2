@@ -26,7 +26,8 @@ const ProjectPreview = forwardRef((props, ref) => {
               {projectData &&
                 projectData.map((data) => (
                   <ProjectItem>
-                    <div className="description">
+                    <ProjectTitle>
+                      <Title mainColor={mainColor}>{data.title}</Title>
                       <PreviewMonthItem
                         type="project"
                         startDate={data.startDate}
@@ -34,44 +35,58 @@ const ProjectPreview = forwardRef((props, ref) => {
                         inProgress={data.inProgress}
                         color={mainColor}
                       ></PreviewMonthItem>
-                      <ProjectWrap>
-                        <Title>{data.title}</Title>
-                        <p className="outline">{data.outline}</p>
-                        <p>{data.people}</p>
-                        <ul>
-                          {data.skills
-                            .filter((skill) => skill !== '')
-                            .map((skill) => (
-                              <Badge className="list">{skill}</Badge>
-                            ))}
-                        </ul>
-                        <ul>
-                          {data.contributions
-                            .filter((cont) => cont !== '')
-                            .map((cont) => (
-                              <li className="list">{cont}</li>
-                            ))}
-                        </ul>
-                      </ProjectWrap>
-                    </div>
+                    </ProjectTitle>
+                    <ProjectWrap>
+                      <p className="outline">{data.outline}</p>
+                      <InformationBox>
+                        <li>
+                          <span className="title">개발 인원</span>
+                          <span>{data.people}</span>
+                        </li>
+                        <li>
+                          <span className="title">기여 부분</span>
+                          <span>
+                            <ul>
+                              {data.contributions
+                                .filter((cont) => cont !== '')
+                                .map((cont) => (
+                                  <li className="list">- {cont}</li>
+                                ))}
+                            </ul>
+                          </span>
+                        </li>
+                        <li>
+                          <span className="title">적용 기술</span>
+                          <span>
+                            <ul className="skills">
+                              {data.skills
+                                .filter((skill) => skill !== '')
+                                .map((skill) => (
+                                  <Badge className="list">{skill}</Badge>
+                                ))}
+                            </ul>
+                          </span>
+                        </li>
+                      </InformationBox>
+                    </ProjectWrap>
                     <LinkWrap>
                       {data.githubLink && (
-                        <div className="linkCont">
-                          <Title>깃허브 링크 </Title>
-                          <PreviewLink link={data.githubLink}></PreviewLink>
-                        </div>
+                        <PreviewLink
+                          link={data.githubLink}
+                          title="깃허브 링크"
+                        ></PreviewLink>
                       )}
                       {data.demoLink && (
-                        <div className="linkCont">
-                          <Title>프로젝트 링크</Title>
-                          <PreviewLink link={data.demoLink}></PreviewLink>
-                        </div>
+                        <PreviewLink
+                          link={data.demoLink}
+                          title="프로젝트 링크"
+                        ></PreviewLink>
                       )}
                       {data.snsLink && (
-                        <div className="linkCont">
-                          <Title>프로젝트 SNS 링크</Title>
-                          <PreviewLink link={data.snsLink}></PreviewLink>
-                        </div>
+                        <PreviewLink
+                          link={data.snsLink}
+                          title="프로젝트 SNS 링크"
+                        ></PreviewLink>
                       )}
                     </LinkWrap>
                   </ProjectItem>
@@ -89,29 +104,15 @@ const Project = styled.section`
   flex-direction: column;
   gap: 40px;
 
-  div.description {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-  }
-
-  div.description li:not(.list) {
-    display: block;
-    margin: 0;
-    line-height: 2rem;
-
-    p {
-      width: auto;
-    }
-  }
-
   p {
     font-size: 1.4rem;
   }
 
   p.outline {
     white-space: pre-wrap;
-    line-height: 2rem;
     color: var(--surface-color);
+    font-size: 16px;
+    line-height: 28px;
   }
 
   & > * {
@@ -125,66 +126,88 @@ const ProjectItem = styled.div`
     break-before: avoid;
     page-break-before: avoid;
   }
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+const ProjectTitle = styled.h4`
+  display: flex;
+  gap: 16px;
+  align-items: center;
 `
 
 const ProjectWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  ul {
-    display: flex;
-    gap: 5px;
-    font-size: 1%.4;
-  }
-
-  ul:not(:has(li)) {
-    display: none;
-  }
-
-  ul:last-child {
-    flex-direction: column;
-  }
-
-  ul:last-child li {
-    list-style-type: disc;
-    list-style-position: inside;
-  }
 `
 
 const Title = styled.p`
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: var(--surface-color);
-  white-space: nowrap;
+  padding: 0 4px 0;
+  color: ${(props) => props.mainColor};
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  position: relative;
 
-  span {
-    font-weight: 400;
-    margin-left: 20px;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: ${(props) => props.mainColor};
+    opacity: 0.15;
   }
 `
 
+const InformationBox = styled.ul`
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid #d9dbe0;
+
+  li {
+    display: flex;
+    gap: 16px;
+
+    span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 22px;
+    }
+
+    span.title {
+      color: #47494d;
+      font-weight: 400;
+    }
+
+    ul.skills {
+      display: flex;
+      gap: 6px;
+    }
+  }
+`
 const Badge = styled.li`
-  height: 22px;
-  display: inline-flex;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
   background-color: #4f4f4f;
   color: #ffffff;
-  border-radius: 100px;
-  padding: 5px 11px;
-  align-items: center;
+  padding: 0 4px 0;
+  border-radius: 2px;
 `
 
 const LinkWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 30px;
-
-  div.linkCont {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    align-items: center;
-  }
 `
 
 export default ProjectPreview
