@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { LocalContext } from '../../../pages/PreviewPage'
 import ColorContext from '../../../context/ColorContext'
 import { PreviewProfileItem } from '../../atoms/PreviewItem'
 import Spinner from '../../../assets/loader.svg'
@@ -80,20 +79,21 @@ export default function ProfilePreview() {
             title="경력 사항"
             content={currentProfileData.careerLength}
           ></PreviewProfileItem>
-          <PreviewProfileItem
-            title="깃허브 아이디"
-            content={currentProfileData.github[0]}
-          ></PreviewProfileItem>
-          {commitURL ? (
-            <img
-              src={commitURL}
-              className="commit"
-              alt="깃허브 커밋기록 이미지"
-            />
-          ) : (
-            <div className="loading">
-              <img src={Spinner} alt="" />
-            </div>
+          {githubID && (
+            <>
+              <PreviewProfileItem
+                title="깃허브 아이디"
+                content={currentProfileData.github[0]}
+              ></PreviewProfileItem>
+              <img
+                src={commitURL}
+                className="commit"
+                alt="깃허브 커밋기록 이미지"
+              />
+              {/* <div className="loading">
+                <img src={Spinner} alt="" />
+              </div> */}
+            </>
           )}
           {currentProfileData?.blog && (
             <PreviewLink
