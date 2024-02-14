@@ -38,7 +38,7 @@ export const resumeItem = {
       endDate: '',
       inProgress: false,
       contributions: [''],
-      skills: [''],
+      skills: [],
     },
   ],
   experience: [
