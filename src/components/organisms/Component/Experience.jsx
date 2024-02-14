@@ -40,6 +40,7 @@ export default function Experience({
               updateData(e, idx, expData, setExpData)
             }}
             maxLength={45}
+            isFirst={true}
           >
             경험명
           </DefaultInput>
