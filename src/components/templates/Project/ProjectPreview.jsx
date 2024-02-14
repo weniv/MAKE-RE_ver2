@@ -184,7 +184,7 @@ const InformationBox = styled.ul`
     }
 
     span.title {
-      color: #47494d;
+      color: var(--gray-lv4-color);
       font-weight: 400;
     }
 

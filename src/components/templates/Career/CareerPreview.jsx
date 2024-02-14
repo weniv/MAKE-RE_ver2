@@ -92,7 +92,7 @@ const Title = styled.p`
   margin-bottom: 12px;
 
   p.rank {
-    color: #47494d;
+    color: var(--gray-lv4-color);
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;

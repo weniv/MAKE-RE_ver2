@@ -56,7 +56,7 @@ PreviewMonthItem.defaultProps = {
 const Item = styled.p`
   width: 14rem;
   height: fit-content;
-  color: #47494d;
+  color: var(--gray-lv4-color);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
