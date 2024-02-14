@@ -44,7 +44,6 @@ export default function DefaultInput({
         onKeyDown={onKeyDown}
         autoComplete="off"
         maxLength={maxLength}
-        // autoFocus
       />
     </InputCont>
   )
