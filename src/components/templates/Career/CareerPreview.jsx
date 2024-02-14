@@ -40,7 +40,7 @@ const CareerPreview = forwardRef((props, ref) => {
                       />
                     </>
                   ) : null}
-                  <div>
+                  <div className="contents">
                     <Title>
                       {data.title}
                       {data.rank ? (
@@ -67,11 +67,16 @@ const Wrap = styled.div`
 `
 const Content = styled.div`
   position: relative;
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  // gap: 20px;
   align-items: flex-start;
   break-inside: avoid;
   page-break-inside: avoid;
+
+  div.contents {
+    margin-left: 20px;
+  }
 
   p.works {
     line-height: 22px;
