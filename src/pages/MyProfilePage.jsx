@@ -15,7 +15,7 @@ export default function MyProfilePage() {
   return (
     <>
       <MetaData meta={meta} />
-      <Header options={{ hasProfile: true, hasCreate: true }} />
+      <Header options={{ hasProfile: false, hasCreate: false }} />
       <Cont>
         <MyPageNav currentNaveItem={1} />
         <Main>
