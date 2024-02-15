@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { WriteTitle } from '../../atoms/Title'
 import { ProjectItem } from '../../organisms/Component'
