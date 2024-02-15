@@ -4,6 +4,8 @@ import ThemeContext from '../../../context/ThemeContext'
 import AddImgIcon from '../../../assets/img-icon.svg'
 import AddImgIconDark from '../../../assets/img-icon-dark.svg'
 import { MainBtn } from '../Button'
+import deleteIcon from '../../../assets/icon-X.svg'
+import ColorIcon from '../ColorIcon/ColorIcon'
 
 export default function GetCommitRecord({ github, setGithub }) {
   const [isValid, setIsValid] = useState(true)
@@ -19,6 +21,7 @@ export default function GetCommitRecord({ github, setGithub }) {
     setGithubID('')
     setCommitSrc('')
     setGithub([])
+    setIsValid(true)
   }
 
   /**
@@ -48,7 +51,12 @@ export default function GetCommitRecord({ github, setGithub }) {
   return (
     <>
       <GitHubCont>
-        <GithubForm>
+        <GithubForm
+          onSubmit={(e) => {
+            e.preventDefault()
+            getCommitImage(githubID)
+          }}
+        >
           <div>
             <label htmlFor="githubId">
               GitHub ID
@@ -67,28 +75,15 @@ export default function GetCommitRecord({ github, setGithub }) {
               }}
             />
           </div>
-          {commitSrc && isValid ? (
-            <MainBtn
-              type="preview"
-              onClick={(e) => {
-                e.preventDefault()
-                deleteGithubData()
-              }}
-            >
-              내 잔디 제거하기
-            </MainBtn>
-          ) : (
-            <MainBtn
-              type="preview"
-              onClick={(e) => {
-                e.preventDefault()
-                getCommitImage(githubID)
-                console.log(11211, isValid, githubID, commitSrc)
-              }}
-            >
-              내 잔디 불러오기
-            </MainBtn>
-          )}
+          <MainBtn type="preview">내 잔디 불러오기</MainBtn>
+          <DeleteIcon
+            onClick={(e) => {
+              e.preventDefault()
+              deleteGithubData()
+            }}
+          >
+            <ColorIcon type="iconLv2" iconPath={deleteIcon} />
+          </DeleteIcon>
         </GithubForm>
       </GitHubCont>
 
@@ -153,6 +148,22 @@ const GithubForm = styled.form`
       padding-left: 16px;
       border-radius: 10px;
     }
+  }
+`
+
+const DeleteIcon = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gray-lv2-color);
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: opacity 0.1s ease-in;
+
+  &:hover {
+    background-color: var(--gray-lv1-color);
   }
 `
 
