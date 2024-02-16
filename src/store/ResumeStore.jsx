@@ -24,6 +24,7 @@ export const useResumeStore = create(
               id: val.id,
               content: val.content,
               name: '새로운 이력서',
+              lastModified: getCurrentDate(),
             },
           ],
         })),
@@ -36,7 +37,9 @@ export const useResumeStore = create(
       updateResumeName: (id, name) =>
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
-            el.id === id ? { ...el, name: name } : el
+            el.id === id
+              ? { ...el, name: name, lastModified: getCurrentDate() }
+              : el
           ),
         })),
       // 이력서 내부 정보 수정
@@ -44,7 +47,11 @@ export const useResumeStore = create(
         set((prev) => ({
           resumeList: prev.resumeList.map((el) =>
             el.id === parseInt(id)
-              ? { ...el, content: { ...el.content, [key]: value } }
+              ? {
+                  ...el,
+                  content: { ...el.content, [key]: value },
+                  lastModified: getCurrentDate(),
+                }
               : el
           ),
         })),
@@ -62,6 +69,7 @@ export const useResumeStore = create(
                       [key]: value,
                     },
                   },
+                  lastModified: getCurrentDate(),
                 }
               : el
           ),
